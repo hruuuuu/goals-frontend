@@ -1,0 +1,37 @@
+/* color */
+$color--main: #6b9c66;
+$color--secondary: #f8bc5d;
+$color--info: #56879b;
+$color--success: #89b085;
+$color--warning: #fad08e;
+$color--error: #ef8b90;
+$color--accent: #f5b8bb;
+$color--light: #ffffff;
+
+$color--gray1: #333333;
+$color--gray2: #4f4f4f;
+$color--gray3: #828282;
+$color--gray4: #bdbdbd;
+$color--gray5: #e0e0e0;
+$color--gray6: #f2f2f2;
+$color--gray7: #fafafa;
+
+$color--analogous1: #74b08d;
+$color--analogous2: #95b06b;
+
+$color--hover: #76b8d3;
+$color--active: #3aa1cb;
+
+$color__font: #333333;
+
+/* box-shadow */
+$box-shadow__modal: 0px 0px 16px rgba(0, 0, 0, 0.25);
+$box-shadow__block: 0px 0px 8px rgba(0, 0, 0, 0.25);
+$box-shadow__element: 2px 2px 4px rgba(0, 0, 0, 0.25);
+$box-shadow__navbar: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$box-shadow__icon: 0px 1px 2px rgba(0, 0, 0, 0.5);
+
+$box-shadow--active: 0px 0px 32px rgba(0, 0, 0, 0.25);
+
+/* bootstrap */
+@import "~bootstrap/scss/bootstrap.scss";

@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Noto Sans TC", sans-serif;
+  letter-spacing: 0.06em;
+  color: $color--font;
+}
+
+@mixin heading {
+  font-style: normal;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
+  letter-spacing: 0.06em;
+  line-height: 110%;
+  color: $color--font;
+}
+
+@mixin text {
+  font-style: normal;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
+  letter-spacing: 0.06em;
+  line-height: 140%;
+  color: $color--font;
+}
+
+h1 {
+  @include heading;
+  font-weight: normal;
+  font-size: 60px;
+}
+
+h2 {
+  @include heading;
+  font-weight: normal;
+  font-size: 40px;
+}
+
+h3 {
+  @include heading;
+  font-weight: normal;
+  font-size: 32px;
+}
+
+h4 {
+  @include heading;
+  font-weight: normal;
+  font-size: 24px;
+}
+
+h5 {
+  @include heading;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+@mixin text--large {
+  @include text;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+@mixin text--large-bold {
+  @include text;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@mixin text--medium {
+  @include text;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+@mixin text--medium-bold {
+  @include text;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@mixin text--normal {
+  @include text;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+@mixin text--normal-bold {
+  @include text;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@mixin text--small {
+  @include text;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+@mixin text--small-bold {
+  @include text;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@mixin text--extra-small {
+  @include text;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+@mixin text--extra-small-bold {
+  @include text;
+  font-weight: bold;
+  font-size: 12px;
+}
