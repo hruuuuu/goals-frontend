@@ -1,7 +1,14 @@
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+
 function App() {
   return (
     <>
-      <h1>Initializing...</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+      </Routes>
     </>
   );
 }
