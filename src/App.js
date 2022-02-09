@@ -1,7 +1,9 @@
+import Caculator from './pages/Caculator';
+
 function App() {
   return (
     <>
-      <h1>Initializing...</h1>
+      <Caculator />
     </>
   );
 }
