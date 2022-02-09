@@ -188,3 +188,20 @@
 
   opacity: 1;
 }
+
+.l-header {
+}
+
+.c-breadcrumb {
+  display: flex;
+}
+
+.e-icon {
+  &--primary {
+    width: 1rem;
+    height: 1rem;
+
+    font-size: 1rem;
+    color: $color--primary;
+  }
+}
