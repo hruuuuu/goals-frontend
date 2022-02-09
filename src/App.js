@@ -1,7 +1,8 @@
+import Cart from './pages/Cart';
 function App() {
   return (
     <>
-      <h1>Initializing...</h1>
+      <Cart />
     </>
   );
 }
