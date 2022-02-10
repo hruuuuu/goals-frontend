@@ -1,8 +1,12 @@
 import React from 'react';
-import PageBanner from '../components/PageBanner';
+import PageBanner from '../components/calculator/PageBanner';
 
 const Caculator = () => {
-  return <div>Caculator</div>;
+  return (
+    <>
+      <PageBanner />
+    </>
+  );
 };
 
 export default Caculator;
