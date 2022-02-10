@@ -36,7 +36,7 @@ function MemberSidebar() {
       name: '歷史清單',
       router: `/`,
       icon: <i className="fas fa-list-alt"></i>,
-      line: <div className="line"></div>,
+      line: <div className="Sidebarline"></div>,
     },
     {
       id: 6,
