@@ -1,45 +1,19 @@
-import React from 'react';
-import $ from 'jquery';
-import { ReactComponent as Logo } from '../images/logo.svg';
+import React, { useState } from 'react';
+// import $ from 'jquery';
+// import { ReactComponent as Logo } from '../img/sign/logo.svg';
 import '../styles/_signup.scss';
-import Image from '../images/login.jpg';
+import Image from '../img/sign/login.jpg';
 
 const Signup = () => {
-  const handleMenu = () => {
-    $('.menu-line2').css('display', 'none');
-
-    $('.menu-line1').css('transform-origin', 'left bottom');
-    $('.menu-line1').css('transform', 'rotate(45deg)');
-
-    $('.menu-line3').css('transform-origin', 'top left');
-    $('.menu-line3').css('transform', 'rotate(-45deg)');
-  };
+  const [showPassword, setShowPassword] = useState(false);
+  const [eye, setEye] = useState("");
+  const handleSwitchEyes = (e) => {
+    setShowPassword(!showPassword);
+    setEye(e.target.id);
+    console.log(document.querySelector("password"))
+  }
   return (
     <>
-      <div className="header container-fluid bg-dark">
-        <div className="container text-light d-flex justify-content-between align-items-center py-2">
-          <ul className="d-flex align-items-center">
-            <li className="logo">
-              <Logo className="logo" />
-            </li>
-            <li className="ps-3">關於果實</li>
-            <li className="ps-3">健康餐盒</li>
-            <li className="ps-3">飲食日誌</li>
-            <li className="ps-3">健康新知</li>
-          </ul>
-          <div className="btn-group">
-            <button className="btn btn-dark text-light btn-outline-secondary">
-              登入
-            </button>
-            <button className="btn btn-warning text-dark ms-2">註冊</button>
-          </div>
-          <div className="mobile-only" onClick={handleMenu}>
-            <span className="menu-line1"></span>
-            <span className="menu-line2"></span>
-            <span className="menu-line3"></span>
-          </div>
-        </div>
-      </div>
       <div className="form position-relative d-flex">
         <img src={Image} alt="" className="bgImage" />
         <div className="signup-form">
@@ -95,8 +69,12 @@ const Signup = () => {
         </div>
       </div>
 
-      <div className="mobile-form">
-        <form>
+      <div className="mobile-form container">
+        <div className="text-center">
+          <h1 className="pt-5">註冊</h1>
+          <p className="text-warning py-3">Welcome!</p>
+        </div>
+        <form className="w-75 m-auto">
           <div className="form-floating mb-3">
             <input
               type="email"
@@ -105,7 +83,8 @@ const Signup = () => {
               placeholder="請輸入電子信箱"
               className="form-control"
             />
-            <label htmlFor="email" className="text-secondary">
+            <i className="fas fa-envelope"></i>
+            <label htmlFor="email">
               E-mail
             </label>
           </div>
@@ -117,7 +96,13 @@ const Signup = () => {
               placeholder="請輸入密碼"
               className="form-control"
             />
-            <label htmlFor="password" className="text-secondary">
+            <i className="fas fa-lock"></i>
+            {showPassword && eye === "password" ?
+              <i className="fas fa-eye-slash" id="password" onClick={(e) => handleSwitchEyes(e)}></i>
+            :
+              <i className="fas fa-eye" id="password" onClick={(e) => handleSwitchEyes(e)}></i>
+            }
+            <label htmlFor="password">
               Password
             </label>
           </div>
@@ -129,13 +114,19 @@ const Signup = () => {
               placeholder="請再次輸入密碼"
               className="form-control"
             />
-            <label htmlFor="confirmPassword" className="text-secondary">
+            <i className="fas fa-lock"></i>
+            {showPassword && eye === "confirmPassword" ? 
+              <i className="fas fa-eye-slash" id="confirmPassword" onClick={(e) => handleSwitchEyes(e)}></i>
+            :
+              <i className="fas fa-eye" id="confirmPassword" onClick={(e) => handleSwitchEyes(e)}></i>
+            }
+            <label htmlFor="confirmPassword">
               Confirm Password
             </label>
           </div>
-          <p className="text-warning text-center py-3">已經有帳戶了？</p>
-          <button className="btn btn-primary w-100 mt-3 py-3">Sign In</button>
+          <button className="btn btn-primary w-100 my-3 py-3">Sign In</button>
         </form>
+        <p className="text-warning text-center pt-3">已經有帳戶了？</p>
       </div>
     </>
   );

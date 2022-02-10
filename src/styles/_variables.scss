@@ -46,5 +46,8 @@ $height__navbar: 80px;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
 
+/* 複寫原本的登入/註冊頁面form-floating-label的css */
+$form-floating-label-transform: scale(1) translateY(0) translateX(0);
+
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";

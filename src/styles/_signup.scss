@@ -1,20 +1,9 @@
 @import './_variables.scss';
 
-.header {
-    .logo {
-        width: 50px;
-        height: 50px;
-    }
-}
-
-.mobile-only {
-    display: none;
-}
-
 .form {
     .bgImage {
         width: 100%;
-        height: calc(100vh - 66px);
+        height: calc(100vh - 80px);
     }
 
     .signup-form {
@@ -50,69 +39,69 @@
 }
 
 @media screen and (max-width: 375px) {
-    .header {
-        .container {
-            display: block !important;
-            // position: relative;
-
-            ul {
-                display: block !important;
-                position: relative;
-
-                li:not(:first-child) {
-                    display: none;
-                }
-
-                .logo {
-                    margin: 0 auto;
-                }
-            }
-
-            .btn-group {
-                display: none;
-            }
-        }
-    }
-
-    .mobile-only {
-        position: absolute;
-        top: 5.5%;
-        left: 90%;
-        transform: translate(-50%, -50%);
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-
-        .menu-line1 {
-            position: absolute;
-            background-color: white;
-            width: 25px;
-            height: 3px;
-            top: 0px;
-        }
-
-        .menu-line2 {
-            position: absolute;
-            background-color: white;
-            width: 25px;
-            height: 3px;
-            top: 10px;
-        }
-
-        .menu-line3 {
-            position: absolute;
-            background-color: white;
-            width: 25px;
-            height: 3px;
-            top: 20px;
-        }
-    }
-
     .form {
         display: none !important;
     }
 
     .mobile-form {
         display: block;
+
+        form {
+            .btn {
+                background-color: $color--primary;
+                border-color: transparent;
+            }
+
+            .form-floating {
+                position: relative;
+
+                i {
+                    position: absolute;
+                    top: 50%;
+                    left: 12.5%;
+                    transform: translate(-50%, -50%);
+                    font-size: 24px;
+                    color: $color--gray4;
+                    padding: 1rem 1rem 1rem 0.5rem;
+                }
+
+                .fa-eye {
+                    position: absolute;
+                    top: 50%;
+                    left: 90%;
+                    transform: translate(-50%, -50%);
+                    font-size: 24px;
+                    color: $color--gray4;
+                    padding: 1rem 1rem 1rem 0.5rem;
+                }
+
+                .fa-eye-slash {
+                    position: absolute;
+                    top: 50%;
+                    left: 90%;
+                    transform: translate(-50%, -50%);
+                    font-size: 24px;
+                    color: $color--gray4;
+                    padding: 1rem 1rem 1rem 0.5rem;
+                }
+
+                label {
+                    padding: 0.25rem 0.75rem 0.25rem 3.5rem;
+                    color: $color__font;
+                }
+
+                .form-control {
+                    padding: 3rem 0.75rem 1rem 3.5rem;
+                }
+
+                .form-control:focus {
+                    padding: 3rem 0.75rem 1rem 3.5rem;
+                }
+
+                .form-control::placeholder {
+                    color: revert;
+                }
+            }
+        }
     }
 }
