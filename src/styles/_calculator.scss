@@ -63,13 +63,18 @@
     }
   }
 }
+
 section.l-description {
   display: flex;
   flex-direction: row;
 }
-.l-des-left {
-  padding-left: calc((100% - 1320px) / 2);
+.des-left {
   width: 70%;
+  padding-left: calc((100% - 1320px) / 2);
+  &__top {
+    padding-right: 12.5rem;
+    padding-bottom: 60px;
+  }
   &__bottom {
     display: flex;
     .text-box {
@@ -78,13 +83,10 @@ section.l-description {
       .model__head--title {
         font-size: 1.6rem;
       }
-      .model__head--subtitle {
-        font-size: 1.125rem;
-      }
     }
   }
 }
 
-.l-des-right {
+.des-right {
   width: 30%;
 }

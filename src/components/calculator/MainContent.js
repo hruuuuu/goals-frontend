@@ -35,7 +35,7 @@ const MainContent = () => {
           </div>
         </section>
         <section className="l-description">
-          <div className="l-des-left">
+          <div className="des-left">
             <div className="des-left__top model">
               <div className="model__head">
                 <div className="model__head--title">TDEE、BMR與減脂的關係</div>
@@ -51,7 +51,7 @@ const MainContent = () => {
                 </p>
               </div>
             </div>
-            <div className="l-des-left__bottom model">
+            <div className="des-left__bottom model">
               <div className="text-box">
                 <div className="model__head">
                   <div className="model__head--title">基礎代謝率 BMR</div>
@@ -88,7 +88,7 @@ const MainContent = () => {
               </div>
             </div>
           </div>
-          <div className="l-des-right"></div>
+          <div className="des-right"></div>
         </section>
       </div>
     </>
