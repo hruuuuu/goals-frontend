@@ -6,7 +6,14 @@ const cart = () => {
   return (
     <>
       <Navbar />
-      <CartList />
+      <div className="container">
+        <div className="row">
+          <div className="col-4">sidebar</div>
+          <div className="col-8">
+            <CartList />
+          </div>
+        </div>
+      </div>
     </>
   );
 };

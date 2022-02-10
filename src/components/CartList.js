@@ -4,7 +4,7 @@ import '../styles/_cartList.scss';
 const cartList = () => {
   return (
     <>
-      <table className="table table-borderless">
+      <table className="table table-borderless align-middle">
         <thead>
           <tr className="table-secondary">
             <th>商品縮圖</th>
@@ -24,14 +24,40 @@ const cartList = () => {
                 alt=""
               />
             </td>
-            <td className="productName">叢林能量碗</td>
-            <td>$110</td>
-            <td>1</td>
-            <td>$110</td>
-            <td>X</td>
+            <td className="productName align-middle">叢林能量碗</td>
+            <td className="align-middle">$110</td>
+            <td className="align-middle">1</td>
+            <td className="align-middle">$110</td>
+            <td className="align-middle">X</td>
           </tr>
         </tbody>
       </table>
+      <hr />
+      <div className="checkoutBox row">
+        <div className="col">
+          <div className="d-flex justify-content-between">
+            <p>總計</p>
+            <p>$2200</p>
+          </div>
+          <div className="d-flex justify-content-between">
+            <p>活動折扣</p>
+            <p>-$ 20</p>
+          </div>
+          <div className="d-flex justify-content-between">
+            <input type="text" placeholder="請輸入折扣券編號" />
+            <button>送出</button>
+          </div>
+        </div>
+        <div className="col">
+          <div className="d-flex justify-content-between">
+            <p>應付金額</p>
+            <p>$2200</p>
+          </div>
+          <div>
+            <button>前往結帳</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
