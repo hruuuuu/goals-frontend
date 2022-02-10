@@ -14,6 +14,22 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
+  cursor: default;
+}
+
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
@@ -124,4 +140,21 @@ h6 {
   @include text;
   font-weight: bold;
   font-size: 12px;
+}
+
+@mixin h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+@mixin interaction__link {
+  transition: $transition;
+  &:hover {
+    color: $color--hover;
+  }
+  &:focus,
+  &:active {
+    color: $color--active;
+  }
 }

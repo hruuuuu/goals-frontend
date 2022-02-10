@@ -101,6 +101,35 @@
     }
 }
 
+.third-party {
+    span {
+        color: $color--gray3;
+    }
+
+    .btn {
+        border-color: $color--active;
+    }
+
+    i {
+        font-size: 2rem;
+    }
+
+    .apple,
+    .apple:hover {
+        color: #555555;
+    }
+
+    .line,
+    .line:hover {
+        color: #00B900;
+    }
+
+    .facebook,
+    .facebook:hover {
+        color: #3b5998;
+    }
+}
+
 /*** Tablet Mode ***/
 @media screen and (max-width: 1023px) {
     .form {
