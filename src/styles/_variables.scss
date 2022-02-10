@@ -35,6 +35,8 @@ $box-shadow--active: 0px 0px 32px rgba(0, 0, 0, 0.25);
 
 /* border-radius */
 $border-radius__navbar: 0 0 50px 50px;
+$border-radius__footer: 3.125rem 3.125rem 0 0;
+$border-radius__footer--lg: 6rem 6rem 0 0;
 
 /* transition */
 $transition: all 0.2s ease-in-out;
@@ -47,6 +49,13 @@ $height__line: 2px;
 $size__icon--small: 1rem;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
+
+/* rwd spec */
+$sm: 575.99px;
+$md: 767.99px;
+$lg: 991.99px;
+$xl: 1199.99px;
+$xxl: 1399.99px;
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";
