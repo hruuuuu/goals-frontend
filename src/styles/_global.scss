@@ -6,7 +6,7 @@
 
 body {
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.06rem;
   color: $color--font;
 }
 
@@ -25,14 +25,15 @@ h4,
 h5,
 h6,
 p,
-span {
+span,
+div {
   cursor: default;
 }
 
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.06rem;
   line-height: 110%;
   color: $color--font;
 }
@@ -40,7 +41,7 @@ span {
 @mixin text {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.06rem;
   line-height: 140%;
   color: $color--font;
 }
@@ -48,97 +49,103 @@ span {
 h1 {
   @include heading;
   font-weight: normal;
-  font-size: 60px;
+  font-size: 3.75rem;
 }
 
 h2 {
   @include heading;
   font-weight: normal;
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
 h3 {
   @include heading;
   font-weight: normal;
-  font-size: 32px;
+  font-size: 2rem;
 }
 
 h4 {
   @include heading;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 h5 {
   @include heading;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 h6 {
   @include heading;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 @mixin text--large {
   @include text;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 @mixin text--large-bold {
   @include text;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 @mixin text--medium {
   @include text;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 @mixin text--medium-bold {
   @include text;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 @mixin text--normal {
   @include text;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 @mixin text--normal-bold {
   @include text;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 @mixin text--small {
   @include text;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 @mixin text--small-bold {
   @include text;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 @mixin text--extra-small {
   @include text;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 @mixin text--extra-small-bold {
   @include text;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+@mixin h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1rem;
 }
 
 @mixin interaction__link {
