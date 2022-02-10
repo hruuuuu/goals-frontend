@@ -1,11 +1,9 @@
 import React from 'react';
-import CartList from '../components/CartList';
-import Navbar from '../components/Navbar';
+import CartList from '../components/Cart/CartList';
 
 const cart = () => {
   return (
     <>
-      <Navbar />
       <div className="container">
         <div className="row">
           <div className="col-4">sidebar</div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/_cartList.scss';
+import React, { useState } from 'react';
+import '../../styles/_cartList.scss';
 
 const cartList = () => {
   return (
@@ -26,7 +26,17 @@ const cartList = () => {
             </td>
             <td className="productName align-middle">叢林能量碗</td>
             <td className="align-middle">$110</td>
-            <td className="align-middle">1</td>
+            <td className="align-middle">
+              <div className="container bg-light rounded-3 d-flex justify-content-between">
+                <span className="btn">
+                  <i class="fa-solid fa-minus"></i>
+                </span>
+                <span></span>
+                <span className="btn">
+                  <i class="fa-solid fa-plus"></i>
+                </span>
+              </div>
+            </td>
             <td className="align-middle">$110</td>
             <td className="align-middle">X</td>
           </tr>

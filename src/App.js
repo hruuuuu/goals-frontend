@@ -1,14 +1,15 @@
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useRoutes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Cart from './pages/Cart';
+
+import routerList from './config/routerList';
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-      </Routes>
+      <Navbar />
+      {useRoutes(routerList)}
       <Cart />
     </>
   );
