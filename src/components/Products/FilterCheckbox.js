@@ -7,16 +7,16 @@ function FilterCheckbox(props) {
       <div className="c-search__heading">{heading}</div>
       {options.map((option, i) => {
         return (
-          <div key={i} className="form-check">
+          <div key={i} className="c-checkbox">
             <input
-              id="checkbox"
+              id={`checkbox-${heading}-${i}`}
               type="checkbox"
-              className="form-check-input c-search__checkbox c-checkbox"
+              className="form-check-input c-checkbox__input c-input"
               autoComplete="off"
             />
             <label
-              htmlFor="checkbox"
-              className="form-check-label c-search__heading"
+              htmlFor={`checkbox-${heading}-${i}`}
+              className="c-checkbox__label"
             >
               {option}
             </label>

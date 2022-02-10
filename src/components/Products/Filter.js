@@ -1,64 +1,102 @@
-import React from 'react';
+import { React, useState } from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import MuiInput from '@mui/material/Input';
+
 import FilterCheckbox from './FilterCheckbox';
 
+const categories = ['素食餐盒', '增肌餐盒', '減脂餐盒'];
+const activities = ['新上市', '促銷中', '適用優惠券'];
+
 function Filter() {
-  const categories = ['素食餐盒', '增肌餐盒', '減脂餐盒'];
-  const activities = ['新上市', '促銷中', '適用優惠券'];
+  const maxPrice = 100;
+  const valuetext = (value) => {
+    return `${value}`;
+  };
+  const RangeInputSlider = () => {
+    const [value, setValue] = useState([10, 90]);
+    const handleSliderChange = (e, newValue) => {
+      setValue(newValue);
+    };
+    const handleInputChange = (event) => {
+      setValue(event.target.value === '' ? '' : Number(event.target.value));
+    };
+    const handleBlur = () => {
+      if (value[0] < 0) {
+        setValue([0, value[1]]);
+      } else if (value[1] > maxPrice) {
+        setValue([value[0], maxPrice]);
+      }
+    };
+    return (
+      <Box sx={{ width: 200 }}>
+        <Slider
+          getAriaLabel={() => 'Temperature range'}
+          value={value}
+          onChange={handleSliderChange}
+          valueLabelDisplay="auto"
+          getAriaValueText={valuetext}
+        />
+        <div className="d-flex align-items-center">
+          <input
+            type="number"
+            className="form-control c-range__input c-input"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            value={value[0]}
+            autoComplete="off"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+          />
+          <span className="c-range__text">~</span>
+          <input
+            type="number"
+            className="form-control c-range__input c-input"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            value={value[1]}
+            autoComplete="off"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+          />
+        </div>
+      </Box>
+    );
+  };
   return (
     <>
       <div className="c-product-filter">
-        <h6 className="c-product-filter__title">
-          <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
-          篩選
-        </h6>
-        <div className="c-product-filter__search c-search">
-          <label htmlFor="search" className="form-label c-search__heading">
-            搜索
-          </label>
-          <input
-            type="text"
-            id="search"
-            className="form-control c-search__input c-input"
-            placeholder="輸入關鍵字"
-            autoComplete="off"
-            onChange={() => {}}
-          />
-        </div>
-        <div className="c-product-filter__price c-search">
-          <label htmlFor="range" className="c-search__title">
-            價格
-          </label>
-          <input
-            type="range"
-            id="range"
-            className="c-search__range c-range"
-            onChange={() => {}}
-          />
-          <div className="d-flex">
-            <input
-              type="number"
-              className="c-search__input c-input"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              value="0"
-              autoComplete="off"
-              onChange={() => {}}
-            />
-            <span>~</span>
-            <input
-              type="number"
-              className="c-search__input c-input"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              value="0"
-              autoComplete="off"
-              onChange={() => {}}
-            />
+        <div className="c-product-filter__wrapper">
+          <h6 className="c-product-filter__title">
+            <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
+            篩選
+          </h6>
+          <div className="c-product-filter__search c-search">
+            <label htmlFor="search" className="form-label c-search__heading">
+              搜索
+            </label>
+            <div className="c-search__wrapper">
+              <input
+                type="text"
+                id="search"
+                className="form-control c-search__input c-input"
+                placeholder="輸入關鍵字"
+                autoComplete="off"
+                onChange={() => {}}
+              />
+            </div>
           </div>
+          <div className="c-product-filter__price c-range">
+            <div className="c-range__heading">價格</div>
+            <RangeInputSlider />
+          </div>
+          <FilterCheckbox heading="類別" options={categories} />
+          <FilterCheckbox heading="活動" options={activities} />
         </div>
-        <FilterCheckbox heading="類別" options={categories} />
-        <FilterCheckbox heading="活動" options={activities} />
-        <button type="submit" className="c-product-filter__action">
+        <button
+          type="submit"
+          className="c-product-filter__action e-btn--primary"
+        >
           搜索
         </button>
       </div>

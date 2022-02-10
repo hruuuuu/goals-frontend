@@ -1,10 +1,82 @@
 .c-product-filter {
   width: 100%;
-  height: calc(100vh - 248px);
+  height: max-content;
+  max-height: calc(100vh - 5rem);
+  margin-bottom: 2.5rem;
 
   position: sticky;
-  top: 0;
+  top: 2.5rem;
   &__title {
+    margin-bottom: 1rem;
     display: flex;
+  }
+  &__search,
+  &__price {
+    margin-bottom: 1rem;
+  }
+  &__checkbox {
+    margin-bottom: 1rem;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  &__action {
+    width: 100%;
+  }
+  &__wrapper {
+    margin-bottom: 2.5rem;
+  }
+}
+.c-search {
+  &__heading {
+    margin-bottom: 1rem;
+    @include text--normal;
+  }
+  &__wrapper {
+    position: relative;
+    &::after {
+      @include icon--absolute("\f002");
+      color: $color--primary;
+      font-size: 1rem;
+
+      top: 50%;
+      right: 0;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.c-range {
+  &__text {
+    margin: 0 1rem;
+  }
+  .css-1domaf0 {
+    width: 100%;
+  }
+  .css-187mznn-MuiSlider-root {
+    color: $color--primary;
+  }
+  .css-14pt78w-MuiSlider-rail {
+    color: $color--gray6;
+  }
+  .css-eg0mwd-MuiSlider-thumb {
+    width: 1rem;
+    height: 1rem;
+    border: 0.0625rem solid $color--primary;
+    background: $color--light;
+    &::before {
+      box-shadow: none;
+    }
+    &:hover,
+    &.Mui-focusVisible {
+      box-shadow: 0 0 0 8px $color--opacity;
+    }
+    &.Mui-active {
+      box-shadow: 0 0 0 16px $color--opacity;
+    }
+  }
+  .css-1kz0hui-MuiSlider-valueLabel {
+    background: $color--primary;
+    border-radius: $border-radius__input;
   }
 }
