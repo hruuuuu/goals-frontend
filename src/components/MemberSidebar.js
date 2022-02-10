@@ -49,7 +49,7 @@ function MemberSidebar() {
   return (
     <>
       <header>
-        <div className="container h-100">
+        <div className="container h-100 p-0">
           <nav>
             <Sidebar SidebarLinks={SidebarLinks} />
             {/* <NavbarMobile navLinks={navLinks}/> */}
