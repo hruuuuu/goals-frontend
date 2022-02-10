@@ -1,0 +1,10 @@
+.c-product-filter {
+  width: 100%;
+  height: calc(100vh - 248px);
+
+  position: sticky;
+  top: 0;
+  &__title {
+    display: flex;
+  }
+}

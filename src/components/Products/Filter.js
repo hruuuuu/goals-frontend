@@ -7,18 +7,18 @@ function Filter() {
   return (
     <>
       <div className="c-product-filter">
-        <div className="c-product-filter__title">
-          <i className="fas fa-sliders-h"></i>
+        <h6 className="c-product-filter__title">
+          <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
           篩選
-        </div>
+        </h6>
         <div className="c-product-filter__search c-search">
-          <label htmlFor="search" className="c-search__heading">
+          <label htmlFor="search" className="form-label c-search__heading">
             搜索
           </label>
           <input
             type="text"
             id="search"
-            className="c-search__input c-input"
+            className="form-control c-search__input c-input"
             placeholder="輸入關鍵字"
             autoComplete="off"
             onChange={() => {}}
