@@ -1,0 +1,90 @@
+.main-content {
+  background: url(../img/calculator/cacu_bg_all.png);
+  background-size: 500px 500px;
+  background-repeat: repeat;
+}
+.l-guide {
+  position: relative;
+  padding: 100px 0;
+  .container {
+    position: relative;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  &::before {
+    position: absolute;
+    content: '';
+    background: url(../img/calculator/guide_deco.png) no-repeat;
+    width: 800px;
+    height: 502px;
+    top: 0;
+    right: 0;
+    opacity: 0.75;
+  }
+}
+.right_cont {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  &__pic {
+    width: 50%;
+    border-radius: 0 0 200px 0;
+    overflow: hidden;
+  }
+  &__text-box {
+    width: 50%;
+    padding-right: calc((100% - 1320px) / 2);
+    padding-left: 80px;
+    &--text {
+      p {
+        font-size: 16px;
+        line-height: 2;
+        letter-spacing: 1.5px;
+        color: $color--gray3;
+        font-weight: 300;
+      }
+    }
+    .model__head {
+      border-left: 1px solid rgba(107, 156, 102, 0.6);
+      padding-left: 35px;
+      position: relative;
+      ::before {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 30px;
+        left: 0px;
+        top: 0px;
+
+        background: $color--primary;
+      }
+    }
+  }
+}
+section.l-description {
+  display: flex;
+  flex-direction: row;
+}
+.l-des-left {
+  padding-left: calc((100% - 1320px) / 2);
+  width: 70%;
+  &__bottom {
+    display: flex;
+    .text-box {
+      width: 50%;
+      padding-right: 80px;
+      .model__head--title {
+        font-size: 1.6rem;
+      }
+      .model__head--subtitle {
+        font-size: 1.125rem;
+      }
+    }
+  }
+}
+
+.l-des-right {
+  width: 30%;
+}

@@ -203,7 +203,7 @@
 
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -231,7 +231,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -251,9 +251,9 @@
       width: $size__icon--small;
       height: $size__icon--small;
 
-      font-family: "Font Awesome 5 Free";
+      font-family: 'Font Awesome 5 Free';
       font-weight: 900;
-      content: "\f105";
+      content: '\f105';
       color: $color--gray4;
       font-size: 1.5rem;
 
@@ -280,5 +280,39 @@
   }
   &--primary {
     color: $color--primary;
+  }
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.model {
+  position: relative;
+  &__head {
+    margin-bottom: 35px;
+    &--deco-text {
+      font-size: 1.5rem;
+      line-height: 1;
+      letter-spacing: 10px;
+      color: rgba(107, 156, 102, 0.2);
+      margin-bottom: 15px;
+    }
+    &--title {
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 3rem;
+      letter-spacing: 3px;
+      color: $color--primary;
+    }
+    &--subtitle {
+      font-size: 1.125rem;
+      letter-spacing: 3px;
+      line-height: 1.6rem;
+      color: #555555;
+      margin-top: 10px;
+      font-weight: 500;
+    }
   }
 }
