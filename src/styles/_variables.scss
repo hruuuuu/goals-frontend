@@ -25,26 +25,37 @@ $color--active: #3aa1cb;
 $color__font: #333333;
 
 /* box-shadow */
-$box-shadow__modal: 0px 0px 16px rgba(0, 0, 0, 0.25);
-$box-shadow__block: 0px 0px 8px rgba(0, 0, 0, 0.25);
-$box-shadow__element: 2px 2px 4px rgba(0, 0, 0, 0.25);
-$box-shadow__navbar: 0px 4px 4px rgba(0, 0, 0, 0.25);
-$box-shadow__icon: 0px 1px 2px rgba(0, 0, 0, 0.5);
+$box-shadow__modal: 0px 0px 1rem rgba(0, 0, 0, 0.25);
+$box-shadow__block: 0px 0px 0.5rem rgba(0, 0, 0, 0.25);
+$box-shadow__element: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
+$box-shadow__navbar: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
+$box-shadow__icon: 0px 0.0625rem 0.125rem rgba(0, 0, 0, 0.5);
 
-$box-shadow--active: 0px 0px 32px rgba(0, 0, 0, 0.25);
+$box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.25);
 
 /* border-radius */
-$border-radius__navbar: 0 0 50px 50px;
+$border-radius__navbar: 0 0 3.125rem 3.125rem;
+$border-radius__footer: 3.125rem 3.125rem 0 0;
+$border-radius__footer--lg: 6rem 6rem 0 0;
 
 /* transition */
 $transition: all 0.2s ease-in-out;
 $transition__navbar-menu: all 0.6s ease-in-out;
 
 /* height */
-$height__navbar: 80px;
+$height__navbar: 5rem;
+$height__line: 0.125rem;
 
+$size__icon--small: 1rem;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
+
+/* rwd spec */
+$sm: 575.99px;
+$md: 767.99px;
+$lg: 991.99px;
+$xl: 1199.99px;
+$xxl: 1399.99px;
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";

@@ -43,8 +43,8 @@
   }
   #{$_}__logo {
     width: max-content;
-    height: 36px;
-    margin-right: 40px;
+    height: 2.25rem;
+    margin-right: 2.5rem;
 
     transition: $transition;
     opacity: 1;
@@ -134,8 +134,8 @@
     #{$_}__toggle {
       position: absolute;
       z-index: 2;
-      top: 18px;
-      right: 24px;
+      top: 1.125rem;
+      right: 1.5rem;
     }
     #{$_}__font {
       z-index: 2;
@@ -181,10 +181,162 @@
 }
 
 .e-hr {
-  width: 160px;
-  height: 2px !important;
+  width: 10rem;
+  height: $height__line !important;
   margin: 0;
   background: $color--secondary;
 
   opacity: 1;
+}
+
+.l-header {
+  padding: 2.5rem 0;
+  &__title {
+    width: 100%;
+    height: max-content;
+    padding-bottom: 0.5rem;
+
+    border-bottom: 0.125rem solid $color--gray5;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    &::before {
+      content: "";
+      width: 25%;
+      height: $height__line;
+      background: $color--secondary;
+
+      position: absolute;
+      left: 0;
+      bottom: -0.125rem;
+    }
+  }
+  &__text {
+    margin-left: 1rem;
+  }
+}
+
+.c-breadcrumb {
+  $_: &;
+  margin-bottom: 1rem;
+
+  display: flex;
+  align-items: center;
+  &__list {
+    display: flex;
+  }
+  &__item {
+    &:first-of-type {
+      margin-right: 0;
+      #{$_}__link::before {
+        content: "";
+        display: none;
+      }
+    }
+  }
+  &__link {
+    margin-right: 1.5rem;
+
+    @include text--small;
+    color: $color--gray3;
+
+    @include interaction__link;
+
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      width: $size__icon--small;
+      height: $size__icon--small;
+
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f105";
+      color: $color--gray4;
+      font-size: 1.5rem;
+
+      position: absolute;
+      top: 50%;
+      left: -0.5rem;
+      transform: translate(-50%, -50%);
+    }
+    &.active {
+      color: $color--active;
+      &:hover {
+        color: $color--active;
+      }
+    }
+  }
+}
+
+.e-icon {
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  &--left {
+    margin-right: 0.25rem;
+  }
+  &--primary {
+    color: $color--primary;
+  }
+}
+
+.l-footer {
+  width: 100%;
+  height: max-content;
+  padding: 1.5rem 0;
+
+  background: $color--primary;
+  border-radius: 8rem 8rem 0 0;
+  @media screen and (max-width: $lg) {
+    border-radius: $border-radius__footer;
+  }
+  &__item {
+    padding: 0.5rem 0;
+
+    @include h6;
+    color: $color--light;
+    font-size: 0.875rem;
+    &--muted {
+      opacity: 0.7;
+    }
+  }
+  &__link {
+    @include h6;
+    color: $color--light;
+    transition: $transition;
+    font-size: 0.875rem;
+    &:hover {
+      color: $color--secondary;
+    }
+  }
+  &__logo {
+    width: max-content;
+    height: 4rem;
+    @media screen and (max-width: $lg) {
+      height: 2.5rem;
+    }
+  }
+  &__btn {
+    width: max-content;
+    height: max-content;
+    margin-right: 0.75rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &__icon {
+    width: max-content;
+    height: max-content;
+
+    color: $color--light;
+    font-size: 2.5rem;
+  }
 }

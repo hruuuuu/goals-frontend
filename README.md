@@ -19,3 +19,8 @@ MFEE22大專Goals-前端
   - 放全域樣式
   - 可延用或依照個人習慣自行新增
   - 已經寫好的mixin可以直接include 就不用自己寫字體樣式
+
+## 關於切版分支
+- 切版分支這樣開:
+`feature/layout/自訂的Component or Page名稱`
+- 切版完成後merge回 `feature/layouts`
