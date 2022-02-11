@@ -8,22 +8,18 @@ function Member() {
   return (
     <>
       <Header />
-<<<<<<< HEAD
 
       <div className="container">
         <div className="row">
-          <div className="col-3">
+          <div className="col-lg-3">
             <MemberSidebar />
           </div>
-          <div className="col-9">
+          <div className="col col-lg-9">
             <EditProfile />
             <EditPassWord />
           </div>
         </div>
       </div>
-=======
-      <h1>Member</h1>
->>>>>>> b8bdfb4743d646fd10538078d38d22127d89b742
     </>
   );
 }
