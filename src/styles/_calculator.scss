@@ -80,7 +80,7 @@ section.l-description {
   p {
     line-height: 2;
     letter-spacing: 1.5px;
-    color: #828282;
+    color: $color--gray3;
     font-weight: 300;
   }
   &__top {
@@ -96,6 +96,7 @@ section.l-description {
   &__bottom {
     display: flex;
     padding: 60px 0;
+    z-index: 1;
     p {
       font-size: 15px;
     }
@@ -106,13 +107,14 @@ section.l-description {
         font-size: 1.6rem;
       }
     }
-    ::before {
+    &::before {
       content: '';
-      width: 200%;
+      width: 300%;
       height: 100%;
       position: absolute;
       top: 0;
-      left: -15%;
+      left: 0%;
+      transform: translateX(-50%);
       background: rgba(149, 176, 107, 0.15);
       z-index: -1;
     }
@@ -122,8 +124,9 @@ section.l-description {
 .des-right {
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
   width: 30%;
+  z-index: 2;
   &__deco {
     position: absolute;
     width: 150px;
@@ -147,10 +150,11 @@ section.l-description {
     display: flex;
     justify-content: flex-end;
     border-radius: 160px 0 0 0;
+    max-height: 80vh;
     img {
       width: 100%;
       max-width: none;
-      height: auto;
+      height: 100%;
     }
   }
 }
@@ -170,4 +174,13 @@ section.l-description {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.l-calculator {
+  padding: 100px 0;
+}
+.l-recommenedGood {
+  padding: 100px 0;
+  background: $color--light;
+  border-top: 1px solid $color--gray6;
 }

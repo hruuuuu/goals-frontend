@@ -1,21 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
   color: $color--font;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 ul {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
@@ -32,7 +34,7 @@ div {
 
 @mixin heading {
   font-style: normal;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
   line-height: 110%;
   color: $color--font;
@@ -40,7 +42,7 @@ div {
 
 @mixin text {
   font-style: normal;
-  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
   line-height: 140%;
   color: $color--font;
@@ -90,7 +92,7 @@ h6 {
 
 @mixin text--large-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
@@ -102,7 +104,7 @@ h6 {
 
 @mixin text--medium-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.125rem;
 }
 
@@ -114,7 +116,7 @@ h6 {
 
 @mixin text--normal-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1rem;
 }
 
@@ -126,7 +128,7 @@ h6 {
 
 @mixin text--small-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 0.875rem;
 }
 
@@ -138,7 +140,7 @@ h6 {
 
 @mixin text--extra-small-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 0.75rem;
 }
 
@@ -164,15 +166,30 @@ h6 {
   width: max-content;
   height: max-content;
 
-  font-family: 'Font Awesome 5 Free';
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 1.5rem;
 
   position: absolute;
 }
 
+@mixin cursor($cursor) {
+  cursor: pointer;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div {
+    cursor: $cursor;
+  }
+}
+
 .c-input {
-  height: 2.75rem;
+  height: $height__input;
 
   border-radius: $border-radius__input;
   @include text--small;
@@ -180,10 +197,10 @@ h6 {
     @include text--small;
     color: $color--gray4;
   }
-  &[type='number'] {
+  &[type="number"] {
     text-align: end;
   }
-  &[type='checkbox'] {
+  &[type="checkbox"] {
     transition: $transition;
     &:focus {
       border: $border__input;
@@ -219,9 +236,8 @@ h6 {
 }
 
 .e-btn {
+  width: max-content;
   &--primary {
-    height: $height__btn--large;
-
     border: none;
     background: $color--primary;
     border-radius: $border-radius__btn;
@@ -236,5 +252,14 @@ h6 {
     &:active {
       background: $color--active;
     }
+  }
+  &--w100 {
+    width: 100%;
+  }
+  &--large {
+    height: $height__btn--large;
+  }
+  &--medium {
+    height: $height__btn--meduim;
   }
 }

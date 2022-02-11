@@ -1,4 +1,7 @@
 import React from 'react';
+import CalculatorForm from './CalculatorForm';
+import RecGood from './RecGood';
+
 import desImg from '../../img/calculator/description.jpg';
 import logoOriginal from '../../img/common/logo--original.svg';
 
@@ -103,6 +106,38 @@ const MainContent = () => {
                 <img src={desImg} alt="description" />
               </div>
             </div>
+          </div>
+        </section>
+        <section className="l-calculator">
+          <div className="model__head model__head--sec">
+            <div className="model__head--deco-text">GOALS CALCULATOR</div>
+            <div className="model__head--title">TDEE/ BMR 計算機</div>
+            <div className="model__head--subtitle">
+              果實帶您了解TDEE與BMR的不同
+            </div>
+          </div>
+          <div className="container">
+            <div className="row">
+              <CalculatorForm />
+            </div>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-6 col-sm-12">123</div>
+              <div className="col-lg-6 col-sm-12">123</div>
+            </div>
+          </div>
+        </section>
+        <section className="l-recommenedGood">
+          <div className="model__head model__head--sec">
+            <div className="model__head--deco-text">RECOMMENED GOODS</div>
+            <div className="model__head--title">果實推薦三餐組合</div>
+            <div className="model__head--subtitle">
+              依照您的TDEE計算結果量身打造的餐食組合
+            </div>
+          </div>
+          <div className="container">
+            <RecGood />
           </div>
         </section>
       </div>
