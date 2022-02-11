@@ -13,7 +13,7 @@ function Cart() {
           <div className="col-lg-3">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">{/* 元件可以放這裡 */}</div>
+          <div className="col col-lg-9">{/* components可以放這裡 */}</div>
         </div>
       </div>
     </>
