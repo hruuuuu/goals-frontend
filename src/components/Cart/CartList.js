@@ -1,14 +1,17 @@
 import React from 'react';
 import ProductItem from './ProductItem';
 import Summary from './Summary';
-import '../../styles/_cartList.scss';
 
 function CartList() {
   return (
     <>
-      <ProductItem />
-      <hr />
-      <Summary />
+      <div className="h-100">
+        <ProductItem />
+        <div>
+          <hr />
+          <Summary />
+        </div>
+      </div>
     </>
   );
 }
