@@ -1,0 +1,23 @@
+.orderlisttable {
+  line-height: 3.75rem;
+  thead {
+    line-height: 1.25rem;
+    background: #fafafa;
+    th:first-child {
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
+    th:last-child {
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+  }
+}
+
+.cardorder {
+  width: 80vw;
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
+}
+
+.orderline {
+  border-top: solid #e0e0e0 2px;
+}

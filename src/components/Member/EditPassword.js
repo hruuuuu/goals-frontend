@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditPassWord = () => {
   return (
-    <form className="row g-1">
+    <form className="row g-3 my-3">
       <div className="alert" style={{ background: '#FAFAFA' }} role="alert">
         修改密碼
       </div>
