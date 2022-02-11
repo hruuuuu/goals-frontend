@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditProfile = () => {
   return (
-    <form className="row g-3">
+    <form className="row g-3 mb-3">
       <div className="alert" style={{ background: '#FAFAFA' }} role="alert">
         修改基本資料
       </div>
