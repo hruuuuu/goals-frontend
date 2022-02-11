@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
-import '../styles/_signup.scss';
 import Image from '../img/sign/login.jpg';
 
-const Signup = () => {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [eye, setEye] = useState('');
   const handleSwitchEyes = (e) => {
@@ -18,14 +17,12 @@ const Signup = () => {
 
   return (
     <>
-      <div className="signWrapper">
-        <img src={Image} alt="" className="signBackground" />
-        {/* container for signFormWrapper */}
-        <div className="signFormWrapper">
-          {/* text-center for div below */}
-          <h1 className="formTitle">註冊</h1>
-          <form className="signForm">
-            <div className="form-floating">
+      <div className="loginWrapper">
+        <img src={Image} alt="" className="loginBackground" />
+        <div className="loginFormWrapper">
+          <h1 className="formTitle">登入</h1>
+          <form className="loginForm">
+            <div className="form-floating mb-3">
               <input
                 type="email"
                 id="email"
@@ -38,7 +35,7 @@ const Signup = () => {
                 E-mail
               </label>
             </div>
-            <div className="form-floating">
+            <div className="form-floating mb-3">
               <input
                 type="password"
                 id="password"
@@ -64,40 +61,37 @@ const Signup = () => {
                 Password
               </label>
             </div>
-            <div className="form-floating">
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="請再次輸入密碼"
-                className="form-control"
-              />
-              <i className="fas fa-lock"></i>
-              {showPassword && eye === 'confirmPassword' ? (
-                <i
-                  className="fas fa-eye-slash"
-                  id="confirmPassword"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              ) : (
-                <i
-                  className="fas fa-eye"
-                  id="confirmPassword"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              )}
-              <label htmlFor="confirmPassword" className="inputLabel">
-                Confirm Password
-              </label>
+            <div className="notificationWrapper">
+              <p className="notification">尚未有帳戶？</p>
+              <p className="notification">忘記密碼</p>
             </div>
-            <p className="notification">已經有帳戶了？</p>
-            {/* w-100 for below */}
-            <button className="signBtn btn">Sign In</button>
+            <button className="loginBtn">Log In</button>
           </form>
+          <div className="anotherLoginMethod">
+            <p className="socialTag">
+              &mdash;
+              <span className="socialTitle">Or Continue With Social Media</span>
+              &mdash;
+            </p>
+            <div className="btnGroup">
+              <button className="btn google">
+                <i className="fab fa-google"></i>
+              </button>
+              <button className="btn facebook">
+                <i className="fab fa-facebook"></i>
+              </button>
+              <button className="btn line">
+                <i className="fab fa-line"></i>
+              </button>
+              <button className="btn apple">
+                <i className="fab fa-apple"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Signup;
+export default Login;
