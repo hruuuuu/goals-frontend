@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
-import '../styles/_login.scss';
 import Image from '../img/sign/login.jpg';
 
 const Login = () => {
