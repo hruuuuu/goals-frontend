@@ -5,14 +5,12 @@ import routerList from './config/routerList';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Cart from './pages/Cart';
 
 function App() {
   return (
     <>
       <Navbar />
       {useRoutes(routerList)}
-      <Cart />
       <Footer />
     </>
   );
