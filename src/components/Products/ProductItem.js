@@ -1,18 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Counter from './Counter';
 import FavIcon from './FavIcon';
 
 function ProductItem() {
   return (
     <>
-      <div className="col-4">
+      <div className="col-6 col-md-4">
         <div className="c-product-item">
           <div className="c-product-item__cover">
-            <img
-              className="c-product-item__img"
-              src={require('../../img/products/sunshine_bowl.jpeg')}
-              alt="thumbnail"
-            />
+            <Link to="/product/detail/:id">
+              <img
+                className="c-product-item__img"
+                src={require('../../img/products/sunshine_bowl.jpeg')}
+                alt="thumbnail"
+              />
+            </Link>
             <FavIcon />
           </div>
           <div className="c-product-item__tag e-tag e-tag--normal">
@@ -28,14 +32,16 @@ function ProductItem() {
               <div className="c-product-item__o-price">$120</div>
             </div>
           </div>
-          <Counter />
-          <button
-            type="button"
-            className="e-btn e-btn--primary e-btn--w100 e-btn--medium mt-2"
-          >
-            <i className="fas fa-shopping-cart e-icon e-icon--left-large"></i>
-            加入購物車
-          </button>
+          <div className="d-flex flex-md-column align-items-center">
+            <Counter />
+            <button
+              type="button"
+              className="c-product-item__action e-btn e-btn--primary mt-0 mt-md-2 ms-3 ms-md-0"
+            >
+              <i className="fas fa-shopping-cart e-icon me-0 me-lg-2"></i>
+              <span className="d-none d-md-block">加入購物車</span>
+            </button>
+          </div>
         </div>
       </div>
     </>

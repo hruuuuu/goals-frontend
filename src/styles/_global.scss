@@ -11,7 +11,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 ul {
@@ -169,6 +169,21 @@ h6 {
   font-size: 1.5rem;
 
   position: absolute;
+}
+
+@mixin cursor($cursor) {
+  cursor: pointer;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  div {
+    cursor: $cursor;
+  }
 }
 
 .c-input {

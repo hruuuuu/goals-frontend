@@ -9,10 +9,10 @@ function Products() {
       <Header />
       <div className="container">
         <div className="row gx-5">
-          <div className="col-3">
+          <div className="col-3 d-none d-lg-block">
             <Filter />
           </div>
-          <div className="col-9">
+          <div className="col-12 col-lg-9">
             <ProductList />
           </div>
         </div>
