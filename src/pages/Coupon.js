@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import EditProfile from '../components/Member/EditProfile';
-import EditPassWord from '../components/Member/EditPassword';
 
 function Coupon() {
   return (
