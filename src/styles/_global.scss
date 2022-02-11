@@ -90,7 +90,7 @@ h6 {
 
 @mixin text--large-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
@@ -102,7 +102,7 @@ h6 {
 
 @mixin text--medium-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.125rem;
 }
 
@@ -114,7 +114,7 @@ h6 {
 
 @mixin text--normal-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1rem;
 }
 
@@ -126,7 +126,7 @@ h6 {
 
 @mixin text--small-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 0.875rem;
 }
 
@@ -138,7 +138,7 @@ h6 {
 
 @mixin text--extra-small-bold {
   @include text;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 0.75rem;
 }
 
@@ -172,7 +172,7 @@ h6 {
 }
 
 .c-input {
-  height: 2.75rem;
+  height: $height__input;
 
   border-radius: $border-radius__input;
   @include text--small;
@@ -219,9 +219,8 @@ h6 {
 }
 
 .e-btn {
+  width: max-content;
   &--primary {
-    height: $height__btn--large;
-
     border: none;
     background: $color--primary;
     border-radius: $border-radius__btn;
@@ -236,5 +235,14 @@ h6 {
     &:active {
       background: $color--active;
     }
+  }
+  &--w100 {
+    width: 100%;
+  }
+  &--large {
+    height: $height__btn--large;
+  }
+  &--medium {
+    height: $height__btn--meduim;
   }
 }

@@ -7,6 +7,16 @@ function ProductList() {
       <div className="container">
         <div className="row">
           <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
         </div>
       </div>
     </>

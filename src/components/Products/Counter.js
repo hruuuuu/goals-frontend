@@ -5,12 +5,12 @@ function Counter() {
   return (
     <>
       <div className="c-counter">
-        <button type="button">
-          <i className="fas fa-minus"></i>
+        <button type="button" className="c-counter__btn">
+          <i className="fas fa-minus e-icon c-counter__icon"></i>
         </button>
         {number}
-        <button type="button">
-          <i className="fas fa-plus"></i>
+        <button type="button" className="c-counter__btn">
+          <i className="fas fa-plus e-icon c-counter__icon"></i>
         </button>
       </div>
     </>
