@@ -21,8 +21,10 @@ $color--analogous2: #95b06b;
 
 $color--hover: #76b8d3;
 $color--active: #3aa1cb;
+$color--opacity: rgba(107, 156, 102, 0.2);
 
-$color__font: #333333;
+$color__font: $color--gray2;
+$color__input-border: $color--gray4;
 
 /* box-shadow */
 $box-shadow__modal: 0px 0px 1rem rgba(0, 0, 0, 0.25);
@@ -37,6 +39,16 @@ $box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.25);
 $border-radius__navbar: 0 0 3.125rem 3.125rem;
 $border-radius__footer: 3.125rem 3.125rem 0 0;
 $border-radius__footer--lg: 6rem 6rem 0 0;
+<<<<<<< HEAD
+=======
+$border-radius__input: 0.25rem;
+$border-radius__btn: 0.625rem;
+
+/* border */
+$border__input: 0.0625rem solid $color__input-border;
+$border__input--checked: 0.0625rem solid $color--primary;
+$border__input--focus: 0.0625rem solid $color--secondary;
+>>>>>>> b8bdfb4743d646fd10538078d38d22127d89b742
 
 /* transition */
 $transition: all 0.2s ease-in-out;
@@ -45,6 +57,10 @@ $transition__navbar-menu: all 0.6s ease-in-out;
 /* height */
 $height__navbar: 5rem;
 $height__line: 0.125rem;
+<<<<<<< HEAD
+=======
+$height__btn--large: 3.75rem;
+>>>>>>> b8bdfb4743d646fd10538078d38d22127d89b742
 
 $size__icon--small: 1rem;
 $size__icon: 1.5rem;

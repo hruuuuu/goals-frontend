@@ -5,32 +5,34 @@ import routerList from '../../config/routerList';
 function Breadcrumb() {
   const locationPath = useLocation().pathname;
   let matchedRoutes = matchRoutes(routerList, locationPath);
-  const onMatchedRoutes = (matchedRoutes) => {
+  let matches =
+    matchedRoutes[matchedRoutes.length - 1].route.path === ''
+      ? matchedRoutes.shift()
+      : matchedRoutes;
+  matches = Array.isArray(matches) ? matches : Array(matches);
+  const onMatchedRoutes = (matches) => {
     return [
       {
         route: {
-          path: '/',
+          path: ``,
           breadcrumbName: '首頁',
         },
       },
-      ...matchedRoutes,
+      ...matches,
     ];
   };
   if (typeof onMatchedRoutes === 'function') {
-    matchedRoutes = onMatchedRoutes(matchedRoutes);
+    matches = onMatchedRoutes(matches);
   }
   return (
     <>
       <div className="c-breadcrumb">
         <i className="fas fa-leaf e-icon--primary e-icon--left"></i>
         <ul className="c-breadcrumb__list">
-          {matchedRoutes.map((matchRoute, i) => {
-            const { path, breadcrumbName } = matchRoute.route;
+          {matches.map((match, i) => {
+            const { path, breadcrumbName } = match.route;
             const locationPaths = locationPath.split('/');
-            const lastLocationPath =
-              locationPaths.length >= 3
-                ? locationPaths[locationPaths.length - 1]
-                : '/' + locationPaths[locationPaths.length - 1];
+            const lastLocationPath = locationPaths[locationPaths.length - 1];
             const isActive = path === lastLocationPath;
             return isActive ? (
               <li key={i} className="c-breadcrumb__item">
@@ -40,19 +42,13 @@ function Breadcrumb() {
               </li>
             ) : (
               <li key={i} className="c-breadcrumb__item">
-                <Link to={path} className="c-breadcrumb__link">
+                <Link to={`/${path}`} className="c-breadcrumb__link">
                   {breadcrumbName}
                 </Link>
               </li>
             );
           })}
         </ul>
-        {/* <Link to="/" className="c-breadcrumb__link">
-          首頁
-        </Link>
-        <Link to="/products" className="c-breadcrumb__link">
-          商品列表
-        </Link> */}
       </div>
     </>
   );

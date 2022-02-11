@@ -8,6 +8,7 @@ function Member() {
   return (
     <>
       <Header />
+<<<<<<< HEAD
 
       <div className="container">
         <div className="row">
@@ -20,6 +21,9 @@ function Member() {
           </div>
         </div>
       </div>
+=======
+      <h1>Member</h1>
+>>>>>>> b8bdfb4743d646fd10538078d38d22127d89b742
     </>
   );
 }

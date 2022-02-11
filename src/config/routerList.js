@@ -7,24 +7,32 @@ import Coupon from '../pages/Coupon';
 import Order from '../pages/Order';
 import About from '../pages/About';
 import Calculator from '../pages/Calculator';
+import NotFound from '../pages/NotFound';
 import ProductDetail from '../components/Products/ProductDetail';
+import { Navigate } from 'react-router-dom';
 
 import imgFood from '../img/common/illustration/food.svg';
 
 const routerList = [
   {
-    path: ``,
+    path: `/`,
     element: <Home />,
     exact: true,
     breadcrumbName: '首頁',
   },
   {
-    path: `/products`,
-    element: <Products />,
+    path: `products`,
     breadcrumbName: '商品列表',
     header: '健康餐盒',
     headerImg: imgFood,
     children: [
+      {
+        path: ``,
+        element: <Products />,
+        breadcrumbName: '商品列表',
+        header: '健康餐盒',
+        headerImg: imgFood,
+      },
       {
         path: `detail`,
         element: <ProductDetail />,
@@ -33,12 +41,18 @@ const routerList = [
     ],
   },
   {
-    path: `/member`,
-    element: <Member />,
-    breadcrumbName: '會員資料',
-    header: '會員資料',
+    path: `member`,
+    breadcrumbName: '會員',
+    header: '會員',
     headerImg: imgFood,
     children: [
+      {
+        path: ``,
+        element: <Member />,
+        breadcrumbName: '會員',
+        header: '會員',
+        headerImg: imgFood,
+      },
       {
         path: `info`,
         element: <Member />,
@@ -74,6 +88,10 @@ const routerList = [
         header: '歷史訂單',
         headerImg: imgFood,
       },
+      {
+        path: `*`,
+        element: <Navigate to="info" />,
+      },
     ],
   },
   {
@@ -85,6 +103,10 @@ const routerList = [
     path: `calculator`,
     element: <Calculator />,
     breadcrumbName: '計算機',
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ];
 
