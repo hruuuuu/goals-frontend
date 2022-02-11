@@ -60,6 +60,12 @@ $size__icon--small: 1rem;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
 
+/* 複寫原本的登入/註冊頁面form-floating-label的css */
+$form-floating-label-transform: scale(1) translateY(0) translateX(0);
+
+/* placeholder color */
+$place-holder-color: #bdbdbd;
+
 /* rwd spec */
 $sm: 575.99px;
 $md: 767.99px;

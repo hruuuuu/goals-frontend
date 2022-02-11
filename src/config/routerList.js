@@ -9,6 +9,8 @@ import About from '../pages/About';
 import Calculator from '../pages/Calculator';
 import NotFound from '../pages/NotFound';
 import ProductDetail from '../components/Products/ProductDetail';
+import Signup from '../pages/Signup';
+import Login from '../pages/Login';
 import { Navigate } from 'react-router-dom';
 
 import imgFood from '../img/common/illustration/food.svg';
@@ -103,6 +105,14 @@ const routerList = [
     path: `calculator`,
     element: <Calculator />,
     breadcrumbName: '計算機',
+  },
+  {
+    path: `signup`,
+    element: <Signup />,
+  },
+  {
+    path: `login`,
+    element: <Login />,
   },
   {
     path: '*',
