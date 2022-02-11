@@ -6,7 +6,7 @@ function Counter() {
     <>
       <div className="c-counter">
         <button type="button">
-          <i className="fas fa-plus"></i>
+          <i className="fas fa-minus"></i>
         </button>
         {number}
         <button type="button">
