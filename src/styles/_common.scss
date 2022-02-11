@@ -163,21 +163,31 @@
 }
 
 .e-tag {
-  width: 1.2rem;
-  height: 1.2rem;
-
   background: $color--secondary;
-  border-radius: 50%;
-  @include text--small-bold;
-  color: $color--light;
 
-  position: absolute;
-  top: 0;
-  right: 0;
+  @include text--small;
+  color: $color--light;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  &--corner {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    @include text--small-bold;
+    color: $color--light;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  &--normal {
+    width: max-content;
+    height: max-content;
+    padding: 0.25rem 0.75rem;
+    border-radius: 10rem;
+  }
 }
 
 .e-hr {
