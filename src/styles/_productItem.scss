@@ -1,0 +1,17 @@
+.txt_Org {
+  color: $color--secondary;
+}
+.txt_grn {
+  color: $color--primary;
+}
+.icon_grn {
+  color: $color--primary;
+}
+.del_btn {
+  background-color: $color--light;
+  border: 1px solid $color--gray4;
+}
+.cartItem {
+  height: 45vh;
+  overflow-y: auto;
+}
