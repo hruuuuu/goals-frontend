@@ -258,16 +258,12 @@
     display: inline-block;
 
     &::before {
-<<<<<<< HEAD
       width: $size__icon--small;
       height: $size__icon--small;
 
       font-family: 'Font Awesome 5 Free';
       font-weight: 900;
       content: '\f105';
-=======
-      @include icon--absolute("\f105");
->>>>>>> 7b879c1bdb00b205f84fa854ff3088d205df98c7
       color: $color--gray4;
 
       position: absolute;
