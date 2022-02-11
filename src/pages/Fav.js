@@ -5,6 +5,7 @@ function Fav() {
   return (
     <>
       <Header />
+      <h1>Fav</h1>
     </>
   );
 }
