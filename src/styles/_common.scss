@@ -347,3 +347,61 @@
     font-size: 2.5rem;
   }
 }
+
+.l-footer {
+  width: 100%;
+  height: max-content;
+  padding: 1.5rem 0;
+
+  background: $color--primary;
+  border-radius: 8rem 8rem 0 0;
+  @media screen and (max-width: $lg) {
+    border-radius: $border-radius__footer;
+  }
+  &__item {
+    padding: 0.5rem 0;
+
+    @include h6;
+    color: $color--light;
+    font-size: 0.875rem;
+    &--muted {
+      opacity: 0.7;
+    }
+  }
+  &__link {
+    @include h6;
+    color: $color--light;
+    transition: $transition;
+    font-size: 0.875rem;
+    &:hover {
+      color: $color--secondary;
+    }
+  }
+  &__logo {
+    width: max-content;
+    height: 4rem;
+    @media screen and (max-width: $lg) {
+      height: 2.5rem;
+    }
+  }
+  &__btn {
+    width: max-content;
+    height: max-content;
+    margin-right: 0.75rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &__icon {
+    width: max-content;
+    height: max-content;
+
+    color: $color--light;
+    font-size: 2.5rem;
+  }
+}
