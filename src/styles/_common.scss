@@ -248,18 +248,12 @@
     display: inline-block;
 
     &::before {
-      width: $size__icon--small;
-      height: $size__icon--small;
-
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      content: "\f105";
+      @include icon--absolute("\f105");
       color: $color--gray4;
-      font-size: 1.5rem;
 
       position: absolute;
       top: 50%;
-      left: -0.5rem;
+      left: -0.6rem;
       transform: translate(-50%, -50%);
     }
     &.active {
@@ -280,6 +274,9 @@
   }
   &--primary {
     color: $color--primary;
+  }
+  &--secondary {
+    color: $color--secondary;
   }
 }
 

@@ -5,6 +5,7 @@ function Member() {
   return (
     <>
       <Header />
+      <h1>Member</h1>
     </>
   );
 }
