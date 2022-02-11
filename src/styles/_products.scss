@@ -216,6 +216,7 @@
   align-items: center;
   justify-content: space-between;
   &__btn {
+    padding: 0 0.625rem;
     background: transparent;
     border: none;
     #{$_}__icon {
