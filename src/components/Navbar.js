@@ -58,7 +58,7 @@ function Navbar() {
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
       iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
-      tagDesktop: <div className="e-tag">5</div>,
+      tagDesktop: <div className="e-tag e-tag--corner">5</div>,
       router: `/`,
     },
     {

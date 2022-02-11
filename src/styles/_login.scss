@@ -45,6 +45,11 @@
                 display: flex;
                 justify-content: space-between;
 
+                .btn:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+
                 .google {
                     background-color: $color--light;
                     padding: 0.5rem 1rem;
@@ -53,7 +58,7 @@
                     font-size: 2rem;
 
                     :hover {
-                        color: #555555;
+                        color: $color--info;
                     }
                 }
 
@@ -80,6 +85,8 @@
                     :hover {
                         color: #00B900;
                     }
+
+
                 }
 
                 .facebook {
@@ -92,6 +99,7 @@
                     :hover {
                         color: #3b5998;
                     }
+
                 }
             }
 
@@ -99,7 +107,6 @@
 
 
         .formTitle {
-            // display: inline-block;
             border-bottom: 5px solid $color--secondary;
             padding-bottom: 1.5rem;
         }
@@ -152,15 +159,6 @@
                     box-shadow: none;
                 }
 
-                // .fa-envelope {
-                //     position: absolute;
-                //     top: 50%;
-                //     left: 5%;
-                //     transform: translate(-50%, -50%);
-                //     font-size: 1.5rem;
-                //     color: $color--gray4;
-                //     padding: 1.4rem 1.15rem 1.4rem 1rem;
-                // }
                 .fa-envelope,
                 .fa-lock {
                     position: absolute;
@@ -202,9 +200,10 @@
                 }
             }
 
-            // .form-control::placeholder {
-            //     color: revert;
-            // }
+            .form-control::placeholder {
+                color: $color--gray4;
+                padding-left: 0.5rem;
+            }
         }
     }
 }
