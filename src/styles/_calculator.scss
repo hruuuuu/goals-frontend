@@ -2,6 +2,7 @@
   background: url(../img/calculator/cacu_bg_all.png);
   background-size: 500px 500px;
   background-repeat: repeat;
+  overflow: hidden;
 }
 .l-guide {
   position: relative;
@@ -65,18 +66,39 @@
 }
 
 section.l-description {
-  display: flex;
-  flex-direction: row;
+  position: relative;
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+  .model__head {
+    margin-bottom: 20px;
+  }
 }
 .des-left {
   width: 70%;
-  padding-left: calc((100% - 1320px) / 2);
+  p {
+    line-height: 2;
+    letter-spacing: 1.5px;
+    color: #828282;
+    font-weight: 300;
+  }
   &__top {
     padding-right: 12.5rem;
     padding-bottom: 60px;
+    .model__head--subtitle {
+      line-height: 2.25rem;
+    }
+    p {
+      font-size: 16px;
+    }
   }
   &__bottom {
     display: flex;
+    padding: 60px 0;
+    p {
+      font-size: 15px;
+    }
     .text-box {
       width: 50%;
       padding-right: 80px;
@@ -84,9 +106,68 @@ section.l-description {
         font-size: 1.6rem;
       }
     }
+    ::before {
+      content: '';
+      width: 200%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: -15%;
+      background: rgba(149, 176, 107, 0.15);
+      z-index: -1;
+    }
   }
 }
 
 .des-right {
+  position: absolute;
+  right: 0;
+  top: 0;
   width: 30%;
+  &__deco {
+    position: absolute;
+    width: 150px;
+    transform: translate(-20%, -25%);
+    &::before {
+      content: '';
+      width: 300px;
+      height: 300px;
+      background: url(../img/common/illustration/logo--deco-txt.svg);
+      -webkit-animation: rotate_ 22s linear infinite;
+      animation: rotate_ 22s linear infinite;
+      display: block;
+      position: absolute;
+      left: -50%;
+      top: -50%;
+    }
+  }
+  &__img {
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 160px 0 0 0;
+    img {
+      width: 100%;
+      max-width: none;
+      height: auto;
+    }
+  }
+}
+
+@-webkit-keyframes rotate_ {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate_ {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
