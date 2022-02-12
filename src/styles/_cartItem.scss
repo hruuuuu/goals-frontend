@@ -1,0 +1,47 @@
+.txt_Org {
+  color: $color--secondary;
+}
+.txt_grn {
+  color: $color--primary;
+}
+.icon_grn {
+  color: $color--primary;
+}
+.del_btn {
+  background-color: $color--light;
+  border: 1px solid $color--gray4;
+}
+.cartItem {
+  height: 45vh;
+  overflow-y: auto;
+  //scrollbar
+  /* width */
+  &::-webkit-scrollbar {
+    width: 0.5vw;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background-color: $color--gray6;
+    border-radius: 0.5rem;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $color--primary;
+    border-radius: 0.5rem;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
+}
+.thead {
+  background-color: $color--gray7;
+  border-radius: 0.5rem;
+}
+.qty_btn {
+  background-color: $color--gray6;
+  border-radius: 0.5rem;
+}
