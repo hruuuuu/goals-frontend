@@ -9,7 +9,10 @@ import FloatingMenu from '../components/FloatingMenu';
 
 function Products() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [show, setShow] = useState({
+    modal: true,
+    outTransition: false,
+  });
   return (
     <>
       <Header />
@@ -19,7 +22,7 @@ function Products() {
             <Filter />
           </div>
           <div className="col-12 col-lg-9">
-            <ProductList open={open} setOpen={setOpen} />
+            <ProductList show={show} setShow={setShow} />
           </div>
         </div>
         <FloatingIcon setIsDisplay={setIsDisplay} />
@@ -27,7 +30,7 @@ function Products() {
           <FloatingMenu isDisplay={isDisplay} setIsDisplay={setIsDisplay} />
         )}
       </div>
-      <ProductDetail open={open} setOpen={setOpen} />
+      <ProductDetail show={show} setShow={setShow} />
     </>
   );
 }

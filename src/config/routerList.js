@@ -8,7 +8,6 @@ import Order from '../pages/Order';
 import About from '../pages/About';
 import Calculator from '../pages/Calculator';
 import NotFound from '../pages/NotFound';
-import ProductDetail from '../components/Products/ProductDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
 import { Navigate } from 'react-router-dom';

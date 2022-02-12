@@ -249,34 +249,28 @@
 }
 
 .m-product-detail {
-  .css-sox5kk-MuiBackdrop-root {
-    background-color: $color__modal-bg;
+  &__backdrop {
+    background-color: $color--modal-bg;
   }
   &__modal {
-    width: 60%;
-    height: 37.5rem;
+    max-width: 60%;
+    @media screen and (max-width: $xl) {
+      max-width: 80%;
+    }
+    @media screen and (max-width: $lg) {
+      max-width: 90%;
+    }
+  }
+  &__wrapper {
+    width: 100%;
     padding: $padding__modal;
 
     background: $color--light;
+    border: none;
     box-shadow: $box-shadow__modal;
     border-radius: $border-radius__modal;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    @media screen and (max-width: $xl) {
-      width: 80%;
-    }
     @media screen and (max-width: $lg) {
-      width: 90%;
       padding: $padding__modal--md;
-    }
-    //全螢幕
-    @media screen and (max-width: $md) {
-      width: 90%;
     }
   }
   &__cover {
@@ -298,9 +292,6 @@
 
     background: $color--info;
     border-radius: $border-radius__small-block;
-
-    display: flex;
-    justify-content: space-between;
   }
   &__list {
     display: flex;
@@ -317,9 +308,15 @@
   }
   &__detail {
     height: max-content;
-    max-height: 12rem;
+    max-height: 11rem;
     overflow-y: auto;
     @include scrollbar;
+    @media screen and (max-width: $lg) {
+      max-height: 14rem;
+    }
+    @media screen and (max-width: $md) {
+      max-height: 17.5rem;
+    }
   }
   &__subtitle {
     margin-bottom: 0.5rem;

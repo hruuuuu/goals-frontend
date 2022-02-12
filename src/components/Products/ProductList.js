@@ -1,18 +1,18 @@
-import React from 'react';
+import { React, useState } from 'react';
 import ProductItem from './ProductItem';
 
 function ProductList(props) {
-  const { open, setOpen } = props;
+  const { setShow } = props;
   const productItems = () => {
     let products = [];
     for (let i = 1; i < 14; i++) {
-      products.push(<ProductItem key={i} setOpen={setOpen} id={i} />);
+      products.push(<ProductItem key={i} id={i} setShow={setShow} />);
     }
     return products;
   };
   return (
     <>
-      <div className="row gx-5">{productItems()}</div>
+      <div className="row gx-3 gx-md-5">{productItems()}</div>
     </>
   );
 }

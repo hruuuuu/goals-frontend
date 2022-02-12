@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -6,12 +6,13 @@ import Counter from './Counter';
 import FavIcon from './FavIcon';
 
 function ProductItem(props) {
-  const { id, setOpen } = props;
-
+  const { id, setShow } = props;
   //params productId -> 打api用
   const { productId } = useParams();
 
-  const handleOpen = () => setOpen(true);
+  const handleShow = () => {
+    setShow({ ...setShow, in: true });
+  };
   return (
     <>
       <div className="col-6 col-md-4">
@@ -28,7 +29,7 @@ function ProductItem(props) {
                 alt="thumbnail"
               />
             </button> */}
-            <Link to={`/product/${id}`} onClick={handleOpen}>
+            <Link to={`/product/${id}`} onClick={handleShow}>
               <img
                 className="c-product-item__img"
                 src={require('../../img/products/sunshine_bowl.jpeg')}
