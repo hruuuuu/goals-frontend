@@ -12,7 +12,7 @@ function Navbar() {
     {
       id: 2,
       name: '健康餐盒',
-      route: `/products`,
+      route: `/product`,
     },
     {
       id: 3,
