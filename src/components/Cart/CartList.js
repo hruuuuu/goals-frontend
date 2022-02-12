@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductItem from './ProductItem';
+import ProductItem from './CartItem';
 import Summary from './Summary';
 
 function CartList() {
