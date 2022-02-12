@@ -1,10 +1,10 @@
 import React from 'react';
-import background from '../../img/page_banner/page_banner1.jpg';
+import background from '../img/page_banner/page_banner1.jpg';
 
 const PageBanner = () => {
   return (
     <>
-      <section className="l-pageBanner">
+      <section className="c-pageBanner">
         <div
           id="carouselExampleSlidesOnly"
           className="carousel slide"
