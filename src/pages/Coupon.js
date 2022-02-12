@@ -7,7 +7,6 @@ function Coupon() {
   return (
     <>
       <Header />
-
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
@@ -39,7 +38,7 @@ function Coupon() {
                           </p>
                         </div>
                       </div>
-                      <button className="btn couponBtn">已領取</button>
+                      <button className="couponBtn">已領取</button>
                       <div className="remain-coupon">剩餘0張</div>
                     </div>
                   </div>
@@ -60,14 +59,13 @@ function Coupon() {
                           </p>
                         </div>
                       </div>
-                      <button className="btn couponBtn1">領取優惠券</button>
+                      <button className="couponBtn1">領取優惠券</button>
                       <div className="remain-coupon">剩餘30張</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* <EditProfile /> */}
           </div>
         </div>
       </div>
