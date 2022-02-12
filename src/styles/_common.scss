@@ -187,6 +187,19 @@
     padding: 0.25rem 0.75rem;
     border-radius: 10rem;
   }
+  &--floating {
+    position: absolute;
+
+    top: 25%;
+    bottom: auto;
+    left: 65%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    @media screen and (min-width: $md) {
+      top: 40%;
+      left: 80%;
+    }
+  }
 }
 
 .e-hr {
@@ -354,6 +367,7 @@
     font-size: 2.5rem;
   }
 }
+<<<<<<< HEAD
 .img-responsive {
   display: block;
   max-width: 100%;
@@ -485,6 +499,8 @@
     opacity: 1;
   }
 }
+=======
+>>>>>>> 9bd8e61157a950207bbaba055d99a7f45167b78c
 
 .c-floating-icon {
   width: 100%;

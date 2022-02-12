@@ -7,7 +7,7 @@
 body {
   font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
-  color: $color--font;
+  color: $color__font;
 }
 
 a {
@@ -37,7 +37,7 @@ div {
   font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
   line-height: 110%;
-  color: $color--font;
+  color: $color__font;
 }
 
 @mixin text {
@@ -45,7 +45,7 @@ div {
   font-family: "Inter", "Noto Sans TC", sans-serif;
   letter-spacing: 0.06rem;
   line-height: 140%;
-  color: $color--font;
+  color: $color__font;
 }
 
 h1 {
