@@ -16,6 +16,7 @@ function FloatingIcon(props) {
           }}
         >
           <i className="fas fa-shopping-cart c-floating-icon__icon"></i>
+          <div className="e-tag e-tag--corner e-tag--floating">5</div>
         </button>
       </div>
     </>

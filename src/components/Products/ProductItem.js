@@ -10,7 +10,7 @@ function ProductItem() {
       <div className="col-6 col-md-4">
         <div className="c-product-item">
           <div className="c-product-item__cover">
-            <Link to="/product/detail/:id">
+            <Link to="/product/detail">
               <img
                 className="c-product-item__img"
                 src={require('../../img/products/sunshine_bowl.jpeg')}

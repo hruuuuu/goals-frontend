@@ -4,7 +4,7 @@ import ProductItem from './ProductItem';
 function ProductList() {
   return (
     <>
-      <div className="row">
+      <div className="row gx-5">
         <ProductItem />
         <ProductItem />
         <ProductItem />
