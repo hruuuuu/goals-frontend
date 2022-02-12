@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
+import { Link } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 
 const Signup = () => {
@@ -89,7 +90,9 @@ const Signup = () => {
                 Confirm Password
               </label>
             </div>
-            <p className="notification">已經有帳戶了？</p>
+            <Link to="/login">
+              <p className="notification">已經有帳戶了？</p>
+            </Link>
             {/* w-100 for below */}
             <button className="signBtn btn">Sign In</button>
           </form>
