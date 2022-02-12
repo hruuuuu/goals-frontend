@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
+import { Link } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 
 const Login = () => {
@@ -62,7 +63,9 @@ const Login = () => {
               </label>
             </div>
             <div className="notificationWrapper">
-              <p className="notification">尚未有帳戶？</p>
+              <Link to="/signup">
+                <p className="notification">尚未有帳戶？</p>
+              </Link>
               <p className="notification">忘記密碼</p>
             </div>
             <button className="loginBtn">Log In</button>
