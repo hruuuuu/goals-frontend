@@ -10,7 +10,7 @@ import FloatingMenu from '../components/FloatingMenu';
 function Products() {
   const [isDisplay, setIsDisplay] = useState(false);
   const [show, setShow] = useState({
-    in: true,
+    in: false,
     out: false,
   });
   return (
