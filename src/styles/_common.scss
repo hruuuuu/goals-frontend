@@ -164,7 +164,7 @@
 .e-tag {
   background: $color--secondary;
 
-  @include text--small;
+  @include text--extra-small;
   color: $color--light;
 
   display: flex;
@@ -203,12 +203,17 @@
 }
 
 .e-hr {
-  width: 10rem;
   height: $height__line !important;
   margin: 0;
-  background: $color--secondary;
-
   opacity: 1;
+  &--navbar {
+    width: 10rem;
+    background: $color--secondary;
+  }
+  &--divider {
+    width: 100%;
+    background: $color--gray5;
+  }
 }
 
 .l-header {

@@ -32,6 +32,10 @@ div {
   cursor: default;
 }
 
+button {
+  letter-spacing: 0.06rem;
+}
+
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
@@ -144,6 +148,12 @@ h6 {
   font-size: 0.75rem;
 }
 
+@mixin h5 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1.25rem;
+}
+
 @mixin h6 {
   @include heading;
   font-weight: normal;
@@ -185,6 +195,21 @@ h6 {
   span,
   div {
     cursor: $cursor;
+  }
+}
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color--gray5;
+    border-radius: 10rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color--primary;
+    border-radius: 10rem;
+    background-clip: content-box;
   }
 }
 

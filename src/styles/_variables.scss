@@ -43,6 +43,8 @@ $border-radius__footer--lg: 6rem 6rem 0 0;
 $border-radius__input: 0.25rem;
 $border-radius__btn: 0.625rem;
 $border-radius__block: 1.25rem;
+$border-radius__modal: 2.5rem;
+$border-radius__small-block: $border-radius__input;
 
 /* border */
 $border__input: 0.0625rem solid $color__input-border;
@@ -64,6 +66,10 @@ $height__btn--large: 3.75rem;
 $height__btn--meduim: 2.75rem;
 $height__input: 2.75rem;
 $height__floating-menu: 31.25rem;
+
+/* padding */
+$padding__modal: 2.5rem;
+$padding__modal--md: 1.25rem;
 
 /* floating icon */
 $radius__floating-icon: 3.75rem;

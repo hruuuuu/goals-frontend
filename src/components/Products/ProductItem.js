@@ -1,23 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Counter from './Counter';
 import FavIcon from './FavIcon';
 
-function ProductItem() {
+function ProductItem(props) {
+  const { id, setOpen } = props;
+
+  //params productId -> 打api用
+  const { productId } = useParams();
+
+  const handleOpen = () => setOpen(true);
   return (
     <>
       <div className="col-6 col-md-4">
         <div className="c-product-item">
           <div className="c-product-item__cover">
-            <Link to="/product/detail">
+            {/* <button
+              type="button"
+              className="c-product-item__btn"
+              onClick={handleOpen}
+            >
+              <img
+                className="c-product-item__img"
+                src={require('../../img/products/sunshine_bowl.jpeg')}
+                alt="thumbnail"
+              />
+            </button> */}
+            <Link to={`/product/${id}`} onClick={handleOpen}>
               <img
                 className="c-product-item__img"
                 src={require('../../img/products/sunshine_bowl.jpeg')}
                 alt="thumbnail"
               />
             </Link>
-            <FavIcon />
+            <FavIcon size="medium" />
           </div>
           <div className="c-product-item__tag e-tag e-tag--normal">
             素食餐盒

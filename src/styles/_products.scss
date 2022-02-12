@@ -108,6 +108,14 @@
     border-radius: $border-radius__block;
     overflow: hidden;
   }
+  &__btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+  }
   &__img {
     width: 100%;
     height: 100%;
@@ -121,11 +129,11 @@
     color: $color--primary;
   }
   &__cal {
-    @include text--normal;
+    @include text--small;
     color: $color--error;
   }
   &__o-price {
-    @include text--normal;
+    @include text--small;
     color: $color--gray5;
     text-decoration: line-through;
   }
@@ -181,6 +189,15 @@
   &--large {
     width: 3.75rem;
     height: 3.75rem;
+    background: transparent;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    #{$_}__icon {
+      font-size: 2rem;
+    }
   }
   @media screen and (max-width: $md) {
     width: 2rem;
@@ -228,5 +245,103 @@
     #{$_}__icon {
       font-size: 0.875rem;
     }
+  }
+}
+
+.m-product-detail {
+  .css-sox5kk-MuiBackdrop-root {
+    background-color: $color__modal-bg;
+  }
+  &__modal {
+    width: 60%;
+    height: 37.5rem;
+    padding: $padding__modal;
+
+    background: $color--light;
+    box-shadow: $box-shadow__modal;
+    border-radius: $border-radius__modal;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    @media screen and (max-width: $xl) {
+      width: 80%;
+    }
+    @media screen and (max-width: $lg) {
+      width: 90%;
+      padding: $padding__modal--md;
+    }
+    //全螢幕
+    @media screen and (max-width: $md) {
+      width: 90%;
+    }
+  }
+  &__cover {
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius__block;
+    overflow: hidden;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__nutrition {
+    width: 100%;
+    height: max-content;
+    padding: 0.625rem;
+    margin-bottom: 1rem;
+
+    background: $color--info;
+    border-radius: $border-radius__small-block;
+
+    display: flex;
+    justify-content: space-between;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+  &__item {
+    margin-bottom: 0.5rem;
+
+    @include text--small;
+    color: $color--light;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  &__detail {
+    height: max-content;
+    max-height: 12rem;
+    overflow-y: auto;
+    @include scrollbar;
+  }
+  &__subtitle {
+    margin-bottom: 0.5rem;
+    display: flex;
+  }
+  &__icon {
+    color: $color--info;
+  }
+  &__heading {
+    color: $color--info;
+  }
+  &__description {
+    margin-bottom: 1rem;
+  }
+  &__text {
+    @include text--small;
+  }
+  &__o-price {
+    color: $color--gray4;
+    text-decoration: line-through;
+  }
+  &__price {
+    color: $color--secondary;
   }
 }

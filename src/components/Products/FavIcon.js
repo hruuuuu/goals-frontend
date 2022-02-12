@@ -1,13 +1,12 @@
 import { React, useState } from 'react';
 
-function FavIcon() {
+function FavIcon(props) {
+  const { size, type } = props;
   const [fav, setFav] = useState(false);
   return (
     <>
       <button
-        className={`c-fav-btn c-fav-btn--medium c-fav-btn--corner ${
-          fav ? 'active' : ''
-        }`}
+        className={`c-fav-btn c-fav-btn--${size} ${fav ? 'active' : ''}`}
         type="button"
         onClick={() => {
           setFav(!fav);

@@ -36,9 +36,11 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `detail`,
-        element: <ProductDetail />,
+        path: `:productId`,
+        element: <Products />,
         breadcrumbName: '商品細節',
+        header: '健康餐盒',
+        headerImg: imgFood,
       },
     ],
   },
