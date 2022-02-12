@@ -283,8 +283,15 @@ h6 {
   }
   &--large {
     height: $height__btn--large;
+    @media screen and (max-width: $md) {
+      height: $height__btn--meduim;
+    }
   }
   &--medium {
     height: $height__btn--meduim;
+  }
+  &--icon {
+    background: transparent;
+    border: none;
   }
 }

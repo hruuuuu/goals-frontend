@@ -34,8 +34,15 @@ function ProductDetail(props) {
         contentClassName="m-product-detail__wrapper"
         centered
         animation={false}
+        fullscreen="md-down"
       >
-        <div className="row h-100">
+        <button
+          onClick={handleClose}
+          className="m-product-detail__close e-btn e-btn--icon"
+        >
+          <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
+        </button>
+        <div className="row">
           <div className="col-12 col-md-7">
             <div className="m-product-detail__cover">
               <img
@@ -45,56 +52,64 @@ function ProductDetail(props) {
               />
             </div>
           </div>
-          <div className="col-12 col-md-5 d-flex flex-column justify-content-between h-100">
-            <div>
-              <div className="position-relative">
-                <div className="e-tag e-tag--normal">素食餐盒</div>
-                <h4 className="my-3">叢林能量碗</h4>
-                <FavIcon size="large" />
-                <div className="m-product-detail__nutrition d-flex flex-column flex-md-row">
-                  <ul className="m-product-detail__list mb-2 mb-md-0">
-                    <li className="m-product-detail__item">379卡路里</li>
-                    <li className="m-product-detail__item">8克脂肪</li>
-                  </ul>
-                  <ul className="m-product-detail__list ms-md-5">
-                    <li className="m-product-detail__item">14克蛋白質</li>
-                    <li className="m-product-detail__item">68克碳水化合物</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="m-product-detail__detail">
-                <div className="m-product-detail__description">
-                  <div className="m-product-detail__subtitle">
-                    <i className="fas fa-pencil-alt e-icon e-icon--left m-product-detail__icon"></i>
-                    <h6 className="m-product-detail__heading">商品描述</h6>
+          <div className="col-12 col-md-5">
+            <div className="d-flex flex-column justify-content-between p-3 p-md-0">
+              <div className="m-product-detail__scroll p-md-0">
+                <div className="position-relative">
+                  <div className="e-tag e-tag--normal">素食餐盒</div>
+                  <h4 className="my-3">叢林能量碗</h4>
+                  <FavIcon size="large" />
+                  <div className="m-product-detail__nutrition d-flex">
+                    <ul className="m-product-detail__list">
+                      <li className="m-product-detail__item">379卡路里</li>
+                      <li className="m-product-detail__item">8克脂肪</li>
+                    </ul>
+                    <ul className="m-product-detail__list ms-5">
+                      <li className="m-product-detail__item">14克蛋白質</li>
+                      <li className="m-product-detail__item">68克碳水化合物</li>
+                    </ul>
                   </div>
-                  <p className="m-product-detail__text">
-                    我們能量碗系列中最陽光的一面。有機藜麥與大蒜羽衣甘藍拌勻，淋上薑黃花椰菜、特級初榨橄欖油、鷹嘴豆和烤無鹽南瓜籽。
-                  </p>
                 </div>
-                <div className="m-product-detail__description">
-                  <div className="m-product-detail__subtitle">
-                    <i className="fas fa-pepper-hot e-icon e-icon--left m-product-detail__icon"></i>
-                    <h6 className="m-product-detail__heading">商品成分</h6>
+                <div className="m-product-detail__detail">
+                  <div className="m-product-detail__description">
+                    <div className="m-product-detail__subtitle">
+                      <i className="fas fa-pencil-alt e-icon e-icon--left m-product-detail__icon"></i>
+                      <h6 className="m-product-detail__heading">商品描述</h6>
+                    </div>
+                    <p className="m-product-detail__text">
+                      我們能量碗系列中最陽光的一面。有機藜麥與大蒜羽衣甘藍拌勻，淋上薑黃花椰菜、特級初榨橄欖油、鷹嘴豆和烤無鹽南瓜籽。
+                    </p>
                   </div>
-                  <p className="m-product-detail__text">
-                    有機藜麥、羽衣甘藍、花椰菜、薑黃、辣椒粉、鷹嘴豆、檸檬汁、米醋、新鮮大蒜、鷹嘴豆、烤有機南瓜子、特級初榨橄欖油、海鹽和黑胡椒。
-                  </p>
+                  <div className="m-product-detail__description">
+                    <div className="m-product-detail__subtitle">
+                      <i className="fas fa-pepper-hot e-icon e-icon--left m-product-detail__icon"></i>
+                      <h6 className="m-product-detail__heading">商品成分</h6>
+                    </div>
+                    <p className="m-product-detail__text">
+                      有機藜麥、羽衣甘藍、花椰菜、薑黃、辣椒粉、鷹嘴豆、檸檬汁、米醋、新鮮大蒜、鷹嘴豆、烤有機南瓜子、特級初榨橄欖油、海鹽和黑胡椒。
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <hr className="e-hr e-hr--divider my-3" />
-              <div className="d-flex justify-content-between align-items-end mb-3">
-                <Counter />
-                <div className="d-flex flex-column align-items-end ps-5">
-                  <h6 className="m-product-detail__o-price">$150</h6>
-                  <h2 className="m-product-detail__price">$110</h2>
+              <div className="m-product-detail__footer">
+                <div className="m-product-detail__footer-wrapper">
+                  <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
+                  <div className="row">
+                    <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
+                      <Counter />
+                      <div className="d-none d-md-flex flex-column align-items-end ps-5">
+                        <h6 className="m-product-detail__o-price">$150</h6>
+                        <h2 className="m-product-detail__price">$110</h2>
+                      </div>
+                    </div>
+                    <div className="col-6 col-md-12">
+                      <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
+                        加入購物車
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
-                加入購物車
-              </button>
             </div>
           </div>
         </div>

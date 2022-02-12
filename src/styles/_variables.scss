@@ -23,6 +23,8 @@ $color--hover: #76b8d3;
 $color--active: #3aa1cb;
 $color--opacity: rgba(107, 156, 102, 0.2);
 
+$color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+
 $color__font: $color--gray2;
 $color__input-border: $color--gray4;
 $color__modal-bg: rgba(255, 255, 255, 0.8);
@@ -87,11 +89,11 @@ $size__icon-btn: 2.75rem;
 $form-floating-label-transform: scale(1) translateY(0) translateX(0);
 
 /* rwd spec */
-$sm: 575.99px;
-$md: 767.99px;
-$lg: 991.99px;
-$xl: 1199.99px;
-$xxl: 1399.99px;
+$sm: 575px;
+$md: 767px;
+$lg: 991px;
+$xl: 1199px;
+$xxl: 1399px;
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";
