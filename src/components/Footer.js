@@ -7,12 +7,11 @@ function Footer() {
     [
       { id: 0, path: `/`, name: '首頁' },
       { id: 1, path: `/about`, name: '關於果實' },
-      { id: 2, path: `/products`, name: '健康餐盒' },
+      { id: 2, path: `/product`, name: '健康餐盒' },
     ],
     [
-      { id: 3, path: `/`, name: '健身課程' },
-      { id: 4, path: `/blog`, name: '健康新知' },
-      { id: 5, path: `/calculator`, name: '計算機' },
+      { id: 3, path: `/blog`, name: '健康新知' },
+      { id: 4, path: `/calculator`, name: '計算機' },
     ],
   ];
   const footerSocialMedias = [
