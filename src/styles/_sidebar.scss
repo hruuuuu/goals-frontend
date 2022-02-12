@@ -4,7 +4,6 @@
   padding: 0;
   width: 18rem;
 }
-
 .Sidebaritem {
   .Sidebarfont {
     display: block;
@@ -16,6 +15,21 @@
 
     //hover 效果
 
+    // &:hover {
+    //   background-color: #555;
+    //   color: white;
+    // }
+  }
+}
+.Sidebaritem1 {
+  .Sidebarfont {
+    display: block;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.25rem;
+    color: #74b08d;
+    padding: 0rem 1rem 1.3rem 1rem;
+    text-decoration: none;
+    //hover 效果
     // &:hover {
     //   background-color: #555;
     //   color: white;

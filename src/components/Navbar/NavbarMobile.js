@@ -18,7 +18,7 @@ function NavbarMobile(props) {
           {navLinks.map((link) => {
             return (
               <li className="l-navbar__item" key={link.id}>
-                <NavLink to={link.router}>
+                <NavLink to={link.route}>
                   <h4 className="l-navbar__font">{link.name}</h4>
                 </NavLink>
               </li>
@@ -30,7 +30,7 @@ function NavbarMobile(props) {
           {navActions.map((action) => {
             return (
               <li className="l-navbar__item" key={action.id}>
-                <NavLink to={action.router} className="l-navbar__btn">
+                <NavLink to={action.route} className="l-navbar__btn">
                   <h4 className="l-navbar__font">{action.name}</h4>
                   {action.iconMobile}
                 </NavLink>

@@ -4,10 +4,18 @@ import ProductItem from './ProductItem';
 function ProductList() {
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <ProductItem />
-        </div>
+      <div className="row gx-5">
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
       </div>
     </>
   );

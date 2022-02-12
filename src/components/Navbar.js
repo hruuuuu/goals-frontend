@@ -7,27 +7,22 @@ function Navbar() {
     {
       id: 1,
       name: '關於果實',
-      router: `/`,
+      route: `/about`,
     },
     {
       id: 2,
       name: '健康餐盒',
-      router: `/`,
+      route: `/products`,
     },
     {
       id: 3,
-      name: '健身課程',
-      router: `/`,
+      name: '計算機',
+      route: `/calculator`,
     },
     {
       id: 4,
-      name: '計算機',
-      router: `/`,
-    },
-    {
-      id: 5,
       name: '健康新知',
-      router: `/`,
+      route: `/blog`,
     },
   ];
   const navActions = [
@@ -39,7 +34,7 @@ function Navbar() {
       ),
       iconDesktop: <i className="fas fa-user l-navbar__font"></i>,
       tagDesktop: ``,
-      router: `/`,
+      route: `/login`,
     },
     {
       id: 2,
@@ -49,7 +44,7 @@ function Navbar() {
       ),
       iconDesktop: <i className="fas fa-heart l-navbar__font"></i>,
       tagDesktop: ``,
-      router: `/`,
+      route: `/member/fav`,
     },
     {
       id: 3,
@@ -59,7 +54,7 @@ function Navbar() {
       ),
       iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
       tagDesktop: <div className="e-tag e-tag--corner">5</div>,
-      router: `/`,
+      route: `/member/cart`,
     },
     {
       id: 4,
@@ -69,7 +64,7 @@ function Navbar() {
       ),
       iconDesktop: <i class="fas fa-ticket-alt l-navbar__font"></i>,
       tagDesktop: ``,
-      router: `/`,
+      route: `/member/coupon`,
     },
     {
       id: 5,
@@ -79,7 +74,7 @@ function Navbar() {
       ),
       iconDesktop: <i className="fas fa-search l-navbar__font"></i>,
       tagDesktop: ``,
-      router: `/`,
+      route: `/`,
     },
   ];
   return (

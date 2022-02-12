@@ -23,7 +23,7 @@ const routerList = [
     breadcrumbName: '首頁',
   },
   {
-    path: `products`,
+    path: `product`,
     breadcrumbName: '商品列表',
     header: '健康餐盒',
     headerImg: imgFood,
