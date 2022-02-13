@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import MemberSidebar from '../MemberSidebar';
+import FloatingSidebar from './FloatingSidebar';
 
 function FloatingMenu(props) {
   const [animation, setAnimation] = useState(false);
@@ -19,7 +19,7 @@ function FloatingMenu(props) {
         <div className="c-floating-menu__content">
           <div className="container">
             <h2>
-              <MemberSidebar />
+              <FloatingSidebar />
             </h2>
           </div>
         </div>
