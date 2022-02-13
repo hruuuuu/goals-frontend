@@ -13,8 +13,18 @@ function Member() {
       <Header />
 
       <div className="container">
+<<<<<<< HEAD
         <div className="row gx-4">
           <div className="col-lg-3">
+=======
+<<<<<<< HEAD
+        <div className="row gx-4">
+          <div className="col-lg-3">
+=======
+        <div className="row">
+          <div className="col-md-3 d-none d-md-block">
+>>>>>>> d9049c77b0603eeb9e7031ce679e3c91bcb389be
+>>>>>>> c7c88517502d7e096e1df23e0afb49b0824d8068
             <MemberSidebar />
           </div>
           <div className="col col-md-9">

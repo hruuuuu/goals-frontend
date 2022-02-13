@@ -29,6 +29,14 @@
 
 .Sidebaritem {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  margin-bottom: 1rem;
+  &:last-of-type {
+    margin: 1rem 0 0 0;
+  }
+=======
+>>>>>>> c7c88517502d7e096e1df23e0afb49b0824d8068
   .Sidebarfont {
     display: flex;
     font-family: 'Noto Sans TC', sans-serif;
@@ -67,12 +75,16 @@
 }
 
 .Sidebaritem1 {
+<<<<<<< HEAD
 =======
   margin-bottom: 1rem;
   &:last-of-type {
     margin: 1rem 0 0 0;
   }
 >>>>>>> 370c3ff0d0fca20f66947f1e854d8e058b7f1505
+=======
+>>>>>>> d9049c77b0603eeb9e7031ce679e3c91bcb389be
+>>>>>>> c7c88517502d7e096e1df23e0afb49b0824d8068
   .Sidebarfont {
     padding: 0.625rem;
 
