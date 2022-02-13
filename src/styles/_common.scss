@@ -230,7 +230,7 @@
 
     position: relative;
     &::before {
-      content: '';
+      content: "";
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -258,7 +258,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: '';
+        content: "";
         display: none;
       }
     }
@@ -278,9 +278,9 @@
       width: $size__icon--small;
       height: $size__icon--small;
 
-      font-family: 'Font Awesome 5 Free';
+      font-family: "Font Awesome 5 Free";
       font-weight: 900;
-      content: '\f105';
+      content: "\f105";
       color: $color--gray4;
 
       position: absolute;
@@ -411,7 +411,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: '';
+        content: "";
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -420,7 +420,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: '';
+        content: "";
         width: 5px;
         height: 30px;
         position: absolute;
@@ -616,5 +616,114 @@
     top: 0;
     left: 0;
     z-index: -1;
+  }
+}
+
+.c-fav-btn {
+  $_: &;
+  background: $color--light;
+  border: none;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: pointer;
+
+  transition: $transition;
+  &__icon {
+    color: $color--gray5;
+    cursor: pointer;
+  }
+  &__text {
+    margin-left: 0.25rem;
+    @include text--small;
+    @include cursor(pointer);
+  }
+  &--medium {
+    width: 2.75rem;
+    height: 2.75rem;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    border-radius: 0 0.625rem 0 1.875rem;
+    #{$_}__icon {
+      font-size: 1.5rem;
+    }
+  }
+  &--large {
+    width: 3.75rem;
+    height: 3.75rem;
+    background: transparent;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    #{$_}__icon {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (max-width: $md) {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 0 0.625rem 0 1rem;
+
+    align-items: center;
+    #{$_}__icon {
+      font-size: 1.25rem;
+    }
+  }
+  &--icon-text {
+    width: max-content;
+
+    display: flex;
+    align-items: center;
+
+    right: 0.75rem;
+    @media screen and (max-width: $md) {
+      width: max-content;
+      top: 0.5rem;
+      right: 0;
+    }
+  }
+  &.active {
+    #{$_}__icon {
+      color: $color--error;
+      box-shadow: none;
+      &::before {
+        filter: drop-shadow($box-shadow__icon);
+      }
+    }
+  }
+}
+
+.c-counter {
+  $_: &;
+  width: 100%;
+  height: $height__input;
+
+  background: $color--gray6;
+  border-radius: $border-radius__input;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__btn {
+    padding: 0 0.625rem;
+    background: transparent;
+    border: none;
+    #{$_}__icon {
+      color: $color--primary;
+      font-size: 1.25rem;
+    }
+  }
+  @media screen and (max-width: $md) {
+    #{$_}__icon {
+      font-size: 0.875rem;
+    }
   }
 }

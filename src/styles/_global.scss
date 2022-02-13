@@ -294,4 +294,22 @@ h6 {
     background: transparent;
     border: none;
   }
+  &--mobile {
+    @include cursor(pointer);
+    @media screen and (max-width: $md) {
+      width: $width__btn--square;
+      min-width: $width__btn--square;
+
+      background: $color--light;
+      color: $color--primary;
+      box-shadow: $box-shadow__block;
+      &:hover {
+        color: $color--light;
+      }
+      &:focus,
+      &:active {
+        color: $color--light;
+      }
+    }
+  }
 }

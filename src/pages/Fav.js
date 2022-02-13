@@ -1,21 +1,25 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
+import ProductDetail from '../components/Products/ProductDetail';
+import FavList from '../components/Fav/FavList';
+import FavItem from '../components/Fav/FavItem';
 
 function Fav() {
   return (
     <>
       <Header />
-      <h1>Fav</h1>
-
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">{/* components可以放這裡 */}</div>
+          <div className="col-lg-9">
+            <FavList />
+          </div>
         </div>
       </div>
+      <ProductDetail />
     </>
   );
 }
