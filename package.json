@@ -17,6 +17,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "formik": "^2.2.9",
     "jquery": "^3.6.0",
     "prettier": "^2.5.1",
     "prop-types": "^15.8.1",

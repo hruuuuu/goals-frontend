@@ -6,6 +6,7 @@ import Image from '../img/sign/login.jpg';
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [eye, setEye] = useState('');
+
   const handleSwitchEyes = (e) => {
     setShowPassword(!showPassword);
     setEye(e.target.id);
@@ -94,7 +95,7 @@ const Signup = () => {
               <p className="notification">已經有帳戶了？</p>
             </Link>
             {/* w-100 for below */}
-            <button className="signBtn btn">Sign In</button>
+            <button className="signBtn">Sign In</button>
           </form>
         </div>
       </div>
