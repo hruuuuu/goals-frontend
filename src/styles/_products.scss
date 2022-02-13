@@ -1,11 +1,11 @@
 .c-product-filter {
   width: 100%;
   height: max-content;
-  max-height: calc(100vh - $top__sticky-filter);
+  max-height: calc(100vh - $top--sticky);
   margin-bottom: 2.5rem;
 
   position: sticky;
-  top: $top__sticky-filter;
+  top: $top--sticky;
   &__title {
     margin-bottom: 1rem;
     display: flex;
@@ -25,6 +25,11 @@
   }
   &__wrapper {
     margin-bottom: 1.5rem;
+    height: max-content;
+    max-height: 65vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @include scrollbar;
   }
 }
 
@@ -88,9 +93,42 @@
   margin-bottom: 3.75rem;
 
   position: relative;
-  &__detail {
-    margin: 0.5rem 0;
+
+  &__cover {
+    width: 100%;
+    height: 13rem;
+    margin-bottom: 0.5rem;
+
+    border-radius: $border-radius__block;
+    overflow: hidden;
   }
+  &__btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__action {
+    height: $height__btn--meduim;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include cursor(pointer);
+  }
+}
+
+.c-product-item-detail {
+  margin: 0.5rem 0;
+
   &__row {
     margin-bottom: 0.125rem;
     display: flex;
@@ -100,19 +138,6 @@
       margin-bottom: 0;
     }
   }
-  &__cover {
-    width: 100%;
-    height: 13rem;
-    margin-bottom: 0.5rem;
-
-    border-radius: $border-radius__block;
-    overflow: hidden;
-  }
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
   &__heading {
     @include text--medium-bold;
   }
@@ -121,112 +146,184 @@
     color: $color--primary;
   }
   &__cal {
-    @include text--normal;
+    @include text--small;
     color: $color--error;
   }
   &__o-price {
-    @include text--normal;
+    @include text--small;
     color: $color--gray5;
     text-decoration: line-through;
   }
-  &__action {
-    width: 100%;
-    height: $height__btn--meduim;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include cursor(pointer);
-    @media screen and (max-width: $md) {
-      width: $width__btn--square;
-      min-width: $width__btn--square;
-
-      background: $color--light;
-      color: $color--primary;
-      box-shadow: $box-shadow__block;
-    }
-  }
 }
 
-.c-fav-btn {
+.c-product-detail {
   $_: &;
-  background: $color--light;
-  border: none;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  cursor: pointer;
-
-  transition: $transition;
-  &__icon {
-    color: $color--gray5;
-    cursor: pointer;
+  &__backdrop {
+    background-color: $color--modal-bg;
   }
-  &--medium {
-    width: 2.75rem;
-    height: 2.75rem;
+  &__modal {
+    max-width: 60%;
+    @media screen and (max-width: $xl) {
+      max-width: 80%;
+    }
+    @media screen and (max-width: $lg) {
+      max-width: 90%;
+    }
+    @media screen and (max-width: $md) {
+      max-width: none;
+      height: max-content;
+    }
+  }
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    padding: $padding__modal;
 
+    background: $color--light;
+    border: none;
+    box-shadow: $box-shadow__modal;
+    border-radius: $border-radius__modal;
+    @media screen and (min-width: $md) and (max-width: $lg) {
+      padding: $padding__modal--md;
+    }
+    @media screen and (max-width: $md) {
+      padding: 0;
+    }
+  }
+  &__close {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    @media screen and (min-width: $md) {
+      display: none;
+    }
+  }
+  &__cover {
+    width: 100%;
+    height: 100%;
+    border-radius: $border-radius__block;
+    overflow: hidden;
+    @media screen and (max-width: $md) {
+      border-radius: 0;
+    }
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__nutrition {
+    width: 100%;
+    height: max-content;
+    padding: 0.625rem;
+    margin-bottom: 1rem;
+
+    background: $color--info;
+    border-radius: $border-radius__small-block;
+  }
+  &__list {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    flex-direction: column;
+  }
+  &__item {
+    margin-bottom: 0.5rem;
 
-    border-radius: 0 0.625rem 0 1.875rem;
-    #{$_}__icon {
-      font-size: 1.5rem;
+    @include text--small;
+    color: $color--light;
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
-  &--large {
-    width: 3.75rem;
-    height: 3.75rem;
-  }
-  @media screen and (max-width: $md) {
-    width: 2rem;
-    height: 2rem;
-
-    border-radius: 0 0.625rem 0 1rem;
-
-    align-items: center;
-    #{$_}__icon {
-      font-size: 1.25rem;
+  &__detail {
+    height: max-content;
+    max-height: 11rem;
+    overflow-y: auto;
+    @include scrollbar;
+    @media screen and (max-width: $lg) {
+      max-height: 14rem;
+    }
+    @media screen and (max-width: $md) {
+      max-height: 17.5rem;
     }
   }
-  &.active {
-    #{$_}__icon {
-      color: $color--error;
-      box-shadow: none;
-      &::before {
-        filter: drop-shadow($box-shadow__icon);
+  &__subtitle {
+    margin-bottom: 0.5rem;
+    display: flex;
+  }
+  &__icon {
+    color: $color--info;
+  }
+  &__heading {
+    color: $color--info;
+  }
+  &__description {
+    margin-bottom: 1rem;
+  }
+  &__text {
+    @include text--small;
+  }
+  &__o-price {
+    color: $color--gray4;
+    text-decoration: line-through;
+  }
+  &__price {
+    color: $color--secondary;
+  }
+  &__scroll {
+    padding-bottom: 6rem;
+  }
+  &__footer {
+    width: 100%;
+    height: 10rem;
+
+    background: $color--gradient;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    @media screen and (min-width: $md) {
+      padding: 0;
+      position: static;
+      bottom: auto;
+      left: auto;
+    }
+  }
+  &__footer-wrapper {
+    width: 100%;
+    padding: $padding__modal--md;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    @media screen and (min-width: $md) {
+      padding: 0;
+      position: static;
+      bottom: auto;
+      left: auto;
+    }
+  }
+  &--fav {
+    margin-bottom: 3.75rem;
+
+    position: relative;
+    #{$_}__btn {
+      width: 100%;
+      height: 10.5rem;
+      padding: 0;
+
+      border-radius: $border-radius__block;
+      border: none;
+
+      overflow: hidden;
+      @media screen and (max-width: $md) {
+        height: 13rem;
       }
     }
-  }
-}
-
-.c-counter {
-  $_: &;
-  width: 100%;
-  height: $height__input;
-
-  background: $color--gray6;
-  border-radius: $border-radius__input;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &__btn {
-    padding: 0 0.625rem;
-    background: transparent;
-    border: none;
-    #{$_}__icon {
-      color: $color--primary;
-      font-size: 1.25rem;
-    }
-  }
-  @media screen and (max-width: $md) {
-    #{$_}__icon {
-      font-size: 0.875rem;
+    #{$_}__text {
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
     }
   }
 }
