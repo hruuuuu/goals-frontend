@@ -3,12 +3,20 @@
   top: $top--sticky;
 }
 
-.Sidebaritems {
+.Sidebaritems,
+.Sidebaritems1 {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.Sidebaritems {
   width: 18rem;
 }
+.Sidebaritems1 {
+  width: 100%;
+}
+
 // .Sidebaritem {
 //   .Sidebarfont {
 //     display: block;
@@ -32,12 +40,11 @@
   &:last-of-type {
     margin: 1rem 0 0 0;
   }
-  .Sidebarfont {
+  .Sidebarfont,
+  .Sidebarfont1 {
     padding: 0.625rem;
-
     display: flex;
     align-items: center;
-    justify-content: flex-start;
 
     @include cursor(pointer);
     &__icon {
@@ -54,6 +61,14 @@
     //   background-color: #555;
     //   color: white;
     // }
+  }
+
+  .Sidebarfont {
+    justify-content: flex-start;
+  }
+
+  .Sidebarfont1 {
+    justify-content: center;
   }
 }
 
