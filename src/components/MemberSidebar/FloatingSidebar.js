@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import SidebarMobile from './SidebarMobile';
 
 function FloatingSidebar() {
   const SidebarLinks = [
@@ -8,7 +8,7 @@ function FloatingSidebar() {
       name: '會員資料',
       router: `/member`,
       icon: <i className="fas fa-user"></i>,
-      memberclass: 'Sidebaritem1',
+      memberclass: 'SidebarMobileitem1',
       line: '',
     },
     {
@@ -57,7 +57,7 @@ function FloatingSidebar() {
       <header>
         <div className="container h-100 p-0">
           <nav>
-            <Sidebar SidebarLinks={SidebarLinks} />
+            <SidebarMobile SidebarLinks={SidebarLinks} />
             {/* <NavbarMobile navLinks={navLinks}/> */}
           </nav>
         </div>

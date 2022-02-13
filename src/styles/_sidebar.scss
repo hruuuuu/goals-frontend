@@ -28,10 +28,51 @@
 // }
 
 .Sidebaritem {
+<<<<<<< HEAD
   margin-bottom: 1rem;
   &:last-of-type {
     margin: 1rem 0 0 0;
   }
+=======
+  .Sidebarfont {
+    display: flex;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.25rem;
+    color: #74b08d;
+    padding: 1.3rem 1rem;
+    //hover 效果
+
+    // &:hover {
+    //   background-color: #555;
+    //   color: white;
+    // }
+  }
+}
+
+.SidebarMobileitems {
+  width: 100%;
+
+  .Sidebarfont {
+    display: flex;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.25rem;
+    color: #74b08d;
+    padding: 1.3rem 1rem;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+
+    //hover 效果
+
+    // &:hover {
+    //   background-color: #555;
+    //   color: white;
+    // }
+  }
+}
+
+.Sidebaritem1 {
+>>>>>>> d9049c77b0603eeb9e7031ce679e3c91bcb389be
   .Sidebarfont {
     padding: 0.625rem;
 
@@ -49,6 +90,24 @@
       @include h5;
       color: $color--analogous1;
     }
+    //hover 效果
+    // &:hover {
+    //   background-color: #555;
+    //   color: white;
+    // }
+  }
+}
+
+.SidebarMobileitem1 {
+  .Sidebarfont {
+    display: flex;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.25rem;
+    color: #74b08d;
+    padding: 0rem 1rem 1.3rem 1rem;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
     //hover 效果
     // &:hover {
     //   background-color: #555;
