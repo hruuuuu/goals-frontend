@@ -13,7 +13,7 @@ const EditProfile = () => {
         </label>
         <input
           type="text"
-          className="form-control name__input c-input"
+          className="form-control"
           id="InputName"
           placeholder="請輸入..."
         />
@@ -25,7 +25,7 @@ const EditProfile = () => {
         </label>
         <input
           type="email"
-          className="form-control email__input c-input"
+          className="form-control"
           id="InputEmail"
           placeholder="請輸入..."
         />
@@ -67,28 +67,21 @@ const EditProfile = () => {
         <label htmlFor="inputAddress" className="form-label">
           地址
         </label>
-        <input
-          type="text"
-          className="form-control phone__input c-input"
-          id="inputAddress"
-        />
+        <input type="text" className="form-control" id="inputAddress" />
       </div>
 
       <div className="col-md-12">
         <label htmlFor="InputPhone" className="form-label">
           連絡電話
         </label>
-        <input
-          type="text"
-          className="form-control phone__input c-input"
-          id="InputPhone"
-        />
+        <input type="text" className="form-control" id="InputPhone" />
       </div>
 
       <div className="col-12">
         <button
           type="submit"
-          className="c-product-filter__action e-btn--primary e-btn--medium col-12"
+          className="btn btn-primary col-12"
+          style={{ background: '#6B9C66' }}
         >
           儲存變更
         </button>

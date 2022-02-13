@@ -6,37 +6,37 @@ const EditPassWord = () => {
       <div className="alert" style={{ background: '#FAFAFA' }} role="alert">
         修改密碼
       </div>
-      <label htmlFor="OldPassword" className="form-label c-search__heading">
+      <label htmlFor="OldPassword" className="form-label ">
         舊密碼
       </label>
       <div className=" mb-2">
         <input
           type="password"
-          className="form-control password__input c-input"
+          className="form-control"
           id="OldPassword"
           placeholder="請輸入..."
         />
       </div>
 
-      <label htmlFor="NewPassword" className="form-label c-search__heading">
+      <label htmlFor="NewPassword" className="form-label">
         新密碼
       </label>
       <div className=" mb-2">
         <input
           type="password"
-          className="form-control password__input__input c-input"
+          className="form-control"
           id="NewPassword"
           placeholder="請輸入..."
         />
       </div>
 
-      <label htmlFor="ConfirmPassword" className="form-label c-search__heading">
+      <label htmlFor="ConfirmPassword" className="form-label">
         確認密碼
       </label>
       <div className=" mb-2">
         <input
           type="password"
-          className="form-control password__input__input c-input"
+          className="form-control"
           id="ConfirmPassword"
           placeholder="請輸入..."
         />
@@ -45,7 +45,8 @@ const EditPassWord = () => {
       <div>
         <button
           type="submit"
-          className="c-product-filter__action e-btn--primary e-btn--medium col-12"
+          className="btn btn-primary col-12"
+          style={{ background: '#6B9C66' }}
         >
           儲存變更
         </button>
