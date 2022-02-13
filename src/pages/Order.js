@@ -10,7 +10,7 @@ function Order() {
 
       <div className="container">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 d-none d-md-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">

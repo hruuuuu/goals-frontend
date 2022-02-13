@@ -9,7 +9,7 @@ function Cart() {
       <Header />
       <div className="container mainContent">
         <div className="row h-100">
-          <div className="col-lg-3">
+          <div className="col-lg-3 d-none d-md-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">

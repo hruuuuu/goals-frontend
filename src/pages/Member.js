@@ -4,7 +4,7 @@ import MemberSidebar from '../components/MemberSidebar';
 import EditProfile from '../components/Member/EditProfile';
 import EditPassWord from '../components/Member/EditPassword';
 import FloatingIcon from '../components/MemberSidebar/FloatingIcon';
-import FloatingMenu from '../components/FloatingMenu';
+import FloatingMenu from '../components/MemberSidebar/FloatingMenu';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -14,7 +14,7 @@ function Member() {
 
       <div className="container">
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 d-none d-md-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">

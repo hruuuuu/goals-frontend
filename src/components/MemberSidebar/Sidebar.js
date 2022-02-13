@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Sidebar(props) {
   const { SidebarLinks } = props;
   return (
-    <div className="d-none d-lg-flex">
+    <div className="d-lg-flex">
       <ul className="Sidebaritems">
         {SidebarLinks.map((link) => {
           return (
