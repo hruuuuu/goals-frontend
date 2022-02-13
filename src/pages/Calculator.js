@@ -1,14 +1,7 @@
 import React from 'react';
-import PageBanner from '../components/PageBanner';
-import MainContent from '../components/Calculator/MainContent';
 
-const Caculator = () => {
-  return (
-    <>
-      <PageBanner />
-      <MainContent />
-    </>
-  );
-};
+function Calculator() {
+  return <></>;
+}
 
-export default Caculator;
+export default Calculator;

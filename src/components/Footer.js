@@ -45,11 +45,11 @@ function Footer() {
                   {footerLinks.map((group, i) => {
                     return (
                       <ul key={i} className="l-footer__list me-5">
-                        {group.map((item, i) => {
-                          const { id, path, name } = item;
+                        {group.map((link, i) => {
+                          const { id, name } = link;
                           return (
                             <li key={id} className="l-footer__item">
-                              <NavLink to={path} className="l-footer__link">
+                              <NavLink to="/" className="l-footer__link">
                                 {name}
                               </NavLink>
                             </li>

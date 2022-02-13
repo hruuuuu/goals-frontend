@@ -1,5 +1,3 @@
-import { Navigate, useNavigate } from 'react-router-dom';
-
 import Home from '../pages/Home';
 import Products from '../pages/Products';
 import Member from '../pages/Member';
@@ -9,12 +7,11 @@ import Coupon from '../pages/Coupon';
 import Order from '../pages/Order';
 import About from '../pages/About';
 import Calculator from '../pages/Calculator';
-import Blog from '../pages/Blog';
 import NotFound from '../pages/NotFound';
+import ProductDetail from '../components/Products/ProductDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
-
-import BlogArticle from '../components/Blog/BlogArticle';
+import { Navigate } from 'react-router-dom';
 
 import imgFood from '../img/common/illustration/food.svg';
 
@@ -39,11 +36,9 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `:productId`,
-        element: <Products />,
+        path: `detail`,
+        element: <ProductDetail />,
         breadcrumbName: '商品細節',
-        header: '健康餐盒',
-        headerImg: imgFood,
       },
     ],
   },
@@ -105,35 +100,11 @@ const routerList = [
     path: `about`,
     element: <About />,
     breadcrumbName: '關於',
-    header: '關於果實',
-    headerImg: imgFood,
   },
   {
     path: `calculator`,
     element: <Calculator />,
     breadcrumbName: '計算機',
-    header: 'TDEE/ BMR 計算機',
-    headerImg: imgFood,
-  },
-  {
-    path: `blog`,
-    breadcrumbName: '健康新知',
-    header: '健康新知',
-    headerImg: imgFood,
-    children: [
-      {
-        path: ``,
-        element: <Blog />,
-        breadcrumbName: '健康新知',
-        header: '健康新知',
-        headerImg: imgFood,
-      },
-      {
-        path: `article`,
-        element: <BlogArticle />,
-        breadcrumbName: '健康新知',
-      },
-    ],
   },
   {
     path: `signup`,

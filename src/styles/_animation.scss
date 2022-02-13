@@ -97,13 +97,4 @@
       }
     }
   }
-  &__modal {
-    animation-duration: 0.3s;
-    &--in {
-      animation-name: fadeIn;
-    }
-    &--out {
-      animation-name: fadeOut;
-    }
-  }
 }

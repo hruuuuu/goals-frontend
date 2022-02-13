@@ -3,16 +3,11 @@ import { React, useState } from 'react';
 import Header from '../components/Header';
 import Filter from '../components/Products/Filter';
 import ProductList from '../components/Products/ProductList';
-import ProductDetail from '../components/Products/ProductDetail';
 import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
 
 function Products() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const [show, setShow] = useState({
-    in: false,
-    out: false,
-  });
   return (
     <>
       <Header />
@@ -22,7 +17,7 @@ function Products() {
             <Filter />
           </div>
           <div className="col-12 col-lg-9">
-            <ProductList show={show} setShow={setShow} />
+            <ProductList />
           </div>
         </div>
         <FloatingIcon setIsDisplay={setIsDisplay} />
@@ -30,7 +25,6 @@ function Products() {
           <FloatingMenu isDisplay={isDisplay} setIsDisplay={setIsDisplay} />
         )}
       </div>
-      <ProductDetail show={show} setShow={setShow} />
     </>
   );
 }

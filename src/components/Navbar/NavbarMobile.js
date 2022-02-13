@@ -25,7 +25,7 @@ function NavbarMobile(props) {
             );
           })}
           <li className="l-navbar__item">
-            <hr className="e-hr e-hr--navbar" />
+            <hr className="e-hr" />
           </li>
           {navActions.map((action) => {
             return (

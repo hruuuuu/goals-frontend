@@ -29,7 +29,7 @@ function Filter() {
       }
     };
     return (
-      <Box>
+      <Box sx={{ width: 200 }}>
         <Slider
           getAriaLabel={() => 'Temperature range'}
           value={value}
@@ -66,39 +66,36 @@ function Filter() {
   return (
     <>
       <div className="c-product-filter">
-        <h6 className="c-product-filter__title">
-          <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
-          篩選
-        </h6>
         <div className="c-product-filter__wrapper">
-          <div className="pe-3">
-            <div className="c-product-filter__search c-search">
-              <label htmlFor="search" className="form-label c-search__heading">
-                搜索
-              </label>
-              <div className="c-search__wrapper">
-                <input
-                  type="text"
-                  id="search"
-                  className="form-control c-search__input c-input"
-                  placeholder="輸入關鍵字"
-                  autoComplete="off"
-                  onChange={() => {}}
-                />
-              </div>
+          <h6 className="c-product-filter__title">
+            <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
+            篩選
+          </h6>
+          <div className="c-product-filter__search c-search">
+            <label htmlFor="search" className="form-label c-search__heading">
+              搜索
+            </label>
+            <div className="c-search__wrapper">
+              <input
+                type="text"
+                id="search"
+                className="form-control c-search__input c-input"
+                placeholder="輸入關鍵字"
+                autoComplete="off"
+                onChange={() => {}}
+              />
             </div>
-            <div className="c-product-filter__price c-range">
-              <div className="c-range__heading">價格</div>
-              <RangeInputSlider />
-            </div>
-            <FilterCheckbox heading="類別" options={categories} />
-            <FilterCheckbox heading="活動" options={activities} />
-            <FilterCheckbox heading="活動" options={activities} />
           </div>
+          <div className="c-product-filter__price c-range">
+            <div className="c-range__heading">價格</div>
+            <RangeInputSlider />
+          </div>
+          <FilterCheckbox heading="類別" options={categories} />
+          <FilterCheckbox heading="活動" options={activities} />
         </div>
         <button
           type="submit"
-          className="c-product-filter__action e-btn--primary e-btn--medium"
+          className="c-product-filter__action e-btn--primary e-btn--large"
         >
           搜索
         </button>

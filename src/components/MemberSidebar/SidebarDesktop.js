@@ -10,8 +10,8 @@ function Sidebar(props) {
           return (
             <li className={link.memberclass} key={link.id}>
               <NavLink to={link.router} className="Sidebarfont">
-                {link.icon}
-                <h5 className="Sidebarfont__text">{link.name}</h5>
+                {link.icon} &nbsp;
+                {link.name}
               </NavLink>
               {link.line}
             </li>

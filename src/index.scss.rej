@@ -1,0 +1,31 @@
+diff a/src/index.scss b/src/index.scss	(rejected hunks)
+@@ -20,4 +20,29 @@
+ @import './styles/_summary.scss';
+ @import './styles/_cartList.scss';
+ @import './styles/_animation.scss';
++<<<<<<< HEAD
+ @import './styles/_blog.scss';
++=======
++@import './styles/_coupon.scss';
++@import './styles/_order.scss';
++=======
++@import "./styles/_variables.scss";
++@import "./styles/_reset.scss";
++@import "./styles/_global.scss";
++@import "./styles/_common.scss";
++@import "./styles/_member.scss";
++@import "./styles/_calculator.scss";
++@import "./styles/_sidebar.scss";
++@import "./styles/_products.scss";
++@import "./styles/_order.scss";
++@import "./styles/_signup.scss";
++@import "./styles/_login.scss";
++@import "./styles/_coupon.scss";
++@import "./styles/_cart.scss";
++@import "./styles/_cartItem.scss";
++@import "./styles/_summary.scss";
++@import "./styles/_cartList.scss";
++@import "./styles/_animation.scss";
++@import "./styles/_blog.scss";
++>>>>>>> 81bbfd97534cff3c4e7840e41ffbfe222e444ac9
++>>>>>>> c7c88517502d7e096e1df23e0afb49b0824d8068

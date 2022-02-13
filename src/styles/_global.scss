@@ -6,7 +6,7 @@
 
 body {
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: $letter-spacing;
+  letter-spacing: 0.06rem;
   color: $color__font;
 }
 
@@ -32,14 +32,10 @@ div {
   cursor: default;
 }
 
-button {
-  letter-spacing: $letter-spacing;
-}
-
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: $letter-spacing;
+  letter-spacing: 0.06rem;
   line-height: 110%;
   color: $color__font;
 }
@@ -47,7 +43,7 @@ button {
 @mixin text {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: $letter-spacing;
+  letter-spacing: 0.06rem;
   line-height: 140%;
   color: $color__font;
 }
@@ -83,42 +79,6 @@ h5 {
 }
 
 h6 {
-  @include heading;
-  font-weight: normal;
-  font-size: 1rem;
-}
-
-@mixin h1 {
-  @include heading;
-  font-weight: normal;
-  font-size: 3.75rem;
-}
-
-@mixin h2 {
-  @include heading;
-  font-weight: normal;
-  font-size: 2.5rem;
-}
-
-@mixin h3 {
-  @include heading;
-  font-weight: normal;
-  font-size: 2rem;
-}
-
-@mixin h4 {
-  @include heading;
-  font-weight: normal;
-  font-size: 1.5rem;
-}
-
-@mixin h5 {
-  @include heading;
-  font-weight: normal;
-  font-size: 1.25rem;
-}
-
-@mixin h6 {
   @include heading;
   font-weight: normal;
   font-size: 1rem;
@@ -184,6 +144,12 @@ h6 {
   font-size: 0.75rem;
 }
 
+@mixin h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
 @mixin interaction__link {
   transition: $transition;
   &:hover {
@@ -219,21 +185,6 @@ h6 {
   span,
   div {
     cursor: $cursor;
-  }
-}
-
-@mixin scrollbar {
-  &::-webkit-scrollbar {
-    width: 0.25rem;
-  }
-  &::-webkit-scrollbar-track {
-    background: $color--gray5;
-    border-radius: 10rem;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: $color--primary;
-    border-radius: 10rem;
-    background-clip: content-box;
   }
 }
 
@@ -307,33 +258,8 @@ h6 {
   }
   &--large {
     height: $height__btn--large;
-    @media screen and (max-width: $md) {
-      height: $height__btn--meduim;
-    }
   }
   &--medium {
     height: $height__btn--meduim;
-  }
-  &--icon {
-    background: transparent;
-    border: none;
-  }
-  &--mobile {
-    @include cursor(pointer);
-    @media screen and (max-width: $md) {
-      width: $width__btn--square;
-      min-width: $width__btn--square;
-
-      background: $color--light;
-      color: $color--primary;
-      box-shadow: $box-shadow__block;
-      &:hover {
-        color: $color--light;
-      }
-      &:focus,
-      &:active {
-        color: $color--light;
-      }
-    }
   }
 }
