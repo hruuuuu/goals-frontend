@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", "Noto Sans TC", sans-serif;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
   letter-spacing: 0.06rem;
   color: $color__font;
 }
@@ -38,7 +38,7 @@ button {
 
 @mixin heading {
   font-style: normal;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
   letter-spacing: 0.06rem;
   line-height: 110%;
   color: $color__font;
@@ -46,7 +46,7 @@ button {
 
 @mixin text {
   font-style: normal;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
   letter-spacing: 0.06rem;
   line-height: 140%;
   color: $color__font;
@@ -176,7 +176,7 @@ h6 {
   width: max-content;
   height: max-content;
 
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 1.5rem;
 
@@ -222,10 +222,10 @@ h6 {
     @include text--small;
     color: $color--gray4;
   }
-  &[type="number"] {
+  &[type='number'] {
     text-align: end;
   }
-  &[type="checkbox"] {
+  &[type='checkbox'] {
     transition: $transition;
     &:focus {
       border: $border__input;
@@ -293,5 +293,20 @@ h6 {
   &--icon {
     background: transparent;
     border: none;
+  }
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; //行數
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
+  &--3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
   }
 }
