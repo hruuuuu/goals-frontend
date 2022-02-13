@@ -1,11 +1,11 @@
 .c-product-filter {
   width: 100%;
   height: max-content;
-  max-height: calc(100vh - $top__sticky-filter);
+  max-height: calc(100vh - $top--sticky);
   margin-bottom: 2.5rem;
 
   position: sticky;
-  top: $top__sticky-filter;
+  top: $top--sticky;
   &__title {
     margin-bottom: 1rem;
     display: flex;
