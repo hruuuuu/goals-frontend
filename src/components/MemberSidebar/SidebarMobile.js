@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Sidebar(props) {
+function SidebarMobile(props) {
   const { SidebarLinks } = props;
   return (
-    <div className="d-lg-flex">
-      <ul className="Sidebaritems">
+    <div className="d-flex justify-content-center">
+      <ul className="SidebarMobileitems">
         {SidebarLinks.map((link) => {
           return (
             <li className={link.memberclass} key={link.id}>
@@ -22,4 +22,4 @@ function Sidebar(props) {
   );
 }
 
-export default Sidebar;
+export default SidebarMobile;
