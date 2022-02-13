@@ -8,7 +8,7 @@ function Coupon() {
     <>
       <Header />
       <div className="container">
-        <div className="row">
+        <div className="row gx-4">
           <div className="col-lg-3">
             <MemberSidebar />
           </div>
