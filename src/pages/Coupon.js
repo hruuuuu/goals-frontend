@@ -14,7 +14,7 @@ function Coupon() {
           <div className="col-md-3 d-none d-md-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9 col-md-12">
+          <div className="col col-lg-9 ">
             <div className="couponStatusBar">
               <ul className="couponStatus">
                 <li className="status">可領取</li>
