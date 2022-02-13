@@ -4,7 +4,7 @@
 }
 
 .Sidebaritems,
-.Sidebaritems1 {
+.SidebaritemsMobile {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@
 .Sidebaritems {
   width: 18rem;
 }
-.Sidebaritems1 {
+.SidebaritemsMobile {
   width: 100%;
 }
 
@@ -41,7 +41,7 @@
     margin: 1rem 0 0 0;
   }
   .Sidebarfont,
-  .Sidebarfont1 {
+  .SidebarfontMobile {
     padding: 0.625rem;
     display: flex;
     align-items: center;
@@ -67,7 +67,7 @@
     justify-content: flex-start;
   }
 
-  .Sidebarfont1 {
+  .SidebarfontMobile {
     justify-content: center;
   }
 }
