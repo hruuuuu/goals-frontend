@@ -11,7 +11,7 @@ function Member() {
 
       <div className="container">
         <div className="row gx-4">
-          <div className="col-lg-3">
+          <div className="col-md-3 d-none d-md-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">
