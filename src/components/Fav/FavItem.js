@@ -67,15 +67,15 @@ function FavItem(props) {
               </div>
             </div>
           </div>
-          <div className="row justify-content-end g-2 g-md-3">
-            <div className="col-9 col-md-5 d-flex flex-column flex-md-row align-items-md-center">
+          <div className="row justify-content-end g-2 g-sm-0 g-md-3">
+            <div className="col-8 col-sm-9 col-md-5 d-flex flex-column flex-md-row align-items-md-center">
               <div className="d-none d-md-flex align-items-center me-4">
                 <h4 className="c-product-detail__price me-2">$110</h4>
                 <h6 className="c-product-detail__o-price">$150</h6>
               </div>
               <Counter />
             </div>
-            <div className="col-3 col-md-4 d-flex justify-content-end align-items-md-end">
+            <div className="col-4 col-sm-3 col-md-4 d-flex justify-content-end align-items-md-end">
               <button className="e-btn e-btn--primary e-btn--w100 e-btn--medium e-btn--mobile d-flex align-items-center justify-content-center">
                 <i className="fas fa-shopping-cart e-icon me-0 me-md-2"></i>
                 <span className="d-none d-md-block">加入購物車</span>
