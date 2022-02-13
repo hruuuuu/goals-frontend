@@ -98,7 +98,7 @@ function Filter() {
         </div>
         <button
           type="submit"
-          className="c-product-filter__action e-btn--primary e-btn--large"
+          className="c-product-filter__action e-btn--primary e-btn--medium"
         >
           搜索
         </button>
