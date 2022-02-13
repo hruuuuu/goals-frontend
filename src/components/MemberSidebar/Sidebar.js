@@ -8,7 +8,7 @@ function Sidebar(props) {
       <ul className="Sidebaritems">
         {SidebarLinks.map((link) => {
           return (
-            <li className={link.memberclass} key={link.id}>
+            <li className="Sidebaritem" key={link.id}>
               <NavLink to={link.router} className="Sidebarfont">
                 {link.icon}
                 <h5 className="Sidebarfont__text">{link.name}</h5>
