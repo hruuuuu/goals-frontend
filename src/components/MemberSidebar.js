@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './MemberSidebar/Sidebar';
+import SidebarDesktop from './MemberSidebar/SidebarDesktop';
 
 function MemberSidebar() {
   const SidebarLinks = [
@@ -57,7 +57,7 @@ function MemberSidebar() {
       <aside className="c-member-sidebar">
         <div className="container h-100 p-0">
           <nav>
-            <Sidebar SidebarLinks={SidebarLinks} />
+            <SidebarDesktop SidebarLinks={SidebarLinks} />
             {/* <NavbarMobile navLinks={navLinks}/> */}
           </nav>
         </div>
