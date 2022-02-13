@@ -57,7 +57,11 @@ function ProductDetail(props) {
               <div className="m-product-detail__scroll p-md-0">
                 <div className="position-relative">
                   <div className="e-tag e-tag--normal">素食餐盒</div>
-                  <h4 className="my-3">叢林能量碗</h4>
+                  <h4 className="my-2 my-md-3">叢林能量碗</h4>
+                  <div className="d-flex align-items-center d-md-none mb-3">
+                    <h4 className="m-product-detail__price me-2">$110</h4>
+                    <h6 className="m-product-detail__o-price">$150</h6>
+                  </div>
                   <FavIcon size="large" />
                   <div className="m-product-detail__nutrition d-flex">
                     <ul className="m-product-detail__list">
