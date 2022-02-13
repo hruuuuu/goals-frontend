@@ -11,8 +11,8 @@ function Cart() {
     <>
       <Header />
       <div className="container mainContent">
-        <div className="row h-100">
-          <div className="col-md-3 d-none d-md-block">
+        <div className="row gx-4 h-100">
+          <div className="col-lg-3">
             <MemberSidebar />
           </div>
           <div className="col col-md-9">

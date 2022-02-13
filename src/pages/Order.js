@@ -12,8 +12,8 @@ function Order() {
       <Header />
 
       <div className="container">
-        <div className="row">
-          <div className="col-md-3 d-none d-md-block">
+        <div className="row gx-4">
+          <div className="col-lg-3">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">

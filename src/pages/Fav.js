@@ -1,32 +1,26 @@
 import { React, useState } from 'react';
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
-import FloatingModal from '../components/MemberSidebar/FloatingModal';
-import FloatingIcon from '../components/MemberSidebar/FloatingIcon';
+import ProductDetail from '../components/Products/ProductDetail';
+import FavList from '../components/Fav/FavList';
+import FavItem from '../components/Fav/FavItem';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);
   return (
     <>
       <Header />
-      <h1>Fav</h1>
-
       <div className="container">
-        <div className="row">
-          <div className="col-md-3 d-none d-md-block">
+        <div className="row gx-4">
+          <div className="col-lg-3">
             <MemberSidebar />
           </div>
-          <div className="col col-md-9">{/* components可以放這裡 */}</div>
-        </div>
-
-        {/* 浮動視窗 */}
-        <div className="d-md-none">
-          <FloatingIcon setIsDisplay={setIsDisplay} />
-          {isDisplay && (
-            <FloatingModal isDisplay={isDisplay} setIsDisplay={setIsDisplay} />
-          )}
+          <div className="col-lg-9">
+            <FavList />
+          </div>
         </div>
       </div>
+      <ProductDetail />
     </>
   );
 }
