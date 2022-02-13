@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../Header';
 import CalculatorForm from './CalculatorForm';
 import RecGood from './RecGood';
 
@@ -9,6 +10,7 @@ const MainContent = () => {
   return (
     <>
       <div className="main-content">
+        <Header />
         <section className="l-guide">
           <div className="container">
             <div className="right_cont model">
