@@ -119,9 +119,7 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <div className="row">
-              <CalculatorForm />
-            </div>
+            <CalculatorForm />
           </div>
           <div className="container">
             <div className="row">

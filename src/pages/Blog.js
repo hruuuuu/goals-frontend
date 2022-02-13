@@ -2,6 +2,7 @@ import React from 'react';
 import PageBanner from '../components/PageBanner';
 import Header from '../components/Header';
 import BlogItem from '../components/Blog/BlogItem';
+import BlogPagination from '../components/Blog/BlogPagination';
 
 const Blog = () => {
   return (
@@ -10,6 +11,7 @@ const Blog = () => {
       <Header />
       <div className="container">
         <BlogItem />
+        <BlogPagination />
       </div>
     </>
   );
