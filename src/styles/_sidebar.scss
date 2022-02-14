@@ -65,6 +65,9 @@
 
   .Sidebarfont {
     justify-content: flex-start;
+    @media screen and (max-width: $lg) {
+      justify-content: center;
+    }
   }
 
   .SidebarfontMobile {

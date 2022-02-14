@@ -69,7 +69,7 @@ function ProductDetail() {
                       <li className="c-product-detail__item">379卡路里</li>
                       <li className="c-product-detail__item">8克脂肪</li>
                     </ul>
-                    <ul className="c-product-detail__list ms-5">
+                    <ul className="c-product-detail__list ms-md-3 ms-5">
                       <li className="c-product-detail__item">14克蛋白質</li>
                       <li className="c-product-detail__item">68克碳水化合物</li>
                     </ul>

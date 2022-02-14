@@ -34,9 +34,13 @@ function Products() {
             <ProductList show={show} setShow={setShow} />
           </div>
         </div>
-        <FloatingIcon setIsDisplay={setIsDisplay} />
+        <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
         {isDisplay && (
-          <FloatingMenu isDisplay={isDisplay} setIsDisplay={setIsDisplay} />
+          <FloatingMenu
+            isDisplay={isDisplay}
+            setIsDisplay={setIsDisplay}
+            page="product"
+          />
         )}
       </div>
       <FilterMobile />
