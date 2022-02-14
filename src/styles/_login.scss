@@ -254,6 +254,10 @@
 @media screen and (max-width: 1023px) {
     .loginWrapper {
         .loginFormWrapper {
+            .formTitle {
+                font-size: 2rem;
+            }
+
             .anotherLoginMethod {
                 .socialTag {
                     font-size: 1rem;
