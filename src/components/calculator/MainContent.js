@@ -121,10 +121,37 @@ const MainContent = () => {
           <div className="container">
             <CalculatorForm />
           </div>
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 col-sm-12">123</div>
-              <div className="col-lg-6 col-sm-12">123</div>
+          <div className="explan">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-6 col-sm-12">
+                  <div className="explan__title">
+                    <h4>
+                      利用算出來的TDEE當作參考值
+                      <br />
+                      之後的熱量攝取可以參考下面的方式做調整
+                    </h4>
+                    <p>
+                      維持體重：每天吃到TDEE的熱量
+                      <br />
+                      增加肌肉：每天吃到TDEE+300卡路里的熱量
+                      <br />
+                      減少脂肪：每天吃到TDEE-300卡路里的熱量
+                    </p>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-sm-12">
+                  <div className="explan__text">
+                    <p>
+                      假設你您的目標是減重，少吃300大卡以後體重還是沒有變化，建議增加活動量，例如原先自己很少運動，就改成一個禮拜運動2~3天，慢慢循序漸進，以重量訓練搭配有氧以及飲食控制，才是比較好的方式喔～
+                      另外，若您的目標是增肌減脂，我們推薦提高蛋白質的攝取，因為蛋白質的食物產熱消耗比碳水化合物及脂質高，所以拉高蛋白質比例、降低碳水化合物攝取，是高cp值的做法喔!
+                    </p>
+                    <span>
+                      ※以上資訊僅供參考，建議依自身身體狀況諮詢專業營養師或健身教練
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
