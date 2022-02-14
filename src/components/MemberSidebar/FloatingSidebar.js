@@ -1,13 +1,14 @@
 import React from 'react';
-import Sidebar from './MemberSidebar/Sidebar';
+import SidebarMobile from './SidebarMobile';
 
-function MemberSidebar() {
+function FloatingSidebar() {
   const SidebarLinks = [
     {
       id: 1,
       name: '會員資料',
       router: `/member`,
       icon: <i className="fas fa-user Sidebarfont__icon"></i>,
+      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -15,6 +16,7 @@ function MemberSidebar() {
       name: '購物車',
       router: `/member/cart`,
       icon: <i className="fas fa-shopping-cart Sidebarfont__icon"></i>,
+      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -22,6 +24,7 @@ function MemberSidebar() {
       name: '折價券',
       router: `/member/coupon`,
       icon: <i className="fas fa-ticket-alt Sidebarfont__icon"></i>,
+      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -29,6 +32,7 @@ function MemberSidebar() {
       name: '收藏清單',
       router: `/member/fav`,
       icon: <i className="fas fa-heart Sidebarfont__icon"></i>,
+      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -36,6 +40,7 @@ function MemberSidebar() {
       name: '歷史清單',
       router: `/member/order`,
       icon: <i className="fas fa-list-alt Sidebarfont__icon"></i>,
+      memberclass: 'Sidebaritem',
       line: <div className="Sidebarline"></div>,
     },
     {
@@ -43,22 +48,22 @@ function MemberSidebar() {
       name: '登出',
       router: `/`,
       icon: <i className="fas fa-sign-out-alt Sidebarfont__icon"></i>,
-
+      memberclass: 'Sidebaritem',
       line: '',
     },
   ];
   return (
     <>
-      <aside className="c-member-sidebar">
+      <header>
         <div className="container h-100 p-0">
           <nav>
-            <Sidebar SidebarLinks={SidebarLinks} />
+            <SidebarMobile SidebarLinks={SidebarLinks} />
             {/* <NavbarMobile navLinks={navLinks}/> */}
           </nav>
         </div>
-      </aside>
+      </header>
     </>
   );
 }
 
-export default MemberSidebar;
+export default FloatingSidebar;
