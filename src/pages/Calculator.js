@@ -1,6 +1,6 @@
 import React from 'react';
 import PageBanner from '../components/PageBanner';
-import MainContent from '../components/Calculator/MainContent';
+import MainContent from '../components/calculator/MainContent';
 
 const Caculator = () => {
   return (

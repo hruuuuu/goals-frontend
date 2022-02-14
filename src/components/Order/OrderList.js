@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const OrderList = () => {
   return (
     <>
-      <div className="d-flex d-none d-sm-block">
+      <div className="d-flex d-none d-md-block">
         <table className="orderlisttable table table-borderless">
           <thead>
             <tr>
@@ -50,7 +50,7 @@ const OrderList = () => {
         </table>
       </div>
 
-      <div className="d-flex d-sm-none justify-content-center mb-3">
+      <div className="d-flex d-md-none justify-content-center mb-3">
         <div className="card cardorder">
           <div className="card-body">
             <h5 className="card-title">1111</h5>
