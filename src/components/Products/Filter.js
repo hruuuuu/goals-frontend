@@ -8,7 +8,8 @@ import FilterCheckbox from './FilterCheckbox';
 const categories = ['素食餐盒', '增肌餐盒', '減脂餐盒'];
 const activities = ['新上市', '促銷中', '適用優惠券'];
 
-function Filter() {
+function Filter(props) {
+  const { device } = props;
   const maxPrice = 100;
   const valuetext = (value) => {
     return `${value}`;
@@ -65,8 +66,8 @@ function Filter() {
   };
   return (
     <>
-      <div className="c-product-filter">
-        <h6 className="c-product-filter__title">
+      <div className={`c-product-filter c-product-filter--${device}`}>
+        <h6 className="c-product-filter__title d-none d-lg-block">
           <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
           篩選
         </h6>
