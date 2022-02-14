@@ -1,0 +1,25 @@
+.l-about-box {
+  padding-top: 100px;
+  .model__head {
+    margin-bottom: 80px;
+  }
+  .about-box__text {
+    width: 50%;
+    float: left;
+    padding-right: 60px;
+    h4 {
+      font-weight: 500;
+      margin-bottom: 30px;
+      padding-top: 20px;
+      border-top: 1px solid $color--gray4;
+    }
+    p {
+      line-height: 2;
+      letter-spacing: 1.5px;
+      color: $color--gray3;
+      font-weight: 300;
+      font-size: 16px;
+      padding-right: 45px;
+    }
+  }
+}
