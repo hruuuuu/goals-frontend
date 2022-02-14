@@ -3,7 +3,7 @@
 .blogList {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
+  gap: 30px 20px;
   &__item {
     border: 1px solid $color--gray5;
     border-radius: 20px;
