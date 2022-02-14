@@ -8,7 +8,6 @@ function FloatingSidebar() {
       name: '會員資料',
       router: `/member`,
       icon: <i className="fas fa-user Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -16,7 +15,6 @@ function FloatingSidebar() {
       name: '購物車',
       router: `/member/cart`,
       icon: <i className="fas fa-shopping-cart Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -24,7 +22,6 @@ function FloatingSidebar() {
       name: '折價券',
       router: `/member/coupon`,
       icon: <i className="fas fa-ticket-alt Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -32,7 +29,6 @@ function FloatingSidebar() {
       name: '收藏清單',
       router: `/member/fav`,
       icon: <i className="fas fa-heart Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: '',
     },
     {
@@ -40,7 +36,6 @@ function FloatingSidebar() {
       name: '歷史清單',
       router: `/member/order`,
       icon: <i className="fas fa-list-alt Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: <div className="Sidebarline"></div>,
     },
     {
@@ -48,7 +43,6 @@ function FloatingSidebar() {
       name: '登出',
       router: `/`,
       icon: <i className="fas fa-sign-out-alt Sidebarfont__icon"></i>,
-      memberclass: 'Sidebaritem',
       line: '',
     },
   ];
