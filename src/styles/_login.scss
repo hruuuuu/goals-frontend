@@ -122,6 +122,7 @@
                     padding: 1rem 0;
                     text-align: center;
                     color: $color--secondary;
+                    cursor: pointer;
                 }
             }
 
@@ -133,6 +134,9 @@
                 border-color: transparent;
                 width: 100%;
                 color: $color--light;
+                line-height: 1.5;
+                border: 1px solid transparent;
+                border-radius: 0.25rem;
             }
 
             .form-floating {
@@ -206,12 +210,54 @@
     }
 }
 
+.modalWrapper {
+    padding: 2rem;
 
+    .goBack {
+        cursor: pointer;
+    }
+
+    .modalTitle {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .modalStatement {
+        padding: 1rem 6rem;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .form-label {
+        font-size: .8rem;
+    }
+
+    .modalInput {
+        padding: .5rem;
+    }
+
+    .modalBtn {
+        padding: .5rem 0;
+        margin-top: 1rem;
+        background-color: $color--success;
+        border-color: transparent;
+        width: 100%;
+        color: $color--light;
+        line-height: 1.5;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+}
 
 /*** Tablet Mode ***/
 @media screen and (max-width: 1023px) {
     .loginWrapper {
         .loginFormWrapper {
+            .formTitle {
+                font-size: 2rem;
+            }
+
             .anotherLoginMethod {
                 .socialTag {
                     font-size: 1rem;
@@ -283,6 +329,12 @@
                     }
                 }
             }
+        }
+    }
+
+    .modalWrapper {
+        .modalStatement {
+            padding: 1rem 2rem;
         }
     }
 }
