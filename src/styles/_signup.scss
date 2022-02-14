@@ -38,6 +38,7 @@
                 padding: 1rem 0;
                 text-align: center;
                 color: $color--secondary;
+                cursor: pointer;
             }
 
             .signBtn {
@@ -47,6 +48,9 @@
                 border-color: transparent;
                 width: 100%;
                 color: $color--light;
+                line-height: 1.5;
+                border: 1px solid transparent;
+                border-radius: 0.25rem;
             }
 
             .form-floating {
@@ -124,6 +128,10 @@
 @media screen and (max-width: 1023px) {
     .signWrapper {
         .signFormWrapper {
+            .formTitle {
+                font-size: 2rem;
+            }
+
             .signForm {
                 width: 90%;
             }
@@ -168,6 +176,7 @@
 @media screen and (max-width: 425px) {
     .signWrapper {
         .signFormWrapper {
+
             .signForm {
                 .form-floating {
 

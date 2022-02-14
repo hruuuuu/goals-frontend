@@ -52,6 +52,9 @@
       height: 100%;
       object-fit: contain;
     }
+    @media screen and (max-width: $md) {
+      margin-right: 0;
+    }
   }
   &__font {
     color: $color--light;
@@ -95,7 +98,7 @@
       background: $color--primary;
       border-radius: $border-radius__navbar;
 
-      transition: all 0.6s ease-in-out;
+      transition: $transition__navbar-menu;
 
       position: fixed;
       top: calc(-100% + $height__navbar);
@@ -111,7 +114,7 @@
       justify-content: center;
       align-items: flex-end;
 
-      transition: all 0.6s ease-in-out;
+      transition: $transition__navbar-menu;
       opacity: 0;
       transform: translate3d(0, -10%, 0);
     }
@@ -164,7 +167,7 @@
 .e-tag {
   background: $color--secondary;
 
-  @include text--small;
+  @include text--extra-small;
   color: $color--light;
 
   display: flex;
@@ -203,12 +206,17 @@
 }
 
 .e-hr {
-  width: 10rem;
   height: $height__line !important;
   margin: 0;
-  background: $color--secondary;
-
   opacity: 1;
+  &--navbar {
+    width: 10rem;
+    background: $color--secondary;
+  }
+  &--divider {
+    width: 100%;
+    background: $color--gray5;
+  }
 }
 
 .l-header {
@@ -270,7 +278,12 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute("\f105");
+      width: $size__icon--small;
+      height: $size__icon--small;
+
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f105";
       color: $color--gray4;
 
       position: absolute;
@@ -303,8 +316,125 @@
   &--secondary {
     color: $color--secondary;
   }
+  &--btn {
+    font-size: 1.5rem;
+  }
 }
 
+.l-footer {
+  width: 100%;
+  height: max-content;
+  padding: 1.5rem 0;
+  margin-top: 2.5rem;
+
+  background: $color--primary;
+  border-radius: 8rem 8rem 0 0;
+  @media screen and (max-width: $lg) {
+    border-radius: $border-radius__footer;
+  }
+  &__item {
+    padding: 0.5rem 0;
+
+    @include h6;
+    color: $color--light;
+    font-size: 0.875rem;
+    &--muted {
+      opacity: 0.7;
+    }
+  }
+  &__link {
+    @include h6;
+    color: $color--light;
+    transition: $transition;
+    font-size: 0.875rem;
+    &:hover {
+      color: $color--secondary;
+    }
+  }
+  &__logo {
+    width: max-content;
+    height: 4rem;
+    @media screen and (max-width: $lg) {
+      height: 2.5rem;
+    }
+  }
+  &__btn {
+    width: max-content;
+    height: max-content;
+    margin-right: 0.75rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &__icon {
+    width: max-content;
+    height: max-content;
+
+    color: $color--light;
+    font-size: 2.5rem;
+  }
+}
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.model {
+  position: relative;
+  &__head {
+    margin-bottom: 35px;
+    &--deco-text {
+      font-size: 1.5rem;
+      line-height: 1;
+      letter-spacing: 10px;
+      color: rgba(107, 156, 102, 0.2);
+      margin-bottom: 15px;
+    }
+    &--title {
+      font-size: 2rem;
+      font-weight: bold;
+      line-height: 3rem;
+      letter-spacing: 3px;
+      color: $color--primary;
+    }
+    &--subtitle {
+      font-size: 1.125rem;
+      letter-spacing: 3px;
+      line-height: 1.6rem;
+      color: #555555;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    &--sec {
+      text-align: center;
+      position: relative;
+      &::before {
+        content: "";
+        width: 1px;
+        height: 85px;
+        background: rgba(107, 156, 102, 0.6);
+        position: absolute;
+        left: 50%;
+        transform: translate(-1px, calc(-100% - 15px));
+      }
+      &::after {
+        content: "";
+        width: 5px;
+        height: 30px;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        background: #6b9c66;
+        transform: translate(calc(-50% - 1px), calc(-100% - 15px));
+      }
+    }
+  }
+}
 .l-footer {
   width: 100%;
   height: max-content;
@@ -363,17 +493,35 @@
   }
 }
 
+.c-pageBanner {
+  .carousel-item.active {
+    animation: move 2s ease-in-out alternate;
+    transform: scale(1);
+  }
+}
+@keyframes move {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .c-floating-icon {
   width: 100%;
   height: 10rem;
 
-  background: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+  background: $color--gradient;
 
   position: fixed;
   left: 0;
   bottom: 0;
 
-  z-index: 5;
+  z-index: 0;
   position: fixed;
   @media screen and (min-width: $md) {
     width: max-content;
@@ -471,5 +619,114 @@
     top: 0;
     left: 0;
     z-index: -1;
+  }
+}
+
+.c-fav-btn {
+  $_: &;
+  background: $color--light;
+  border: none;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: pointer;
+
+  transition: $transition;
+  &__icon {
+    color: $color--gray5;
+    cursor: pointer;
+  }
+  &__text {
+    margin-left: 0.25rem;
+    @include text--small;
+    @include cursor(pointer);
+  }
+  &--medium {
+    width: 2.75rem;
+    height: 2.75rem;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    border-radius: 0 0.625rem 0 1.875rem;
+    #{$_}__icon {
+      font-size: 1.5rem;
+    }
+  }
+  &--large {
+    width: 3.75rem;
+    height: 3.75rem;
+    background: transparent;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    #{$_}__icon {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (max-width: $md) {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 0 0.625rem 0 1rem;
+
+    align-items: center;
+    #{$_}__icon {
+      font-size: 1.25rem;
+    }
+  }
+  &--icon-text {
+    width: max-content;
+
+    display: flex;
+    align-items: center;
+
+    right: 0.75rem;
+    @media screen and (max-width: $md) {
+      width: max-content;
+      top: 0.5rem;
+      right: 0;
+    }
+  }
+  &.active {
+    #{$_}__icon {
+      color: $color--error;
+      box-shadow: none;
+      &::before {
+        filter: drop-shadow($box-shadow__icon);
+      }
+    }
+  }
+}
+
+.c-counter {
+  $_: &;
+  width: 100%;
+  height: $height__input;
+
+  background: $color--gray6;
+  border-radius: $border-radius__input;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__btn {
+    padding: 0 0.625rem;
+    background: transparent;
+    border: none;
+    #{$_}__icon {
+      color: $color--primary;
+      font-size: 1.25rem;
+    }
+  }
+  @media screen and (max-width: $md) {
+    #{$_}__icon {
+      font-size: 0.875rem;
+    }
   }
 }

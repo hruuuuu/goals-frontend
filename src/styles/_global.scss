@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06rem;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  letter-spacing: $letter-spacing;
   color: $color__font;
 }
 
@@ -32,18 +32,22 @@ div {
   cursor: default;
 }
 
+button {
+  letter-spacing: $letter-spacing;
+}
+
 @mixin heading {
   font-style: normal;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06rem;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  letter-spacing: $letter-spacing;
   line-height: 110%;
   color: $color__font;
 }
 
 @mixin text {
   font-style: normal;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
-  letter-spacing: 0.06rem;
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  letter-spacing: $letter-spacing;
   line-height: 140%;
   color: $color__font;
 }
@@ -79,6 +83,42 @@ h5 {
 }
 
 h6 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+@mixin h1 {
+  @include heading;
+  font-weight: normal;
+  font-size: 3.75rem;
+}
+
+@mixin h2 {
+  @include heading;
+  font-weight: normal;
+  font-size: 2.5rem;
+}
+
+@mixin h3 {
+  @include heading;
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+@mixin h4 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1.5rem;
+}
+
+@mixin h5 {
+  @include heading;
+  font-weight: normal;
+  font-size: 1.25rem;
+}
+
+@mixin h6 {
   @include heading;
   font-weight: normal;
   font-size: 1rem;
@@ -144,12 +184,6 @@ h6 {
   font-size: 0.75rem;
 }
 
-@mixin h6 {
-  @include heading;
-  font-weight: normal;
-  font-size: 1rem;
-}
-
 @mixin interaction__link {
   transition: $transition;
   &:hover {
@@ -166,7 +200,7 @@ h6 {
   width: max-content;
   height: max-content;
 
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
   font-size: 1.5rem;
 
@@ -188,6 +222,21 @@ h6 {
   }
 }
 
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color--gray5;
+    border-radius: 10rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color--primary;
+    border-radius: 10rem;
+    background-clip: content-box;
+  }
+}
+
 .c-input {
   height: $height__input;
 
@@ -197,10 +246,10 @@ h6 {
     @include text--small;
     color: $color--gray4;
   }
-  &[type="number"] {
+  &[type='number'] {
     text-align: end;
   }
-  &[type="checkbox"] {
+  &[type='checkbox'] {
     transition: $transition;
     &:focus {
       border: $border__input;
@@ -258,8 +307,48 @@ h6 {
   }
   &--large {
     height: $height__btn--large;
+    @media screen and (max-width: $md) {
+      height: $height__btn--meduim;
+    }
   }
   &--medium {
     height: $height__btn--meduim;
+  }
+  &--icon {
+    background: transparent;
+    border: none;
+  }
+  &--mobile {
+    @include cursor(pointer);
+    @media screen and (max-width: $md) {
+      width: $width__btn--square;
+      min-width: $width__btn--square;
+
+      background: $color--light;
+      color: $color--primary;
+      box-shadow: $box-shadow__block;
+      &:hover {
+        color: $color--light;
+      }
+      &:focus,
+      &:active {
+        color: $color--light;
+      }
+    }
+  }
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; //行數
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
+  &--3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
   }
 }

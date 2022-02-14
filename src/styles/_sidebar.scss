@@ -1,42 +1,78 @@
-.Sidebaritems {
+.c-member-sidebar {
+  position: sticky;
+  top: $top--sticky;
+}
+
+.Sidebaritems,
+.SidebaritemsMobile {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.Sidebaritems {
   width: 18rem;
 }
+.SidebaritemsMobile {
+  width: 100%;
+}
+
+// .Sidebaritem {
+//   .Sidebarfont {
+//     display: block;
+//     font-family: "Noto Sans TC", sans-serif;
+//     font-size: 1.25rem;
+//     color: #74b08d;
+//     padding: 1.3rem 1rem;
+//     text-decoration: none;
+
+//     //hover 效果
+
+//     // &:hover {
+//     //   background-color: #555;
+//     //   color: white;
+//     // }
+//   }
+// }
+
 .Sidebaritem {
-  .Sidebarfont {
-    display: block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 1.25rem;
-    color: #74b08d;
-    padding: 1.3rem 1rem;
-    text-decoration: none;
+  margin-bottom: 1rem;
+  &:last-of-type {
+    margin: 1rem 0 0 0;
+  }
+  .Sidebarfont,
+  .SidebarfontMobile {
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
 
+    @include cursor(pointer);
+    &__icon {
+      color: $color--analogous1;
+      font-size: 1.25rem;
+    }
+    &__text {
+      margin-left: 1rem;
+      @include h5;
+      color: $color--analogous1;
+    }
     //hover 效果
-
     // &:hover {
     //   background-color: #555;
     //   color: white;
     // }
   }
-}
-.Sidebaritem1 {
+
   .Sidebarfont {
-    display: block;
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 1.25rem;
-    color: #74b08d;
-    padding: 0rem 1rem 1.3rem 1rem;
-    text-decoration: none;
-    //hover 效果
-    // &:hover {
-    //   background-color: #555;
-    //   color: white;
-    // }
+    justify-content: flex-start;
+  }
+
+  .SidebarfontMobile {
+    justify-content: center;
   }
 }
 
 .Sidebarline {
+  margin: 1rem 0;
   border-top: solid #e0e0e0 2px;
 }

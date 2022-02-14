@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
+import { Link } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [eye, setEye] = useState('');
+
   const handleSwitchEyes = (e) => {
     setShowPassword(!showPassword);
     setEye(e.target.id);
@@ -22,7 +24,7 @@ const Signup = () => {
         {/* container for signFormWrapper */}
         <div className="signFormWrapper">
           {/* text-center for div below */}
-          <h1 className="formTitle">註冊</h1>
+          <h2 className="formTitle">註冊</h2>
           <form className="signForm">
             <div className="form-floating">
               <input
@@ -70,6 +72,7 @@ const Signup = () => {
                 name="confirmPassword"
                 placeholder="請再次輸入密碼"
                 className="form-control"
+                onPaste={(e) => e.preventDefault()}
               />
               <i className="fas fa-lock"></i>
               {showPassword && eye === 'confirmPassword' ? (
@@ -89,9 +92,11 @@ const Signup = () => {
                 Confirm Password
               </label>
             </div>
-            <p className="notification">已經有帳戶了？</p>
+            <Link to="/login">
+              <p className="notification">已經有帳戶了？</p>
+            </Link>
             {/* w-100 for below */}
-            <button className="signBtn btn">Sign In</button>
+            <button className="signBtn">Sign In</button>
           </form>
         </div>
       </div>

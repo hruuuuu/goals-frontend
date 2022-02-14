@@ -23,6 +23,8 @@ $color--hover: #76b8d3;
 $color--active: #3aa1cb;
 $color--opacity: rgba(107, 156, 102, 0.2);
 
+$color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+
 $color__font: $color--gray2;
 $color__input-border: $color--gray4;
 $color__modal-bg: rgba(255, 255, 255, 0.8);
@@ -33,6 +35,7 @@ $box-shadow__block: 0px 0px 0.5rem rgba(0, 0, 0, 0.25);
 $box-shadow__element: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
 $box-shadow__navbar: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
 $box-shadow__icon: 0px 0.0625rem 0.125rem rgba(0, 0, 0, 0.5);
+$box-shadow__input: 0 0 0 0.0625rem $color__input-border;
 
 $box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.25);
 
@@ -40,9 +43,12 @@ $box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.25);
 $border-radius__navbar: 0 0 3.125rem 3.125rem;
 $border-radius__footer: 3.125rem 3.125rem 0 0;
 $border-radius__footer--lg: 6rem 6rem 0 0;
-$border-radius__input: 0.25rem;
+$border-radius__input: 0.3125rem;
 $border-radius__btn: 0.625rem;
 $border-radius__block: 1.25rem;
+$border-radius__modal: 2.5rem;
+$border-radius__small-block: $border-radius__input;
+$border-radius__floating-filter: 0 0 1.875rem 1.875rem;
 
 /* border */
 $border__input: 0.0625rem solid $color__input-border;
@@ -64,28 +70,38 @@ $height__btn--large: 3.75rem;
 $height__btn--meduim: 2.75rem;
 $height__input: 2.75rem;
 $height__floating-menu: 31.25rem;
+$height__floating-filter-body: 4.75rem;
+$height__floating-filter: $height__navbar + $height__floating-filter-body;
+
+/* padding */
+$padding__modal: 2.5rem;
+$padding__modal--md: 1.25rem;
 
 /* floating icon */
 $radius__floating-icon: 3.75rem;
 $diameter__floating-icon: $radius__floating-icon * 2;
 
 /* top */
-$top__sticky-filter: $height__navbar + 2.5rem;
+$top--sticky: $height__navbar + 2.5rem;
+$top--floating-filter: $height__navbar + 1rem;
 
 /* size */
 $size__icon--small: 1rem;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
 
+/* font */
+$letter-spacing: 0.125rem;
+
 /* 複寫原本的登入/註冊頁面form-floating-label的css */
 $form-floating-label-transform: scale(1) translateY(0) translateX(0);
 
 /* rwd spec */
-$sm: 575.99px;
-$md: 767.99px;
-$lg: 991.99px;
-$xl: 1199.99px;
-$xxl: 1399.99px;
+$sm: 575px;
+$md: 767px;
+$lg: 991px;
+$xl: 1199px;
+$xxl: 1399px;
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";
