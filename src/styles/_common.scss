@@ -514,19 +514,8 @@
 }
 
 .c-floating-icon {
+  $_: &;
   z-index: 1;
-  &--normal {
-    @media screen and (max-width: $lg) {
-      width: 100%;
-      height: 10rem;
-
-      background: $color--gradient;
-
-      position: fixed;
-      left: 0;
-      bottom: 0;
-    }
-  }
   &--member {
     @media screen and (max-width: $lg) {
       width: 100%;
@@ -537,6 +526,25 @@
       position: fixed;
       left: 0;
       bottom: 0;
+      #{$_}__btn {
+        width: $diameter__floating-icon;
+        height: $radius__floating-icon;
+
+        border-top-left-radius: $radius__floating-icon;
+        border-top-right-radius: $radius__floating-icon;
+        background: $color--primary;
+        border: none;
+        box-shadow: $box-shadow--active;
+
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
   &--product {
@@ -560,38 +568,38 @@
       bottom: auto;
       transform: translateY(-50%);
     }
-  }
-  &__btn {
-    width: $diameter__floating-icon;
-    height: $radius__floating-icon;
-
-    border-top-left-radius: $radius__floating-icon;
-    border-top-right-radius: $radius__floating-icon;
-    background: $color--primary;
-    border: none;
-    box-shadow: $box-shadow--active;
-
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include cursor(pointer);
-    @media screen and (min-width: $md) {
-      width: $radius__floating-icon;
-      height: $diameter__floating-icon;
+    #{$_}__btn {
+      width: $diameter__floating-icon;
+      height: $radius__floating-icon;
 
       border-top-left-radius: $radius__floating-icon;
-      border-bottom-left-radius: $radius__floating-icon;
-      border-top-right-radius: 0;
+      border-top-right-radius: $radius__floating-icon;
+      background: $color--primary;
+      border: none;
+      box-shadow: $box-shadow--active;
 
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include cursor(pointer);
+      @media screen and (min-width: $lg) {
+        width: $radius__floating-icon;
+        height: $diameter__floating-icon;
+
+        border-top-left-radius: $radius__floating-icon;
+        border-bottom-left-radius: $radius__floating-icon;
+        border-top-right-radius: 0;
+
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
     }
   }
   &__icon {
