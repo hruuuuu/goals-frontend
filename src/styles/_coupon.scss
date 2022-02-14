@@ -5,20 +5,19 @@
         display: flex;
         padding: 0;
 
-        :nth-child(1) {
-            border-bottom: 1px solid $color--primary;
-            color: $color--primary;
-        }
-
-        :not(:nth-child(1)) {
+        .canGet,
+        .canUse,
+        .expired {
+            font-size: 1.5rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
             border-bottom: 1px solid $color--gray4;
             color: $color--gray4;
         }
 
-        .status {
-            font-size: 1.5rem;
-            padding: 1rem 1.5rem;
-            cursor: pointer;
+        .active {
+            border-bottom: 1px solid $color--primary;
+            color: $color--primary;
         }
     }
 }
@@ -30,7 +29,7 @@
         width: 100%;
         background-color: $color--gray4;
         border-radius: .25rem;
-        padding: .5rem 0;
+        padding: .5rem 0 .8rem 0;
         position: relative;
 
         .coupon {
@@ -54,7 +53,7 @@
 
             .coupon-detail {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 align-items: center;
                 padding: 0.5rem 0;
                 width: 310px;
@@ -92,7 +91,9 @@
                     .coupon-period {
                         font-size: .8rem;
                         margin-bottom: 0;
-                        display: inline;
+                        display: flex;
+                        flex-direction: column;
+                        line-height: 1.5;
                     }
                 }
             }
@@ -101,8 +102,8 @@
                 width: 100%;
                 background-color: $color--light;
                 color: $color--gray5;
-                padding-top: .1rem;
-                padding-bottom: .1rem;
+                padding: .1rem 0;
+                margin: 0 auto;
                 line-height: 2;
                 border: 1px solid transparent;
                 border-radius: .25rem;
@@ -114,7 +115,7 @@
         width: 100%;
         background-color: $color--info;
         border-radius: .25rem;
-        padding: .5rem 0;
+        padding: .5rem 0 .8rem 0;
         position: relative;
 
         .coupon {
@@ -133,12 +134,12 @@
                 color: $color--light;
                 padding: 0.75rem 0.3rem;
                 border-radius: .25rem;
-                font-size: .8rem;
+                font-size: .7rem;
             }
 
             .coupon-detail {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 align-items: center;
                 padding: 0.5rem 0;
                 width: 310px;
@@ -176,7 +177,9 @@
                     .coupon-period {
                         font-size: .8rem;
                         margin-bottom: 0;
-                        display: inline;
+                        display: flex;
+                        flex-direction: column;
+                        line-height: 1.5;
                     }
                 }
 
@@ -186,8 +189,8 @@
                 width: 100%;
                 background-color: $color--light;
                 color: $color--info;
-                padding-top: .1rem;
-                padding-bottom: .1rem;
+                padding: .1rem 0;
+                margin: 0 auto;
                 line-height: 2;
                 border: 1px solid transparent;
                 border-radius: .25rem;
@@ -227,7 +230,9 @@
         .couponStatus {
             justify-content: center;
 
-            .status {
+            .canGet,
+            .canUse,
+            .expired {
                 font-size: 1rem;
             }
         }
