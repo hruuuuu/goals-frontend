@@ -40,9 +40,9 @@
   &:last-of-type {
     margin: 1rem 0 0 0;
   }
-  .Sidebarfont,
-  .SidebarfontMobile {
+  .Sidebarfont {
     padding: 0.625rem;
+
     display: flex;
     align-items: center;
 
@@ -50,17 +50,36 @@
     &__icon {
       color: $color--analogous1;
       font-size: 1.25rem;
+
+      transition: $transition;
     }
     &__text {
       margin-left: 1rem;
       @include h5;
       color: $color--analogous1;
+      font-size: 1.125rem;
+
+      transition: $transition;
     }
-    //hover 效果
-    // &:hover {
-    //   background-color: #555;
-    //   color: white;
-    // }
+    &:hover {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--hover;
+      }
+    }
+    &:focus,
+    &:active {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--active;
+      }
+    }
+    &.active {
+      .Sidebarfont__icon,
+      .Sidebarfont__text {
+        color: $color--active;
+      }
+    }
   }
 
   .Sidebarfont {
@@ -68,10 +87,6 @@
     @media screen and (max-width: $lg) {
       justify-content: center;
     }
-  }
-
-  .SidebarfontMobile {
-    justify-content: center;
   }
 }
 

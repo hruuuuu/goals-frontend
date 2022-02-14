@@ -44,7 +44,10 @@ function Footer() {
                 <div className="d-flex">
                   {footerLinks.map((group, i) => {
                     return (
-                      <ul key={i} className="l-footer__list me-5">
+                      <ul
+                        key={i}
+                        className="l-footer__list me-5 me-lg-4 me-xl-5"
+                      >
                         {group.map((item, i) => {
                           const { id, path, name } = item;
                           return (
