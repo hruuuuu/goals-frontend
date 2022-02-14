@@ -16,7 +16,7 @@ function Coupon() {
       <Header />
       <div className="container">
         <div className="row gx-4">
-          <div className="col-md-3 d-none d-md-block">
+          <div className="col-md-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9 col-md-12">
