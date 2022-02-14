@@ -4,6 +4,7 @@
   background-repeat: repeat;
   overflow: hidden;
   position: relative;
+  z-index: 2;
   &::after {
     content: '';
     width: 100%;
@@ -13,6 +14,7 @@
     left: 0;
     background: linear-gradient(to bottom, #fbfbfb, white);
     display: block;
+    z-index: -1;
   }
 }
 .l-guide {
@@ -56,6 +58,9 @@
         letter-spacing: 1.5px;
         color: $color--gray3;
         font-weight: 300;
+        @media screen and (max-width: $xxl) {
+          font-size: 15px;
+        }
       }
     }
     .model__head {
@@ -102,6 +107,9 @@
     }
     p {
       font-size: 16px;
+      @media screen and (max-width: $xxl) {
+        font-size: 15px;
+      }
     }
   }
   &__bottom {

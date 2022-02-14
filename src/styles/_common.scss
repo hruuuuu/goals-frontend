@@ -233,7 +233,7 @@
 
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -264,7 +264,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -281,8 +281,12 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute("\f105");
-      font-size: 1rem;
+      width: $size__icon--small;
+      height: $size__icon--small;
+
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: '\f105';
       color: $color--gray4;
 
       top: 50%;
@@ -394,6 +398,15 @@
       letter-spacing: 10px;
       color: rgba(107, 156, 102, 0.2);
       margin-bottom: 15px;
+      @media screen and (max-width: $xxl) {
+        font-size: 1.2rem;
+        letter-spacing: 8px;
+      }
+      @media screen and (max-width: $sm) {
+        font-size: 16px;
+        letter-spacing: 5px;
+        margin-bottom: 10px;
+      }
     }
     &--title {
       font-size: 2rem;
@@ -401,6 +414,15 @@
       line-height: 3rem;
       letter-spacing: 3px;
       color: $color--primary;
+      @media screen and (max-width: $xxl) {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+      }
+      @media screen and (max-width: $sm) {
+        font-size: 24px;
+        line-height: 1.5;
+        font-weight: 600;
+      }
     }
     &--subtitle {
       font-size: 1.125rem;
@@ -409,12 +431,21 @@
       color: #555555;
       margin-top: 10px;
       font-weight: 500;
+      @media screen and (max-width: $xxl) {
+        font-size: 1.1rem;
+        line-height: 1.6rem;
+      }
+      @media screen and (max-width: $sm) {
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: 2px;
+      }
     }
     &--sec {
       text-align: center;
       position: relative;
       &::before {
-        content: "";
+        content: '';
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -423,7 +454,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: "";
+        content: '';
         width: 5px;
         height: 30px;
         position: absolute;
