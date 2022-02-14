@@ -36,7 +36,7 @@ const ResetPassword = () => {
               />
               <i className="fas fa-envelope"></i>
               <label htmlFor="showEmail" className="inputLabel">
-                E-mail
+                電子信箱
               </label>
             </div>
             <div className="form-floating">
@@ -62,7 +62,7 @@ const ResetPassword = () => {
                 ></i>
               )}
               <label htmlFor="newPassword" className="inputLabel">
-                New Password
+                新密碼
               </label>
             </div>
             <div className="form-floating">
@@ -89,11 +89,11 @@ const ResetPassword = () => {
                 ></i>
               )}
               <label htmlFor="confirmNewPassword" className="inputLabel">
-                Confirm New Password
+                確認新密碼
               </label>
             </div>
             {/* w-100 for below */}
-            <button className="resetBtn">Reset Password</button>
+            <button className="resetBtn">重設密碼</button>
           </form>
         </div>
       </div>
