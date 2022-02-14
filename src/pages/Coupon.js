@@ -3,23 +3,34 @@ import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import FloatingModal from '../components/MemberSidebar/FloatingModal';
 import FloatingIcon from '../components/MemberSidebar/FloatingIcon';
+import $ from 'jquery';
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
+  const switchStatus = (e) => {
+    $('.couponStatus').children().removeClass('active');
+    $(e.target).addClass('active');
+  };
   return (
     <>
       <Header />
       <div className="container">
         <div className="row gx-4">
-          <div className="col-md-3 d-none d-md-block">
+          <div className="col-md-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9 col-md-12">
             <div className="couponStatusBar">
               <ul className="couponStatus">
-                <li className="status">可領取</li>
-                <li className="status">可使用</li>
-                <li className="status">已失效</li>
+                <li className="canGet active" onClick={switchStatus}>
+                  可領取
+                </li>
+                <li className="canUse" onClick={switchStatus}>
+                  可使用
+                </li>
+                <li className="expired" onClick={switchStatus}>
+                  已失效
+                </li>
               </ul>
             </div>
             <div className="coupons">
@@ -36,7 +47,8 @@ function Coupon() {
                         <div className="coupon-statement">
                           <p className="coupon-title">新會員折價券</p>
                           <p className="coupon-period">
-                            使用期間: 2022/01/01-2022/06/30
+                            <span>使用期間:</span>
+                            <span>2022/01/01-2022/06/30</span>
                           </p>
                         </div>
                       </div>
@@ -57,7 +69,8 @@ function Coupon() {
                         <div className="coupon-statement">
                           <p className="coupon-title">新會員折價券</p>
                           <p className="coupon-period">
-                            使用期間: 2022/01/01-2022/06/30
+                            <span>使用期間:</span>
+                            <span>2022/01/01-2022/06/30</span>
                           </p>
                         </div>
                       </div>

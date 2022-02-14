@@ -30,10 +30,8 @@ function ProductDetail() {
       <Modal
         show={show.in}
         onHide={handleClose}
-        dialogClassName={`c-product-detail__modal ${handleIn}
-        ${handleOut}`}
-        backdropClassName={`c-product-detail__backdrop ${handleIn}
-        ${handleOut}`}
+        dialogClassName={`c-product-detail__modal ${handleIn} ${handleOut}`}
+        backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
         contentClassName="c-product-detail__wrapper"
         centered
         animation={false}
