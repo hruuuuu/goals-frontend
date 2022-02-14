@@ -52,6 +52,9 @@
       height: 100%;
       object-fit: contain;
     }
+    @media screen and (max-width: $md) {
+      margin-right: 0;
+    }
   }
   &__font {
     color: $color--light;
@@ -95,7 +98,7 @@
       background: $color--primary;
       border-radius: $border-radius__navbar;
 
-      transition: all 0.6s ease-in-out;
+      transition: $transition__navbar-menu;
 
       position: fixed;
       top: calc(-100% + $height__navbar);
@@ -111,7 +114,7 @@
       justify-content: center;
       align-items: flex-end;
 
-      transition: all 0.6s ease-in-out;
+      transition: $transition__navbar-menu;
       opacity: 0;
       transform: translate3d(0, -10%, 0);
     }
@@ -335,6 +338,8 @@
     @include h6;
     color: $color--light;
     font-size: 0.875rem;
+
+    z-index: 0;
     &--muted {
       opacity: 0.7;
     }
@@ -509,60 +514,92 @@
 }
 
 .c-floating-icon {
-  width: 100%;
-  height: 10rem;
+  $_: &;
+  z-index: 1;
+  &--member {
+    @media screen and (max-width: $lg) {
+      width: 100%;
+      height: 10rem;
 
-  background: $color--gradient;
+      background: $color--gradient;
 
-  position: fixed;
-  left: 0;
-  bottom: 0;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      #{$_}__btn {
+        width: $diameter__floating-icon;
+        height: $radius__floating-icon;
 
-  z-index: 5;
-  position: fixed;
-  @media screen and (min-width: $md) {
-    width: max-content;
-    height: max-content;
+        border-top-left-radius: $radius__floating-icon;
+        border-top-right-radius: $radius__floating-icon;
+        background: $color--primary;
+        border: none;
+        box-shadow: $box-shadow--active;
 
-    background: transparent;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
 
-    top: 50%;
-    left: auto;
-    right: $radius__floating-icon;
-    bottom: auto;
-    transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   }
-  &__btn {
-    width: $diameter__floating-icon;
-    height: $radius__floating-icon;
+  &--product {
+    width: 100%;
+    height: 10rem;
 
-    border-top-left-radius: $radius__floating-icon;
-    border-top-right-radius: $radius__floating-icon;
-    background: $color--primary;
-    border: none;
-    box-shadow: $box-shadow--active;
+    background: $color--gradient;
 
-    position: absolute;
-    left: 50%;
+    position: fixed;
+    left: 0;
     bottom: 0;
-    transform: translateX(-50%);
+    @media screen and (min-width: $lg) {
+      width: max-content;
+      height: max-content;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include cursor(pointer);
-    @media screen and (min-width: $md) {
-      width: $radius__floating-icon;
-      height: $diameter__floating-icon;
-
-      border-top-left-radius: $radius__floating-icon;
-      border-bottom-left-radius: $radius__floating-icon;
-      border-top-right-radius: 0;
+      background: transparent;
 
       top: 50%;
-      right: 0;
+      left: auto;
+      right: $radius__floating-icon;
+      bottom: auto;
       transform: translateY(-50%);
+    }
+    #{$_}__btn {
+      width: $diameter__floating-icon;
+      height: $radius__floating-icon;
+
+      border-top-left-radius: $radius__floating-icon;
+      border-top-right-radius: $radius__floating-icon;
+      background: $color--primary;
+      border: none;
+      box-shadow: $box-shadow--active;
+
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include cursor(pointer);
+      @media screen and (min-width: $lg) {
+        width: $radius__floating-icon;
+        height: $diameter__floating-icon;
+
+        border-top-left-radius: $radius__floating-icon;
+        border-bottom-left-radius: $radius__floating-icon;
+        border-top-right-radius: 0;
+
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
     }
   }
   &__icon {
@@ -581,7 +618,6 @@
 
   bottom: 0;
   left: 0;
-
   &__content {
     width: 100%;
     height: $height__floating-menu;
@@ -604,6 +640,9 @@
       right: $radius__floating-icon + 1rem;
       bottom: auto;
       transform: translateY(-50%);
+    }
+    &--member {
+      height: max-content;
     }
   }
   &__bg {

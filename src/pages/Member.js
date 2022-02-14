@@ -3,8 +3,7 @@ import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import EditProfile from '../components/Member/EditProfile';
 import EditPassWord from '../components/Member/EditPassword';
-import FloatingModal from '../components/MemberSidebar/FloatingModal';
-import FloatingIcon from '../components/MemberSidebar/FloatingIcon';
+import FloatingMember from '../components/FloatingMember';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -12,10 +11,9 @@ function Member() {
   return (
     <>
       <Header />
-
       <div className="container">
         <div className="row gx-4">
-          <div className="col-md-3 d-none d-md-block">
+          <div className="col-md-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">
@@ -23,15 +21,9 @@ function Member() {
             <EditPassWord />
           </div>
         </div>
-
-        {/* 浮動視窗 */}
-        <div className="d-md-none">
-          <FloatingIcon setIsDisplay={setIsDisplay} />
-          {isDisplay && (
-            <FloatingModal isDisplay={isDisplay} setIsDisplay={setIsDisplay} />
-          )}
-        </div>
       </div>
+      {/* 浮動視窗 */}
+      <FloatingMember />
     </>
   );
 }

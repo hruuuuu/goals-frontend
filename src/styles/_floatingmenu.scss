@@ -1,6 +1,10 @@
-.cartItem {
-  height: 45vh;
+.floatCart {
+  height: $height__floating-menu;
+  width: $width__floating-menu;
+}
+.floatingCartItem {
   overflow-y: auto;
+  height: calc($height__floating-menu * 0.6);
   //scrollbar
   /* width */
   &::-webkit-scrollbar {
@@ -23,8 +27,4 @@
   &::-webkit-scrollbar-thumb:hover {
     background: #b30000;
   }
-}
-.thead {
-  background-color: $color--gray7;
-  border-radius: 0.5rem;
 }

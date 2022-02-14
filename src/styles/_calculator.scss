@@ -3,6 +3,17 @@
   background-size: 500px 500px;
   background-repeat: repeat;
   overflow: hidden;
+  position: relative;
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, #fbfbfb, white);
+    display: block;
+  }
 }
 .l-guide {
   position: relative;
