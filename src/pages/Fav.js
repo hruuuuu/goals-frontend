@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import ProductDetail from '../components/Products/ProductDetail';
 import FavList from '../components/Fav/FavList';
-import FavItem from '../components/Fav/FavItem';
+import FloatingMember from '../components/FloatingMember';
 
 function Fav() {
   return (
@@ -11,7 +11,7 @@ function Fav() {
       <Header />
       <div className="container">
         <div className="row gx-4">
-          <div className="col-lg-3">
+          <div className="col-lg-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
           <div className="col-lg-9">
@@ -19,6 +19,8 @@ function Fav() {
           </div>
         </div>
       </div>
+      {/* 浮動視窗 */}
+      <FloatingMember />
       <ProductDetail />
     </>
   );

@@ -1,8 +1,11 @@
 import { React, useState } from 'react';
+import MemberSidebar from './MemberSidebar';
 
 function FloatingMenu(props) {
   const [animation, setAnimation] = useState(false);
-  const { isDisplay, setIsDisplay } = props;
+  const { isDisplay, setIsDisplay, page } = props;
+  const isMember = page === 'member';
+
   return (
     <>
       <div
@@ -15,9 +18,19 @@ function FloatingMenu(props) {
             'animation animation__floating-menu animation__floating-menu--out'
           }`}
       >
-        <div className="c-floating-menu__content">
+        <div
+          className={`c-floating-menu__content ${
+            isMember && 'c-floating-menu__content--member'
+          }`}
+        >
           <div className="container">
-            <h2>FloatingMenu</h2>
+            {isMember ? (
+              <>
+                <MemberSidebar />
+              </>
+            ) : (
+              <>CartMobile</>
+            )}
           </div>
         </div>
         <div
