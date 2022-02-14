@@ -104,9 +104,6 @@ const Login = () => {
               <button className="btn line">
                 <i className="fab fa-line"></i>
               </button>
-              <button className="btn apple">
-                <i className="fab fa-apple"></i>
-              </button>
             </div>
           </div>
         </div>
