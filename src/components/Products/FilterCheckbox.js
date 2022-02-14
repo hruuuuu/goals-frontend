@@ -11,7 +11,7 @@ function FilterCheckbox(props) {
             <input
               id={`checkbox-${heading}-${i}`}
               type="checkbox"
-              className="form-check-input c-checkbox__input c-input"
+              className="form-check-input c-checkbox__input c-form__input"
               autoComplete="off"
             />
             <label

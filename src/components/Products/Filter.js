@@ -41,7 +41,7 @@ function Filter(props) {
         <div className="d-flex align-items-center">
           <input
             type="number"
-            className="form-control c-range__input c-input"
+            className="form-control c-range__input c-form__input"
             inputMode="numeric"
             pattern="[0-9]*"
             value={value[0]}
@@ -52,7 +52,7 @@ function Filter(props) {
           <span className="c-range__text">~</span>
           <input
             type="number"
-            className="form-control c-range__input c-input"
+            className="form-control c-range__input c-form__input"
             inputMode="numeric"
             pattern="[0-9]*"
             value={value[1]}
@@ -81,7 +81,7 @@ function Filter(props) {
                 <input
                   type="text"
                   id="search"
-                  className="form-control c-search__input c-input"
+                  className="form-control c-search__input c-form__input"
                   placeholder="輸入關鍵字"
                   autoComplete="off"
                   onChange={() => {}}
