@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
-import { Link } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 
-const Signup = () => {
+const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [eye, setEye] = useState('');
 
@@ -19,84 +18,82 @@ const Signup = () => {
 
   return (
     <>
-      <div className="signWrapper">
-        <img src={Image} alt="" className="signBackground" />
+      <div className="resetWrapper">
+        <img src={Image} alt="" className="resetBackground" />
         {/* container for signFormWrapper */}
-        <div className="signFormWrapper">
+        <div className="resetFormWrapper">
           {/* text-center for div below */}
-          <h2 className="formTitle">註冊</h2>
-          <form className="signForm">
+          <h2 className="formTitle">重設密碼</h2>
+          <form className="resetForm">
             <div className="form-floating">
               <input
                 type="email"
-                id="email"
-                name="email"
-                placeholder="請輸入電子信箱"
+                id="showEmail"
+                name="showEmail"
+                placeholder="顯示用戶電子信箱"
                 className="form-control"
+                disabled
               />
               <i className="fas fa-envelope"></i>
-              <label htmlFor="email" className="inputLabel">
+              <label htmlFor="showEmail" className="inputLabel">
                 E-mail
               </label>
             </div>
             <div className="form-floating">
               <input
                 type="password"
-                id="password"
-                name="password"
-                placeholder="請輸入密碼"
+                id="newPassword"
+                name="newPassword"
+                placeholder="請輸入新密碼"
                 className="form-control"
               />
               <i className="fas fa-lock"></i>
-              {showPassword && eye === 'password' ? (
+              {showPassword && eye === 'newPassword' ? (
                 <i
                   className="fas fa-eye-slash"
-                  id="password"
+                  id="newPassword"
                   onClick={(e) => handleSwitchEyes(e)}
                 ></i>
               ) : (
                 <i
                   className="fas fa-eye"
-                  id="password"
+                  id="newPassword"
                   onClick={(e) => handleSwitchEyes(e)}
                 ></i>
               )}
-              <label htmlFor="password" className="inputLabel">
-                Password
+              <label htmlFor="newPassword" className="inputLabel">
+                New Password
               </label>
             </div>
             <div className="form-floating">
               <input
                 type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="請再次輸入密碼"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
+                placeholder="請再次輸入新密碼"
                 className="form-control"
                 onPaste={(e) => e.preventDefault()}
               />
               <i className="fas fa-lock"></i>
-              {showPassword && eye === 'confirmPassword' ? (
+              {showPassword && eye === 'confirmNewPassword' ? (
                 <i
                   className="fas fa-eye-slash"
-                  id="confirmPassword"
+                  id="confirmNewPassword"
                   onClick={(e) => handleSwitchEyes(e)}
                 ></i>
               ) : (
                 <i
                   className="fas fa-eye"
-                  id="confirmPassword"
+                  id="confirmNewPassword"
                   onClick={(e) => handleSwitchEyes(e)}
                 ></i>
               )}
-              <label htmlFor="confirmPassword" className="inputLabel">
-                Confirm Password
+              <label htmlFor="confirmNewPassword" className="inputLabel">
+                Confirm New Password
               </label>
             </div>
-            <Link to="/login">
-              <p className="notification">已經有帳戶了？</p>
-            </Link>
             {/* w-100 for below */}
-            <button className="signBtn">Sign In</button>
+            <button className="resetBtn">Reset Password</button>
           </form>
         </div>
       </div>
@@ -104,4 +101,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default ResetPassword;
