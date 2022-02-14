@@ -21,7 +21,7 @@ function Summary() {
               className="rounded-3 coupon_input flex-grow-1 me-2"
               placeholder="請輸入折扣券編號"
             />
-            <button className="btn-sm btn_grn rounded-3" type="button">
+            <button className="btn-sm btn_grn rounded-3" type="button"> 
               送出
             </button>
           </div>

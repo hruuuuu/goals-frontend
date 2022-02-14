@@ -13,7 +13,7 @@ function Cart() {
           <div className="col-lg-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">
+          <div className="col col-lg-9 col-md-12">
             <CartList />
           </div>
         </div>

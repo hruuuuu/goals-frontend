@@ -24,7 +24,7 @@ function CheckoutModal() {
             <i className="fas fa-times icon_grn"></i>
           </button>
         </div>
-        <div className="container mt-2 mb-4 px-5">
+        <div className="container mb-4 px-5">
           <CartStepper handleClose={handleClose} />
         </div>
         {/* <div className="container px-5">
