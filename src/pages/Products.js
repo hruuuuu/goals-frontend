@@ -1,5 +1,8 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
+import axios from 'axios';
+
+import { API_URL } from '../utils/config';
 
 import Header from '../components/Header';
 import Filter from '../components/Products/Filter';
@@ -15,6 +18,7 @@ function Products() {
     in: false,
     out: false,
   });
+  const [data, setData] = useState([]);
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
   const isLower = () => {
@@ -22,6 +26,20 @@ function Products() {
       return true;
     }
   };
+
+  useEffect(() => {
+    //api/product
+    (async () => {
+      try {
+        let response = await axios.get(`${API_URL}/product`, {
+          withCredentials: true,
+        });
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   return (
     <>
       <Header isLower={isLower} />
