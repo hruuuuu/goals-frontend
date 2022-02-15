@@ -19,7 +19,7 @@
 }
 .l-guide {
   position: relative;
-  padding: 100px 0;
+  padding: 50px 0 100px;
   .container {
     position: relative;
     width: 100%;
@@ -36,6 +36,7 @@
     top: 0;
     right: 0;
     opacity: 0.75;
+    transform: translateY(-44%);
   }
 }
 .right_cont {
@@ -51,6 +52,12 @@
     width: 50%;
     padding-right: calc((100% - 1320px) / 2);
     padding-left: 80px;
+    @media screen and (max-width: $xxl) {
+      padding-right: calc((100% - 1140px) / 2);
+    }
+    @media screen and (max-width: $xl) {
+      padding-right: calc((100% - 960px) / 2);
+    }
     &--text {
       p {
         font-size: 16px;
