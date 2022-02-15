@@ -1,6 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 
 const OrderList = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <div className="d-flex d-none d-lg-block">
@@ -23,9 +29,9 @@ const OrderList = () => {
               <td>@mdo</td>
               <td>200</td>
               <td className="p-0">
-                <NavLink to="/" className="detail rounded-3 ">
+                <button onClick={handleShow} className="detail rounded-3">
                   <i className="fas fa-eye p-1 icon_grn"></i>
-                </NavLink>{' '}
+                </button>
               </td>
             </tr>
             <tr>
@@ -35,9 +41,9 @@ const OrderList = () => {
               <td>@fat</td>
               <td>100</td>
               <td className="p-0">
-                <NavLink to="/" className="detail rounded-3 ">
+                <button onClick={handleShow} className="detail rounded-3">
                   <i className="fas fa-eye p-1 icon_grn"></i>
-                </NavLink>
+                </button>
               </td>
             </tr>
             <tr>
@@ -47,18 +53,18 @@ const OrderList = () => {
               <td>50</td>
               <td>50</td>
               <td className="p-0">
-                <NavLink to="/" className="detail rounded-3 ">
+                <button onClick={handleShow} className="detail rounded-3">
                   <i className="fas fa-eye p-1 icon_grn"></i>
-                </NavLink>
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div className="d-flex d-lg-none justify-content-center mb-3">
-        <div className="card cardorder">
-          <div className="card-body">
+      <div className="d-flex d-lg-none justify-content-center mb-3 ">
+        <div className="card cardorder ">
+          <div onClick={handleShow} className="card-body ">
             <h5 className="card-title">1111</h5>
             <h6 className="card-subtitle mb-2 text-muted">訂單日期</h6>
             <div className="card-text">
@@ -82,6 +88,18 @@ const OrderList = () => {
           </div>
         </div>
       </div>
+
+      <Modal centered show={show} onHide={handleClose} animation={false}>
+        <Modal.Header>
+          <Modal.Title>您的訂單詳情</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>OrderDetail</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
