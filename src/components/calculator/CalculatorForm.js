@@ -10,7 +10,7 @@ const CalculatorForm = () => {
     <>
       <form className="calculator__form">
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <FormControl>
                 <label for="exampleFormControlInput1" className="form-label">
@@ -36,7 +36,7 @@ const CalculatorForm = () => {
               </FormControl>
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <label for="exampleFormControlInput1" className="form-label">
                 年齡
@@ -49,7 +49,7 @@ const CalculatorForm = () => {
               />
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <label for="exampleFormControlInput1" className="form-label">
                 身高(公分)
@@ -62,7 +62,7 @@ const CalculatorForm = () => {
               />
             </div>
           </div>
-          <div className="col-sm-6">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <label for="exampleFormControlInput1" className="form-label">
                 體重(公斤)

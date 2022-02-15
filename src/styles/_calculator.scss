@@ -4,6 +4,7 @@
   background-repeat: repeat;
   overflow: hidden;
   position: relative;
+  z-index: 2;
   &::after {
     content: '';
     width: 100%;
@@ -13,17 +14,23 @@
     left: 0;
     background: linear-gradient(to bottom, #fbfbfb, white);
     display: block;
+    z-index: -1;
   }
 }
 .l-guide {
   position: relative;
-  padding: 100px 0;
+  padding: 50px 0 100px;
   .container {
     position: relative;
     width: 100%;
     margin-left: 0;
     padding: 0;
     max-width: 100%;
+    @media screen and (max-width: $md) {
+      padding: 0 15px;
+      max-width: 540px;
+      margin: auto;
+    }
   }
   &::before {
     position: absolute;
@@ -34,21 +41,64 @@
     top: 0;
     right: 0;
     opacity: 0.75;
+    transform: translateY(-44%);
+    z-index: -1;
+  }
+  @media screen and (max-width: $xxl) {
+    padding: 50px 0;
+  }
+  @media screen and (max-width: $md) {
+    padding: 20px 0 60px;
   }
 }
 .right_cont {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  @media screen and (max-width: $xl) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
   &__pic {
     width: 50%;
     border-radius: 0 0 200px 0;
     overflow: hidden;
+    @media screen and (max-width: $xl) {
+      border-radius: 0;
+      width: 100%;
+      opacity: 0.5;
+      max-height: 80vh;
+    }
+    @media screen and (max-width: $md) {
+      max-height: initial;
+      opacity: 1;
+      padding-top: 30px;
+    }
   }
   &__text-box {
     width: 50%;
     padding-right: calc((100% - 1320px) / 2);
     padding-left: 80px;
+    @media screen and (max-width: $xxl) {
+      padding-right: calc((100% - 1140px) / 2);
+    }
+    @media screen and (max-width: $xl) {
+      width: 80%;
+      padding: 50px;
+      position: absolute;
+      background: rgb(255 255 255 / 95%);
+      box-shadow: 0px 0px 14px 2px rgb(0 0 0 / 11%);
+    }
+    @media screen and (max-width: $lg) {
+      padding: 30px 30px;
+    }
+    @media screen and (max-width: $md) {
+      width: 100%;
+      position: relative;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+    }
     &--text {
       p {
         font-size: 16px;
@@ -56,6 +106,9 @@
         letter-spacing: 1.5px;
         color: $color--gray3;
         font-weight: 300;
+        @media screen and (max-width: $xxl) {
+          font-size: 15px;
+        }
       }
     }
     .model__head {
@@ -88,6 +141,12 @@
 }
 .des-left {
   width: 70%;
+  @media screen and (max-width: $xxl) {
+    width: 75%;
+  }
+  @media screen and (max-width: $xl) {
+    width: 100%;
+  }
   p {
     line-height: 2;
     letter-spacing: 1.5px;
@@ -102,12 +161,35 @@
     }
     p {
       font-size: 16px;
+      @media screen and (max-width: $xxl) {
+        font-size: 15px;
+      }
+    }
+    @media screen and (max-width: $xxl) {
+      padding-right: 80px;
+    }
+    @media screen and (max-width: $xl) {
+      padding-right: 200px;
+    }
+    @media screen and (max-width: $md) {
+      padding-right: 0px;
     }
   }
   &__bottom {
     display: flex;
     padding: 60px 0;
     z-index: 1;
+    @media screen and (max-width: $xxl) {
+      flex-direction: column;
+    }
+    @media screen and (max-width: $xl) {
+      flex-direction: row;
+      gap: 50px;
+    }
+    @media screen and (max-width: $lg) {
+      flex-direction: column;
+      gap: 0px;
+    }
     p {
       font-size: 15px;
     }
@@ -116,6 +198,14 @@
       padding-right: 80px;
       .model__head--title {
         font-size: 1.6rem;
+        @media screen and (max-width: $md) {
+          font-size: 20px;
+        }
+      }
+      @media screen and (max-width: $xxl) {
+        width: 100%;
+        padding-bottom: 40px;
+        padding-right: 0px;
       }
     }
     &::before {
@@ -125,7 +215,7 @@
       position: absolute;
       top: 0;
       left: 0%;
-      transform: translateX(-50%);
+      transform: translateX(-40%);
       background: rgba(149, 176, 107, 0.15);
       z-index: -1;
     }
@@ -138,6 +228,13 @@
   bottom: 0;
   width: 30%;
   z-index: 2;
+  @media screen and (max-width: $xxl) {
+    bottom: auto;
+    top: 0;
+  }
+  @media screen and (max-width: $md) {
+    display: none;
+  }
   &__deco {
     position: absolute;
     width: 150px;
@@ -154,6 +251,20 @@
       left: -50%;
       top: -50%;
     }
+    @media screen and (max-width: $xxl) {
+      transform: translate(100%, -275%);
+      width: 100px;
+      &::before {
+        width: 200px;
+        height: 200px;
+      }
+    }
+    @media screen and (max-width: $xl) {
+      transform: translate(100%, 60%);
+    }
+    @media screen and (max-width: $lg) {
+      transform: translate(60%, 65%);
+    }
   }
   &__img {
     height: auto;
@@ -162,6 +273,9 @@
     justify-content: flex-end;
     border-radius: 160px 0 0 0;
     max-height: 80vh;
+    @media screen and (max-width: $xl) {
+      display: none;
+    }
     img {
       width: 100%;
       max-width: none;
@@ -213,6 +327,21 @@
       color: $color--gray3;
       font-weight: 300;
       letter-spacing: 1.5px;
+      @media screen and (max-width: $sm) {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+    }
+    @media screen and (max-width: $xxl) {
+      width: 100%;
+    }
+    @media screen and (max-width: $lg) {
+      border-radius: 50px;
+      padding: 50px 50px;
+    }
+    @media screen and (max-width: $sm) {
+      border-radius: 25px;
+      padding: 40px 20px;
     }
   }
   .explan {
@@ -227,7 +356,7 @@
       content: '';
       width: 48%;
       height: 100%;
-      background: $color--success;
+      background: $color--analogous2;
       display: block;
       position: absolute;
       top: 0;
@@ -268,10 +397,68 @@
         margin-top: 15px;
       }
     }
+    @media screen and (max-width: $xxl) {
+      &::before {
+        width: 50%;
+      }
+      &__text {
+        padding-left: 50px;
+      }
+    }
+    @media screen and (max-width: $xl) {
+      &::before {
+        width: 100%;
+        border-radius: 100px 100px 0px 0px;
+      }
+      &__title {
+        text-align: center;
+      }
+      &__text {
+        padding-left: 0px;
+        padding-top: 50px;
+        p {
+          color: $color--gray6;
+        }
+        span {
+          color: $color--gray6;
+        }
+      }
+    }
+    @media screen and (max-width: $sm) {
+      padding: 50px 0;
+      &.container {
+        max-width: initial;
+      }
+      &::before {
+        border-radius: 3.125rem 3.125rem 0 0;
+      }
+      &__title {
+        text-align: left;
+      }
+    }
   }
 }
 .l-recommenedGood {
   padding: 100px 0;
   background: $color--light;
   border-top: 1px solid $color--gray6;
+}
+
+br.model_br {
+  display: none;
+  @media screen and (max-width: $xxl) {
+    display: inline-block;
+  }
+  @media screen and (max-width: $xl) {
+    display: none;
+  }
+  @media screen and (max-width: $lg) {
+    display: none;
+  }
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+  @media screen and (max-width: $sm) {
+    display: none;
+  }
 }

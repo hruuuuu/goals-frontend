@@ -84,4 +84,18 @@
       }
     }
   }
+
+  @media screen and (max-width: $lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: $md) {
+    &__item {
+      &--Txt {
+        padding: 40px 20px 35px;
+      }
+    }
+  }
+  @media screen and (max-width: $sm) {
+    grid-template-columns: 1fr;
+  }
 }
