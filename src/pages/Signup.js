@@ -3,6 +3,8 @@ import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 
+// 修改input, placeholder字距 行高
+
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [eye, setEye] = useState('');
@@ -36,7 +38,7 @@ const Signup = () => {
               />
               <i className="fas fa-envelope"></i>
               <label htmlFor="email" className="inputLabel">
-                E-mail
+                電子信箱
               </label>
             </div>
             <div className="form-floating">
@@ -62,7 +64,7 @@ const Signup = () => {
                 ></i>
               )}
               <label htmlFor="password" className="inputLabel">
-                Password
+                密碼
               </label>
             </div>
             <div className="form-floating">
@@ -89,14 +91,14 @@ const Signup = () => {
                 ></i>
               )}
               <label htmlFor="confirmPassword" className="inputLabel">
-                Confirm Password
+                再次輸入密碼
               </label>
             </div>
             <Link to="/login">
               <p className="notification">已經有帳戶了？</p>
             </Link>
             {/* w-100 for below */}
-            <button className="signBtn">Sign In</button>
+            <button className="signBtn">註冊</button>
           </form>
         </div>
       </div>

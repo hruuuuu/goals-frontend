@@ -10,20 +10,15 @@ function FloatingMenu(props) {
   return (
     <>
       <div
-        className={`c-floating-menu ${
+        className={`c-floating-menu c-floating-menu--${page} ${
           isDisplay &&
           'animation animation__floating-menu animation__floating-menu--in'
-        }
-          ${
-            animation &&
-            'animation animation__floating-menu animation__floating-menu--out'
-          }`}
+        } ${
+          animation &&
+          'animation animation__floating-menu animation__floating-menu--out'
+        }`}
       >
-        <div
-          className={`c-floating-menu__content ${
-            isMember && 'c-floating-menu__content--member'
-          }`}
-        >
+        <div className={`c-floating-menu__content`}>
           <div className="container">
             {isMember ? (
               <>

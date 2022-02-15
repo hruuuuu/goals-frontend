@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 const OrderList = () => {
   return (
     <>
-      <div className="d-flex d-none d-md-block">
-        <table className="orderlisttable table table-borderless">
+      <div className="d-flex d-none d-lg-block">
+        <table className="table table-borderless orderlist_table">
           <thead>
             <tr>
               <th scope="col">訂單編號</th>
@@ -22,8 +22,10 @@ const OrderList = () => {
               <td>Otto</td>
               <td>@mdo</td>
               <td>200</td>
-              <td>
-                <NavLink to="/" className="fas fa-eye"></NavLink>
+              <td className="p-0">
+                <NavLink to="/" className="detail rounded-3 ">
+                  <i className="fas fa-eye p-1 icon_grn"></i>
+                </NavLink>{' '}
               </td>
             </tr>
             <tr>
@@ -32,8 +34,10 @@ const OrderList = () => {
               <td>Thornton</td>
               <td>@fat</td>
               <td>100</td>
-              <td>
-                <NavLink to="/" className="fas fa-eye"></NavLink>
+              <td className="p-0">
+                <NavLink to="/" className="detail rounded-3 ">
+                  <i className="fas fa-eye p-1 icon_grn"></i>
+                </NavLink>
               </td>
             </tr>
             <tr>
@@ -42,15 +46,17 @@ const OrderList = () => {
               <td>@twitter</td>
               <td>50</td>
               <td>50</td>
-              <td>
-                <NavLink to="/" className="fas fa-eye"></NavLink>
+              <td className="p-0">
+                <NavLink to="/" className="detail rounded-3 ">
+                  <i className="fas fa-eye p-1 icon_grn"></i>
+                </NavLink>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div className="d-flex d-md-none justify-content-center mb-3">
+      <div className="d-flex d-lg-none justify-content-center mb-3">
         <div className="card cardorder">
           <div className="card-body">
             <h5 className="card-title">1111</h5>

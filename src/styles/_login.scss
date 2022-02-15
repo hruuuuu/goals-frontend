@@ -1,8 +1,20 @@
+.loginWrapper::before {
+    content: '';
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, white, transparent);
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
 .loginWrapper {
     height: calc(100vh - 5rem);
     overflow: hidden;
     position: relative;
     display: flex;
+
 
     .loginBackground {
         width: 100%;
@@ -23,12 +35,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        z-index: 2;
 
         .anotherLoginMethod {
-            width: 90%;
+            width: 65%;
 
             .socialTag {
-                padding: 1.5rem 0 1rem 0;
+                padding: 1.5rem 0 1.5rem 0;
                 margin-top: 1rem;
                 text-align: center;
                 font-size: 1.25rem;
@@ -41,7 +54,7 @@
 
             .btnGroup {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-evenly;
 
                 .btn:focus {
                     outline: none;
@@ -57,18 +70,6 @@
 
                     :hover {
                         color: $color--info;
-                    }
-                }
-
-                .apple {
-                    color: #555555;
-                    background-color: $color--light;
-                    padding: 0.5rem 1rem;
-                    border-color: $color--active;
-                    font-size: 2rem;
-
-                    :hover {
-                        color: #555555;
                     }
                 }
 
@@ -136,7 +137,12 @@
                 color: $color--light;
                 line-height: 1.5;
                 border: 1px solid transparent;
-                border-radius: 0.25rem;
+                border-radius: 0.625rem;
+                transition: $transition;
+            }
+
+            .loginBtn:hover {
+                background-color: $color--hover;
             }
 
             .form-floating {
@@ -210,6 +216,17 @@
     }
 }
 
+.loginWrapper::after {
+    content: '';
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, white);
+    display: block;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
 .modalWrapper {
     padding: 2rem;
 
@@ -259,8 +276,20 @@
             }
 
             .anotherLoginMethod {
+                width: 80%;
+
                 .socialTag {
                     font-size: 1rem;
+                }
+
+                .btnGroup {
+
+                    .google,
+                    .facebook,
+                    .line {
+                        padding: .3rem .8rem;
+                        font-size: 1.5rem;
+                    }
                 }
             }
 
@@ -274,7 +303,7 @@
 /*** Mobile Mode ***/
 @media screen and (max-width: 767px) {
     .loginWrapper {
-        height: 100vh;
+        height: auto;
 
         .loginBackground {
             display: none;
@@ -287,12 +316,23 @@
             left: 0;
             transform: none;
             margin: 0 auto;
-            padding: 0;
+            padding: 2rem 0;
             height: 100%;
 
             .anotherLoginMethod {
+                width: 75%;
+
                 .socialTag {
                     font-size: 1rem;
+                }
+
+                .btnGroup {
+
+                    .google,
+                    .facebook,
+                    .line {
+                        padding: .2rem .5rem;
+                    }
                 }
             }
 
@@ -315,9 +355,12 @@
     .loginWrapper {
         .loginFormWrapper {
             .anotherLoginMethod {
+
+
                 .socialTag {
-                    font-size: 1rem;
+                    font-size: .8rem;
                 }
+
             }
 
             .loginForm {

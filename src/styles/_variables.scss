@@ -21,9 +21,14 @@ $color--analogous2: #95b06b;
 
 $color--hover: #76b8d3;
 $color--active: #3aa1cb;
+$color--disabled: $color--gray4;
 $color--opacity: rgba(107, 156, 102, 0.2);
 
-$color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+$color--gradient: linear-gradient(
+  180.06deg,
+  rgba(255, 255, 255, 0) 0.05%,
+  #ffffff 68.32%
+);
 
 $color__font: $color--gray2;
 $color__input-border: $color--gray4;
@@ -54,6 +59,10 @@ $border-radius__floating-filter: 0 0 1.875rem 1.875rem;
 $border__input: 0.0625rem solid $color__input-border;
 $border__input--checked: 0.0625rem solid $color--primary;
 $border__input--focus: 0.0625rem solid $color--secondary;
+$border__input--disabled: 0.0625rem solid $color--disabled;
+$border__input--error: 0.0625rem solid $color--error;
+$border__input--success: 0.0625rem solid $color--success;
+$border__input--warning: 0.0625rem solid $color--warning;
 
 /* transition */
 $transition: all 0.2s ease-in-out;
@@ -104,4 +113,4 @@ $xl: 1199px;
 $xxl: 1399px;
 
 /* bootstrap */
-@import "~bootstrap/scss/bootstrap.scss";
+@import '~bootstrap/scss/bootstrap.scss';

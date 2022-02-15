@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import OrderList from '../components/Order/OrderList';
@@ -12,7 +11,7 @@ function Order() {
       <Header />
       <div className="container">
         <div className="row gx-4">
-          <div className="col-md-3 d-none d-md-block">
+          <div className="col-md-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">

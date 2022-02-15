@@ -49,7 +49,7 @@ const Login = () => {
               />
               <i className="fas fa-envelope"></i>
               <label htmlFor="email" className="inputLabel">
-                E-mail
+                電子信箱
               </label>
             </div>
             <div className="form-floating mb-3">
@@ -75,7 +75,7 @@ const Login = () => {
                 ></i>
               )}
               <label htmlFor="password" className="inputLabel">
-                Password
+                密碼
               </label>
             </div>
             <div className="notificationWrapper">
@@ -86,7 +86,7 @@ const Login = () => {
                 忘記密碼
               </p>
             </div>
-            <button className="loginBtn">Log In</button>
+            <button className="loginBtn">登入</button>
           </form>
           <div className="anotherLoginMethod">
             <p className="socialTag">
@@ -104,9 +104,6 @@ const Login = () => {
               <button className="btn line">
                 <i className="fab fa-line"></i>
               </button>
-              <button className="btn apple">
-                <i className="fab fa-apple"></i>
-              </button>
             </div>
           </div>
         </div>
@@ -123,13 +120,13 @@ const Login = () => {
           </p>
           <div className="mb-3">
             <label htmlFor="forgetEmail" className="form-label">
-              電子郵箱
+              電子信箱
             </label>
             {/* 用formik檢查信箱格式 */}
             <input
               type="email"
               id="forgetEmail"
-              placeholder="請填入您的電子郵箱"
+              placeholder="請填入您的電子信箱"
               className="modalInput form-control"
               onChange={handleChange}
             />

@@ -1,4 +1,4 @@
-.orderlisttable {
+.orderlist_table {
   line-height: 3.75rem;
   thead {
     line-height: 1.25rem;
@@ -12,10 +12,21 @@
   }
 }
 
+.detail {
+  background-color: $color--light;
+  border: 1px solid $color--gray4;
+  width: $width__btn--square;
+  height: $height__btn--meduim;
+  border-radius: $border-radius__btn;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cardorder {
   width: 80vw;
-  border-radius: 1.5rem;
-  box-shadow: 0 6px 6px hsl(0deg 0% 0% / 0.3);
+  border-radius: $border-radius__btn;
+  box-shadow: $box-shadow__block;
 }
 
 .orderline {

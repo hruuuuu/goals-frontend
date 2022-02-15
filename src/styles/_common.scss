@@ -241,6 +241,9 @@
       position: absolute;
       left: 0;
       bottom: -0.125rem;
+      @media screen and (max-width: $sm) {
+        width: 60%;
+      }
     }
   }
   &__text {
@@ -278,15 +281,10 @@
     display: inline-block;
 
     &::before {
-      width: $size__icon--small;
-      height: $size__icon--small;
-
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
-      content: "\f105";
+      @include icon--absolute("\f105");
+      font-size: 1rem;
       color: $color--gray4;
 
-      position: absolute;
       top: 50%;
       left: -0.6rem;
       transform: translate(-50%, -50%);
@@ -514,19 +512,8 @@
 }
 
 .c-floating-icon {
+  $_: &;
   z-index: 1;
-  &--normal {
-    @media screen and (max-width: $lg) {
-      width: 100%;
-      height: 10rem;
-
-      background: $color--gradient;
-
-      position: fixed;
-      left: 0;
-      bottom: 0;
-    }
-  }
   &--member {
     @media screen and (max-width: $lg) {
       width: 100%;
@@ -537,6 +524,25 @@
       position: fixed;
       left: 0;
       bottom: 0;
+      #{$_}__btn {
+        width: $diameter__floating-icon;
+        height: $radius__floating-icon;
+
+        border-top-left-radius: $radius__floating-icon;
+        border-top-right-radius: $radius__floating-icon;
+        background: $color--primary;
+        border: none;
+        box-shadow: $box-shadow--active;
+
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
   &--product {
@@ -560,38 +566,38 @@
       bottom: auto;
       transform: translateY(-50%);
     }
-  }
-  &__btn {
-    width: $diameter__floating-icon;
-    height: $radius__floating-icon;
-
-    border-top-left-radius: $radius__floating-icon;
-    border-top-right-radius: $radius__floating-icon;
-    background: $color--primary;
-    border: none;
-    box-shadow: $box-shadow--active;
-
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include cursor(pointer);
-    @media screen and (min-width: $md) {
-      width: $radius__floating-icon;
-      height: $diameter__floating-icon;
+    #{$_}__btn {
+      width: $diameter__floating-icon;
+      height: $radius__floating-icon;
 
       border-top-left-radius: $radius__floating-icon;
-      border-bottom-left-radius: $radius__floating-icon;
-      border-top-right-radius: 0;
+      border-top-right-radius: $radius__floating-icon;
+      background: $color--primary;
+      border: none;
+      box-shadow: $box-shadow--active;
 
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include cursor(pointer);
+      @media screen and (min-width: $lg) {
+        width: $radius__floating-icon;
+        height: $diameter__floating-icon;
+
+        border-top-left-radius: $radius__floating-icon;
+        border-bottom-left-radius: $radius__floating-icon;
+        border-top-right-radius: 0;
+
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
     }
   }
   &__icon {
@@ -610,31 +616,48 @@
 
   bottom: 0;
   left: 0;
-  &__content {
-    width: 100%;
-    height: $height__floating-menu;
-    padding: 1rem;
+  &--member {
+    #{$_}__content {
+      @media screen and (max-width: $lg) {
+        width: 100%;
+        height: max-content;
+        padding: 1rem;
 
-    background: $color--light;
-    box-shadow: $box-shadow__block;
-    border-radius: $border-radius__block;
+        background: $color--light;
+        box-shadow: $box-shadow__block;
+        border-radius: $border-radius__block;
 
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    @media screen and (min-width: $md) {
-      width: $width__floating-menu;
-      height: $height__floating-menu;
-
-      top: 50%;
-      left: auto;
-      right: $radius__floating-icon + 1rem;
-      bottom: auto;
-      transform: translateY(-50%);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+      }
     }
-    &--member {
-      height: max-content;
+  }
+  &--product {
+    #{$_}__content {
+      width: 100%;
+      height: $height__floating-menu;
+      padding: 1rem;
+
+      background: $color--light;
+      box-shadow: $box-shadow__block;
+      border-radius: $border-radius__block;
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      @media screen and (min-width: $lg) {
+        width: $width__floating-menu;
+        height: $height__floating-menu;
+
+        top: 50%;
+        left: auto;
+        right: $radius__floating-icon + 1rem;
+        bottom: auto;
+        transform: translateY(-50%);
+      }
     }
   }
   &__bg {
