@@ -6,7 +6,7 @@ function MemberSidebar() {
     {
       id: 1,
       name: '會員資料',
-      router: `/member`,
+      router: `/member/`,
       icon: <i className="fas fa-user Sidebarfont__icon"></i>,
       line: '',
     },
