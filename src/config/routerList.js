@@ -136,13 +136,13 @@ const routerList = [
       },
     ],
   },
-  {
-    path: `signup`,
-    element: <Signup />,
-  },
+  // {
+  //   path: `signup`,
+  //   element: <Login />,
+  // },
   {
     path: `login`,
-    element: <Login />,
+    element: <Signup />,
   },
   {
     path: `resetpassword`,
