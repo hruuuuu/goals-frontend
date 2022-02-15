@@ -25,7 +25,9 @@ const MainContent = () => {
                 <div className="model__head">
                   <div className="model__head--deco-text">GUIDE</div>
                   <div className="model__head--title">
-                    打造易瘦體質！由計算TDEE開始
+                    打造易瘦體質！
+                    <br class="model_br" />
+                    由計算TDEE開始
                   </div>
                   <div className="model__head--subtitle">
                     果實帶您了解TDEE與BMR的不同
@@ -124,7 +126,7 @@ const MainContent = () => {
           <div className="explan">
             <div className="container">
               <div className="row">
-                <div className="col-lg-6 col-sm-12">
+                <div className="col-xl-6 col-lg-12">
                   <div className="explan__title">
                     <h4>
                       利用算出來的TDEE當作參考值
@@ -140,7 +142,7 @@ const MainContent = () => {
                     </p>
                   </div>
                 </div>
-                <div className="col-lg-6 col-sm-12">
+                <div className="col-xl-6 col-lg-12">
                   <div className="explan__text">
                     <p>
                       假設你您的目標是減重，少吃300大卡以後體重還是沒有變化，建議增加活動量，例如原先自己很少運動，就改成一個禮拜運動2~3天，慢慢循序漸進，以重量訓練搭配有氧以及飲食控制，才是比較好的方式喔～
