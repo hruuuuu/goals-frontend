@@ -1,7 +1,7 @@
 import { React, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useShow } from '../../context/ProductDetail';
+import { useShow } from '../../context/showProductDetail';
 import FavIcon from '../FavIcon';
 import Counter from '../Counter';
 

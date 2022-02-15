@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import Modal from 'react-bootstrap/Modal';
 
-import { useShow } from '../../context/ProductDetail';
+import { useShow } from '../../context/showProductDetail';
 
 import FavIcon from '../FavIcon';
 import Counter from '../Counter';
