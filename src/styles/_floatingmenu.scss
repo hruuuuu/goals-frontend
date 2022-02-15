@@ -4,7 +4,7 @@
 }
 .floatingCartItem {
   overflow-y: auto;
-  height: calc($height__floating-menu * 0.6);
+  height: calc($height__floating-menu * 0.55);
   //scrollbar
   /* width */
   &::-webkit-scrollbar {
