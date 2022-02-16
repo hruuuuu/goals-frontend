@@ -18,6 +18,7 @@ function CheckoutModal() {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        fullscreen="md-down"
       >
         <div className="mt-3 px-3 d-flex justify-content-end">
           <button className="btn btn-lg" onClick={handleClose}>

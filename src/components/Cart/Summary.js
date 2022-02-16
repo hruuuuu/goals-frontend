@@ -5,7 +5,7 @@ import CheckoutModal from './CheckoutModal';
 function Summary() {
   return (
     <>
-      <div className="checkoutBox row gx-4 gy-2 align-items-end">
+      <div className="checkoutBox row gx-4 gx-md-5 gy-2 align-items-end">
         <div className="col-12 col-lg-6">
           <div className="d-flex justify-content-between py-2">
             <p>總計</p>
