@@ -62,7 +62,7 @@ function Navbar() {
       iconMobile: (
         <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
-      iconDesktop: <i class="fas fa-ticket-alt l-navbar__font"></i>,
+      iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
       tagDesktop: ``,
       route: `/member/coupon`,
     },

@@ -19,19 +19,11 @@ const CalculatorForm = () => {
                 <RadioGroup
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
+                  defaultValue="男"
                   name="radio-buttons-group"
                 >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
+                  <FormControlLabel value="男" control={<Radio />} label="男" />
+                  <FormControlLabel value="女" control={<Radio />} label="女" />
                 </RadioGroup>
               </FormControl>
             </div>
