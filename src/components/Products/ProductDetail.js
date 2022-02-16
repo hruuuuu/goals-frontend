@@ -16,7 +16,7 @@ function ProductDetail(props) {
   const { show, setShow } = useShow();
   const navigate = useNavigate();
   const locationPath = useLocation().pathname;
-  const [isFetching, setIsFetching] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [detailData, setDetailData] = useState({
     image: 'salmon.jpeg',
@@ -55,7 +55,6 @@ function ProductDetail(props) {
       let response = await axios.get(`${API_URL}/product/${productId}`);
       const details = response.data[0];
       setDetailData(details);
-      setIsFetching(false);
     }
   };
 
@@ -214,7 +213,11 @@ function ProductDetail(props) {
   };
   return (
     <>
-      {isFetching || isFetchingCategory ? 'isFetching' : <ProductDetailModal />}
+      {!isFetching || !isFetchingCategory ? (
+        <ProductDetailModal />
+      ) : (
+        'showSpinner'
+      )}
     </>
   );
 }
