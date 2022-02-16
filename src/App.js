@@ -26,7 +26,7 @@ function App() {
           withCredentials: true,
         });
         const products = productResponse.data;
-        setProductsData(products);
+        setProductsData([...productsData, ...products]);
 
         //api/product/category
         const categoryResponse = await axios.get(
@@ -36,7 +36,7 @@ function App() {
           }
         );
         const categories = categoryResponse.data;
-        setCategoryData(categories);
+        setCategoryData([...categoryData, ...categories]);
       } catch (error) {
         console.log(error);
       }

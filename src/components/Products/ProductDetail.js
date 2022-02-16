@@ -17,7 +17,6 @@ function ProductDetail(props) {
   const navigate = useNavigate();
   const locationPath = useLocation().pathname;
   const [isFetching, setIsFetching] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [detailData, setDetailData] = useState({
     image: 'salmon.jpeg',
     name: '',
@@ -54,7 +53,7 @@ function ProductDetail(props) {
     if (productId) {
       let response = await axios.get(`${API_URL}/product/${productId}`);
       const details = response.data[0];
-      setDetailData(details);
+      setDetailData({ ...detailData, ...details });
     }
   };
 
@@ -69,15 +68,12 @@ function ProductDetail(props) {
     const matchedCategory = categoryData.find(
       (category) => detailData.category_id === category.id
     );
-    setCategory(matchedCategory);
+    setCategory({ ...category, ...matchedCategory });
   };
 
   useEffect(() => {
-    getCategoryData();
-  }, []);
-
-  useEffect(() => {
     setIsFetching(true);
+    getCategoryData();
     getDetail();
   }, [productId]);
 
@@ -102,112 +98,113 @@ function ProductDetail(props) {
     ? 'animation animation__modal animation__modal--out'
     : '';
 
-  const ProductDetailModal = () => {
-    return (
-      <>
-        <Modal
-          show={show.in}
-          onHide={handleClose}
-          dialogClassName={`c-product-detail__modal ${handleIn} ${handleOut}`}
-          backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
-          contentClassName="c-product-detail__wrapper"
-          centered
-          animation={false}
-          fullscreen="md-down"
-        >
-          <button
-            onClick={handleClose}
-            className="c-product-detail__close e-btn e-btn--icon"
-          >
-            <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
-          </button>
-          <div className="row">
-            <div className="col-12 col-md-7">
-              <div className="c-product-detail__cover">
-                <img
-                  className="c-product-detail__img"
-                  src={`${IMG_URL}/products/${image}`}
-                  alt="product"
-                />
-              </div>
-            </div>
-            <div className="col-12 col-md-5">
-              <div className="d-flex flex-column justify-content-between p-3 p-md-0">
-                <div className="c-product-detail__scroll p-md-0">
-                  <div className="position-relative">
-                    <div className="e-tag e-tag--normal">{category.name}</div>
-                    <h4 className="my-2 my-md-3">{name}</h4>
-                    <div className="d-flex align-items-center d-md-none mb-3">
-                      <h4 className="c-product-detail__price me-2">$110</h4>
-                      <h6 className="c-product-detail__o-price">${price}</h6>
-                    </div>
-                    <FavIcon size="large" type="icon" />
-                    <div className="c-product-detail__nutrition d-flex">
-                      <ul className="c-product-detail__list">
-                        <li className="c-product-detail__item">
-                          {calories}卡路里
-                        </li>
-                        <li className="c-product-detail__item">{fat}克脂肪</li>
-                      </ul>
-                      <ul className="c-product-detail__list ms-md-3 ms-5">
-                        <li className="c-product-detail__item">
-                          {protein}克蛋白質
-                        </li>
-                        <li className="c-product-detail__item">
-                          {carb}克碳水化合物
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="c-product-detail__detail">
-                    <div className="c-product-detail__description">
-                      <div className="c-product-detail__subtitle">
-                        <i className="fas fa-pencil-alt e-icon e-icon--left c-product-detail__icon"></i>
-                        <h6 className="c-product-detail__heading">商品描述</h6>
-                      </div>
-                      <p className="c-product-detail__text">{description}</p>
-                    </div>
-                    <div className="c-product-detail__description">
-                      <div className="c-product-detail__subtitle">
-                        <i className="fas fa-pepper-hot e-icon e-icon--left c-product-detail__icon"></i>
-                        <h6 className="c-product-detail__heading">商品成分</h6>
-                      </div>
-                      <p className="c-product-detail__text">{ingredients}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="c-product-detail__footer">
-                  <div className="c-product-detail__footer-wrapper">
-                    <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
-                    <div className="row">
-                      <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
-                        <Counter />
-                        <div className="d-none d-md-flex flex-column align-items-end ps-5">
-                          <h6 className="c-product-detail__o-price">
-                            ${price}
-                          </h6>
-                          <h2 className="c-product-detail__price">$110</h2>
-                        </div>
-                      </div>
-                      <div className="col-6 col-md-12">
-                        <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
-                          加入購物車
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Modal>
-      </>
-    );
-  };
   return (
     <>
       {!isFetching || !isFetchingCategory ? (
-        <ProductDetailModal />
+        <>
+          <Modal
+            show={show.in}
+            onHide={handleClose}
+            dialogClassName={`c-product-detail__modal ${handleIn} ${handleOut}`}
+            backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
+            contentClassName="c-product-detail__wrapper"
+            centered
+            animation={false}
+            fullscreen="md-down"
+          >
+            <button
+              onClick={handleClose}
+              className="c-product-detail__close e-btn e-btn--icon"
+            >
+              <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
+            </button>
+            <div className="row">
+              <div className="col-12 col-md-7">
+                <div className="c-product-detail__cover">
+                  <img
+                    className="c-product-detail__img"
+                    src={`${IMG_URL}/products/${image}`}
+                    alt="product"
+                  />
+                </div>
+              </div>
+              <div className="col-12 col-md-5">
+                <div className="d-flex flex-column justify-content-between p-3 p-md-0">
+                  <div className="c-product-detail__scroll p-md-0">
+                    <div className="position-relative">
+                      <div className="e-tag e-tag--normal">{category.name}</div>
+                      <h4 className="my-2 my-md-3">{name}</h4>
+                      <div className="d-flex align-items-center d-md-none mb-3">
+                        <h4 className="c-product-detail__price me-2">$110</h4>
+                        <h6 className="c-product-detail__o-price">${price}</h6>
+                      </div>
+                      <FavIcon size="large" type="icon" />
+                      <div className="c-product-detail__nutrition d-flex">
+                        <ul className="c-product-detail__list">
+                          <li className="c-product-detail__item">
+                            {calories}卡路里
+                          </li>
+                          <li className="c-product-detail__item">
+                            {fat}克脂肪
+                          </li>
+                        </ul>
+                        <ul className="c-product-detail__list ms-md-3 ms-5">
+                          <li className="c-product-detail__item">
+                            {protein}克蛋白質
+                          </li>
+                          <li className="c-product-detail__item">
+                            {carb}克碳水化合物
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="c-product-detail__detail">
+                      <div className="c-product-detail__description">
+                        <div className="c-product-detail__subtitle">
+                          <i className="fas fa-pencil-alt e-icon e-icon--left c-product-detail__icon"></i>
+                          <h6 className="c-product-detail__heading">
+                            商品描述
+                          </h6>
+                        </div>
+                        <p className="c-product-detail__text">{description}</p>
+                      </div>
+                      <div className="c-product-detail__description">
+                        <div className="c-product-detail__subtitle">
+                          <i className="fas fa-pepper-hot e-icon e-icon--left c-product-detail__icon"></i>
+                          <h6 className="c-product-detail__heading">
+                            商品成分
+                          </h6>
+                        </div>
+                        <p className="c-product-detail__text">{ingredients}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="c-product-detail__footer">
+                    <div className="c-product-detail__footer-wrapper">
+                      <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
+                      <div className="row">
+                        <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
+                          <Counter />
+                          <div className="d-none d-md-flex flex-column align-items-end ps-5">
+                            <h6 className="c-product-detail__o-price">
+                              ${price}
+                            </h6>
+                            <h2 className="c-product-detail__price">$110</h2>
+                          </div>
+                        </div>
+                        <div className="col-6 col-md-12">
+                          <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
+                            加入購物車
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal>
+        </>
       ) : (
         'showSpinner'
       )}
