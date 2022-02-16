@@ -1,3 +1,4 @@
+/* P */
 import { React, useState, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
 
@@ -11,6 +12,10 @@ import FloatingMenu from '../components/FloatingMenu';
 
 function Products() {
   const [isDisplay, setIsDisplay] = useState(false);
+  const [category, setCategory] = useState({
+    id: '',
+    name: '',
+  });
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
   const isLower = () => {
@@ -28,7 +33,7 @@ function Products() {
             <Filter device="desktop" />
           </div>
           <div className="col-12 col-lg-9">
-            <ProductList />
+            <ProductList category={category} setCategory={setCategory} />
           </div>
         </div>
         <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
@@ -41,7 +46,7 @@ function Products() {
         )}
       </div>
       <FilterMobile />
-      <ProductDetail />
+      <ProductDetail category={category} setCategory={setCategory} />
     </>
   );
 }

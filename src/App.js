@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
 import { ProductsContext } from './context/products';
+import { CategoryContext } from './context/products';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -16,14 +17,26 @@ function App() {
     out: false,
   });
   const [productsData, setProductsData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
   useEffect(() => {
     //api/product
     (async () => {
       try {
-        let response = await axios.get(`${API_URL}/product`, {
+        const productResponse = await axios.get(`${API_URL}/product`, {
           withCredentials: true,
         });
-        setProductsData(response.data);
+        const products = productResponse.data;
+        setProductsData(products);
+
+        //api/product/category
+        const categoryResponse = await axios.get(
+          `${API_URL}/product/category`,
+          {
+            withCredentials: true,
+          }
+        );
+        const categories = categoryResponse.data;
+        setCategoryData(categories);
       } catch (error) {
         console.log(error);
       }
@@ -32,11 +45,13 @@ function App() {
   return (
     <>
       <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <ShowContext.Provider value={{ show, setShow }}>
-          <Navbar />
-          {useRoutes(routerList)}
-          <Footer />
-        </ShowContext.Provider>
+        <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
+          <ShowContext.Provider value={{ show, setShow }}>
+            <Navbar />
+            {useRoutes(routerList)}
+            <Footer />
+          </ShowContext.Provider>
+        </CategoryContext.Provider>
       </ProductsContext.Provider>
     </>
   );

@@ -1,9 +1,11 @@
+/* C/C */
 import { React, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import { API_URL } from '../../utils/config';
+import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
+import { useCategory } from '../../context/products';
 
 import Counter from '../Counter';
 import FavIcon from '../FavIcon';
@@ -12,38 +14,23 @@ function ProductItem(props) {
   const { product } = props;
   const { id, image, name, calories, price } = product;
   const { show, setShow } = useShow();
-  const [categoryData, setCategoryData] = useState([]);
-  const [category, setCategory] = useState({
-    id: '',
-    name: '',
-  });
+  const { categoryData } = useCategory();
+  const [category, setCategory] = useState({ id: '', name: '' });
 
-  //params productId -> 打api用
-  const { productId } = useParams();
-
+  /* 控制modal顯示 */
   const handleShow = () => {
     setShow({ ...setShow, in: true });
   };
 
+  /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
-    //api/product
-    (async () => {
-      try {
-        let response = await axios.get(`${API_URL}/product/category`, {
-          withCredentials: true,
-        });
-        const categories = response.data;
-        setCategoryData(categories);
-
-        const matchedCategory = categories.find(
-          (category) => product.category_id === category.id
-        );
-        setCategory(matchedCategory);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+    if (categoryData.length !== 0) {
+      const matchedCategory = categoryData.find(
+        (category) => product.category_id === category.id
+      );
+      setCategory(matchedCategory);
+    }
+  }, [categoryData]); //只要有變動(拿到資料再執行)
 
   return (
     <>
@@ -53,7 +40,7 @@ function ProductItem(props) {
             <Link to={`/product/${id}`} onClick={handleShow}>
               <img
                 className="c-product-item__img"
-                src={require(`../../img/products/${image}`)}
+                src={`${IMG_URL}/products/${image}`}
                 alt="thumbnail"
               />
             </Link>

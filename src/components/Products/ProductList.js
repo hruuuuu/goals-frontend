@@ -1,3 +1,4 @@
+/* C/C */
 import { React, useState } from 'react';
 
 import { useProducts } from '../../context/products';
@@ -6,7 +7,7 @@ import ProductItem from './ProductItem';
 
 function ProductList(props) {
   const { setShow } = props;
-  const { productsData, setProductsData } = useProducts();
+  const { productsData } = useProducts();
 
   return (
     <>
