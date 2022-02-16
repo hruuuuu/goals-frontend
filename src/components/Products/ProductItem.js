@@ -22,6 +22,10 @@ function ProductItem(props) {
     setShow({ ...setShow, in: true });
   };
 
+  const addCart = () => {
+    console.log('add cart');
+  };
+
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
     if (categoryData.length !== 0) {
@@ -64,6 +68,7 @@ function ProductItem(props) {
             <button
               type="button"
               className="c-product-item__action e-btn e-btn--primary e-btn--w100 mt-0 mt-md-2 ms-3 ms-md-0 e-btn--mobile"
+              onClick={addCart}
             >
               <i className="fas fa-shopping-cart e-icon me-0 me-md-2"></i>
               <span className="d-none d-md-block">加入購物車</span>
