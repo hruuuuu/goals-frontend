@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Typography from '@mui/material/Typography';
 
 import Shipping from './Shipping';
 import Checkout from './Checkout';
@@ -69,7 +68,7 @@ function CartStepper(props) {
         </Stepper>
         {activeStep === steps.length ? (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>已下單</Typography>
+            <p sx={{ mt: 2, mb: 1 }}>已下單</p>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <button className="btn_outline p-2" onClick={props.handleClose}>
@@ -79,9 +78,9 @@ function CartStepper(props) {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 3, mb: 1 }}>
+            <div sx={{ mt: 3, mb: 1 }}>
               {activeStep === steps.length - 1 ? <Checkout /> : <Shipping />}
-            </Typography>
+            </div>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <div className="container mb-1">

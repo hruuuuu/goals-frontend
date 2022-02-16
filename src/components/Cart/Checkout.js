@@ -4,11 +4,11 @@ function Checkout() {
   return (
     <>
       <div className="container">
-        <div className="fs-5 my-3">
-          <h2>付款資訊</h2>
+        <div className="my-3">
+          <h5>付款資訊</h5>
         </div>
         <div className="mb-2">
-          <label for="firstName" className="form-label label_fs">
+          <label htmlFor="firstName" className="form-label label_fs">
             持卡人
           </label>
           <input
@@ -22,7 +22,7 @@ function Checkout() {
         </div>
 
         <div className="mb-2">
-          <label for="address" className="form-label label_fs">
+          <label htmlFor="address" className="form-label label_fs">
             卡號
           </label>
           <input
@@ -35,7 +35,7 @@ function Checkout() {
           <div className="invalid-feedback">Valid address is required.</div>
         </div>
         <div className="mb-2">
-          <label for="recipient" className="form-label label_fs">
+          <label htmlFor="recipient" className="form-label label_fs">
             卡別
           </label>
           <input
@@ -49,7 +49,7 @@ function Checkout() {
         </div>
         <div className="row g-2 mb-2">
           <div className="col-4">
-            <label for="" className="form-label label_fs">
+            <label htmlFor="" className="form-label label_fs">
               有效日期
             </label>
             <div className="d-flex align-items-center justify-content-between">
@@ -72,7 +72,7 @@ function Checkout() {
           </div>
 
           <div className="col-8">
-            <label for="state" className="form-label label_fs">
+            <label htmlFor="state" className="form-label label_fs">
               CVC
             </label>
             <input
