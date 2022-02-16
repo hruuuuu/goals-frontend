@@ -4,7 +4,7 @@
 }
 .floatingCartItem {
   overflow-y: auto;
-  height: calc($height__floating-menu * 0.6);
+  height: calc($height__floating-menu * 0.55);
   //scrollbar
   /* width */
   &::-webkit-scrollbar {
@@ -14,17 +14,17 @@
   /* Track */
   &::-webkit-scrollbar-track {
     background-color: $color--gray6;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
     background: $color--primary;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
+    background: $color--hover;
   }
 }

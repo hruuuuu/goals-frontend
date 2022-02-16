@@ -13,10 +13,10 @@ function Cart() {
       <Header />
       <div className="container mainContent">
         <div className="row gx-4 h-100">
-          <div className="col-lg-3 d-none d-lg-block">
+          <div className="col-lg-3 col-xl-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">
+          <div className="col col-xl-9 col-lg-9 col-md-12 col-sm-12">
             <CartList />
           </div>
         </div>

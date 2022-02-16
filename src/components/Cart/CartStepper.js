@@ -28,9 +28,9 @@ function CartStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  //   const handleBack = () => {
-  //     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //   };
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
 
   //   const handleSkip = () => {
   //     if (!isStepOptional(activeStep)) {
@@ -52,7 +52,7 @@ function CartStepper(props) {
   };
   return (
     <>
-      <Box sx={{ width: '100%' }}>
+      <Box className="box" sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label, index) => {
             const stepProps = {};
@@ -72,7 +72,9 @@ function CartStepper(props) {
             <Typography sx={{ mt: 2, mb: 1 }}>已下單</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <button onClick={props.handleClose}>返回</button>
+              <button className="btn_outline p-2" onClick={props.handleClose}>
+                返回
+              </button>
             </Box>
           </React.Fragment>
         ) : (
@@ -87,12 +89,21 @@ function CartStepper(props) {
                 <div className="row justify-content-between">
                   <div className="col-6 mt-2">
                     <div className="d-grid">
-                      <button
-                        className="btn_grn p-2"
-                        onClick={props.handleClose}
-                      >
-                        取消
-                      </button>
+                      {activeStep === steps.length - 1 ? (
+                        <button
+                          className="btn_outline p-2"
+                          onClick={handleBack}
+                        >
+                          上一步
+                        </button>
+                      ) : (
+                        <button
+                          className="btn_outline p-2"
+                          onClick={props.handleClose}
+                        >
+                          返回購物車
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className="col-6 mt-2">
@@ -100,7 +111,7 @@ function CartStepper(props) {
                       <button className="btn_grn p-2" onClick={handleNext}>
                         {activeStep === steps.length - 1
                           ? '確認付款'
-                          : '前往結帳'}
+                          : '下一步'}
                       </button>
                     </div>
                   </div>

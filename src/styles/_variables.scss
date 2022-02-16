@@ -24,7 +24,11 @@ $color--active: #3aa1cb;
 $color--disabled: $color--gray4;
 $color--opacity: rgba(107, 156, 102, 0.2);
 
-$color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+$color--gradient: linear-gradient(
+  180.06deg,
+  rgba(255, 255, 255, 0) 0.05%,
+  #ffffff 68.32%
+);
 
 $color__font: $color--gray2;
 $color__input-border: $color--gray4;
@@ -109,4 +113,4 @@ $xl: 1199px;
 $xxl: 1399px;
 
 /* bootstrap */
-@import "~bootstrap/scss/bootstrap.scss";
+@import '~bootstrap/scss/bootstrap.scss';

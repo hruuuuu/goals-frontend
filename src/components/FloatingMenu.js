@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import MemberSidebar from './MemberSidebar';
+import CartMoblie from './Cart/CartMoblie';
 
 function FloatingMenu(props) {
   const [animation, setAnimation] = useState(false);
@@ -24,7 +25,7 @@ function FloatingMenu(props) {
                 <MemberSidebar />
               </>
             ) : (
-              <>CartMobile</>
+              <CartMoblie />
             )}
           </div>
         </div>

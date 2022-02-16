@@ -18,13 +18,14 @@ function CheckoutModal() {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        fullscreen="md-down"
       >
         <div className="mt-3 px-3 d-flex justify-content-end">
           <button className="btn btn-lg" onClick={handleClose}>
             <i className="fas fa-times icon_grn"></i>
           </button>
         </div>
-        <div className="container mt-2 mb-4 px-5">
+        <div className="container mb-4 px-5">
           <CartStepper handleClose={handleClose} />
         </div>
         {/* <div className="container px-5">

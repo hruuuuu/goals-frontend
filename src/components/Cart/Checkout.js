@@ -47,30 +47,28 @@ function Checkout() {
           />
           <div className="invalid-feedback">Valid recipient is required.</div>
         </div>
-        <div className="row g-3 mb-2">
-          <div className="col-2">
-            <label for="tel" className="form-label label_fs">
+        <div className="row g-2 mb-2">
+          <div className="col-4">
+            <label for="" className="form-label label_fs">
               有效日期
             </label>
-            <input
-              type="tel"
-              className="form-control"
-              id="tel"
-              placeholder="月"
-              required
-            />
-          </div>
-          <div className="col-2">
-            <label for="tel" className="form-label label_fs">
-              聯絡電話
-            </label>
-            <input
-              type="tel"
-              className="form-control"
-              id="tel"
-              placeholder="年"
-              required
-            />
+            <div className="d-flex align-items-center justify-content-between">
+              <input
+                type=""
+                className="form-control"
+                id=""
+                placeholder="月"
+                required
+              />
+              <div className="mx-1">/</div>
+              <input
+                type=""
+                className="form-control"
+                id=""
+                placeholder="年"
+                required
+              />
+            </div>
           </div>
 
           <div className="col-8">
@@ -78,7 +76,7 @@ function Checkout() {
               CVC
             </label>
             <input
-              type="tel"
+              type=""
               className="form-control"
               id="tel"
               placeholder="請輸入..."
