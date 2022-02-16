@@ -82,16 +82,9 @@ function ProductDetail(props) {
   }, [productId]);
 
   useEffect(() => {
+    setIsFetching(true);
     matchCategory();
   }, [detailData]);
-
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
-    }
-  }, [isLoading]);
 
   /* 控制modal關閉 & 淡出淡入效果 */
   const handleClose = () => {
