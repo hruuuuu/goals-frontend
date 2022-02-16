@@ -4,11 +4,11 @@ function Shipping() {
   return (
     <>
       <div className="container">
-        <div className="fs-5 my-3">
-          <h2>運送資訊</h2>
+        <div className="my-3">
+          <h5>運送資訊</h5>
         </div>
         <div className="mb-2">
-          <label for="firstName" className="form-label label_fs">
+          <label htmlFor="firstName" className="form-label label_fs">
             訂購人姓名
           </label>
           <input
@@ -22,7 +22,7 @@ function Shipping() {
         </div>
         <div className="row g-3 mb-2">
           <div className="col-6">
-            <label for="country" className="form-label label_fs">
+            <label htmlFor="country" className="form-label label_fs">
               縣市
             </label>
             <select className="form-select styled-select" id="country" required>
@@ -36,7 +36,7 @@ function Shipping() {
             </div>
           </div>
           <div className="col-6">
-            <label for="state" className="form-label label_fs">
+            <label htmlFor="state" className="form-label label_fs">
               鄉鎮市區
             </label>
             <select className="form-select styled-select" id="state" required>
@@ -49,7 +49,7 @@ function Shipping() {
           </div>
         </div>
         <div className="mb-2">
-          <label for="address" className="form-label label_fs">
+          <label htmlFor="address" className="form-label label_fs">
             地址
           </label>
           <input
@@ -62,7 +62,7 @@ function Shipping() {
           <div className="invalid-feedback">Valid address is required.</div>
         </div>
         <div className="mb-2">
-          <label for="recipient" className="form-label label_fs">
+          <label htmlFor="recipient" className="form-label label_fs">
             收件人
           </label>
           <input
@@ -76,7 +76,7 @@ function Shipping() {
         </div>
         <div className="row g-3">
           <div className="col-6">
-            <label for="tel" className="form-label label_fs">
+            <label htmlFor="tel" className="form-label label_fs">
               聯絡電話
             </label>
             <input
@@ -88,7 +88,7 @@ function Shipping() {
             />
           </div>
           <div className="col-6">
-            <label for="state" className="form-label label_fs">
+            <label htmlFor="state" className="form-label label_fs">
               運送方式
             </label>
             <select className="form-select styled-select" id="state" required>
