@@ -1,4 +1,5 @@
-import { React, useState } from 'react';
+/* P */
+import { React, useState, useEffect } from 'react';
 import { useLocation, useMatch } from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -11,9 +12,9 @@ import FloatingMenu from '../components/FloatingMenu';
 
 function Products() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const [show, setShow] = useState({
-    in: false,
-    out: false,
+  const [category, setCategory] = useState({
+    id: '',
+    name: '',
   });
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
@@ -22,6 +23,7 @@ function Products() {
       return true;
     }
   };
+
   return (
     <>
       <Header isLower={isLower} />
@@ -31,7 +33,7 @@ function Products() {
             <Filter device="desktop" />
           </div>
           <div className="col-12 col-lg-9">
-            <ProductList show={show} setShow={setShow} />
+            <ProductList category={category} setCategory={setCategory} />
           </div>
         </div>
         <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
@@ -44,7 +46,7 @@ function Products() {
         )}
       </div>
       <FilterMobile />
-      <ProductDetail show={show} setShow={setShow} />
+      <ProductDetail category={category} setCategory={setCategory} />
     </>
   );
 }

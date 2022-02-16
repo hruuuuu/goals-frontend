@@ -1,18 +1,23 @@
+/* C/C */
 import { React, useState } from 'react';
+
+import { useProducts } from '../../context/products';
+
 import ProductItem from './ProductItem';
 
 function ProductList(props) {
   const { setShow } = props;
-  const productItems = () => {
-    let products = [];
-    for (let i = 1; i < 14; i++) {
-      products.push(<ProductItem key={i} id={i} setShow={setShow} />);
-    }
-    return products;
-  };
+  const { productsData } = useProducts();
+
   return (
     <>
-      <div className="row gx-3 gx-md-5">{productItems()}</div>
+      <div className="row gx-3 gx-md-5">
+        {productsData.map((product, i) => {
+          return (
+            <ProductItem key={product.id} setShow={setShow} product={product} />
+          );
+        })}
+      </div>
     </>
   );
 }
