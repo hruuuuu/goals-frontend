@@ -176,7 +176,7 @@ function CartMoblie(props) {
             <p className="font_larger txt_bolder">總計</p>
             <p className="txt_org txt_bolder fs-2">$110</p>
           </div>
-          <div class="d-grid gap-2">
+          <div className="d-grid gap-2">
             <button className="btn btn_grn rounded-3 py-2" type="button">
               前往結帳
             </button>
