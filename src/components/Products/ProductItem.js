@@ -1,46 +1,62 @@
-import { React, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+/* C/C */
+import { React, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-import { useShow } from '../../context/ProductDetail';
+import { IMG_URL } from '../../utils/config';
+import { useShow } from '../../context/showProductDetail';
+import { useCategory } from '../../context/products';
 
 import Counter from '../Counter';
 import FavIcon from '../FavIcon';
 
 function ProductItem(props) {
-  const { id } = props;
+  const { product } = props;
+  const { id, image, name, calories, price } = product;
   const { show, setShow } = useShow();
+  const { categoryData } = useCategory();
+  const [category, setCategory] = useState({ id: '', name: '' });
 
-  //params productId -> 打api用
-  const { productId } = useParams();
-
+  /* 控制modal顯示 */
   const handleShow = () => {
     setShow({ ...setShow, in: true });
   };
+
+  /* 拿到CategoryContext的資料後跟product的category_id關聯 */
+  useEffect(() => {
+    if (categoryData.length !== 0) {
+      const matchedCategory = categoryData.find(
+        (category) => product.category_id === category.id
+      );
+      setCategory(matchedCategory);
+    }
+  }, [categoryData]); //只要有變動(拿到資料再執行)
+
   return (
     <>
-      <div className="col-6 col-md-4">
+      <div className="col-6 col-md-4 col-lg-6 col-xl-4">
         <div className="c-product-item">
           <div className="c-product-item__cover">
             <Link to={`/product/${id}`} onClick={handleShow}>
               <img
                 className="c-product-item__img"
-                src={require('../../img/products/sunshine_bowl.jpeg')}
+                src={`${IMG_URL}/products/${image}`}
                 alt="thumbnail"
               />
             </Link>
             <FavIcon size="medium" type="icon" />
           </div>
           <div className="c-product-item__tag e-tag e-tag--normal">
-            素食餐盒
+            {category.name}
           </div>
           <div className="c-product-item-detail">
             <div className="c-product-item-detail__row">
-              <div className="c-product-item-detail__heading">叢林能量碗</div>
+              <div className="c-product-item-detail__heading">{name}</div>
               <div className="c-product-item-detail__price">$110</div>
             </div>
             <div className="c-product-item-detail__row">
-              <div className="c-product-item-detail__cal">熱量379卡</div>
-              <div className="c-product-item-detail__o-price">$120</div>
+              <div className="c-product-item-detail__cal">熱量{calories}卡</div>
+              <div className="c-product-item-detail__o-price">${price}</div>
             </div>
           </div>
           <div className="d-flex flex-md-column align-items-center">
