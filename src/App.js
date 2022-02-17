@@ -9,6 +9,7 @@ import {
   CategoryContext,
   ActivityContext,
 } from './context/products';
+import { FavContext } from './context/fav';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -22,6 +23,7 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [activityData, setActivityData] = useState([]);
+  const [favStorage, setFavStorage] = useState([]);
   useEffect(() => {
     (async () => {
       try {
@@ -59,15 +61,17 @@ function App() {
   return (
     <>
       <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <ActivityContext.Provider value={{ activityData, setActivityData }}>
-          <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
-            <ShowContext.Provider value={{ show, setShow }}>
-              <Navbar />
-              {useRoutes(routerList)}
-              <Footer />
-            </ShowContext.Provider>
-          </CategoryContext.Provider>
-        </ActivityContext.Provider>
+        <FavContext.Provider value={{ favStorage, setFavStorage }}>
+          <ActivityContext.Provider value={{ activityData, setActivityData }}>
+            <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
+              <ShowContext.Provider value={{ show, setShow }}>
+                <Navbar />
+                {useRoutes(routerList)}
+                <Footer />
+              </ShowContext.Provider>
+            </CategoryContext.Provider>
+          </ActivityContext.Provider>
+        </FavContext.Provider>
       </ProductsContext.Provider>
     </>
   );

@@ -44,7 +44,7 @@ function ProductItem(props) {
                 alt="thumbnail"
               />
             </Link>
-            <FavIcon size="medium" type="icon" />
+            <FavIcon size="medium" type="icon" id={id} />
           </div>
           <div className="c-product-item__tag e-tag e-tag--normal">
             {category.name}
