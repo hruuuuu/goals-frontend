@@ -4,8 +4,11 @@ import axios from 'axios';
 
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
-import { ProductsContext } from './context/products';
-import { CategoryContext } from './context/products';
+import {
+  ProductsContext,
+  CategoryContext,
+  ActivityContext,
+} from './context/products';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -18,10 +21,11 @@ function App() {
   });
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+  const [activityData, setActivityData] = useState([]);
   useEffect(() => {
-    //api/product
     (async () => {
       try {
+        //api/product
         const productResponse = await axios.get(`${API_URL}/product`, {
           withCredentials: true,
         });
@@ -37,6 +41,16 @@ function App() {
         );
         const categories = categoryResponse.data;
         setCategoryData([...categoryData, ...categories]);
+
+        //api/product/activity
+        const activityResponse = await axios.get(
+          `${API_URL}/product/activity`,
+          {
+            withCredentials: true,
+          }
+        );
+        const activities = activityResponse.data;
+        setActivityData([...activityData, ...activities]);
       } catch (error) {
         console.log(error);
       }
@@ -45,13 +59,15 @@ function App() {
   return (
     <>
       <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
-          <ShowContext.Provider value={{ show, setShow }}>
-            <Navbar />
-            {useRoutes(routerList)}
-            <Footer />
-          </ShowContext.Provider>
-        </CategoryContext.Provider>
+        <ActivityContext.Provider value={{ activityData, setActivityData }}>
+          <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
+            <ShowContext.Provider value={{ show, setShow }}>
+              <Navbar />
+              {useRoutes(routerList)}
+              <Footer />
+            </ShowContext.Provider>
+          </CategoryContext.Provider>
+        </ActivityContext.Provider>
       </ProductsContext.Provider>
     </>
   );

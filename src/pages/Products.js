@@ -29,10 +29,10 @@ function Products() {
       <Header isLower={isLower} />
       <div className="container">
         <div className="row gx-lg-5">
-          <div className="col-3 d-none d-lg-block">
+          <div className="col-lg-4 col-xl-3 d-none d-lg-block">
             <Filter device="desktop" />
           </div>
-          <div className="col-12 col-lg-9">
+          <div className="col-12 col-lg-8 col-xl-9">
             <ProductList category={category} setCategory={setCategory} />
           </div>
         </div>

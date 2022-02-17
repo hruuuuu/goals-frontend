@@ -206,7 +206,7 @@ function ProductDetail(props) {
           </Modal>
         </>
       ) : (
-        'showSpinner'
+        <></>
       )}
     </>
   );
