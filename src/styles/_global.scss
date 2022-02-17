@@ -217,7 +217,9 @@ h6 {
   h6,
   p,
   span,
-  div {
+  div,
+  label,
+  input {
     cursor: $cursor;
   }
 }
@@ -309,6 +311,8 @@ h6 {
 
   display: flex;
   align-items: center;
+
+  @include cursor(pointer);
   &:last-of-type {
     margin-bottom: 0;
   }
