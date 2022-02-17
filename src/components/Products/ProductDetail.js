@@ -88,8 +88,7 @@ function ProductDetail(props) {
     setTimeout(() => {
       setShow({ ...show, in: false, out: false });
     }, 500);
-    let redirect =
-      locationPath === '/member/fav' ? navigate(-1) : navigate('/product');
+    navigate(-1);
   };
   const handleIn = show.in
     ? 'animation animation__modal animation__modal--in'

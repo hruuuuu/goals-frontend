@@ -199,6 +199,22 @@
     background: $color--primary;
     border-radius: $border-radius__input;
   }
+  .css-a88p61-MuiInputBase-root-MuiInput-root {
+    height: $height__input;
+    &:before {
+      display: none;
+    }
+    &:after {
+      display: none;
+    }
+    input {
+      @include text--small;
+      &::placeholder {
+        @include text--small;
+        color: $color--gray4;
+      }
+    }
+  }
 }
 
 .c-product-item {
