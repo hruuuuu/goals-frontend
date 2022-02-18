@@ -233,7 +233,7 @@
 
     position: relative;
     &::before {
-      content: '';
+      content: "";
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -264,7 +264,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: '';
+        content: "";
         display: none;
       }
     }
@@ -281,13 +281,9 @@
     display: inline-block;
 
     &::before {
-      width: $size__icon--small;
-      height: $size__icon--small;
-
-      font-family: 'Font Awesome 5 Free';
-      font-weight: 900;
-      content: '\f105';
+      @include icon--absolute("\f105");
       color: $color--gray4;
+      font-size: 1rem;
 
       top: 50%;
       left: -0.6rem;
@@ -445,7 +441,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: '';
+        content: "";
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -454,7 +450,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: '';
+        content: "";
         width: 5px;
         height: 30px;
         position: absolute;
