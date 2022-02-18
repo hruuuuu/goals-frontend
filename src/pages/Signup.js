@@ -47,13 +47,7 @@ const Signup = () => {
     });
   };
 
-  // 設定modal提交忘記密碼
-  // const handleForgetSubmit = async () => {
-  //   setShow(false);
-  //   console.log(email);
-  // };
-
-  // 設定modal提交重發驗證信
+  // 設定modal提交重發驗證信/忘記密碼
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!page) {
@@ -171,7 +165,7 @@ const Signup = () => {
   };
 
   const submitHandler = async (values) => {
-    console.log('測試');
+    console.log(values);
     try {
       if (!page) {
         const loginData = await axios.post(
@@ -183,7 +177,7 @@ const Signup = () => {
           localStorage.setItem('login', true);
           setLogin(true);
         } else {
-          console.log(loginData.status);
+          console.log(loginData);
         }
         history('/');
       } else {
@@ -213,12 +207,10 @@ const Signup = () => {
             validationSchema={
               !page ? loginValidationSchema : signupValidationSchema
             }
-            onSubmit={(values, { resetForm, submitForm, setSubmitting }) => {
-              // console.log('Test');
+            onSubmit={(values, { resetForm, setSubmitting }) => {
               setSubmitting(false);
-              resetForm();
-              submitForm();
               submitHandler(values);
+              resetForm();
             }}
           >
             {(props) => (
@@ -349,79 +341,6 @@ const Signup = () => {
               </div>
             </Modal>
           </>
-
-          {/* <form className="signup-form">
-            <div className="form-floating">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="請輸入電子信箱"
-                className="form-control"
-              />
-              <i className="fas fa-envelope"></i>
-              <label htmlFor="email" className="signup-form_label">
-                電子信箱
-              </label>
-            </div>
-            <div className="form-floating">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="請輸入密碼"
-                className="form-control"
-              />
-              <i className="fas fa-lock"></i>
-              {showPassword && eye === 'password' ? (
-                <i
-                  className="fas fa-eye-slash"
-                  id="password"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              ) : (
-                <i
-                  className="fas fa-eye"
-                  id="password"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              )}
-              <label htmlFor="password" className="signup-form_label">
-                密碼
-              </label>
-            </div>
-            <div className="form-floating">
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                placeholder="請再次輸入密碼"
-                className="form-control"
-                onPaste={(e) => e.preventDefault()}
-              />
-              <i className="fas fa-lock"></i>
-              {showPassword && eye === 'confirmPassword' ? (
-                <i
-                  className="fas fa-eye-slash"
-                  id="confirmPassword"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              ) : (
-                <i
-                  className="fas fa-eye"
-                  id="confirmPassword"
-                  onClick={(e) => handleSwitchEyes(e)}
-                ></i>
-              )}
-              <label htmlFor="confirmPassword" className="signup-form_label">
-                再次輸入密碼
-              </label>
-            </div>
-            <Link to="/login">
-              <p className="signup-form_switch-page">已經有帳戶了？</p>
-            </Link>
-            <button className="signup-form_button">註冊</button>
-          </form> */}
         </div>
       </div>
     </>
