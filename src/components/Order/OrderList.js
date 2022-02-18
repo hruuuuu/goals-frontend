@@ -1,14 +1,54 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let getStock = async () => {
+      // http://localhost:3002/api/stocks
+      let response = await axios.get(`http://localhost:3002/api/order`, {
+        // 為了跨源存取 cookie
+        withCredentials: true,
+      });
+      setData(response.data);
+    };
+    getStock();
+  }, []);
+
   return (
     <>
+      {/* <div>
+        {error && <div>{error}</div>}
+        <h2 className="ml-7 mt-6 text-xl text-gray-600">股票代碼</h2>
+
+        {data.map((stock) => {
+          return (
+            <div
+              key={stock.id}
+              className="bg-white bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg m-6 cursor-pointer"
+            >
+              <Link to={`/stock/${stock.id}`}>
+                <h2 className="text-2xl font-bold mb-2 text-gray-800">
+                  {stock.id}
+                </h2>
+                <p className="text-gray-700">{stock.name}</p>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+      ); */}
       <div className="d-flex d-none d-lg-block">
         <table className="table table-borderless orderlist_table">
           <thead>
@@ -21,48 +61,28 @@ const OrderList = () => {
               <th scope="col">查看</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>200</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>100</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-              <td>50</td>
-              <td>50</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
+
+          {data.map((order) => {
+            return (
+              <tbody key={order.id}>
+                <tr>
+                  <th scope="row">{order.id}</th>
+                  <td>{order.create_at}</td>
+                  <td>{order.payment_id}</td>
+                  <td>{order.order_status_id}</td>
+                  <td>{order.address}</td>
+                  <td className="p-0">
+                    <button onClick={handleShow} className="detail rounded-3">
+                      <i className="fas fa-eye p-1 icon_grn"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
         </table>
       </div>
-
-      <div className="d-flex d-lg-none justify-content-center mb-3 ">
+      {/* <div className="d-flex d-lg-none justify-content-center mb-3 ">
         <div className="card cardorder ">
           <div onClick={handleShow} className="card-body ">
             <h5 className="card-title">1111</h5>
@@ -87,8 +107,7 @@ const OrderList = () => {
             </div>
           </div>
         </div>
-      </div>
-
+      </div> */}
       <Modal centered show={show} onHide={handleClose} animation={false}>
         <Modal.Header>
           <Modal.Title>您的訂單詳情</Modal.Title>
