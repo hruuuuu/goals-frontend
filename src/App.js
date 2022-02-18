@@ -23,7 +23,7 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [activityData, setActivityData] = useState([]);
-  const [favStorage, setFavStorage] = useState([]);
+  const [favItemsArr, setFavItemsArr] = useState([]);
   const [favData, setFavData] = useState([]);
   useEffect(() => {
     (async () => {
@@ -63,7 +63,7 @@ function App() {
     <>
       <ProductsContext.Provider value={{ productsData, setProductsData }}>
         <FavContext.Provider
-          value={{ favData, setFavData, favStorage, setFavStorage }}
+          value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
         >
           <ActivityContext.Provider value={{ activityData, setActivityData }}>
             <CategoryContext.Provider value={{ categoryData, setCategoryData }}>

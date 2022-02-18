@@ -9,12 +9,11 @@ import FavItem from './FavItem';
 
 function FavList() {
   const [fav, setFav] = useState(false);
-  const { favData, setFavData, favStorage, setFavStorage } = useFav();
-
-  //const navigate = useNavigate();
+  const { favData, setFavData, favItemsArr, setFavItemsArr } = useFav();
 
   const favItems = localStorage.getItem('fav');
-  const isFetchingFav = favStorage.length === 0;
+  const isEmptyStorage = favItems === '';
+  const isFetchingFav = favItemsArr.length === 0;
 
   const handleFavQuery = (favString) => {
     const query = new URLSearchParams();
@@ -36,30 +35,29 @@ function FavList() {
   };
 
   useEffect(() => {
-    const favItemsArr = localStorage
-      .getItem('fav')
-      .split(',')
-      .map((item) => parseInt(item, 10));
-    setFavStorage([...favItemsArr]);
-
-    const queryString = handleFavQuery(favItems);
-    getFavProductsData(queryString);
+    if (!isEmptyStorage) {
+      const favItems = localStorage
+        .getItem('fav')
+        .split(',')
+        .map((item) => parseInt(item, 10));
+      setFavItemsArr([...favItems]);
+      const queryString = handleFavQuery(favItems);
+      getFavProductsData(queryString);
+    }
   }, []);
 
   useEffect(() => {
-    if (!isFetchingFav) {
-      const favItemsString = favStorage.join(',');
+    if (!isFetchingFav && !isEmptyStorage) {
+      const favItemsString = favItemsArr.join(',');
       const queryString = handleFavQuery(favItemsString);
       getFavProductsData(queryString);
     }
-  }, [favStorage]);
-
-  const isEmpty = localStorage.getItem('fav') === '';
+  }, [favItemsArr]);
 
   return (
     <>
       <div className="row g-3">
-        {isEmpty ? (
+        {isEmptyStorage ? (
           <>
             <h1>Fav is empty</h1>
           </>
