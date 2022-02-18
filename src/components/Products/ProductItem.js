@@ -17,6 +17,8 @@ function ProductItem(props) {
   const { categoryData } = useCategory();
   const [category, setCategory] = useState({ id: '', name: '' });
 
+  const isFetchingCategory = categoryData.length === 0;
+
   /* 控制modal顯示 */
   const handleShow = () => {
     setShow({ ...setShow, in: true });
@@ -24,7 +26,7 @@ function ProductItem(props) {
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
-    if (categoryData.length !== 0) {
+    if (!isFetchingCategory) {
       const matchedCategory = categoryData.find(
         (category) => product.category_id === category.id
       );

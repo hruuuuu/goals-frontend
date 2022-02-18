@@ -13,6 +13,7 @@ function FavIcon(props) {
       .getItem('fav')
       .split(',')
       .map((item) => parseInt(item, 10));
+    setFavStorage([...favItems]);
     if (favItems.includes(id)) {
       setFav(!fav);
     }

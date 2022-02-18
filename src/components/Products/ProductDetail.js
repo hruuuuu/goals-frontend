@@ -68,7 +68,7 @@ function ProductDetail(props) {
     const matchedCategory = categoryData.find(
       (category) => detailData.category_id === category.id
     );
-    setCategory({ ...category, ...matchedCategory });
+    setCategory({ ...matchedCategory });
   };
 
   useEffect(() => {
@@ -89,6 +89,8 @@ function ProductDetail(props) {
       setShow({ ...show, in: false, out: false });
     }, 500);
     navigate(-1);
+    // const redirect =
+    //   locationPath === '/member/fav' ? navigate(-1) : navigate('/product');
   };
   const handleIn = show.in
     ? 'animation animation__modal animation__modal--in'
@@ -205,7 +207,9 @@ function ProductDetail(props) {
           </Modal>
         </>
       ) : (
-        <></>
+        <>
+          <h1>Spinner</h1>
+        </>
       )}
     </>
   );
