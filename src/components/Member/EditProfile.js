@@ -1,6 +1,29 @@
-import React from 'react';
+import { React, useState } from 'react';
+import axios from 'axios';
 
 const EditProfile = () => {
+  const [member, setMember] = useState({
+    //id為登入會員的id
+    id: '1',
+    name: 'Nick',
+    email: 'Nick@gmail.com',
+    address: '資策會',
+    tel: '4561515',
+  });
+
+  function handleChange(e) {
+    setMember({ ...member, [e.target.name]: e.target.value });
+    // console.log(123);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let response = await axios.post('http://localhost:3002/api/order', member);
+
+    console.log(response.data);
+    // 關掉原本預設的行為
+  }
+
   return (
     <>
       <form className="c-member-info">
@@ -16,6 +39,9 @@ const EditProfile = () => {
                 className="form-control name__input c-form__input"
                 id="InputName"
                 placeholder="請輸入..."
+                name="name"
+                value={member.name}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
@@ -27,6 +53,9 @@ const EditProfile = () => {
                 className="form-control name__input c-form__input"
                 id="InputEmail"
                 placeholder="請輸入..."
+                name="email"
+                value={member.email}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
@@ -84,6 +113,9 @@ const EditProfile = () => {
                     type="text"
                     className="form-control phone__input c-form__input"
                     id="inputAddress"
+                    name="address"
+                    value={member.address}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -96,12 +128,16 @@ const EditProfile = () => {
                 type="text"
                 className="form-control phone__input c-form__input"
                 id="InputPhone"
+                name="tel"
+                value={member.tel}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
               <button
                 type="submit"
                 className="c-product-filter__action e-btn--primary e-btn--medium col-12"
+                onClick={handleSubmit}
               >
                 儲存變更
               </button>
