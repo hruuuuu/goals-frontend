@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Route, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
 import { ShowContext } from './context/ProductDetail';
+import { LoginContext } from './context/LoginStatus';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -12,13 +13,20 @@ function App() {
     in: false,
     out: false,
   });
+  const [login, setLogin] = useState(false);
+  useEffect(() => {
+    const checkStatus = localStorage.getItem('login');
+    setLogin(checkStatus);
+  }, []);
   return (
     <>
-      <ShowContext.Provider value={{ show, setShow }}>
-        <Navbar />
-        {useRoutes(routerList)}
-        <Footer />
-      </ShowContext.Provider>
+      <LoginContext.Provider value={{ login, setLogin }}>
+        <ShowContext.Provider value={{ show, setShow }}>
+          <Navbar />
+          {useRoutes(routerList)}
+          <Footer />
+        </ShowContext.Provider>
+      </LoginContext.Provider>
     </>
   );
 }

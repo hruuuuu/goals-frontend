@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
+import axios from 'axios';
 
 const ResetPassword = () => {
+  const history = useNavigate();
+  const { pathname } = useLocation();
+
+  const email = pathname
+    .slice(7, pathname.length - 1)
+    .split('&')[0]
+    .split('=')[1];
+
+  const verifyString = pathname
+    .slice(7, pathname.length)
+    .split('&')[1]
+    .split('=')[1];
+  console.log(verifyString);
+
+  // const verifyString =
   // 切換看得到/看不到密碼
   const [password, setPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(false);
@@ -49,9 +66,12 @@ const ResetPassword = () => {
           {label}
         </label>
         <input {...field} {...props} />
-        <i
-          className={props.type === 'email' ? iconName.email : iconName.lock}
-        ></i>
+
+        {props.type === 'hidden' ? null : (
+          <i
+            className={props.type === 'email' ? iconName.email : iconName.lock}
+          ></i>
+        )}
 
         {field.name === 'password' ? (
           <i
@@ -75,7 +95,19 @@ const ResetPassword = () => {
   };
 
   const submitHandler = async (values) => {
-    console.log('測試');
+    try {
+      const resetData = await axios.post(
+        'http://127.0.0.1:3002/api/verify/reset',
+        values,
+        { withCredentials: true }
+      );
+      console.log(resetData);
+      if (resetData.status === 200) {
+        history('/');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   // const [showPassword, setShowPassword] = useState(false);
@@ -99,9 +131,10 @@ const ResetPassword = () => {
           <h2 className="reset-form-title">重設密碼</h2>
           <Formik
             initialValues={{
-              email: '',
+              email,
               password: '',
               confirmPassword: '',
+              verifyString,
             }}
             validationSchema={resetValidationSchema}
             onSubmit={(values, { resetForm, submitForm, setSubmitting }) => {
@@ -120,7 +153,7 @@ const ResetPassword = () => {
                   placeholder="顯示用戶電子信箱"
                   className="form-control"
                   label="電子信箱"
-                  disabled
+                  readOnly
                 />
                 <CustomInput
                   type={!password ? 'password' : 'text'}
@@ -139,6 +172,12 @@ const ResetPassword = () => {
                   className="form-control"
                   label="再次輸入密碼"
                   onPaste={(e) => e.preventDefault()}
+                />
+
+                <CustomInput
+                  type="hidden"
+                  id="verifyString"
+                  name="verifyString"
                 />
 
                 <button

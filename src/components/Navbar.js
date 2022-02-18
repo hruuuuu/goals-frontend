@@ -1,8 +1,27 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
+import { useLogin } from '../context/LoginStatus';
 
 function Navbar() {
+  const { login, setLogin } = useLogin();
+  const history = useNavigate();
+  const handleLogout = async () => {
+    localStorage.clear();
+    setLogin(false);
+    const logoutResult = await axios.post(
+      'http://127.0.0.1:3002/api/auth/logout',
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(logoutResult);
+    if (logoutResult.status === 200) {
+      history('/');
+    }
+  };
   const navLinks = [
     {
       id: 1,
@@ -28,13 +47,25 @@ function Navbar() {
   const navActions = [
     {
       id: 1,
-      name: '註冊/登入',
-      iconMobile: (
+      name: !login ? '註冊/登入' : '登出',
+      iconMobile: !login ? (
         <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ) : (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
+          onClick={handleLogout}
+        ></i>
       ),
-      iconDesktop: <i className="fas fa-user l-navbar__font"></i>,
+      iconDesktop: !login ? (
+        <i className="fas fa-user l-navbar__font"></i>
+      ) : (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font"
+          onClick={handleLogout}
+        ></i>
+      ),
       tagDesktop: ``,
-      route: `/login`,
+      route: `${!login ? '/login' : '/logout'}`,
     },
     {
       id: 2,

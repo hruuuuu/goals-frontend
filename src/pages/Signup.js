@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import Image from '../img/sign/login.jpg';
 import * as Yup from 'yup';
 import { Formik, Form, useField } from 'formik';
 import { Modal } from 'react-bootstrap';
+import { useNavigate, Navigate } from 'react-router-dom';
+import axios from 'axios';
+import { useLogin } from '../context/LoginStatus';
+import Image from '../img/sign/login.jpg';
 
 const Signup = () => {
+  const history = useNavigate();
+  const { login, setLogin } = useLogin();
   // 切換看得到/看不到密碼
-  const [password, setPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [passwordField, setPasswordField] = useState(false);
+  const [confirmPasswordField, setConfirmPasswordField] = useState(false);
   const handleSwitchEyes = (e) => {
     if (e.target.id === 'password') {
-      setPassword(!password);
+      setPasswordField(!passwordField);
     } else {
-      setConfirmPassword(!confirmPassword);
+      setConfirmPasswordField(!confirmPasswordField);
     }
   };
 
@@ -22,7 +27,7 @@ const Signup = () => {
   // 切換登入或註冊頁面
   const switchPageHandler = () => {
     setPage(!page);
-    setPassword(false);
+    setPasswordField(false);
   };
 
   // 設定modal畫面
@@ -31,17 +36,60 @@ const Signup = () => {
   const handleShow = () => setShow(true);
 
   // 設定modal Email
-  const [email, setEmail] = useState('');
+  const [data, setData] = useState({
+    email: '',
+  });
 
   // 設定modal輸入
   const handleChange = (e) => {
-    setEmail(e.target.value);
+    setData({
+      email: e.target.value,
+    });
   };
 
-  // 設定modal提交
-  const handleSubmit = () => {
-    setShow(false);
-    console.log(email);
+  // 設定modal提交忘記密碼
+  // const handleForgetSubmit = async () => {
+  //   setShow(false);
+  //   console.log(email);
+  // };
+
+  // 設定modal提交重發驗證信
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!page) {
+      const forgetEmail = await axios.post(
+        'http://127.0.0.1:3002/api/verify/forget',
+        data,
+        { withCredentials: true }
+      );
+      console.log(forgetEmail);
+      setShow(false);
+    } else {
+      console.log(data);
+      const reVerifyEmail = await axios.post(
+        'http://127.0.0.1:3002/api/verify/resend',
+        data,
+        { withCredentials: true }
+      );
+      console.log(reVerifyEmail);
+      setShow(false);
+      if (reVerifyEmail.status === 200) {
+        history('/');
+      }
+    }
+  };
+
+  // 登入初值
+  const loginInitValue = {
+    email: '',
+    password: '',
+  };
+
+  // 註冊初值
+  const signupInitValue = {
+    email: '',
+    password: '',
+    confirmPassword: '',
   };
 
   // 註冊模板
@@ -85,6 +133,10 @@ const Signup = () => {
       closeEye: 'fas fa-eye-slash',
     });
 
+    if (login) {
+      return <Navigate to="/" />;
+    }
+
     return (
       <div className="form-floating">
         <label htmlFor={props.id || props.name} className="signup-form_label">
@@ -97,13 +149,15 @@ const Signup = () => {
 
         {field.name === 'password' ? (
           <i
-            className={password ? iconName.closeEye : iconName.openEye}
+            className={passwordField ? iconName.closeEye : iconName.openEye}
             id="password"
             onClick={(e) => handleSwitchEyes(e)}
           ></i>
         ) : field.name === 'confirmPassword' ? (
           <i
-            className={confirmPassword ? iconName.closeEye : iconName.openEye}
+            className={
+              confirmPasswordField ? iconName.closeEye : iconName.openEye
+            }
             id="confirmPassword"
             onClick={(e) => handleSwitchEyes(e)}
           ></i>
@@ -118,6 +172,34 @@ const Signup = () => {
 
   const submitHandler = async (values) => {
     console.log('測試');
+    try {
+      if (!page) {
+        const loginData = await axios.post(
+          'http://127.0.0.1:3002/api/auth/login',
+          values,
+          { withCredentials: true }
+        );
+        if (loginData.status === 200) {
+          localStorage.setItem('login', true);
+          setLogin(true);
+        } else {
+          console.log(loginData.status);
+        }
+        history('/');
+      } else {
+        const signupData = await axios.post(
+          'http://127.0.0.1:3002/api/auth/signup',
+          values,
+          { withCredentials: true }
+        );
+        console.log(signupData.data);
+        if (signupData.status === 200) {
+          history('/');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -127,18 +209,7 @@ const Signup = () => {
         <div className="signup-form-wrapper">
           <h2 className="signup-form_title">{!page ? '登入' : '註冊'}</h2>
           <Formik
-            initialValues={
-              !page
-                ? {
-                    email: '',
-                    password: '',
-                  }
-                : {
-                    email: '',
-                    password: '',
-                    confirmPassword: '',
-                  }
-            }
+            initialValues={!page ? loginInitValue : signupInitValue}
             validationSchema={
               !page ? loginValidationSchema : signupValidationSchema
             }
@@ -161,22 +232,21 @@ const Signup = () => {
                   label="電子信箱"
                 />
                 <CustomInput
-                  type={!password ? 'password' : 'text'}
+                  type={!passwordField ? 'password' : 'text'}
                   id="password"
                   name="password"
                   placeholder="請輸入密碼"
                   className="form-control"
                   label="密碼"
                 />
-                {page && (
+                {!page ? null : (
                   <CustomInput
-                    type={!confirmPassword ? 'password' : 'text'}
+                    type={!confirmPasswordField ? 'password' : 'text'}
                     id="confirmPassword"
                     name="confirmPassword"
                     placeholder="請再次輸入密碼"
                     className="form-control"
                     label="再次輸入密碼"
-                    onPaste={(e) => e.preventDefault()}
                   />
                 )}
                 {!page ? (
@@ -195,15 +265,20 @@ const Signup = () => {
                     </p>
                   </div>
                 ) : (
-                  <p
-                    className="signup-form_switch-page"
-                    onClick={() => {
-                      switchPageHandler();
-                      props.resetForm();
-                    }}
-                  >
-                    已經有帳戶了？
-                  </p>
+                  <div className="login-form_switch-page-wrapper">
+                    <p
+                      className="signup-form_switch-page"
+                      onClick={() => {
+                        switchPageHandler();
+                        props.resetForm();
+                      }}
+                    >
+                      已經有帳戶了？
+                    </p>
+                    <p className="signup-form_switch-page" onClick={handleShow}>
+                      重發驗證信
+                    </p>
+                  </div>
                 )}
 
                 <button
@@ -216,60 +291,65 @@ const Signup = () => {
               </Form>
             )}
           </Formik>
-          {!page ? (
-            <>
-              <div className="another-login">
-                <p className="another-login_title-wrapper">
-                  &mdash;
-                  <span className="another-login_title">
-                    Or Continue With Social Media
-                  </span>
-                  &mdash;
-                </p>
-                <div className="another-login_buttons">
-                  <button className="another-login_button google">
-                    <i className="fab fa-google"></i>
-                  </button>
-                  <button className="another-login_button facebook">
-                    <i className="fab fa-facebook"></i>
-                  </button>
-                  <button className="another-login_button line">
-                    <i className="fab fa-line"></i>
-                  </button>
-                </div>
+          {!page && (
+            <div className="another-login">
+              <p className="another-login_title-wrapper">
+                &mdash;
+                <span className="another-login_title">
+                  Or Continue With Social Media
+                </span>
+                &mdash;
+              </p>
+              <div className="another-login_buttons">
+                <button className="another-login_button google">
+                  <i className="fab fa-google"></i>
+                </button>
+                <button className="another-login_button facebook">
+                  <i className="fab fa-facebook"></i>
+                </button>
+                <button className="another-login_button line">
+                  <i className="fab fa-line"></i>
+                </button>
               </div>
-
-              <Modal show={show} onHide={handleClose}>
-                <div className="modal-wrapper">
-                  <p className="modal_close-button" onClick={handleClose}>
-                    <i className="fas fa-arrow-left"></i>
-                  </p>
-                  <h1 className="modal-title">忘記密碼?</h1>
-                  <p className="modal-statement">
-                    請輸入您的電子信箱，我們將會傳送更改密碼的鏈結給您。
-                  </p>
-                  <div className="modal-form">
-                    <label htmlFor="forgetEmail" className="modal_form-label">
-                      電子信箱
-                    </label>
-                    <input
-                      type="email"
-                      id="forgetEmail"
-                      placeholder="請填入您的電子信箱"
-                      className="modal_form-Input form-control"
-                      onChange={handleChange}
-                    />
-                  </div>
+            </div>
+          )}
+          <>
+            <Modal show={show} onHide={handleClose}>
+              <div className="modal-wrapper">
+                <p className="modal_close-button" onClick={handleClose}>
+                  <i className="fas fa-arrow-left"></i>
+                </p>
+                <h1 className="modal-title">
+                  {!page ? '忘記密碼' : '重寄驗證信'}
+                </h1>
+                <p className="modal-statement">
+                  請輸入您的電子信箱，我們將會傳送
+                  {!page ? '忘記密碼' : '重寄驗證信'}的鏈結給您。
+                </p>
+                <div className="modal-form">
+                  <label htmlFor="remail" className="modal_form-label">
+                    電子信箱
+                  </label>
+                  <input
+                    type="email"
+                    id="remail"
+                    name="remail"
+                    placeholder="請填入您的電子信箱"
+                    className="modal_form-Input form-control"
+                    onChange={handleChange}
+                  />
                   <button
+                    type="submit"
                     className="modal_submit-button"
                     onClick={handleSubmit}
                   >
                     送出
                   </button>
                 </div>
-              </Modal>
-            </>
-          ) : null}
+              </div>
+            </Modal>
+          </>
+
           {/* <form className="signup-form">
             <div className="form-floating">
               <input
