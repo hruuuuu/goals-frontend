@@ -1,17 +1,103 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+// import { useProducts } from '../../context/products';
+
 import CartItem from './CartItem';
 import Summary from './Summary';
 
-function CartList() {
-  return (
+function CartList(props) {
+  // const { productsData } = useProducts();
+  // const [cartListItem, setCartListItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
+
+  // const isFetching = productsData.length === 0;
+
+  
+  // let cartList = JSON.parse(localStorage.getItem('cartList'));
+  // setCart(cartList);
+  // console.log(cart);
+
+  useEffect(() => {
+    // 先開起載入指示器
+    setIsLoading(true);
+    
+    // 將localstorage的value轉成陣列物件
+    let cartList = JSON.parse(localStorage.getItem('cartList'));
+    setCart(cartList);
+
+    //比對cartList跟productata兩筆資料重疊的部分，id相同則產生新陣列cartListItem
+    // if (!isFetching) {
+    //   let cartListItem = [];
+    //   for (let i = 0; i < productsData.length; i++) {
+    //     for (let x = 0; x < cartList.length; x++) {
+    //       if (productsData[i].id === cartList[x].id) {
+    //         cartListItem.push(productsData[i]);
+    //       }
+    //     }
+    //   }
+    //   console.log(cartListItem);
+    //   setCartListItem([...cartListItem]);
+    // }
+
+    // 3秒後關閉指示器
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, [cart.length]);
+
+  const spinner = (
+    <>
+      <div className="spinner-grow text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-secondary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-success" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </>
+  );
+
+  const display = (
     <>
       <div className="h-100">
-        <CartItem />
+        <div className="cartItem">
+          <div className="cartItem__thead">
+            <div>商品縮圖</div>
+            <div>商品名稱</div>
+            <div>商品單價</div>
+            <div className="cartItem__qty_btn">數量</div>
+            <div className="cartItem__total">小計</div>
+            <div className="cartItem__del_btn">移除</div>
+          </div>
+          {cart.map((product, i) => {
+            return (
+              <CartItem key={product.id} cart={product} setCart={setCart} />
+            );
+          })}
+        </div>
         <div>
           <hr />
           <Summary />
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <>
+      {isLoading ? spinner : display}
+      {/* <div className="h-100">
+        {productsData.map((product, i) => {
+          return <CartItem key={product.id} product={product} />;
+        })}
+        <div>
+          <hr />
+          <Summary />
+        </div>
+      </div> */}
     </>
   );
 }

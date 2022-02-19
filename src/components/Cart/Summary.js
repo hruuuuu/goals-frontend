@@ -1,19 +1,28 @@
-import React from 'react';
-// import Shipping from './Shipping';
+import { React, useEffect, useState } from 'react';
 import CheckoutModal from './CheckoutModal';
 
-function Summary() {
+function Summary(props) {
+  const { subtotal, setSubtotal } = props;
+  const [total, setTotal] = useState();
+  const [coupon, setCoupon] = useState();
+  const [orderTotal, setOrderTotal] = useState();
+
+  useEffect(() => {
+    setTotal(total);
+    setOrderTotal(total - coupon);
+  }, []);
+
   return (
     <>
       <div className="checkoutBox row gx-4 gx-md-5 gy-2 align-items-end">
         <div className="col-12 col-lg-6">
           <div className="d-flex justify-content-between py-2">
             <p>總計</p>
-            <p className="txt_org">$2200</p>
+            <p className="txt_org">${total}</p>
           </div>
           <div className="d-flex justify-content-between py-2">
             <p>活動折扣</p>
-            <p className="txt_org">-$ 20</p>
+            <p className="txt_org">- ${coupon}</p>
           </div>
           <div className="d-flex justify-content-between pt-2">
             <input
@@ -29,7 +38,7 @@ function Summary() {
         <div className="col-12 col-lg-6">
           <div className="d-flex justify-content-between py-2">
             <span>應付金額</span>
-            <span className="txt_org fs-1">$2200</span>
+            <span className="txt_org fs-1">${orderTotal}</span>
           </div>
           <div className="d-grid gap-2">
             {/* <Shipping /> */}

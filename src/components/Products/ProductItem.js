@@ -11,19 +11,16 @@ import Counter from '../Counter';
 import FavIcon from '../FavIcon';
 
 function ProductItem(props) {
+  const [number, setNumber] = useState(1);
   const { product } = props;
   const { id, image, name, calories, price } = product;
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
   const [category, setCategory] = useState({ id: '', name: '' });
-
+  // const { cartList, setCartList } = useState([]);
   /* 控制modal顯示 */
-  const handleShow = () => {
+  const handleShow = (product) => {
     setShow({ ...setShow, in: true });
-  };
-
-  const addCart = () => {
-    console.log('add cart');
   };
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
@@ -35,6 +32,32 @@ function ProductItem(props) {
       setCategory(matchedCategory);
     }
   }, [categoryData]); //只要有變動(拿到資料再執行)
+
+  //addlocalStorage
+  const addCart = () => {
+    let cartList = JSON.parse(localStorage.getItem('cartList'));
+    // console.log('cartList :>> ', cartList);
+    if (!cartList) {
+      cartList = [];
+    }
+    // let cartList = JSON.parse(localStorage.getItem('cartList'));
+    // console.log(Array.isArray(cartList));
+
+    let newItem = {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      amount: number,
+    };
+
+    // itemList.push(...itemList, newItem);
+    // setCartList([...cartList, newItem]);
+
+    // console.log(cartList);
+    // console.log(newItem);
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+  };
 
   return (
     <>
@@ -64,7 +87,7 @@ function ProductItem(props) {
             </div>
           </div>
           <div className="d-flex flex-md-column align-items-center">
-            <Counter />
+            <Counter number={number} setNumber={setNumber} />
             <button
               type="button"
               className="c-product-item__action e-btn e-btn--primary e-btn--w100 mt-0 mt-md-2 ms-3 ms-md-0 e-btn--mobile"
