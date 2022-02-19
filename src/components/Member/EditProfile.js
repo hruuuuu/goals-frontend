@@ -18,10 +18,11 @@ const EditProfile = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    let response = await axios.post('http://localhost:3002/api/order', member);
-
+    let response = await axios.post(
+      'http://127.0.0.1:3002/api/editprofile',
+      member
+    );
     console.log(response.data);
-    // 關掉原本預設的行為
   }
 
   return (
