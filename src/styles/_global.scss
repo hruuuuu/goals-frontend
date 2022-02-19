@@ -239,6 +239,17 @@ h6 {
   }
 }
 
+@mixin placeholder__rec($margin) {
+  width: 100%;
+  margin: $margin;
+  border-radius: $border-radius__btn;
+}
+
+@mixin placeholder__text {
+  width: 100%;
+  height: 1.5rem;
+}
+
 .c-form {
   $_: &;
   &__input {

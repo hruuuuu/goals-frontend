@@ -33,7 +33,9 @@ function Products() {
             <Filter device="desktop" />
           </div>
           <div className="col-12 col-lg-8 col-xl-9">
-            <ProductList category={category} setCategory={setCategory} />
+            <div className="l-product">
+              <ProductList category={category} setCategory={setCategory} />
+            </div>
           </div>
         </div>
         <FloatingIcon setIsDisplay={setIsDisplay} page="product" />

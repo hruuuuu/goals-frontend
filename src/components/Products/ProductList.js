@@ -1,5 +1,6 @@
 /* C/C */
 import { React, useState } from 'react';
+import Skeleton from '@mui/material/Skeleton';
 
 import { useProducts } from '../../context/products';
 
@@ -9,12 +10,12 @@ function ProductList(props) {
   const { setShow } = props;
   const { productsData } = useProducts();
 
-  const hasData = productsData.length !== 0;
+  const isFetchingProducts = productsData.length === 0;
 
   return (
     <>
-      <div className="row gx-3 gx-md-5">
-        {hasData ? (
+      <div className="row gx-3 gx-md-5 gy-3">
+        {!isFetchingProducts ? (
           productsData.map((product, i) => {
             return (
               <ProductItem
@@ -26,10 +27,9 @@ function ProductList(props) {
           })
         ) : (
           <>
-            <h1>Page - Empty state</h1>
+            <h1>Spinner</h1>
           </>
         )}
-        {}
       </div>
     </>
   );

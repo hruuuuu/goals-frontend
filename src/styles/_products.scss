@@ -457,13 +457,22 @@
   }
 }
 
+.l-product {
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0 0 0.5rem 0);
+    height: 12.5rem;
+  }
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
+  }
+}
+
 .l-fav {
-  .css-58ftfq-MuiSkeleton-root {
-    width: 100%;
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0);
     height: 10rem;
   }
-  .css-1n7gpw1-MuiSkeleton-root {
-    width: 100%;
-    height: 2rem;
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
   }
 }

@@ -115,7 +115,7 @@ function ProductDetail(props) {
 
   return (
     <>
-      {!isFetchingDetail && !isFetchingCategory && !isFetchingActivity ? (
+      {!isFetchingCategory && !isFetchingActivity ? (
         <>
           <Modal
             show={show.in}
