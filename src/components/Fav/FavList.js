@@ -8,7 +8,6 @@ import { useFav } from '../../context/fav';
 import FavItem from './FavItem';
 
 function FavList() {
-  const [fav, setFav] = useState(false);
   const { favData, setFavData, favItemsArr, setFavItemsArr } = useFav();
 
   const favItems = localStorage.getItem('fav');

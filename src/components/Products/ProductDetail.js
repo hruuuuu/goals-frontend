@@ -9,7 +9,7 @@ import { API_URL, IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
 
-import FavIcon from '../FavIcon';
+import ProductDetailFavIcon from './ProductDetailFavIcon';
 import Counter from '../Counter';
 
 function ProductDetail(props) {
@@ -30,6 +30,7 @@ function ProductDetail(props) {
     category_id: 0,
   });
   const {
+    id,
     image,
     name,
     price,
@@ -139,7 +140,7 @@ function ProductDetail(props) {
                         <h4 className="c-product-detail__price me-2">$110</h4>
                         <h6 className="c-product-detail__o-price">${price}</h6>
                       </div>
-                      <FavIcon size="large" type="icon" />
+                      <ProductDetailFavIcon id={id} />
                       <div className="c-product-detail__nutrition d-flex">
                         <ul className="c-product-detail__list">
                           <li className="c-product-detail__item">
