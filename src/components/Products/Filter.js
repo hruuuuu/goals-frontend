@@ -110,6 +110,20 @@ function Filter(props) {
     ) {
       category = filterForm.category;
       activity = filterForm.activity;
+    } else if (
+      filterForm.search !== '' &&
+      filterForm.category.length !== 0 &&
+      filterForm.activity.length === 0
+    ) {
+      category = filterForm.category;
+      activity = activityId;
+    } else if (
+      filterForm.search !== '' &&
+      filterForm.category.length === 0 &&
+      filterForm.activity.length !== 0
+    ) {
+      category = categoryId;
+      activity = filterForm.activity;
     } else {
       category = categoryId;
       activity = activityId;
