@@ -53,17 +53,13 @@ function FavItem(props) {
           <FavIcon size="medium" type="icon-text" id={id} />
           <div className="row gy-2 gy-md-0">
             <div className="col-12 col-md-3">
-              <button
-                type="button"
-                className="c-product-detail__btn"
-                onClick={handleShow}
-              >
+              <div className="c-product-detail__cover">
                 <img
                   className="c-product-detail__img"
                   src={`${IMG_URL}/products/${image}`}
                   alt="thumbnail"
                 />
-              </button>
+              </div>
             </div>
             <div className="col-12 col-md-5 d-flex flex-column justify-content-between">
               <div className="d-flex flex-column">

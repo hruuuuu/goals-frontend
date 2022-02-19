@@ -2,6 +2,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Products from '../pages/Products';
+// import ProductDetail from '../components/Products/ProductDetail';
 import Member from '../pages/Member';
 import Fav from '../pages/Fav';
 import Cart from '../pages/Cart';
