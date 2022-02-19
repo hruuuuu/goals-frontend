@@ -73,6 +73,12 @@ function ProductDetail(props) {
   };
 
   useEffect(() => {
+    if (productId) {
+      setShow({ ...show, in: true });
+    }
+  }, []);
+
+  useEffect(() => {
     setIsFetching(true);
     getCategoryData();
     getDetail();
