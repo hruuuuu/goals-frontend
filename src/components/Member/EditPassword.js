@@ -21,10 +21,13 @@ const EditPassWord = () => {
   useEffect(() => {
     let getStock = async () => {
       // http://localhost:3002/api/stocks
-      let response = await axios.get(`http://localhost:3002/api/getprofile`, {
-        // 為了跨源存取 cookie
-        withCredentials: true,
-      });
+      let response = await axios.get(
+        `http://localhost:3002/api/member/getprofile`,
+        {
+          // 為了跨源存取 cookie
+          withCredentials: true,
+        }
+      );
       setData(response.data);
     };
     getStock();
@@ -45,7 +48,7 @@ const EditPassWord = () => {
     } else {
       // make API call
       let response = await axios.post(
-        'http://127.0.0.1:3002/api/editpassword',
+        'http://127.0.0.1:3002/api/member//editpassword',
         member
       );
 

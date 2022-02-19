@@ -19,7 +19,7 @@ const EditProfile = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     let response = await axios.post(
-      'http://127.0.0.1:3002/api/editprofile',
+      'http://127.0.0.1:3002/api/member/editprofile',
       member
     );
     console.log(response.data);
