@@ -4,12 +4,9 @@ import axios from 'axios';
 
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
-import {
-  ProductsContext,
-  CategoryContext,
-  ActivityContext,
-} from './context/products';
+import { ProductsContext, CategoryContext } from './context/products';
 import { FavContext } from './context/fav';
+import { ActivityContext } from './context/activity';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -46,12 +43,9 @@ function App() {
         setCategoryData([...categoryData, ...categories]);
 
         //api/product/activity
-        const activityResponse = await axios.get(
-          `${API_URL}/product/activity`,
-          {
-            withCredentials: true,
-          }
-        );
+        const activityResponse = await axios.get(`${API_URL}/activity`, {
+          withCredentials: true,
+        });
         const activities = activityResponse.data;
         setActivityData([...activityData, ...activities]);
       } catch (error) {

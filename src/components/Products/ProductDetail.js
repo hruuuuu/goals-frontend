@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import { API_URL, IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
+import { useActivity } from '../../context/activity';
 
 import ProductDetailFavIcon from './ProductDetailFavIcon';
 import Counter from '../Counter';
@@ -16,8 +17,8 @@ function ProductDetail(props) {
   const { show, setShow } = useShow();
   const navigate = useNavigate();
   const locationPath = useLocation().pathname;
-  const [isFetching, setIsFetching] = useState(false);
   const [detailData, setDetailData] = useState({
+    id: '',
     image: 'salmon.jpeg',
     name: '',
     price: 0,
@@ -43,9 +44,15 @@ function ProductDetail(props) {
     category_id,
   } = detailData;
   const { categoryData } = useCategory();
+  const { activityData } = useActivity();
   const [category, setCategory] = useState({ id: '', name: '' });
+  const [activity, setActivity] = useState({ id: '', discount: 0 });
 
-  const isFetchingCategory = category === undefined || category.name === '';
+  const isFetchingDetail = detailData.id === '';
+  const isFetchingCategory = categoryData.id === '';
+  const isFetchingActivity = activityData.id === '';
+
+  const discountPrice = Math.ceil(price * activity.discount);
 
   /* 1.取得網址params 2.打api拿特定product id的資料 */
   //params productId -> 打api用
@@ -58,36 +65,36 @@ function ProductDetail(props) {
     }
   };
 
-  const getCategoryData = () => {
-    if (categoryData.length === 0) {
-      setIsFetching(true);
-    }
-  };
-
-  /* 拿到CategoryContext的資料後跟product的category_id關聯 */
-  const matchCategory = () => {
-    const matchedCategory = categoryData.find(
-      (category) => detailData.category_id === category.id
-    );
-    setCategory({ ...matchedCategory });
-  };
-
+  /* 設定url一進入/:productId就開啟modal*/
   useEffect(() => {
     if (productId) {
       setShow({ ...show, in: true });
     }
   }, []);
 
+  /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
-    setIsFetching(true);
-    getCategoryData();
-    getDetail();
-  }, [productId]);
+    if (!isFetchingDetail && !isFetchingCategory) {
+      const matchedCategory = categoryData.find(
+        (category) => detailData.category_id === category.id
+      );
+      setCategory({ ...matchedCategory });
+    }
+  }, [detailData, categoryData]);
+
+  /* 拿到ActivityContext的資料後跟product的activity_id關聯  */
+  useEffect(() => {
+    if (!isFetchingDetail && !isFetchingActivity) {
+      const matchedActivity = activityData.find(
+        (activity) => detailData.activity_id === activity.id
+      );
+      setActivity({ ...matchedActivity });
+    }
+  }, [detailData, activityData]);
 
   useEffect(() => {
-    setIsFetching(true);
-    matchCategory();
-  }, [detailData]);
+    getDetail();
+  }, [productId]);
 
   /* 控制modal關閉 & 淡出淡入效果 */
   const handleClose = () => {
@@ -108,7 +115,7 @@ function ProductDetail(props) {
 
   return (
     <>
-      {!isFetching || !isFetchingCategory ? (
+      {!isFetchingDetail && !isFetchingCategory && !isFetchingActivity ? (
         <>
           <Modal
             show={show.in}
@@ -143,7 +150,9 @@ function ProductDetail(props) {
                       <div className="e-tag e-tag--normal">{category.name}</div>
                       <h4 className="my-2 my-md-3">{name}</h4>
                       <div className="d-flex align-items-center d-md-none mb-3">
-                        <h4 className="c-product-detail__price me-2">$110</h4>
+                        <h4 className="c-product-detail__price me-2">
+                          ${discountPrice}
+                        </h4>
                         <h6 className="c-product-detail__o-price">${price}</h6>
                       </div>
                       <ProductDetailFavIcon id={id} />
@@ -197,7 +206,9 @@ function ProductDetail(props) {
                             <h6 className="c-product-detail__o-price">
                               ${price}
                             </h6>
-                            <h2 className="c-product-detail__price">$110</h2>
+                            <h2 className="c-product-detail__price">
+                              ${discountPrice}
+                            </h2>
                           </div>
                         </div>
                         <div className="col-6 col-md-12">
