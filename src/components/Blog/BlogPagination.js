@@ -1,25 +1,42 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const BlogPagination = () => {
+const BlogPagination = (props) => {
+  const { setPage } = props;
+  const navigate = useNavigate();
   return (
     <>
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
-            <Link to="" className="page-link" aria-label="Previous">
+            <button to="" className="page-link" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
-            </Link>
+            </button>
           </li>
           <li className="page-item">
-            <Link to="" className="page-link">
+            <button
+              type="bottom"
+              className="page-link"
+              onClick={(e) => {
+                setPage(1);
+                navigate(`/blog?page=1`);
+              }}
+            >
               1
-            </Link>
+            </button>
           </li>
           <li className="page-item">
-            <Link to="" className="page-link">
+            <button
+              type="bottom"
+              className="page-link"
+              onClick={(e) => {
+                setPage(2);
+                navigate(`/blog?page=2`);
+              }}
+            >
               2
-            </Link>
+            </button>
           </li>
           <li className="page-item">
             <Link to="" className="page-link">

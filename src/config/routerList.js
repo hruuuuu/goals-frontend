@@ -130,9 +130,8 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `article`,
+        path: `:blogId`,
         element: <BlogArticle />,
-        breadcrumbName: '健康新知',
       },
     ],
   },
