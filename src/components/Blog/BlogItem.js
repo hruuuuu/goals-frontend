@@ -25,30 +25,27 @@ const BlogItem = () => {
             <li key={blog.id} className="col-xs-12 clearfix">
               <div className="blogList__item clearfix">
                 <div className="blogList__item--Img">
-                  <Link
-                    to={`/blog/article/${blog.id}`}
-                    title="為什麼越運動越大隻？專家揭超NG塑身法：做錯這件事，讓你的肉都長在大腿上"
-                  >
+                  <Link to={`/blog/article/${blog.id}`} title={blog.title}>
                     <img
                       className="img-responsive"
-                      src={require('../../img/blog/blog_item.jpg')}
+                      src={blog.image}
                       alt="BlogItem"
                     />
                   </Link>
                 </div>
                 <div className="blogList__item--Txt">
                   <div className="listHead">
-                    <div className="day">07</div>
+                    <div className="day">{blog.created_at}</div>
                     <div className="dateBox">
                       <div className="date">Dec.2021</div>
-                      <div className="newIcon">健康良醫</div>
+                      <div className="newIcon">{blog.category}</div>
                     </div>
                   </div>
                   <h4>
                     <Link
                       className="ellipsis"
                       to="/blog/article"
-                      title="{blog.title}"
+                      title={blog.title}
                     >
                       {blog.title}
                     </Link>
