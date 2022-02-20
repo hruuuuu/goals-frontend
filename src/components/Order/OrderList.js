@@ -68,7 +68,7 @@ const OrderList = () => {
                 <tr>
                   <th scope="row">{order.id}</th>
                   <td>{order.create_at}</td>
-                  <td>{order.payment_id}</td>
+                  <td>{order.payment_status_id}</td>
                   <td>{order.order_status_id}</td>
                   <td>{order.address}</td>
                   <td className="p-0">
