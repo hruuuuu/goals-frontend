@@ -65,11 +65,19 @@ const OrderList = () => {
             return (
               <tbody key={order.id}>
                 <tr>
-                  <th scope="row">{order.id}</th>
-                  <td>{order.create_at}</td>
-                  <td>{order.payment_status}</td>
-                  <td>{order.order_status}</td>
-                  <td>{order.price * order.amount}</td>
+                  <th scope="row" className="order_td__order_id">
+                    {order.id}
+                  </th>
+                  <td className="order_td__create_at">{order.create_at}</td>
+                  <td className="order_td__payment_status">
+                    {order.payment_status}
+                  </td>
+                  <td className="order_td__order_status">
+                    {order.order_status}
+                  </td>
+                  <td className="order_td__total">
+                    {order.price * order.amount}
+                  </td>
                   <td className="p-0">
                     <button onClick={handleShow} className="detail rounded-3">
                       <i className="fas fa-eye p-1 icon_grn"></i>
@@ -91,26 +99,32 @@ const OrderList = () => {
           >
             <div className="card cardorder ">
               <div onClick={handleShow} className="card-body ">
-                <h5 className="card-title">{order.id}</h5>
+                <h5 className="card-title order_td__order_id">{order.id}</h5>
                 <div className="card-text">
                   <div className="my-3 d-flex justify-content-between">
                     <div>訂單日期</div>
-                    <div>{order.create_at}</div>
+                    <div className="order_td__create_at">{order.create_at}</div>
                   </div>
                   <div className="orderline">
                     <div className="my-3 d-flex justify-content-between">
                       <div>付款狀態</div>
-                      <div>{order.payment_status}</div>
+                      <div className="order_td__payment_status">
+                        {order.payment_status}
+                      </div>
                     </div>
 
                     <div className="my-3 d-flex justify-content-between">
                       <div>訂單狀態</div>
-                      <div>{order.order_status}</div>
+                      <div className="order_td__order_status">
+                        {order.order_status}
+                      </div>
                     </div>
 
                     <div className="my-3 d-flex justify-content-between">
                       <div>總計</div>
-                      <div>{order.price * order.amount}</div>
+                      <div className="order_td__total">
+                        {order.price * order.amount}
+                      </div>
                     </div>
                   </div>
                 </div>
