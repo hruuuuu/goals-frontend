@@ -217,7 +217,9 @@ h6 {
   h6,
   p,
   span,
-  div {
+  div,
+  label,
+  input {
     cursor: $cursor;
   }
 }
@@ -235,6 +237,17 @@ h6 {
     border-radius: 10rem;
     background-clip: content-box;
   }
+}
+
+@mixin placeholder__rec($margin) {
+  width: 100%;
+  margin: $margin;
+  border-radius: $border-radius__btn;
+}
+
+@mixin placeholder__text {
+  width: 100%;
+  height: 1.5rem;
 }
 
 .c-form {
@@ -309,6 +322,8 @@ h6 {
 
   display: flex;
   align-items: center;
+
+  @include cursor(pointer);
   &:last-of-type {
     margin-bottom: 0;
   }

@@ -17,13 +17,14 @@ function Fav() {
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">
-            <FavList />
+            <div className="l-fav">
+              <FavList />
+            </div>
           </div>
         </div>
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
-      <ProductDetail />
     </>
   );
 }
