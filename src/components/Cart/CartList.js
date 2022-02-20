@@ -5,65 +5,10 @@ import Summary from './Summary';
 
 function CartList(props) {
   const { cartListData, setCartListData } = useCartList();
-  const [isLoading, setIsLoading] = useState(true);
-  // const [cart, setCart] = useState([]);
 
-  // const isFetching = cartListData.length === 0;
-  // if (!isFetching) {
-  //   setCartListData([...cartListData]);
-  // }
+  useEffect(() => {}, [cartListData]);
 
-  // console.log(cartListData);
-  // let cartList = JSON.parse(localStorage.getItem('cartList'));
-  // setCartListData([...cartListData, cartList]);
-  // setCart(cartList);
-  // console.log(cart);
-
-  useEffect(() => {
-    // 先開起載入指示器
-    setIsLoading(true);
-    // 將localstorage的value轉成陣列物件
-    // console.log(cartList);
-    // console.log(typeof cartList);
-    // setCartListData([...cartListData]);
-    // console.log(cartListData);
-    // console.log(typeof cartListData);
-
-    //比對cartList跟productata兩筆資料重疊的部分，id相同則產生新陣列cartListItem
-    // if (!isFetching) {
-    //   let cartListItem = [];
-    //   for (let i = 0; i < productsData.length; i++) {
-    //     for (let x = 0; x < cartList.length; x++) {
-    //       if (productsData[i].id === cartList[x].id) {
-    //         cartListItem.push(productsData[i]);
-    //       }
-    //     }
-    //   }
-    //   console.log(cartListItem);
-    //   setCartListItem([...cartListItem]);
-    // }
-
-    // 3秒後關閉指示器
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-  }, [cartListData.length]);
-
-  const spinner = (
-    <>
-      <div className="spinner-grow text-primary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-      <div className="spinner-grow text-secondary" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-      <div className="spinner-grow text-success" role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </>
-  );
-
-  const display = (
+  return (
     <>
       <div className="h-100">
         <div className="cartItem">
@@ -84,21 +29,6 @@ function CartList(props) {
           <Summary />
         </div>
       </div>
-    </>
-  );
-
-  return (
-    <>
-      {isLoading ? spinner : display}
-      {/* <div className="h-100">
-        {productsData.map((product, i) => {
-          return <CartItem key={product.id} product={product} />;
-        })}
-        <div>
-          <hr />
-          <Summary />
-        </div>
-      </div> */}
     </>
   );
 }

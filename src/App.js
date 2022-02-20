@@ -46,15 +46,21 @@ function App() {
         const categories = categoryResponse.data;
         setCategoryData([...categoryData, ...categories]);
 
-        //初始化localStorage購物車
-        const cartList = JSON.parse(localStorage.getItem('cartList'));
-        setCartListData([...cartListData, ...cartList]);
         //api/product/activity
         const activityResponse = await axios.get(`${API_URL}/activity`, {
           withCredentials: true,
         });
         const activities = activityResponse.data;
         setActivityData([...activityData, ...activities]);
+
+        //初始化localStorage購物車
+        const cartList = localStorage.getItem('cartList');
+        if (cartList) {
+          const cartList = JSON.parse(localStorage.getItem('cartList'));
+          setCartListData([...cartListData, ...cartList]);
+        } else {
+          localStorage.setItem('cartList', '');
+        }
       } catch (error) {
         console.log(error);
       }

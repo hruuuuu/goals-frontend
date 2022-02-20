@@ -19,14 +19,12 @@ function ProductItem(props) {
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
   const { cartListData, setCartListData } = useCartList();
-  // const { cartList, setCartList } = useState([]);
   const { activityData } = useActivity();
   const [category, setCategory] = useState({ id: '', name: '' });
   const [activity, setActivity] = useState({ id: '', discount: 0 });
 
   const isFetchingCategory = categoryData.length === 0;
   const isFetchingActivity = activityData.length === 0;
-
   /* 控制modal顯示 */
   const handleShow = (product) => {
     setShow({ ...setShow, in: true });
@@ -56,11 +54,6 @@ function ProductItem(props) {
 
   //加入購物車
   const addCart = () => {
-    let cartList = JSON.parse(localStorage.getItem('cartList'));
-    if (!cartList) {
-      cartList = [];
-    }
-
     let newItem = {
       id: product.id,
       name: product.name,
@@ -69,19 +62,26 @@ function ProductItem(props) {
       amount: number,
     };
 
-    cartList.push(newItem);
-    setCartListData([...cartListData, ...cartList]);
-    // itemList.push(...itemList, newItem);
-    // setCartList([...cartList, newItem]);
+    const newItemData = [...cartListData, newItem];
 
-    // console.log(cartList);
-    // console.log(newItem);
-    localStorage.setItem('cartList', JSON.stringify(cartList));
+    for (let i = 0; i < cartListData.length; i++) {
+      if (cartListData[i].id === newItem.id) {
+        return alert('您已添加此商品進購物車');
+      }
+    }
+
+    if (cartListData.length !== 0) {
+      setCartListData(newItemData);
+      localStorage.setItem('cartList', JSON.stringify(newItemData));
+    } else {
+      setCartListData([newItem]);
+      localStorage.setItem('cartList', JSON.stringify([newItem]));
+    }
   };
 
   return (
     <>
-      {!isFetchingCategory ? (
+      {!isFetchingCategory && !isFetchingActivity ? (
         <>
           <div className="col-6 col-md-4 col-lg-6 col-xl-4">
             <div className="c-product-item">

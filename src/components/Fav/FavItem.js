@@ -5,12 +5,14 @@ import Skeleton from '@mui/material/Skeleton';
 import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
+import { useCartList } from '../../context/cart';
 import { useActivity } from '../../context/activity';
 
 import FavIcon from '../FavIcon';
 import Counter from '../Counter';
 
 function FavItem(props) {
+  const [number, setNumber] = useState(1);
   const { product } = props;
   const {
     id,
@@ -34,6 +36,7 @@ function FavItem(props) {
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
   const { activityData } = useActivity();
+  const { cartListData, setCartListData } = useCartList();
 
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
@@ -59,6 +62,33 @@ function FavItem(props) {
       setActivity({ ...matchedActivity });
     }
   }, [activityData]); //只要有變動(拿到資料再執行)
+
+  //加入購物車
+  const addCart = () => {
+    let newItem = {
+      id: product.id,
+      name: product.name,
+      image: product.image,
+      price: product.price,
+      amount: number,
+    };
+
+    const newItemData = [...cartListData, newItem];
+
+    for (let i = 0; i < cartListData.length; i++) {
+      if (cartListData[i].id === newItem.id) {
+        return alert('您已添加此商品進購物車');
+      }
+    }
+
+    if (cartListData.length !== 0) {
+      setCartListData(newItemData);
+      localStorage.setItem('cartList', JSON.stringify(newItemData));
+    } else {
+      setCartListData([newItem]);
+      localStorage.setItem('cartList', JSON.stringify([newItem]));
+    }
+  };
 
   return (
     <>
@@ -130,10 +160,13 @@ function FavItem(props) {
                     </h4>
                     <h6 className="c-product-detail__o-price">${price}</h6>
                   </div>
-                  <Counter />
+                  <Counter number={number} setNumber={setNumber} />
                 </div>
                 <div className="col-4 col-sm-3 col-md-4 d-flex justify-content-end align-items-md-end">
-                  <button className="e-btn e-btn--primary e-btn--w100 e-btn--medium e-btn--mobile d-flex align-items-center justify-content-center">
+                  <button
+                    className="e-btn e-btn--primary e-btn--w100 e-btn--medium e-btn--mobile d-flex align-items-center justify-content-center"
+                    onClick={addCart}
+                  >
                     <i className="fas fa-shopping-cart e-icon me-0 me-md-2"></i>
                     <span className="d-none d-md-block">加入購物車</span>
                   </button>
