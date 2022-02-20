@@ -52,7 +52,7 @@ function ProductItem(props) {
 
   return (
     <>
-      {!isFetchingCategory ? (
+      {!isFetchingCategory && !isFetchingActivity ? (
         <>
           <div className="col-6 col-md-4 col-lg-6 col-xl-4">
             <div className="c-product-item">
