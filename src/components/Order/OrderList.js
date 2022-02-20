@@ -16,7 +16,6 @@ const OrderList = () => {
 
   useEffect(() => {
     let getStock = async () => {
-      // http://localhost:3002/api/stocks
       let response = await axios.get(`http://localhost:3002/api/order`, {
         // 為了跨源存取 cookie
         withCredentials: true,
@@ -68,9 +67,9 @@ const OrderList = () => {
                 <tr>
                   <th scope="row">{order.id}</th>
                   <td>{order.create_at}</td>
-                  <td>{order.payment_status_id}</td>
-                  <td>{order.order_status_id}</td>
-                  <td>{order.address}</td>
+                  <td>{order.payment_status}</td>
+                  <td>{order.order_status}</td>
+                  <td>{order.price * order.amount}</td>
                   <td className="p-0">
                     <button onClick={handleShow} className="detail rounded-3">
                       <i className="fas fa-eye p-1 icon_grn"></i>
