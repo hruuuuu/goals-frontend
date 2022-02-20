@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const BlogPagination = (props) => {
   const { setPage } = props;
   const navigate = useNavigate();
+
   return (
     <>
       <nav aria-label="Page navigation example">
