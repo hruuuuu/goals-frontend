@@ -15,7 +15,7 @@ import FavIcon from '../FavIcon';
 function ProductItem(props) {
   const [number, setNumber] = useState(1);
   const { product } = props;
-  const { id, image, name, calories, price } = product;
+  const { id, image, name, calories, price, discountPrice } = product;
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
   const { cartListData, setCartListData } = useCartList();
@@ -29,8 +29,6 @@ function ProductItem(props) {
   const handleShow = (product) => {
     setShow({ ...setShow, in: true });
   };
-
-  const discountPrice = Math.ceil(price * activity.discount);
 
   /* 拿到ActivityContext的資料後跟product的activity_id關聯  */
   useEffect(() => {
@@ -109,7 +107,11 @@ function ProductItem(props) {
                   <div className="c-product-item-detail__cal">
                     熱量{calories}卡
                   </div>
-                  <div className="c-product-item-detail__o-price">${price}</div>
+                  {activity.id !== 0 && (
+                    <div className="c-product-item-detail__o-price">
+                      ${price}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="d-flex flex-md-column align-items-center">
