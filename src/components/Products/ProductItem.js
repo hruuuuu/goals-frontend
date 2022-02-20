@@ -113,27 +113,17 @@ function ProductItem(props) {
                 </div>
               </div>
               <div className="d-flex flex-md-column align-items-center">
-                <Counter />
+                <Counter number={number} setNumber={setNumber} />
                 <button
                   type="button"
                   className="c-product-item__action e-btn e-btn--primary e-btn--w100 mt-0 mt-md-2 ms-3 ms-md-0 e-btn--mobile"
+                  onClick={addCart}
                 >
                   <i className="fas fa-shopping-cart e-icon me-0 me-md-2"></i>
                   <span className="d-none d-md-block">加入購物車</span>
                 </button>
               </div>
             </div>
-          </div>
-          <div className="d-flex flex-md-column align-items-center">
-            <Counter number={number} setNumber={setNumber} />
-            <button
-              type="button"
-              className="c-product-item__action e-btn e-btn--primary e-btn--w100 mt-0 mt-md-2 ms-3 ms-md-0 e-btn--mobile"
-              onClick={addCart}
-            >
-              <i className="fas fa-shopping-cart e-icon me-0 me-md-2"></i>
-              <span className="d-none d-md-block">加入購物車</span>
-            </button>
           </div>
         </>
       ) : (

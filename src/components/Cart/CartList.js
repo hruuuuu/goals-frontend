@@ -8,7 +8,10 @@ function CartList(props) {
   const [isLoading, setIsLoading] = useState(true);
   // const [cart, setCart] = useState([]);
 
-  const isFetching = cartListData.length === 0;
+  // const isFetching = cartListData.length === 0;
+  // if (!isFetching) {
+  //   setCartListData([...cartListData]);
+  // }
 
   // console.log(cartListData);
   // let cartList = JSON.parse(localStorage.getItem('cartList'));
@@ -20,7 +23,6 @@ function CartList(props) {
     // 先開起載入指示器
     setIsLoading(true);
     // 將localstorage的value轉成陣列物件
-    // let cartList = JSON.parse(localStorage.getItem('cartList'));
     // console.log(cartList);
     // console.log(typeof cartList);
     // setCartListData([...cartListData]);
@@ -40,15 +42,12 @@ function CartList(props) {
     //   console.log(cartListItem);
     //   setCartListItem([...cartListItem]);
     // }
-    if (!isFetching) {
-      setCartListData([...cartListData]);
-    }
 
     // 3秒後關閉指示器
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
-  }, []);
+  }, [cartListData.length]);
 
   const spinner = (
     <>
