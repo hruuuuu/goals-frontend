@@ -339,12 +339,32 @@ h6 {
 
 .e-btn {
   width: max-content;
+  padding: 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &--primary {
     border: none;
     background: $color--primary;
     border-radius: $border-radius__btn;
     color: $color--light;
     box-shadow: $box-shadow__element;
+
+    transition: $transition;
+    &:hover {
+      background: $color--hover;
+    }
+    &:focus,
+    &:active {
+      background: $color--active;
+    }
+  }
+  &--plain {
+    border: none;
+    background: $color--primary;
+    border-radius: $border-radius__input;
+    color: $color--light;
 
     transition: $transition;
     &:hover {
