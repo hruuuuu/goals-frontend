@@ -6,9 +6,9 @@ const EditPassWord = () => {
   const [member, setMember] = useState({
     //id為登入會員的id
 
-    oldpassword: '1',
-    newpassword: '12',
-    confirmpassword: '123',
+    oldpassword: '',
+    newpassword: '',
+    confirmpassword: '',
   });
 
   const [data, setData] = useState([]);
@@ -19,8 +19,7 @@ const EditPassWord = () => {
   }
 
   useEffect(() => {
-    let getStock = async () => {
-      // http://localhost:3002/api/stocks
+    let getProfile = async () => {
       let response = await axios.get(
         `http://localhost:3002/api/member/getprofile`,
         {
@@ -30,17 +29,12 @@ const EditPassWord = () => {
       );
       setData(response.data);
     };
-    getStock();
+    getProfile();
   }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // JSON.parse(data);
-
-    // console.log(data[0].password);
-
-    // perform all neccassary validations
     if (member.newpassword !== member.confirmpassword) {
       alert('新密碼與確認密碼不一致，請確認');
     } else if (member.oldpassword !== data[0].password) {

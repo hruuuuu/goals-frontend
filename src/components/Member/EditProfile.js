@@ -1,19 +1,29 @@
 import { React, useState } from 'react';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const EditProfile = () => {
-  const [member, setMember] = useState({
-    //id為登入會員的id
-    id: '1',
-    name: 'Nick',
-    email: 'Nick@gmail.com',
-    address: '資策會',
-    tel: '4561515',
-  });
+  const [member, setMember] = useState({});
+
+  useEffect(() => {
+    let getProfile = async () => {
+      let response = await axios.get(
+        `http://localhost:3002/api/member/getprofile`,
+        {
+          withCredentials: true,
+        }
+      );
+      setMember(response.data[0]);
+    };
+    getProfile();
+
+    console.log(member);
+  }, []);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
-    // console.log(123);
+
+    console.log(member);
   }
 
   async function handleSubmit(e) {
@@ -22,7 +32,6 @@ const EditProfile = () => {
       'http://127.0.0.1:3002/api/member/editprofile',
       member
     );
-    console.log(response.data);
   }
 
   return (
@@ -40,8 +49,8 @@ const EditProfile = () => {
                 className="form-control name__input c-form__input"
                 id="InputName"
                 placeholder="請輸入..."
-                name="name"
-                value={member.name}
+                name="username"
+                value={member.username ? member.username : ''}
                 onChange={handleChange}
               />
             </div>
@@ -55,7 +64,7 @@ const EditProfile = () => {
                 id="InputEmail"
                 placeholder="請輸入..."
                 name="email"
-                value={member.email}
+                value={member.email ? member.email : ''}
                 onChange={handleChange}
               />
             </div>
@@ -114,8 +123,9 @@ const EditProfile = () => {
                     type="text"
                     className="form-control phone__input c-form__input"
                     id="inputAddress"
+                    // name="address"
                     name="address"
-                    value={member.address}
+                    value={member.address ? member.address : ''}
                     onChange={handleChange}
                   />
                 </div>
@@ -130,7 +140,7 @@ const EditProfile = () => {
                 className="form-control phone__input c-form__input"
                 id="InputPhone"
                 name="tel"
-                value={member.tel}
+                value={member.tel ? member.tel : ''}
                 onChange={handleChange}
               />
             </div>
