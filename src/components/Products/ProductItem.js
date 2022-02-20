@@ -80,7 +80,11 @@ function ProductItem(props) {
                   <div className="c-product-item-detail__cal">
                     熱量{calories}卡
                   </div>
-                  <div className="c-product-item-detail__o-price">${price}</div>
+                  {activity.id !== 0 && (
+                    <div className="c-product-item-detail__o-price">
+                      ${price}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="d-flex flex-md-column align-items-center">

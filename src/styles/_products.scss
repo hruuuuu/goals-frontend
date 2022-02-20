@@ -262,7 +262,7 @@
   &__row {
     margin-bottom: 0.125rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     &:last-of-type {
       margin-bottom: 0;

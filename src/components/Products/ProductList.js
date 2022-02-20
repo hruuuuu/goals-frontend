@@ -5,6 +5,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { useProducts } from '../../context/products';
 
 import ProductItem from './ProductItem';
+import Sort from './Sort';
 
 function ProductList(props) {
   const { setShow } = props;
@@ -15,6 +16,9 @@ function ProductList(props) {
   return (
     <>
       <div className="row gx-3 gx-md-5 gy-3">
+        <div className="d-flex d-sm-none justify-content-end">
+          <Sort />
+        </div>
         {!isFetchingProducts ? (
           productsData.map((product, i) => {
             return (
@@ -27,7 +31,7 @@ function ProductList(props) {
           })
         ) : (
           <>
-            <h1>Spinner</h1>
+            <h1>沒有符合條件的商品</h1>
           </>
         )}
       </div>

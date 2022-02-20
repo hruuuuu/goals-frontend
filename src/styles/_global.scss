@@ -353,10 +353,12 @@ h6 {
 
     transition: $transition;
     &:hover {
+      color: $color--light;
       background: $color--hover;
     }
     &:focus,
     &:active {
+      color: $color--light;
       background: $color--active;
     }
   }
@@ -368,10 +370,12 @@ h6 {
 
     transition: $transition;
     &:hover {
+      color: $color--light;
       background: $color--hover;
     }
     &:focus,
     &:active {
+      color: $color--light;
       background: $color--active;
     }
   }

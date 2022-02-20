@@ -24,7 +24,9 @@ function Header(props) {
                   {lastLocationPath.route.header}
                 </h3>
               </div>
-              {hasLayout && lastLocationPath.route.layout}
+              <div className="d-none d-sm-flex">
+                {hasLayout && lastLocationPath.route.layout}
+              </div>
             </div>
           </div>
         </div>
