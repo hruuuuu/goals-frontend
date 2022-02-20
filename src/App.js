@@ -6,6 +6,7 @@ import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
 import { ProductsContext } from './context/products';
 import { CategoryContext } from './context/products';
+import { CartListContext } from './context/cart';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -18,6 +19,8 @@ function App() {
   });
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+  const [cartListData, setCartListData] = useState([]);
+
   useEffect(() => {
     //api/product
     (async () => {
@@ -37,22 +40,29 @@ function App() {
         );
         const categories = categoryResponse.data;
         setCategoryData([...categoryData, ...categories]);
+
+        //初始化localStorage購物車
+        const cartList = JSON.parse(localStorage.getItem('cartList'));
+        setCartListData([...cartListData, ...cartList]);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
   return (
     <>
-      <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
-          <ShowContext.Provider value={{ show, setShow }}>
-            <Navbar />
-            {useRoutes(routerList)}
-            <Footer />
-          </ShowContext.Provider>
-        </CategoryContext.Provider>
-      </ProductsContext.Provider>
+      <CartListContext.Provider value={{ cartListData, setCartListData }}>
+        <ProductsContext.Provider value={{ productsData, setProductsData }}>
+          <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
+            <ShowContext.Provider value={{ show, setShow }}>
+              <Navbar />
+              {useRoutes(routerList)}
+              <Footer />
+            </ShowContext.Provider>
+          </CategoryContext.Provider>
+        </ProductsContext.Provider>
+      </CartListContext.Provider>
     </>
   );
 }

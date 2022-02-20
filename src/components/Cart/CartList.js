@@ -1,30 +1,30 @@
 import { React, useState, useEffect } from 'react';
-// import { useProducts } from '../../context/products';
-
+import { useCartList } from '../../context/cart';
 import CartItem from './CartItem';
 import Summary from './Summary';
 
 function CartList(props) {
-  // const { productsData } = useProducts();
-  // const [cartListItem, setCartListItem] = useState([]);
+  const { cartListData, setCartListData } = useCartList();
   const [isLoading, setIsLoading] = useState(true);
-  const [cart, setCart] = useState([]);
   // const [cart, setCart] = useState([]);
 
-  // const isFetching = productsData.length === 0;
-
-  
+  const isFetching = cartListData.length === 0;
+  // console.log(cartListData);
   // let cartList = JSON.parse(localStorage.getItem('cartList'));
+  // setCartListData([...cartListData, cartList]);
   // setCart(cartList);
   // console.log(cart);
 
   useEffect(() => {
     // 先開起載入指示器
     setIsLoading(true);
-    
     // 將localstorage的value轉成陣列物件
-    let cartList = JSON.parse(localStorage.getItem('cartList'));
-    setCart(cartList);
+    // let cartList = JSON.parse(localStorage.getItem('cartList'));
+    // console.log(cartList);
+    // console.log(typeof cartList);
+    // setCartListData([...cartListData]);
+    // console.log(cartListData);
+    // console.log(typeof cartListData);
 
     //比對cartList跟productata兩筆資料重疊的部分，id相同則產生新陣列cartListItem
     // if (!isFetching) {
@@ -39,12 +39,15 @@ function CartList(props) {
     //   console.log(cartListItem);
     //   setCartListItem([...cartListItem]);
     // }
+    if (!isFetching) {
+      setCartListData([...cartListData]);
+    }
 
     // 3秒後關閉指示器
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
-  }, [cart.length]);
+    }, 500);
+  }, []);
 
   const spinner = (
     <>
@@ -72,10 +75,8 @@ function CartList(props) {
             <div className="cartItem__total">小計</div>
             <div className="cartItem__del_btn">移除</div>
           </div>
-          {cart.map((product, i) => {
-            return (
-              <CartItem key={product.id} cart={product} setCart={setCart} />
-            );
+          {cartListData.map((product, i) => {
+            return <CartItem key={product.id} product={product} />;
           })}
         </div>
         <div>

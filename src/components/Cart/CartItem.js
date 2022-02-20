@@ -1,31 +1,46 @@
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
-
 import { IMG_URL } from '../../utils/config';
+
+import { useCartList } from '../../context/cart';
 
 function CartItem(props) {
   const [count, setCount] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
-  const { cart, setCart } = props;
-  const { id, image, name, price, amount } = cart;
-  // const { product } = props;
-  // const { id, image, name, calories, price } = product;
+  const { cartListData, setCartListData } = useCartList();
+  // const { cart, setCart } = props;
+  // const { id, image, name, price, amount } = cartListData;
+  const { product } = props;
+  const { id, image, name, price, amount } = product;
+
+  // console.log(cartListData);
 
   useEffect(() => {
     setCount(amount);
     setSubtotal(price * amount);
+    // console.log(cartListData);
   }, []);
 
   //移除商品、更新localStorage的value
   const removeItemFromCart = () => {
-    let cartList = JSON.parse(localStorage.getItem('cartList'));
-    console.log('cartList :>> ', cartList);
-    if (!cartList) {
-      cartList = [];
-    }
-    let setCartList = cartList.filter((item) => item.id !== id);
-    setCart(setCartList);
+    // let cartList = JSON.parse(localStorage.getItem('cartList'));
+    // console.log('cartList :>> ', cartList);
+    // if (!cartList) {
+    //   cartList = [];
+    // }
+    let setCartList = cartListData.filter((item) => item.id !== id);
     console.log(setCartList);
+    console.log(cartListData);
+
+    // const isFetching = cartListData.length !== setCartList.length;
+    // setCart(setCartList);
+    // setCartListData(setCartList);
+    // setCartListData([...setCartList]);
+    // console.log(cartListData);
+
+    // if (!isFetching) {
+    //   localStorage.setItem('cartList', JSON.stringify(cartListData));
+    // }
     localStorage.setItem('cartList', JSON.stringify(setCartList));
   };
 
@@ -49,6 +64,9 @@ function CartItem(props) {
                 className="btn"
                 onClick={() => {
                   setCount(count - 1);
+                  if (count <= 1) {
+                    return setCount(1);
+                  }
                   setSubtotal((count - 1) * price);
                 }}
               >

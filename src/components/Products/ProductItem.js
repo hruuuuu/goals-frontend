@@ -6,6 +6,7 @@ import axios from 'axios';
 import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
+import { useCartList } from '../../context/cart';
 
 import Counter from '../Counter';
 import FavIcon from '../FavIcon';
@@ -16,6 +17,7 @@ function ProductItem(props) {
   const { id, image, name, calories, price } = product;
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
+  const { cartListData, setCartListData } = useCartList();
   const [category, setCategory] = useState({ id: '', name: '' });
   // const { cartList, setCartList } = useState([]);
   /* 控制modal顯示 */
@@ -33,15 +35,12 @@ function ProductItem(props) {
     }
   }, [categoryData]); //只要有變動(拿到資料再執行)
 
-  //addlocalStorage
+  //加入購物車
   const addCart = () => {
     let cartList = JSON.parse(localStorage.getItem('cartList'));
-    // console.log('cartList :>> ', cartList);
     if (!cartList) {
       cartList = [];
     }
-    // let cartList = JSON.parse(localStorage.getItem('cartList'));
-    // console.log(Array.isArray(cartList));
 
     let newItem = {
       id: product.id,
@@ -51,6 +50,8 @@ function ProductItem(props) {
       amount: number,
     };
 
+    cartList.push(newItem);
+    setCartListData([...cartListData, ...cartList]);
     // itemList.push(...itemList, newItem);
     // setCartList([...cartList, newItem]);
 
