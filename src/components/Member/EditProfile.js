@@ -1,6 +1,5 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const EditProfile = () => {
   const [member, setMember] = useState({});
@@ -16,14 +15,10 @@ const EditProfile = () => {
       setMember(response.data[0]);
     };
     getProfile();
-
-    console.log(member);
   }, []);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
-
-    console.log(member);
   }
 
   async function handleSubmit(e) {
@@ -32,6 +27,8 @@ const EditProfile = () => {
       'http://127.0.0.1:3002/api/member/editprofile',
       member
     );
+
+    alert('修改成功');
   }
 
   return (
@@ -124,8 +121,8 @@ const EditProfile = () => {
                     className="form-control phone__input c-form__input"
                     id="inputAddress"
                     // name="address"
-                    name="address"
-                    value={member.address ? member.address : ''}
+                    name="default_address"
+                    value={member.default_address ? member.default_address : ''}
                     onChange={handleChange}
                   />
                 </div>
@@ -139,8 +136,8 @@ const EditProfile = () => {
                 type="text"
                 className="form-control phone__input c-form__input"
                 id="InputPhone"
-                name="tel"
-                value={member.tel ? member.tel : ''}
+                name="default_tel"
+                value={member.default_tel ? member.default_tel : ''}
                 onChange={handleChange}
               />
             </div>
