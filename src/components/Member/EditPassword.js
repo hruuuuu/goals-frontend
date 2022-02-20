@@ -65,6 +65,7 @@ const EditPassWord = () => {
                 className="form-control password__input__input c-form__input"
                 id="OldPassword"
                 placeholder="請輸入..."
+                autoComplete="on"
                 name="oldpassword"
                 value={member.oldpassword}
                 onChange={handleChange}
@@ -79,6 +80,7 @@ const EditPassWord = () => {
                 className="form-control password__input__input c-form__input"
                 id="NewPassword"
                 placeholder="請輸入..."
+                autoComplete="on"
                 name="newpassword"
                 value={member.newpassword}
                 onChange={handleChange}
@@ -96,6 +98,7 @@ const EditPassWord = () => {
                 className="form-control password__input__input c-form__input"
                 id="ConfirmPassword"
                 placeholder="請輸入..."
+                autoComplete="on"
                 name="confirmpassword"
                 value={member.confirmpassword}
                 onChange={handleChange}

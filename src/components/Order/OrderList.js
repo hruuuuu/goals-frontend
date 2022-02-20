@@ -81,32 +81,44 @@ const OrderList = () => {
           })}
         </table>
       </div>
-      {/* <div className="d-flex d-lg-none justify-content-center mb-3 ">
-        <div className="card cardorder ">
-          <div onClick={handleShow} className="card-body ">
-            <h5 className="card-title">1111</h5>
-            <h6 className="card-subtitle mb-2 text-muted">訂單日期</h6>
-            <div className="card-text">
-              <div className="orderline">
-                <div className="my-3 d-flex justify-content-between">
-                  <div>付款狀態</div>
-                  <div>已付款</div>
-                </div>
 
-                <div className="my-3 d-flex justify-content-between">
-                  <div>訂單狀態</div>
-                  <div>準備中</div>
-                </div>
+      {/* RWD */}
+      {data.map((order) => {
+        return (
+          <div
+            className="d-flex d-lg-none justify-content-center mb-3 "
+            key={order.id}
+          >
+            <div className="card cardorder ">
+              <div onClick={handleShow} className="card-body ">
+                <h5 className="card-title">{order.id}</h5>
+                <div className="card-text">
+                  <div className="my-3 d-flex justify-content-between">
+                    <div>訂單日期</div>
+                    <div>{order.create_at}</div>
+                  </div>
+                  <div className="orderline">
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>付款狀態</div>
+                      <div>{order.payment_status}</div>
+                    </div>
 
-                <div className="my-3 d-flex justify-content-between">
-                  <div>付款狀態</div>
-                  <div>$123</div>
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>訂單狀態</div>
+                      <div>{order.order_status}</div>
+                    </div>
+
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>總計</div>
+                      <div>{order.price * order.amount}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div> */}
+        );
+      })}
       <Modal centered show={show} onHide={handleClose} animation={false}>
         <Modal.Header>
           <Modal.Title>您的訂單詳情</Modal.Title>
