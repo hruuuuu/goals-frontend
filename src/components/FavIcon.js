@@ -12,14 +12,13 @@ function FavIcon(props) {
   const hasLocalStorage = localStorage.getItem('fav');
   const isEmptyState = favItemsArr.length === 0;
 
-  const favItems = localStorage
-    .getItem('fav')
-    .split(',')
-    .map((item) => parseInt(item, 10));
-
   /* 一開始載入時先取出local storage的收藏陣列 設定到資料state */
   useEffect(() => {
     if (hasLocalStorage) {
+      const favItems = localStorage
+        .getItem('fav')
+        .split(',')
+        .map((item) => parseInt(item, 10));
       setFavItemsArr([...favItems]);
     } else {
       localStorage.setItem('fav', '');
