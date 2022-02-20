@@ -13,7 +13,7 @@ import FavIcon from '../FavIcon';
 
 function ProductItem(props) {
   const { product } = props;
-  const { id, image, name, calories, price } = product;
+  const { id, image, name, calories, price, discountPrice } = product;
   const { show, setShow } = useShow();
   const { categoryData } = useCategory();
   const { activityData } = useActivity();
@@ -27,8 +27,6 @@ function ProductItem(props) {
   const handleShow = () => {
     setShow({ ...setShow, in: true });
   };
-
-  const discountPrice = Math.ceil(price * activity.discount);
 
   /* 拿到ActivityContext的資料後跟product的activity_id關聯  */
   useEffect(() => {

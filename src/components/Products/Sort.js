@@ -20,16 +20,16 @@ function Sort() {
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
-              navigate(`/product?sort=${e.target.value}`);
+              navigate(`/product?sortBy=${e.target.value}`);
             }}
           >
             <option value="default" disabled>
-              商品排序依
+              商品排序依...
             </option>
-            <option value="discountPriceDesc">價格高→低</option>
-            <option value="discountPriceAsc">價格低→高</option>
-            <option value="caloriesDesc">熱量高→低</option>
-            <option value="caloriesAsc">熱量低→高</option>
+            <option value="priceDesc">價格高 → 低</option>
+            <option value="priceAsc">價格低 → 高</option>
+            <option value="caloriesDesc">熱量高 → 低</option>
+            <option value="caloriesAsc">熱量低 → 高</option>
           </select>
         </div>
         <Link

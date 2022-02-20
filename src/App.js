@@ -30,7 +30,7 @@ function App() {
           withCredentials: true,
         });
         const products = productResponse.data;
-        setProductsData([...productsData, ...products]);
+        setProductsData([...products]);
 
         //api/product/category
         const categoryResponse = await axios.get(
@@ -40,14 +40,14 @@ function App() {
           }
         );
         const categories = categoryResponse.data;
-        setCategoryData([...categoryData, ...categories]);
+        setCategoryData([...categories]);
 
         //api/product/activity
         const activityResponse = await axios.get(`${API_URL}/activity`, {
           withCredentials: true,
         });
         const activities = activityResponse.data;
-        setActivityData([...activityData, ...activities]);
+        setActivityData([...activities]);
       } catch (error) {
         console.log(error);
       }

@@ -24,6 +24,7 @@ function FavItem(props) {
     price,
     category_id,
     activity_id,
+    discountPrice,
   } = product;
   const [category, setCategory] = useState({
     id: '',
@@ -37,8 +38,6 @@ function FavItem(props) {
 
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
-
-  const discountPrice = Math.ceil(price * activity.discount);
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
