@@ -108,7 +108,7 @@ const CalculatorForm = () => {
             </div>
           </div>
           <div className="col-sm-12 calculator__form--btn">
-            <button type="submit" class="e-btn--primary e-btn--medium">
+            <button type="submit" className="e-btn--primary e-btn--medium">
               送出
             </button>
           </div>
