@@ -9,6 +9,7 @@ function CartList(props) {
   // const [cart, setCart] = useState([]);
 
   const isFetching = cartListData.length === 0;
+
   // console.log(cartListData);
   // let cartList = JSON.parse(localStorage.getItem('cartList'));
   // setCartListData([...cartListData, cartList]);
