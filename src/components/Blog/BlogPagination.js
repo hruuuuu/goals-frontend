@@ -10,7 +10,12 @@ const BlogPagination = (props) => {
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className="page-item">
-            <button to="" className="page-link" aria-label="Previous">
+            <button
+              type="bottom"
+              className="page-link"
+              aria-label="Previous"
+              onClick={() => navigate(-1)}
+            >
               <span aria-hidden="true">&laquo;</span>
             </button>
           </li>
@@ -39,14 +44,26 @@ const BlogPagination = (props) => {
             </button>
           </li>
           <li className="page-item">
-            <Link to="" className="page-link">
+            <button
+              type="bottom"
+              className="page-link"
+              onClick={(e) => {
+                setPage(3);
+                navigate(`/blog?page=3`);
+              }}
+            >
               3
-            </Link>
+            </button>
           </li>
           <li className="page-item">
-            <Link to="" className="page-link" aria-label="Next">
+            <button
+              type="bottom"
+              className="page-link"
+              aria-label="Next"
+              onClick={() => navigate(1)}
+            >
               <span aria-hidden="true">&raquo;</span>
-            </Link>
+            </button>
           </li>
         </ul>
       </nav>

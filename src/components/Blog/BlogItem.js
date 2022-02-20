@@ -35,10 +35,25 @@ const BlogItem = () => {
     for (let i = 1; i <= lastPage; i++) {
       pages.push(
         <li
+          style={{
+            display: 'inline-flex',
+            margin: '2px',
+            backgroundColor: page === i ? '#6b9c66' : '',
+            borderColor: page === i ? '#6b9c66' : '#dbdbdb',
+            color: page === i ? '#fff' : '#363636',
+            borderWidth: '1px',
+            width: '32px',
+            height: '32px',
+            borderRadius: '25px',
+            textAlign: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
           key={i}
           onClick={(e) => {
             setPage(i);
-            navigate(`/blog/${page}`);
+            navigate(`/blog?page=${page}`);
           }}
         >
           {i}
@@ -51,7 +66,6 @@ const BlogItem = () => {
   return (
     <>
       {error && <div>{error}</div>}
-      <ul>{getPages()}</ul>
       <ul className="blogList clearfix">
         {data.map((blog) => {
           return (
@@ -89,7 +103,9 @@ const BlogItem = () => {
           );
         })}
       </ul>
-      <BlogPagination setPage={setPage} />
+      <ul style={{ textAlign: 'center', marginTop: '25px' }}>{getPages()}</ul>
+
+      {/* <BlogPagination setPage={setPage} /> */}
     </>
   );
 };
