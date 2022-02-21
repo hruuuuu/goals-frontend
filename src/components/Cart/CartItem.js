@@ -9,12 +9,13 @@ function CartItem(props) {
   const [subtotal, setSubtotal] = useState(0);
   const { cartListData, setCartListData } = useCartList();
   const { product } = props;
-  const { id, image, name, price, amount } = product;
+  const { id, image, name, price, amount, discountPrice } = product;
 
   useEffect(() => {
     setCount(amount);
-    setSubtotal(price * amount);
-  }, []);
+    // const discountPriceTotal = discountPrice * amount;
+    setSubtotal(discountPrice * amount);
+  }, [amount]);
 
   //移除商品、更新localStorage的value
   const removeItemFromCart = () => {
@@ -34,7 +35,7 @@ function CartItem(props) {
           />
         </div>
         <div className="cartItem__name">{name}</div>
-        <div className="cartItem__price txt_grn">${price}</div>
+        <div className="cartItem__price txt_grn">${discountPrice}</div>
         <div className="cartItem__qty_btn">
           <div className="qty_btn">
             <div className="d-flex align-items-center justify-content-center">
@@ -45,7 +46,7 @@ function CartItem(props) {
                   if (count <= 1) {
                     return setCount(1);
                   }
-                  setSubtotal((count - 1) * price);
+                  setSubtotal((count - 1) * discountPrice);
                 }}
               >
                 <i className="fas fa-minus icon_grn"></i>
@@ -55,7 +56,7 @@ function CartItem(props) {
                 className="btn"
                 onClick={() => {
                   setCount(count + 1);
-                  setSubtotal((count + 1) * price);
+                  setSubtotal((count + 1) * discountPrice);
                 }}
               >
                 <i className="fas fa-plus icon_grn"></i>

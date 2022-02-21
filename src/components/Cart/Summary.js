@@ -1,15 +1,26 @@
 import { React, useEffect, useState } from 'react';
 import CheckoutModal from './CheckoutModal';
+import { useCartList } from '../../context/cart';
 
 function Summary(props) {
-  const { subtotal, setSubtotal } = props;
   const [total, setTotal] = useState();
   const [coupon, setCoupon] = useState();
   const [orderTotal, setOrderTotal] = useState();
+  const { cartListData, setCartListData } = useCartList();
 
   useEffect(() => {
-    setTotal(total);
-    setOrderTotal(total - coupon);
+    //總計
+    let allSubtotal = 0;
+    for (let i = 1; i < cartListData.length; i++) {
+      allSubtotal += cartListData[i].discountPrice * cartListData[i].amount;
+    }
+    // console.log(allSubtotal);
+    setTotal(allSubtotal);
+
+    //TODO:活動折扣
+
+    //應付金額
+    setOrderTotal(allSubtotal);
   }, []);
 
   return (
