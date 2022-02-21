@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Products from '../pages/Products';
@@ -14,7 +14,6 @@ import Calculator from '../pages/Calculator';
 import Blog from '../pages/Blog';
 import NotFound from '../pages/NotFound';
 import Signup from '../pages/Signup';
-import Login from '../pages/Login';
 import ResetPassword from '../pages/ResetPassword';
 
 import BlogArticle from '../components/Blog/BlogArticle';
@@ -138,16 +137,12 @@ const routerList = [
       },
     ],
   },
-  // {
-  //   path: `signup`,
-  //   element: <Login />,
-  // },
   {
     path: `login`,
     element: <Signup />,
   },
   {
-    path: `resetpassword`,
+    path: `/reset/:resetString`,
     element: <ResetPassword />,
   },
   {
