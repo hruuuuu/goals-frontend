@@ -44,9 +44,18 @@ function Footer() {
                 <div className="d-flex">
                   {footerLinks.map((group, i) => {
                     return (
+<<<<<<< HEAD
                       <ul key={i} className="l-footer__list me-5">
                         {group.map((link, i) => {
                           const { id, name } = link;
+=======
+                      <ul
+                        key={i}
+                        className="l-footer__list me-5 me-lg-4 me-xl-5"
+                      >
+                        {group.map((item, i) => {
+                          const { id, path, name } = item;
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
                           return (
                             <li key={id} className="l-footer__item">
                               <NavLink to="/" className="l-footer__link">

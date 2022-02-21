@@ -183,37 +183,97 @@ h6 {
   h6,
   p,
   span,
-  div {
+  div,
+  label,
+  input {
     cursor: $cursor;
   }
 }
 
+<<<<<<< HEAD
 .c-input {
   height: $height__input;
+=======
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: $color--gray5;
+    border-radius: 10rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color--primary;
+    border-radius: 10rem;
+    background-clip: content-box;
+  }
+}
 
-  border-radius: $border-radius__input;
-  @include text--small;
-  &::placeholder {
+.c-form {
+  $_: &;
+  &__input {
+    height: $height__input;
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
+
+    border-radius: $border-radius__input;
     @include text--small;
-    color: $color--gray4;
-  }
-  &[type="number"] {
-    text-align: end;
-  }
-  &[type="checkbox"] {
-    transition: $transition;
+    &::placeholder {
+      @include text--small;
+      color: $color--gray4;
+    }
+    &[type="number"] {
+      text-align: end;
+    }
+    &[type="checkbox"] {
+      transition: $transition;
+      &:focus {
+        border: $border__input;
+        box-shadow: none;
+      }
+      &:checked {
+        border: $border__input--checked;
+        background-color: $color--primary;
+      }
+    }
     &:focus {
-      border: $border__input;
+      border: $border__input--focus;
       box-shadow: none;
     }
-    &:checked {
-      border: $border__input--checked;
-      background-color: $color--primary;
+  }
+  &__label {
+    margin-bottom: 0.5rem;
+    @include text--small;
+    color: $color--gray3;
+  }
+  &__select {
+    height: $height__input;
+
+    @include text--small;
+    border-radius: $border-radius__input;
+    background-image: url("../img/common/icon/down.svg");
+    &:focus {
+      border: $border__input--focus;
+      box-shadow: none;
     }
   }
-  &:focus {
-    border: $border__input--focus;
-    box-shadow: none;
+  &--disabled {
+    #{$_}__input {
+      color: $color--disabled;
+      border: $border__input--disabled;
+    }
+  }
+  &--error {
+    #{$_}__label {
+      color: $border__input--error;
+    }
+    #{$_}__input {
+      border: $border__input--error;
+    }
+  }
+  &--success {
+    #{$_}__input {
+      border: $border__input--success;
+    }
   }
 }
 
@@ -222,6 +282,8 @@ h6 {
 
   display: flex;
   align-items: center;
+
+  @include cursor(pointer);
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -261,5 +323,20 @@ h6 {
   }
   &--medium {
     height: $height__btn--meduim;
+  }
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; //行數
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  overflow: hidden;
+  &--3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; //行數
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
   }
 }

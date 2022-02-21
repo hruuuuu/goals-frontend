@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap');
+
+.blogList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px 20px;
+  &__item {
+    border: 1px solid $color--gray5;
+    border-radius: 20px;
+    overflow: hidden;
+    &--Img {
+    }
+    &--Txt {
+      padding: 45px 30px 35px;
+      .listHead {
+        display: flex;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        .day {
+          padding-right: 15px;
+          width: 48px;
+          font-size: 33px;
+          font-weight: 500;
+          color: $color--gray3;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          font-family: 'Oswald', sans-serif;
+        }
+        .dateBox {
+          margin: 0px 0 13px;
+          display: flex;
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          width: calc(100% - 48px);
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(119, 114, 105, 0.2);
+          }
+          .date {
+            font-size: 14px;
+            font-weight: 300;
+            font-family: 'Oswald', sans-serif;
+            color: $color--gray3;
+            text-transform: uppercase;
+          }
+          .newIcon {
+            position: relative;
+            display: inline-block;
+            padding-left: 22px;
+            margin-left: 5px;
+            font-size: 14px;
+            font-weight: 300;
+            font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+            color: $color--gray3;
+          }
+        }
+      }
+      h4 {
+        margin-bottom: 25px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        line-height: 25px;
+        color: $color--gray2;
+        padding: 3px 0;
+        position: relative;
+        a {
+          color: $color--gray2;
+        }
+      }
+      p {
+        font-size: 13px;
+        font-weight: 300;
+        color: $color--gray3;
+        line-height: 1.8;
+      }
+    }
+  }
+
+  @media screen and (max-width: $lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: $md) {
+    &__item {
+      &--Txt {
+        padding: 40px 20px 35px;
+      }
+    }
+  }
+  @media screen and (max-width: $sm) {
+    grid-template-columns: 1fr;
+  }
+}

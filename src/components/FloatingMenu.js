@@ -1,23 +1,32 @@
 import { React, useState } from 'react';
+import MemberSidebar from './MemberSidebar';
+import CartMoblie from './Cart/CartMoblie';
 
 function FloatingMenu(props) {
   const [animation, setAnimation] = useState(false);
-  const { isDisplay, setIsDisplay } = props;
+  const { isDisplay, setIsDisplay, page } = props;
+  const isMember = page === 'member';
+
   return (
     <>
       <div
-        className={`c-floating-menu ${
+        className={`c-floating-menu c-floating-menu--${page} ${
           isDisplay &&
           'animation animation__floating-menu animation__floating-menu--in'
-        }
-          ${
-            animation &&
-            'animation animation__floating-menu animation__floating-menu--out'
-          }`}
+        } ${
+          animation &&
+          'animation animation__floating-menu animation__floating-menu--out'
+        }`}
       >
-        <div className="c-floating-menu__content">
+        <div className={`c-floating-menu__content`}>
           <div className="container">
-            <h2>FloatingMenu</h2>
+            {isMember ? (
+              <>
+                <MemberSidebar />
+              </>
+            ) : (
+              <CartMoblie />
+            )}
           </div>
         </div>
         <div

@@ -11,7 +11,13 @@ import NotFound from '../pages/NotFound';
 import ProductDetail from '../components/Products/ProductDetail';
 import Signup from '../pages/Signup';
 import Login from '../pages/Login';
+<<<<<<< HEAD
 import { Navigate } from 'react-router-dom';
+=======
+import ResetPassword from '../pages/ResetPassword';
+
+import BlogArticle from '../components/Blog/BlogArticle';
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
 
 import imgFood from '../img/common/illustration/food.svg';
 
@@ -77,7 +83,7 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `coupon`,
+        path: `coupon/*`,
         element: <Coupon />,
         breadcrumbName: '優惠券',
         header: '優惠券',
@@ -106,13 +112,17 @@ const routerList = [
     element: <Calculator />,
     breadcrumbName: '計算機',
   },
+  // {
+  //   path: `signup`,
+  //   element: <Login />,
+  // },
   {
-    path: `signup`,
+    path: `login`,
     element: <Signup />,
   },
   {
-    path: `login`,
-    element: <Login />,
+    path: `resetpassword`,
+    element: <ResetPassword />,
   },
   {
     path: '*',

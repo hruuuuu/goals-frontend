@@ -1,0 +1,61 @@
+.l-about-box {
+  padding-top: 50px;
+  .model__head {
+    margin-bottom: 80px;
+  }
+  .about-box__text {
+    width: 50%;
+    float: left;
+    padding-right: 60px;
+    h4 {
+      font-weight: 500;
+      margin-bottom: 30px;
+      padding-top: 20px;
+      border-top: 1px solid $color--gray4;
+    }
+    p {
+      line-height: 2;
+      letter-spacing: 1.5px;
+      color: $color--gray3;
+      font-weight: 300;
+      font-size: 16px;
+      padding-right: 45px;
+    }
+  }
+
+  @media screen and (max-width: $xxl) {
+    .about-box__text {
+      p {
+        padding-right: 0px;
+        font-size: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $xl) {
+    padding-top: 20px;
+    .model__head {
+      margin-bottom: 45px;
+    }
+    .about-box__text {
+      padding-right: 35px;
+    }
+  }
+
+  @media screen and (max-width: $lg) {
+    .model__head {
+      margin-bottom: 35px;
+    }
+    .about-box__text {
+      padding-bottom: 50px;
+      width: 100%;
+      float: none;
+      h4 {
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}

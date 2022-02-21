@@ -1,0 +1,7 @@
+.u-padding {
+  &__product-top {
+    @media screen and (max-width: $lg) {
+      padding-top: $height__floating-filter-body + 2.5rem;
+    }
+  }
+}

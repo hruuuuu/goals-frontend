@@ -1,8 +1,13 @@
 import { React, useState } from 'react';
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
+<<<<<<< HEAD
 import FloatingIcon from '../components/MemberSidebar/FloatingIcon';
 import FloatingModal from '../components/MemberSidebar/FloatingModal';
+=======
+import FloatingMember from '../components/FloatingMember';
+import CouponList from '../components/Coupon/CouponList';
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -10,6 +15,7 @@ function Coupon() {
     <>
       <Header />
       <div className="container">
+<<<<<<< HEAD
         <div className="row">
           <div className="col-md-3 d-none d-md-block">
             <MemberSidebar />
@@ -68,6 +74,14 @@ function Coupon() {
                 </div>
               </div>
             </div>
+=======
+        <div className="row gx-4">
+          <div className="col-lg-3 d-none d-lg-block">
+            <MemberSidebar />
+          </div>
+          <div className="col col-lg-9">
+            <CouponList />
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
           </div>
         </div>
 
@@ -79,6 +93,8 @@ function Coupon() {
           )}
         </div>
       </div>
+      {/* 浮動視窗 */}
+      <FloatingMember />
     </>
   );
 }

@@ -81,18 +81,18 @@
   animation-timing-function: ease-in-out;
   &__floating-menu {
     animation-duration: 0.5s;
-    @media screen and (min-width: $md) {
+    @media screen and (min-width: $lg) {
       animation-duration: 0.2s;
     }
     &--in {
       animation-name: slideInUp;
-      @media screen and (min-width: $md) {
+      @media screen and (min-width: $lg) {
         animation-name: fadeIn;
       }
     }
     &--out {
       animation-name: slideOutDown;
-      @media screen and (min-width: $md) {
+      @media screen and (min-width: $lg) {
         animation-name: fadeOut;
       }
     }

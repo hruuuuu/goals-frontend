@@ -1,3 +1,70 @@
+//txt
+.txt_org {
+  color: $color--secondary;
+}
+.txt_grn {
+  color: $color--primary;
+}
+.txt_bolder {
+  font-weight: bolder;
+}
+.txt_error {
+  color: $color--error;
+}
+.font_larger {
+  font-size: larger;
+}
+
+//icon
+.icon_grn {
+  color: $color--primary;
+}
+//btn
+.del_btn {
+  background-color: $color--light;
+  border: 1px solid $color--gray4;
+}
+.qty_btn {
+  background-color: $color--gray6;
+  border-radius: 0.5rem;
+}
+.del_btn {
+  width: $width__btn--square;
+  height: $height__btn--meduim;
+  border-radius: $border-radius__btn;
+}
+.btn_grn {
+  border: none;
+  background: $color--primary;
+  border-radius: $border-radius__btn;
+  color: $color--light;
+  box-shadow: $box-shadow__element;
+
+  transition: $transition;
+  &:hover {
+    background: $color--hover;
+  }
+  &:focus,
+  &:active {
+    background: $color--active;
+  }
+}
+.btn_outline {
+  border: $border__input;
+  border-radius: $border-radius__btn;
+  color: $color--gray2;
+  box-shadow: $box-shadow__element;
+
+  transition: $transition;
+  &:hover {
+    background: $color--hover;
+  }
+  &:focus,
+  &:active {
+    background: $color--active;
+  }
+}
+
 .mainContent {
   height: 70vh;
 }

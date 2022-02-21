@@ -8,7 +8,8 @@ import FilterCheckbox from './FilterCheckbox';
 const categories = ['素食餐盒', '增肌餐盒', '減脂餐盒'];
 const activities = ['新上市', '促銷中', '適用優惠券'];
 
-function Filter() {
+function Filter(props) {
+  const { device } = props;
   const maxPrice = 100;
   const valuetext = (value) => {
     return `${value}`;
@@ -40,7 +41,7 @@ function Filter() {
         <div className="d-flex align-items-center">
           <input
             type="number"
-            className="form-control c-range__input c-input"
+            className="form-control c-range__input c-form__input"
             inputMode="numeric"
             pattern="[0-9]*"
             value={value[0]}
@@ -51,7 +52,7 @@ function Filter() {
           <span className="c-range__text">~</span>
           <input
             type="number"
-            className="form-control c-range__input c-input"
+            className="form-control c-range__input c-form__input"
             inputMode="numeric"
             pattern="[0-9]*"
             value={value[1]}
@@ -65,6 +66,7 @@ function Filter() {
   };
   return (
     <>
+<<<<<<< HEAD
       <div className="c-product-filter">
         <div className="c-product-filter__wrapper">
           <h6 className="c-product-filter__title">
@@ -84,6 +86,29 @@ function Filter() {
                 autoComplete="off"
                 onChange={() => {}}
               />
+=======
+      <div className={`c-product-filter c-product-filter--${device}`}>
+        <h6 className="c-product-filter__title d-none d-lg-block">
+          <i className="fas fa-sliders-h e-icon e-icon--left e-icon--secondary"></i>
+          篩選
+        </h6>
+        <div className="c-product-filter__wrapper">
+          <div className="pe-3">
+            <div className="c-product-filter__search c-search">
+              <label htmlFor="search" className="form-label c-search__heading">
+                搜索
+              </label>
+              <div className="c-search__wrapper">
+                <input
+                  type="text"
+                  id="search"
+                  className="form-control c-search__input c-form__input"
+                  placeholder="輸入關鍵字"
+                  autoComplete="off"
+                  onChange={() => {}}
+                />
+              </div>
+>>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
             </div>
           </div>
           <div className="c-product-filter__price c-range">
