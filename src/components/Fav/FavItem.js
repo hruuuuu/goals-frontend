@@ -69,6 +69,7 @@ function FavItem(props) {
       name: product.name,
       image: product.image,
       price: product.price,
+      discountPrice: product.discountPrice,
       amount: number,
     };
 

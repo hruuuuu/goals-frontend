@@ -36,7 +36,7 @@ function CartMobileItem(props) {
         <div className="mobileCartItem__name">{name}</div>
         <div className="mobileCartItem__price d-flex">
           <p className="txt_gry">單價:</p>
-          <p className="txt_grn">${price}</p>
+          <p className="txt_grn">${discountPrice}</p>
         </div>
         <div className="mobileCartItem__qty_btn">
           <div className="qty_btn">
