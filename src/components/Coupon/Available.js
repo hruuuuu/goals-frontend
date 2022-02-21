@@ -24,6 +24,10 @@ const Available = () => {
     alert('領取成功');
   }
 
+  function deleteUserWithName(name) {
+    console.log(name);
+  }
+
   return (
     <>
       <div className="container">
@@ -59,7 +63,7 @@ const Available = () => {
                         className={
                           isActive ? 'couponBtn mt-3' : 'couponBtn1 mt-3'
                         }
-                        onClick={handleSubmit}
+                        onClick={() => deleteUserWithName(order.id)}
                       >
                         已領取
                       </button>
