@@ -2,6 +2,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import Home from '../pages/Home';
 import Products from '../pages/Products';
+// import ProductDetail from '../components/Products/ProductDetail';
+import Sort from '../components/Products/Sort';
 import Member from '../pages/Member';
 import Fav from '../pages/Fav';
 import Cart from '../pages/Cart';
@@ -38,6 +40,7 @@ const routerList = [
         breadcrumbName: '商品列表',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
       {
         path: `:productId`,

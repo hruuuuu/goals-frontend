@@ -2,7 +2,8 @@ import { React, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import { useProducts, useCategory, useActivity } from '../../context/products';
+import { useProducts, useCategory } from '../../context/products';
+import { useActivity } from '../../context/activity';
 import { API_URL } from '../../utils/config';
 
 import FilterCheckbox from './FilterCheckbox';

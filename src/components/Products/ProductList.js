@@ -1,20 +1,25 @@
 /* C/C */
 import { React, useState } from 'react';
+import Skeleton from '@mui/material/Skeleton';
 
 import { useProducts } from '../../context/products';
 
 import ProductItem from './ProductItem';
+import Sort from './Sort';
 
 function ProductList(props) {
   const { setShow } = props;
   const { productsData } = useProducts();
 
-  const hasData = productsData.length !== 0;
+  const isFetchingProducts = productsData.length === 0;
 
   return (
     <>
-      <div className="row gx-3 gx-md-5">
-        {hasData ? (
+      <div className="row gx-3 gx-md-5 gy-3">
+        <div className="d-flex d-sm-none justify-content-end">
+          <Sort />
+        </div>
+        {!isFetchingProducts ? (
           productsData.map((product, i) => {
             return (
               <ProductItem
@@ -26,10 +31,9 @@ function ProductList(props) {
           })
         ) : (
           <>
-            <h1>Page - Empty state</h1>
+            <h1>沒有符合條件的商品</h1>
           </>
         )}
-        {}
       </div>
     </>
   );

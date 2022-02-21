@@ -29,23 +29,25 @@ function FilterCheckbox(props) {
       {options.map((option, i) => {
         const { id, name, description } = option;
         return (
-          <div key={id} className="c-checkbox">
-            <input
-              type="checkbox"
-              className="form-check-input c-checkbox__input c-form__input"
-              id={`checkbox-${heading}-${id}`}
-              name={`${heading}[]`}
-              value={id}
-              autoComplete="off"
-              onChange={handleChange}
-            />
-            <label
-              htmlFor={`checkbox-${heading}-${id}`}
-              className="c-checkbox__label"
-            >
-              {fieldName === 'category' ? name : description}
-            </label>
-          </div>
+          id !== 0 && (
+            <div key={id} className="c-checkbox">
+              <input
+                type="checkbox"
+                className="form-check-input c-checkbox__input c-form__input"
+                id={`checkbox-${heading}-${id}`}
+                name={`${heading}[]`}
+                value={id}
+                autoComplete="off"
+                onChange={handleChange}
+              />
+              <label
+                htmlFor={`checkbox-${heading}-${id}`}
+                className="c-checkbox__label"
+              >
+                {fieldName === 'category' ? name : description}
+              </label>
+            </div>
+          )
         );
       })}
     </div>

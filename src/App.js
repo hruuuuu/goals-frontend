@@ -4,11 +4,9 @@ import axios from 'axios';
 
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
-import {
-  ProductsContext,
-  CategoryContext,
-  ActivityContext,
-} from './context/products';
+import { ProductsContext, CategoryContext } from './context/products';
+import { FavContext } from './context/fav';
+import { ActivityContext } from './context/activity';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
@@ -22,6 +20,8 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [activityData, setActivityData] = useState([]);
+  const [favItemsArr, setFavItemsArr] = useState([]);
+  const [favData, setFavData] = useState([]);
   useEffect(() => {
     (async () => {
       try {
@@ -30,7 +30,7 @@ function App() {
           withCredentials: true,
         });
         const products = productResponse.data;
-        setProductsData([...productsData, ...products]);
+        setProductsData([...products]);
 
         //api/product/category
         const categoryResponse = await axios.get(
@@ -40,17 +40,14 @@ function App() {
           }
         );
         const categories = categoryResponse.data;
-        setCategoryData([...categoryData, ...categories]);
+        setCategoryData([...categories]);
 
         //api/product/activity
-        const activityResponse = await axios.get(
-          `${API_URL}/product/activity`,
-          {
-            withCredentials: true,
-          }
-        );
+        const activityResponse = await axios.get(`${API_URL}/activity`, {
+          withCredentials: true,
+        });
         const activities = activityResponse.data;
-        setActivityData([...activityData, ...activities]);
+        setActivityData([...activities]);
       } catch (error) {
         console.log(error);
       }
@@ -59,15 +56,19 @@ function App() {
   return (
     <>
       <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <ActivityContext.Provider value={{ activityData, setActivityData }}>
-          <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
-            <ShowContext.Provider value={{ show, setShow }}>
-              <Navbar />
-              {useRoutes(routerList)}
-              <Footer />
-            </ShowContext.Provider>
-          </CategoryContext.Provider>
-        </ActivityContext.Provider>
+        <FavContext.Provider
+          value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
+        >
+          <ActivityContext.Provider value={{ activityData, setActivityData }}>
+            <CategoryContext.Provider value={{ categoryData, setCategoryData }}>
+              <ShowContext.Provider value={{ show, setShow }}>
+                <Navbar />
+                {useRoutes(routerList)}
+                <Footer />
+              </ShowContext.Provider>
+            </CategoryContext.Provider>
+          </ActivityContext.Provider>
+        </FavContext.Provider>
       </ProductsContext.Provider>
     </>
   );

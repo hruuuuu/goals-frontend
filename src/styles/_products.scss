@@ -262,7 +262,7 @@
   &__row {
     margin-bottom: 0.125rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     &:last-of-type {
       margin-bottom: 0;
@@ -454,5 +454,25 @@
       display: -webkit-box;
       overflow: hidden;
     }
+  }
+}
+
+.l-product {
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0 0 0.5rem 0);
+    height: 12.5rem;
+  }
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
+  }
+}
+
+.l-fav {
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0);
+    height: 10rem;
+  }
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
   }
 }
