@@ -81,7 +81,7 @@ function ProductItem(props) {
     <>
       {!isFetchingCategory && !isFetchingActivity ? (
         <>
-          <div className="col-6 col-md-4 col-lg-6 col-xl-4">
+          <div className="col-6 col-md-6 col-xl-4">
             <div className="c-product-item">
               <div className="c-product-item__cover">
                 <Link to={`/product/${id}`} onClick={handleShow}>
@@ -130,7 +130,7 @@ function ProductItem(props) {
         </>
       ) : (
         <>
-          <div className="col-6">
+          <div className="col-6 col-md-6 col-xl-4">
             <Skeleton variant="rectangular" animation="wave" />
             <Skeleton variant="text" animation="wave" />
             <Skeleton variant="text" animation="wave" />
