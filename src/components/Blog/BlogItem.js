@@ -57,7 +57,7 @@ const BlogItem = () => {
           key={i}
           onClick={(e) => {
             setPage(i);
-            navigate(`/blog?page=${page}`);
+            navigate(`/blog?page=${i}`);
           }}
         >
           {i}
