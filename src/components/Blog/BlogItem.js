@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../utils/config.js';
-import BlogPagination from './BlogPagination.js';
+// import BlogPagination from './BlogPagination.js';
 
 const BlogItem = () => {
   const [error, setError] = useState(null);
@@ -10,13 +10,17 @@ const BlogItem = () => {
   // 總共有 lastPage 這麼多頁
   const [lastPage, setLastPage] = useState(1);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   let navigate = useNavigate();
 
-  const { currentPage } = useParams();
-  // /stock/2330 => currnetPage 會是 undefined
-  // /stock/2330/2 => currentPage 會是 2
-  const [page, setPage] = useState(parseInt(currentPage, 4) || 1);
-  console.log('currentPage', currentPage, page);
+  // searchCurrent = 抓queryString的數字當作currentPage
+  const searchCurrent = searchParams.get('page');
+  console.log(searchCurrent);
+  // /blog => searchCurrent 會是 null
+  // /blog?page=1 => searchCurrent 會是 1
+  const [page, setPage] = useState(parseInt(searchCurrent, 10) || 1);
+  console.log('currentPage', searchCurrent, page);
 
   useEffect(() => {
     let getBlog = async () => {
