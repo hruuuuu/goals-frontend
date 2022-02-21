@@ -18,6 +18,7 @@ import Login from '../pages/Login';
 import ResetPassword from '../pages/ResetPassword';
 
 import BlogArticle from '../components/Blog/BlogArticle';
+import Chat from '../components/Chat';
 
 import imgFood from '../img/common/illustration/food.svg';
 
@@ -150,6 +151,10 @@ const routerList = [
   {
     path: `resetpassword`,
     element: <ResetPassword />,
+  },
+  {
+    path: `chat`,
+    element: <Chat />,
   },
   {
     path: '*',
