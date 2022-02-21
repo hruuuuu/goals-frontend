@@ -45,8 +45,8 @@ function ReceiveList() {
                         </p>
                       </div>
                     </div>
-                    <button className="couponBtn">已領取</button>
-                    <div className="remain-coupon">剩餘{order.amount}張</div>
+
+                    {/* <div className="remain-coupon">剩餘{order.amount}張</div> */}
                   </div>
                 </div>
               </div>
