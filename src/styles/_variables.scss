@@ -77,11 +77,13 @@ $height__input: 2.75rem;
 $height__floating-menu: 31.25rem;
 $height__floating-filter-body: 4.75rem;
 $height__floating-filter: $height__navbar + $height__floating-filter-body;
+$height__chat-block: 3.75rem;
 
 /* padding */
 $padding__modal: 2.5rem;
 $padding__modal--md: 1.25rem;
 $padding__chat: 1.25rem;
+$padding__chat-msg: 0.625rem;
 
 /* floating icon */
 $radius__floating-icon: 3.75rem;

@@ -255,6 +255,7 @@ h6 {
   &__input {
     height: $height__input;
 
+    border: $border__input;
     border-radius: $border-radius__input;
     @include text--small;
     &::placeholder {
@@ -275,7 +276,8 @@ h6 {
         background-color: $color--primary;
       }
     }
-    &:focus {
+    &:focus,
+    &:focus-visible {
       border: $border__input--focus;
       box-shadow: none;
     }
