@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Router, Route, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import axios from 'axios';
 
 import { API_URL } from './utils/config';
@@ -10,6 +10,9 @@ import { ProductsContext, CategoryContext } from './context/products';
 import { FavContext } from './context/fav';
 import { ActivityContext } from './context/activity';
 
+// import { ShowContext } from './context/ProductDetail';
+import { LoginContext } from './context/LoginStatus';
+
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -18,6 +21,13 @@ function App() {
   const [show, setShow] = useState({
     in: false,
     out: false,
+  });
+  const [login, setLogin] = useState(false);
+  const [loginOption, setLoginOption] = useState({
+    normal: false,
+    google: false,
+    facebook: false,
+    line: false,
   });
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -29,6 +39,9 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
+        // api/login
+        const checkStatus = localStorage.getItem('login');
+        setLogin(checkStatus);
         //api/product
         const productResponse = await axios.get(`${API_URL}/product`, {
           withCredentials: true,
@@ -69,25 +82,31 @@ function App() {
 
   return (
     <>
-      <ProductsContext.Provider value={{ productsData, setProductsData }}>
-        <CartListContext.Provider value={{ cartListData, setCartListData }}>
-          <FavContext.Provider
-            value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
-          >
-            <ActivityContext.Provider value={{ activityData, setActivityData }}>
-              <CategoryContext.Provider
-                value={{ categoryData, setCategoryData }}
+      <LoginContext.Provider
+        value={{ login, setLogin, loginOption, setLoginOption }}
+      >
+        <ProductsContext.Provider value={{ productsData, setProductsData }}>
+          <CartListContext.Provider value={{ cartListData, setCartListData }}>
+            <FavContext.Provider
+              value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
+            >
+              <ActivityContext.Provider
+                value={{ activityData, setActivityData }}
               >
-                <ShowContext.Provider value={{ show, setShow }}>
-                  <Navbar />
-                  {useRoutes(routerList)}
-                  <Footer />
-                </ShowContext.Provider>
-              </CategoryContext.Provider>
-            </ActivityContext.Provider>
-          </FavContext.Provider>
-        </CartListContext.Provider>
-      </ProductsContext.Provider>
+                <CategoryContext.Provider
+                  value={{ categoryData, setCategoryData }}
+                >
+                  <ShowContext.Provider value={{ show, setShow }}>
+                    <Navbar />
+                    {useRoutes(routerList)}
+                    <Footer />
+                  </ShowContext.Provider>
+                </CategoryContext.Provider>
+              </ActivityContext.Provider>
+            </FavContext.Provider>
+          </CartListContext.Provider>
+        </ProductsContext.Provider>
+      </LoginContext.Provider>
     </>
   );
 }

@@ -11,7 +11,6 @@ const Blog = () => {
       <Header />
       <div className="container">
         <BlogItem />
-        <BlogPagination />
       </div>
     </>
   );
