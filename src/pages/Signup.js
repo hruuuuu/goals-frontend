@@ -6,10 +6,12 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useLogin } from '../context/LoginStatus';
 import Image from '../img/sign/login.jpg';
+import GoogleLogin from 'react-google-login';
+// import { LineLogin } from 'reactjs-line-login';
 
 const Signup = () => {
   const history = useNavigate();
-  const { login, setLogin } = useLogin();
+  const { login, setLogin, loginOption, setLoginOption } = useLogin();
   // 切換看得到/看不到密碼
   const [passwordField, setPasswordField] = useState(false);
   const [confirmPasswordField, setConfirmPasswordField] = useState(false);
@@ -52,7 +54,7 @@ const Signup = () => {
     e.preventDefault();
     if (!page) {
       const forgetEmail = await axios.post(
-        'http://127.0.0.1:3002/api/verify/forget',
+        'http://localhost:3002/api/verify/forget',
         data,
         { withCredentials: true }
       );
@@ -61,7 +63,7 @@ const Signup = () => {
     } else {
       console.log(data);
       const reVerifyEmail = await axios.post(
-        'http://127.0.0.1:3002/api/verify/resend',
+        'http://localhost:3002/api/verify/resend',
         data,
         { withCredentials: true }
       );
@@ -72,6 +74,35 @@ const Signup = () => {
       }
     }
   };
+
+  // google登入
+  const handleGoogleLogIn = async (googleData) => {
+    const loginResult = await axios.post(
+      'http://localhost:3002/api/social/google',
+      { access_token: googleData.accessToken },
+      {
+        withCredentials: true,
+      }
+    );
+
+    console.log(loginResult);
+    if (loginResult.status === 200) {
+      localStorage.setItem('login', true);
+      setLogin(true);
+      setLoginOption({
+        ...loginOption,
+        google: true,
+      });
+    }
+    history('/');
+  };
+
+  // facebook登入
+  // const handleFacebookLogIn = async () => {
+  //   const loginResult = await axios.post(
+  //     'http://localhost:3002/api/social/facebook'
+  //   );
+  // };
 
   // 登入初值
   const loginInitValue = {
@@ -127,6 +158,15 @@ const Signup = () => {
       closeEye: 'fas fa-eye-slash',
     });
 
+    // 設定剛載入頁面時一開始的cookie樣式
+    // useEffect(() => {
+    //   const cookies = new Cookies();
+    //   cookies.set('client', 'test', {
+    //     sameSite: 'none',
+    //     secure: true,
+    //   });
+    // });
+
     if (login) {
       return <Navigate to="/" />;
     }
@@ -169,20 +209,24 @@ const Signup = () => {
     try {
       if (!page) {
         const loginData = await axios.post(
-          'http://127.0.0.1:3002/api/auth/login',
+          'http://localhost:3002/api/auth/login',
           values,
           { withCredentials: true }
         );
         if (loginData.status === 200) {
           localStorage.setItem('login', true);
           setLogin(true);
+          setLoginOption({
+            ...loginOption,
+            normal: true,
+          });
         } else {
           console.log(loginData);
         }
         history('/');
       } else {
         const signupData = await axios.post(
-          'http://127.0.0.1:3002/api/auth/signup',
+          'http://localhost:3002/api/auth/signup',
           values,
           { withCredentials: true }
         );
@@ -293,12 +337,32 @@ const Signup = () => {
                 &mdash;
               </p>
               <div className="another-login_buttons">
-                <button className="another-login_button google">
+                <GoogleLogin
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText="Google"
+                  onSuccess={handleGoogleLogIn}
+                  onFailure={handleGoogleLogIn}
+                  // isSignedIn={true}
+                />
+                {/* <button
+                  className="another-login_button google"
+                  onClick={onSignIn}
+                >
                   <i className="fab fa-google"></i>
-                </button>
-                <button className="another-login_button facebook">
+                </button> */}
+                {/* <FacebookLogin
+                  // className="facebook-login"
+                  // appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
+                  // fields="name,email"
+                  // icon="fa-facebook"
+                  // textButton="Facebook"
+                  // onClick={handleFacebookLogIn}
+                  // callback={responseFacebook}
+                /> */}
+                {/* <button className="another-login_button facebook">
                   <i className="fab fa-facebook"></i>
-                </button>
+                </button> */}
+                {/* <LineLogin /> */}
                 <button className="another-login_button line">
                   <i className="fab fa-line"></i>
                 </button>

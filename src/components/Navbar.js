@@ -4,21 +4,57 @@ import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
 import { useLogin } from '../context/LoginStatus';
+import { GoogleLogout } from 'react-google-login';
 
 function Navbar() {
-  const { login, setLogin } = useLogin();
+  const { login, setLogin, loginOption, setLoginOption } = useLogin();
   const history = useNavigate();
+
   const handleLogout = async () => {
     localStorage.clear();
     setLogin(false);
+    setLoginOption({
+      ...loginOption,
+      normal: false,
+    });
     const logoutResult = await axios.post(
-      'http://127.0.0.1:3002/api/auth/logout',
+      'http://localhost:3002/api/auth/logout',
       {
         withCredentials: true,
       }
     );
     console.log(logoutResult);
     if (logoutResult.status === 200) {
+      history('/');
+    }
+  };
+
+  const deleteAllCookies = () => {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    }
+  };
+
+  const handleGoogleLogout = async () => {
+    setLogin(false);
+    setLoginOption({
+      ...loginOption,
+      google: false,
+    });
+    const logoutResult = await axios.post(
+      'http://localhost:3002/api/social/logout',
+      {
+        withCredentials: true,
+      }
+    );
+    console.log(logoutResult);
+    if (logoutResult.status === 200) {
+      sessionStorage.clear();
+      localStorage.clear();
+      deleteAllCookies();
       history('/');
     }
   };
@@ -44,12 +80,22 @@ function Navbar() {
       route: `/blog`,
     },
   ];
+
   const navActions = [
     {
       id: 1,
       name: !login ? '註冊/登入' : '登出',
       iconMobile: !login ? (
         <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ) : login && !loginOption['normal'] ? (
+        <GoogleLogout
+          className="google-logout"
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          buttonText={
+            <i className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+          }
+          onLogoutSuccess={handleGoogleLogout}
+        ></GoogleLogout>
       ) : (
         <i
           className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
@@ -58,6 +104,13 @@ function Navbar() {
       ),
       iconDesktop: !login ? (
         <i className="fas fa-user l-navbar__font"></i>
+      ) : login && !loginOption['normal'] ? (
+        <GoogleLogout
+          className="google-logout"
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          buttonText={<i className="fas fa-sign-out-alt l-navbar__font"></i>}
+          onLogoutSuccess={handleGoogleLogout}
+        ></GoogleLogout>
       ) : (
         <i
           className="fas fa-sign-out-alt l-navbar__font"
@@ -65,7 +118,13 @@ function Navbar() {
         ></i>
       ),
       tagDesktop: ``,
-      route: `${!login ? '/login' : '/logout'}`,
+      route: `${
+        !login
+          ? '/login'
+          : login && !loginOption['normal']
+          ? '/social/logout'
+          : '/logout'
+      }`,
     },
     {
       id: 2,

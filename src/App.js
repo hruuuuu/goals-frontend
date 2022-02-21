@@ -14,13 +14,21 @@ function App() {
     out: false,
   });
   const [login, setLogin] = useState(false);
+  const [loginOption, setLoginOption] = useState({
+    normal: false,
+    google: false,
+    facebook: false,
+    line: false,
+  });
   useEffect(() => {
     const checkStatus = localStorage.getItem('login');
     setLogin(checkStatus);
   }, []);
   return (
     <>
-      <LoginContext.Provider value={{ login, setLogin }}>
+      <LoginContext.Provider
+        value={{ login, setLogin, loginOption, setLoginOption }}
+      >
         <ShowContext.Provider value={{ show, setShow }}>
           <Navbar />
           {useRoutes(routerList)}
