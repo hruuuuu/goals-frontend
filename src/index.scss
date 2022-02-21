@@ -1,37 +1,40 @@
 // 這個檔案只連結其他scss檔
-@import './styles/_variables.scss';
-@import './styles/_reset.scss';
-@import './styles/_global.scss';
-@import './styles/_common.scss';
-@import './styles/_animation.scss';
+@import "./styles/_variables.scss";
+@import "./styles/_reset.scss";
+@import "./styles/_global.scss";
+@import "./styles/_common.scss";
+@import "./styles/_animation.scss";
 
 // 靜態頁面
-@import './styles/_about.scss';
-@import './styles/_blog.scss';
-@import './styles/_calculator.scss';
+@import "./styles/_about.scss";
+@import "./styles/_blog.scss";
+@import "./styles/_calculator.scss";
 
 // 商品
-@import './styles/_products.scss';
-@import './styles/_summary.scss';
+@import "./styles/_products.scss";
+@import "./styles/_summary.scss";
 
 // 購物車
-@import './styles/_cart.scss';
-@import './styles/_cartItem.scss';
-@import './styles/_cartList.scss';
-@import './styles/_order.scss';
-@import './styles/_coupon.scss';
-@import './styles/_floatingmenu.scss';
-@import './styles/_cartStepper.scss';
-@import './styles/_checkoutModal.scss';
+@import "./styles/_cart.scss";
+@import "./styles/_cartItem.scss";
+@import "./styles/_cartList.scss";
+@import "./styles/_order.scss";
+@import "./styles/_coupon.scss";
+@import "./styles/_floatingmenu.scss";
+@import "./styles/_cartStepper.scss";
+@import "./styles/_checkoutModal.scss";
 
 // 會員
-@import './styles/_sidebar.scss';
-@import './styles/_member.scss';
+@import "./styles/_sidebar.scss";
+@import "./styles/_member.scss";
 
 // 登入登出
-@import './styles/_login.scss';
-@import './styles/_signup.scss';
-@import './styles/_resetPassword.scss';
+@import "./styles/_login.scss";
+@import "./styles/_signup.scss";
+@import "./styles/_resetPassword.scss";
 
-//這個scss請幫我保留在最下面
-@import './styles/_dynamic.scss';
+// 管理員
+@import "./styles/admin.scss";
+
+// 這個scss請幫我保留在最下面
+@import "./styles/_dynamic.scss";
