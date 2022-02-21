@@ -357,6 +357,12 @@
   &--btn {
     font-size: 1.5rem;
   }
+  &--light {
+    color: $color--light;
+  }
+  &--medium {
+    font-size: 1.25rem;
+  }
 }
 
 .l-footer {
@@ -660,7 +666,7 @@
         border-bottom-left-radius: 0;
         border-top-right-radius: 0;
 
-        top: 50%;
+        top: calc(50% - $radius__floating-icon);
         right: 0;
         transform: translateY(-50%);
       }
@@ -676,7 +682,7 @@
       border-top-right-radius: 0;
 
       position: fixed;
-      top: calc(50% + $diameter__floating-icon);
+      top: calc(50% + $radius__floating-icon);
       right: 0;
       transform: translateY(-50%);
       @media screen and (max-width: $lg) {
@@ -894,6 +900,7 @@
 }
 
 .c-chat {
+  $_: &;
   height: 100%;
 
   position: relative;
@@ -913,12 +920,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
+  }
+  &__close {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+  &__date {
+    margin-bottom: 1.5rem;
+    @include text--small-bold;
+    color: $color--gray4;
+    text-align: center;
   }
   &__content {
     height: calc(100% - $height__chat-block - 5.25rem);
     padding: $padding__chat;
 
     @include scrollbar;
+    overflow-x: hidden;
     overflow-y: auto;
   }
   &__title {
@@ -944,31 +966,43 @@
     height: $size__icon-btn;
   }
   &__icon {
-    color: $color--primary;
     font-size: 1.25rem;
   }
   &__msg {
     width: max-content;
     max-width: 60%;
     padding: $padding__chat-msg;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 
     @include text--small;
     border-radius: $border-radius__input;
 
     clear: both;
     display: block;
+    position: relative;
     &[sender="user"] {
       color: $color--light;
       background: $color--info;
 
       float: right;
+      #{$_}__time {
+        left: -3rem;
+      }
     }
     &[sender="admin"] {
       color: $color--font;
       background: $color--gray6;
 
       float: left;
+      #{$_}__time {
+        right: -3rem;
+      }
     }
+  }
+  &__time {
+    @include text--extra-small;
+    color: $color--gray4;
+    position: absolute;
+    bottom: 0;
   }
 }

@@ -1,26 +1,33 @@
 import { React, useState, useEffect } from 'react';
-import socket from 'socket.io-client';
+import io from 'socket.io-client';
+import dayjs from 'dayjs';
 
 import { BE_URL } from '../utils/config';
 
 function AdminChat() {
-  const [ws, setWs] = useState();
+  const [socket, setSocket] = useState();
   const [sendingMessage, setSendingMessage] = useState('');
-  const roomName = 'id';
+  const roomName = 'memberId';
 
   const initWebSocket = () => {
     /* on: 監聽指定這個頻道 得到從server傳來的訊息 */
-    // ws.on('connect', () => {
-    //   console.log(ws.id);
+    // socket.on('connect', () => {
+    //   console.log(socket.id);
     // });
-    ws.on(roomName, (message) => {
+    socket.on(roomName, (message) => {
       console.log(message);
     });
+    socket.emit(`join chat ${roomName}`, { identity: 'admin' });
   };
 
   const sendMessage = () => {
     // emit: 指定頻道 傳送訊息給server
-    ws.emit(roomName, { sender: 'admin', message: sendingMessage });
+    const time = dayjs().format('HH:mm');
+    socket.emit(roomName, {
+      sender: 'admin',
+      message: sendingMessage,
+      sentAt: time,
+    });
     setSendingMessage('');
   };
 
@@ -29,11 +36,11 @@ function AdminChat() {
   };
 
   useEffect(() => {
-    setWs(socket(BE_URL, { withCredentials: true }));
+    setSocket(io(BE_URL, { withCredentials: true }));
   }, []);
 
   useEffect(() => {
-    if (ws) {
+    if (socket) {
       try {
         initWebSocket();
         console.log('連線成功');
@@ -41,7 +48,7 @@ function AdminChat() {
         console.log(error);
       }
     }
-  }, [ws]);
+  }, [socket]);
 
   return (
     <>

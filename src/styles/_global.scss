@@ -394,6 +394,10 @@ h6 {
     height: $height__btn--meduim;
   }
   &--icon {
+    width: $size__icon-btn;
+    height: $size__icon-btn;
+    padding: 0;
+
     background: transparent;
     border: none;
   }
