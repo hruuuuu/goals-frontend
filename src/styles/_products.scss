@@ -204,6 +204,22 @@
     background: $color--primary;
     border-radius: $border-radius__input;
   }
+  .css-a88p61-MuiInputBase-root-MuiInput-root {
+    height: $height__input;
+    &:before {
+      display: none;
+    }
+    &:after {
+      display: none;
+    }
+    input {
+      @include text--small;
+      &::placeholder {
+        @include text--small;
+        color: $color--gray4;
+      }
+    }
+  }
 }
 
 .c-product-item {
@@ -218,7 +234,7 @@
   &__row {
     margin-bottom: 0.125rem;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     &:last-of-type {
       margin-bottom: 0;
@@ -374,5 +390,25 @@
     #{$_}__icon {
       font-size: 0.875rem;
     }
+  }
+}
+
+.l-product {
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0 0 0.5rem 0);
+    height: 12.5rem;
+  }
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
+  }
+}
+
+.l-fav {
+  .css-1slz293-MuiSkeleton-root {
+    @include placeholder__rec(0);
+    height: 10rem;
+  }
+  .css-1dk1h2u-MuiSkeleton-root {
+    @include placeholder__text;
   }
 }

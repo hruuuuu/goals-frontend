@@ -209,6 +209,17 @@ h6 {
   }
 }
 
+@mixin placeholder__rec($margin) {
+  width: 100%;
+  margin: $margin;
+  border-radius: $border-radius__btn;
+}
+
+@mixin placeholder__text {
+  width: 100%;
+  height: 1.5rem;
+}
+
 .c-form {
   $_: &;
   &__input {
@@ -299,6 +310,11 @@ h6 {
 
 .e-btn {
   width: max-content;
+  padding: 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &--primary {
     border: none;
     background: $color--primary;
@@ -308,10 +324,29 @@ h6 {
 
     transition: $transition;
     &:hover {
+      color: $color--light;
       background: $color--hover;
     }
     &:focus,
     &:active {
+      color: $color--light;
+      background: $color--active;
+    }
+  }
+  &--plain {
+    border: none;
+    background: $color--primary;
+    border-radius: $border-radius__input;
+    color: $color--light;
+
+    transition: $transition;
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+    }
+    &:focus,
+    &:active {
+      color: $color--light;
       background: $color--active;
     }
   }

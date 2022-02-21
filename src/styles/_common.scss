@@ -225,6 +225,7 @@
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     position: relative;
     &::before {
@@ -243,6 +244,45 @@
   }
   &__text {
     margin-left: 1rem;
+  }
+  &__sort {
+    display: flex;
+    align-items: center;
+  }
+  &__select {
+    width: max-content;
+    height: $height__btn--meduim;
+    padding: 0;
+    margin-right: 1rem;
+
+    border: none;
+    background-image: none;
+    box-shadow: none;
+    &:focus,
+    &:active {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+  &__select-wrapper {
+    width: max-content;
+    height: max-content;
+
+    position: relative;
+    &::before {
+      @include icon--absolute("\f0dc");
+      color: $color--secondary;
+      font-size: 1.2rem;
+
+      top: 50%;
+      left: -1rem;
+      transform: translateY(-50%);
+    }
+  }
+  &__action {
+    width: max-content;
+
+    white-space: nowrap;
   }
 }
 

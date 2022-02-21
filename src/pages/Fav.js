@@ -41,14 +41,19 @@ function Fav() {
             <MemberSidebar />
           </div>
           <div className="col col-lg-9">
-            <FavList />
+            <div className="l-fav">
+              <FavList />
+            </div>
           </div>
         </div>
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
+<<<<<<< HEAD
       <ProductDetail />
 >>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
+=======
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52
     </>
   );
 }

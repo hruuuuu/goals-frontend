@@ -37,6 +37,7 @@
 @import './styles/_floatingmenu.scss';
 @import './styles/_cartStepper.scss';
 @import './styles/_checkoutModal.scss';
+@import './styles/_cartMobileItem.scss';
 
 // 會員
 @import './styles/_sidebar.scss';
@@ -47,6 +48,13 @@
 @import './styles/_signup.scss';
 @import './styles/_resetPassword.scss';
 
+// 設定第三方登出按鈕用
+@import './styles/_navbar.scss';
+
 //這個scss請幫我保留在最下面
+<<<<<<< HEAD
 @import './styles/_dynamic.scss';
 >>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
+=======
+@import './styles/_dynamic.scss';
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52

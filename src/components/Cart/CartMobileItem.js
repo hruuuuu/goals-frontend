@@ -1,19 +1,18 @@
 import { React, useEffect, useState } from 'react';
-import axios from 'axios';
 import { IMG_URL } from '../../utils/config';
 
 import { useCartList } from '../../context/cart';
 
-function CartItem(props) {
+function CartMobileItem(props) {
   const [count, setCount] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const { cartListData, setCartListData } = useCartList();
+
   const { product } = props;
   const { id, image, name, price, amount, discountPrice } = product;
 
   useEffect(() => {
     setCount(amount);
-    // const discountPriceTotal = discountPrice * amount;
     setSubtotal(discountPrice * amount);
   }, [amount]);
 
@@ -26,17 +25,20 @@ function CartItem(props) {
 
   return (
     <>
-      <div className="cartItem__tbody">
-        <div className="cartItem__cover">
+      <div className="mobileCartItem__tbody">
+        <div className="mobileCartItem__cover">
           <img
-            className="cartItem__img"
+            className="mobileCartItem__img"
             src={`${IMG_URL}/products/${image}`}
             alt="thumbnail"
           />
         </div>
-        <div className="cartItem__name">{name}</div>
-        <div className="cartItem__price txt_grn">${discountPrice}</div>
-        <div className="cartItem__qty_btn">
+        <div className="mobileCartItem__name">{name}</div>
+        <div className="mobileCartItem__price d-flex">
+          <p className="txt_gry">單價:</p>
+          <p className="txt_grn">${discountPrice}</p>
+        </div>
+        <div className="mobileCartItem__qty_btn">
           <div className="qty_btn">
             <div className="d-flex align-items-center justify-content-center">
               <div
@@ -64,8 +66,8 @@ function CartItem(props) {
             </div>
           </div>
         </div>
-        <div className="cartItem__total txt_org">${subtotal}</div>
-        <div className="cartItem__del_btn">
+        <div className="mobileCartItem__total txt_org">${subtotal}</div>
+        <div className="mobileCartItem__del_btn">
           <button className="del_btn py-1" onClick={removeItemFromCart}>
             <i className="fas fa-trash-alt p-1 icon_grn"></i>
           </button>
@@ -75,4 +77,4 @@ function CartItem(props) {
   );
 }
 
-export default CartItem;
+export default CartMobileItem;

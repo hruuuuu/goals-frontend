@@ -25,12 +25,16 @@ $color--disabled: $color--gray4;
 $color--opacity: rgba(107, 156, 102, 0.2);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 $color--gradient: linear-gradient(
   180.06deg,
   rgba(255, 255, 255, 0) 0.05%,
   #ffffff 68.32%
 );
+=======
+$color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52
 
 >>>>>>> 4222b20c68ca4b4facce28b51a7a3ebf0e6a0df3
 $color__font: $color--gray2;
@@ -116,4 +120,4 @@ $xl: 1199.99px;
 $xxl: 1399.99px;
 
 /* bootstrap */
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";

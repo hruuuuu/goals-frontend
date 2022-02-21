@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+=======
+import { Navigate } from 'react-router-dom';
+
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52
 import Home from '../pages/Home';
 import Products from '../pages/Products';
+// import ProductDetail from '../components/Products/ProductDetail';
+import Sort from '../components/Products/Sort';
 import Member from '../pages/Member';
 import Fav from '../pages/Fav';
 import Cart from '../pages/Cart';
@@ -10,10 +17,13 @@ import Calculator from '../pages/Calculator';
 import NotFound from '../pages/NotFound';
 import ProductDetail from '../components/Products/ProductDetail';
 import Signup from '../pages/Signup';
+<<<<<<< HEAD
 import Login from '../pages/Login';
 <<<<<<< HEAD
 import { Navigate } from 'react-router-dom';
 =======
+=======
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52
 import ResetPassword from '../pages/ResetPassword';
 
 import BlogArticle from '../components/Blog/BlogArticle';
@@ -40,6 +50,7 @@ const routerList = [
         breadcrumbName: '商品列表',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
       {
         path: `detail`,
@@ -111,17 +122,37 @@ const routerList = [
     path: `calculator`,
     element: <Calculator />,
     breadcrumbName: '計算機',
+<<<<<<< HEAD
+=======
+    header: 'TDEE/ BMR 計算機',
+    headerImg: imgFood,
   },
-  // {
-  //   path: `signup`,
-  //   element: <Login />,
-  // },
+  {
+    path: `blog`,
+    breadcrumbName: '健康新知',
+    header: '健康新知',
+    headerImg: imgFood,
+    children: [
+      {
+        path: ``,
+        element: <Blog />,
+        breadcrumbName: '健康新知',
+        header: '健康新知',
+        headerImg: imgFood,
+      },
+      {
+        path: `:blogId`,
+        element: <BlogArticle />,
+      },
+    ],
+>>>>>>> 1541b0b06d6992a4d6b6fa373b9b49163a5e2f52
+  },
   {
     path: `login`,
     element: <Signup />,
   },
   {
-    path: `resetpassword`,
+    path: `/reset/:resetString`,
     element: <ResetPassword />,
   },
   {
