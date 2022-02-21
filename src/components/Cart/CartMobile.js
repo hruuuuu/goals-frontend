@@ -4,8 +4,10 @@ import CartMobileItem from './CartMobileItem';
 
 function CartMoblie(props) {
   const { cartListData, setCartListData } = useCartList();
-  
+
   useEffect(() => {}, [cartListData]);
+
+  const isFetchingCartList = cartListData.length === 0;
 
   return (
     <>

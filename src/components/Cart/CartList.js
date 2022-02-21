@@ -8,27 +8,33 @@ function CartList(props) {
 
   useEffect(() => {}, [cartListData]);
 
+  const isFetchingCartList = cartListData.length === 0;
+
   return (
     <>
-      <div className="h-100">
-        <div className="cartItem">
-          <div className="cartItem__thead">
-            <div>商品縮圖</div>
-            <div>商品名稱</div>
-            <div>商品單價</div>
-            <div className="cartItem__qty_btn">數量</div>
-            <div className="cartItem__total">小計</div>
-            <div className="cartItem__del_btn">移除</div>
+      {!isFetchingCartList ? (
+        <div className="h-100">
+          <div className="cartItem">
+            <div className="cartItem__thead">
+              <div>商品縮圖</div>
+              <div>商品名稱</div>
+              <div>商品單價</div>
+              <div className="cartItem__qty_btn">數量</div>
+              <div className="cartItem__total">小計</div>
+              <div className="cartItem__del_btn">移除</div>
+            </div>
+            {cartListData.map((product, i) => {
+              return <CartItem key={product.id} product={product} />;
+            })}
           </div>
-          {cartListData.map((product, i) => {
-            return <CartItem key={product.id} product={product} />;
-          })}
+          <div>
+            <hr />
+            <Summary />
+          </div>
         </div>
-        <div>
-          <hr />
-          <Summary />
-        </div>
-      </div>
+      ) : (
+        <h1>您尚未選購任何商品</h1>
+      )}
     </>
   );
 }
