@@ -5,22 +5,27 @@ import { BE_URL } from '../utils/config';
 
 function AdminChat() {
   const [ws, setWs] = useState();
-  const [message, setMessage] = useState('');
+  const [sendingMessage, setSendingMessage] = useState('');
   const roomName = 'id';
 
   const initWebSocket = () => {
-    // on: 監聽指定這個頻道 得到從server傳來的訊息
+    /* on: 監聽指定這個頻道 得到從server傳來的訊息 */
+    // ws.on('connect', () => {
+    //   console.log(ws.id);
+    // });
     ws.on(roomName, (message) => {
-      console.log(message);
-    });
-    ws.on('broadcast', (message) => {
       console.log(message);
     });
   };
 
-  const sendMessage = (channel) => {
+  const sendMessage = () => {
     // emit: 指定頻道 傳送訊息給server
-    ws.emit(channel, `來自${channel}的訊息`);
+    ws.emit(roomName, { sender: 'admin', message: sendingMessage });
+    setSendingMessage('');
+  };
+
+  const handleFieldChange = (e) => {
+    setSendingMessage(e.target.value);
   };
 
   useEffect(() => {
@@ -43,19 +48,18 @@ function AdminChat() {
       <div className="l-admin-chat">
         <div className="container">
           <input
-            type="button"
-            value="送出訊息，讓所有人收到回傳"
-            onClick={() => {
-              sendMessage(roomName);
-            }}
+            type="text"
+            value={sendingMessage}
+            onChange={handleFieldChange}
           />
-          <input
+          <button
             type="button"
-            value="送出訊息，除了自己外所有人收到回傳"
             onClick={() => {
-              sendMessage('broadcast');
+              sendMessage();
             }}
-          />
+          >
+            傳送
+          </button>
         </div>
       </div>
     </>

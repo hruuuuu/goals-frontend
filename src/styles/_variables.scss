@@ -38,7 +38,7 @@ $box-shadow__navbar: 0px 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
 $box-shadow__icon: 0px 0.0625rem 0.125rem rgba(0, 0, 0, 0.5);
 $box-shadow__input: 0 0 0 0.0625rem $color__input-border;
 
-$box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.25);
+$box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.3);
 
 /* border-radius */
 $border-radius__navbar: 0 0 3.125rem 3.125rem;
@@ -81,6 +81,7 @@ $height__floating-filter: $height__navbar + $height__floating-filter-body;
 /* padding */
 $padding__modal: 2.5rem;
 $padding__modal--md: 1.25rem;
+$padding__chat: 1.25rem;
 
 /* floating icon */
 $radius__floating-icon: 3.75rem;
