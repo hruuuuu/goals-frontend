@@ -97,7 +97,7 @@ const ResetPassword = () => {
   const submitHandler = async (values) => {
     try {
       const resetData = await axios.post(
-        'http://127.0.0.1:3002/api/verify/reset',
+        'http://localhost:3002/api/verify/reset',
         values,
         { withCredentials: true }
       );
