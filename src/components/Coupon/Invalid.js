@@ -3,13 +3,13 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
-function Unvalid() {
+function Invalid() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     let getStock = async () => {
       let response = await axios.get(
-        `http://127.0.0.1:3002/api/coupon/unvalid`,
+        `http://127.0.0.1:3002/api/coupon/invalid`,
         {
           withCredentials: true,
         }
@@ -56,4 +56,4 @@ function Unvalid() {
   );
 }
 
-export default Unvalid;
+export default Invalid;

@@ -23,6 +23,8 @@ const OrderList = () => {
       setData(response.data);
     };
     getStock();
+
+    console.log(JSON.parse(localStorage.getItem('user')));
   }, []);
 
   return (

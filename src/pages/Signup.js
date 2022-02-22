@@ -158,15 +158,6 @@ const Signup = () => {
       closeEye: 'fas fa-eye-slash',
     });
 
-    // 設定剛載入頁面時一開始的cookie樣式
-    // useEffect(() => {
-    //   const cookies = new Cookies();
-    //   cookies.set('client', 'test', {
-    //     sameSite: 'none',
-    //     secure: true,
-    //   });
-    // });
-
     if (login) {
       return <Navigate to="/" />;
     }
@@ -213,8 +204,10 @@ const Signup = () => {
           values,
           { withCredentials: true }
         );
+        const userProfile = loginData.data;
         if (loginData.status === 200) {
           localStorage.setItem('login', true);
+          localStorage.setItem('user', JSON.stringify(userProfile.data));
           setLogin(true);
           setLoginOption({
             ...loginOption,
