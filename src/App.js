@@ -39,6 +39,9 @@ function App() {
   const [activityData, setActivityData] = useState([]);
   const [favItemsArr, setFavItemsArr] = useState([]);
   const [favData, setFavData] = useState([]);
+
+  const hasLocalStorage = localStorage.getItem('fav');
+
   useEffect(() => {
     (async () => {
       try {
@@ -99,6 +102,17 @@ function App() {
         console.log(error);
       }
     })();
+
+    /* 一開始載入時先取出local storage的收藏陣列 設定到資料state */
+    if (hasLocalStorage) {
+      const favItems = localStorage
+        .getItem('fav')
+        .split(',')
+        .map((item) => parseInt(item, 10));
+      setFavItemsArr([...favItems]);
+    } else {
+      localStorage.setItem('fav', '');
+    }
   }, []);
 
   return (

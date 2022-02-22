@@ -85,7 +85,7 @@ const routerList = [
         headerImg: imgFood,
       },
       {
-        path: `coupon`,
+        path: `coupon/*`,
         element: <Coupon />,
         breadcrumbName: '優惠券',
         header: '優惠券',

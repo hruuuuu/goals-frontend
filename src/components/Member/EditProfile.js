@@ -1,6 +1,35 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 const EditProfile = () => {
+  const [member, setMember] = useState({});
+
+  useEffect(() => {
+    let getProfile = async () => {
+      let response = await axios.get(`${API_URL}/member/getprofile`, {
+        withCredentials: true,
+      });
+      setMember(response.data[0]);
+    };
+    getProfile();
+  }, []);
+
+  function handleChange(e) {
+    setMember({ ...member, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let response = await axios.post(
+      `${API_URL}/api/member/editprofile`,
+      member
+    );
+
+    alert('修改成功');
+  }
+
   return (
     <>
       <form className="c-member-info">
@@ -16,6 +45,9 @@ const EditProfile = () => {
                 className="form-control name__input c-form__input"
                 id="InputName"
                 placeholder="請輸入..."
+                name="username"
+                value={member.username ? member.username : ''}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
@@ -27,6 +59,9 @@ const EditProfile = () => {
                 className="form-control name__input c-form__input"
                 id="InputEmail"
                 placeholder="請輸入..."
+                name="email"
+                value={member.email ? member.email : ''}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
@@ -84,6 +119,10 @@ const EditProfile = () => {
                     type="text"
                     className="form-control phone__input c-form__input"
                     id="inputAddress"
+                    // name="address"
+                    name="default_address"
+                    value={member.default_address ? member.default_address : ''}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -96,12 +135,16 @@ const EditProfile = () => {
                 type="text"
                 className="form-control phone__input c-form__input"
                 id="InputPhone"
+                name="default_tel"
+                value={member.default_tel ? member.default_tel : ''}
+                onChange={handleChange}
               />
             </div>
             <div className="col-12">
               <button
                 type="submit"
                 className="c-product-filter__action e-btn--primary e-btn--medium col-12"
+                onClick={handleSubmit}
               >
                 儲存變更
               </button>
