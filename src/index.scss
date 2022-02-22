@@ -23,6 +23,7 @@
 @import './styles/_floatingmenu.scss';
 @import './styles/_cartStepper.scss';
 @import './styles/_checkoutModal.scss';
+@import './styles/_cartMobileItem.scss';
 
 // 會員
 @import './styles/_sidebar.scss';
@@ -32,6 +33,9 @@
 @import './styles/_login.scss';
 @import './styles/_signup.scss';
 @import './styles/_resetPassword.scss';
+
+// 設定第三方登出按鈕用
+@import './styles/_navbar.scss';
 
 //這個scss請幫我保留在最下面
 @import './styles/_dynamic.scss';

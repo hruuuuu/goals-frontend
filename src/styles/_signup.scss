@@ -175,7 +175,6 @@
         font-size: 1.25rem;
 
         .another-login_title {
-            background-color: $color--light;
             color: $color--gray3;
         }
     }
@@ -198,14 +197,16 @@
             border-radius: 0.25rem;
         }
 
-        .google {
-            color: $color--info;
+        // .google {
+        //     color: $color--info;
 
-            :hover {
-                color: $color--info;
-            }
+        //     :hover {
+        //         color: $color--info;
+        //     }
+        // }
+        .kep-login-facebook {
+            text-transform: capitalize;
         }
-
 
         .line {
             color: #00B900;
@@ -295,7 +296,7 @@
 
         .another-login_buttons {
 
-            .google,
+            // .google,
             .facebook,
             .line {
                 padding: .3rem .8rem;
@@ -347,7 +348,7 @@
 
         .another-login_buttons {
 
-            .google,
+            // .google,
             .facebook,
             .line {
                 padding: .2rem .5rem;
