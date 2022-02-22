@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 import axios from 'axios';
 
+import { API_URL } from '../utils/config';
+
 const ResetPassword = () => {
   const history = useNavigate();
   const { pathname } = useLocation();
@@ -96,11 +98,9 @@ const ResetPassword = () => {
 
   const submitHandler = async (values) => {
     try {
-      const resetData = await axios.post(
-        'http://127.0.0.1:3002/api/verify/reset',
-        values,
-        { withCredentials: true }
-      );
+      const resetData = await axios.post(`${API_URL}/verify/reset`, values, {
+        withCredentials: true,
+      });
       console.log(resetData);
       if (resetData.status === 200) {
         history('/');

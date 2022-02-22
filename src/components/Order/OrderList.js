@@ -1,14 +1,55 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { useEffect } from 'react';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let getStock = async () => {
+      let response = await axios.get(`${API_URL}/order`, {
+        // 為了跨源存取 cookie
+        withCredentials: true,
+      });
+      setData(response.data);
+    };
+    getStock();
+  }, []);
+
   return (
     <>
+      {/* <div>
+        {error && <div>{error}</div>}
+        <h2 className="ml-7 mt-6 text-xl text-gray-600">股票代碼</h2>
+
+        {data.map((stock) => {
+          return (
+            <div
+              key={stock.id}
+              className="bg-white bg-gray-50 p-6 rounded-lg shadow hover:shadow-lg m-6 cursor-pointer"
+            >
+              <Link to={`/stock/${stock.id}`}>
+                <h2 className="text-2xl font-bold mb-2 text-gray-800">
+                  {stock.id}
+                </h2>
+                <p className="text-gray-700">{stock.name}</p>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+      ); */}
       <div className="d-flex d-none d-lg-block">
         <table className="table table-borderless orderlist_table">
           <thead>
@@ -21,74 +62,79 @@ const OrderList = () => {
               <th scope="col">查看</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>200</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>100</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-              <td>50</td>
-              <td>50</td>
-              <td className="p-0">
-                <button onClick={handleShow} className="detail rounded-3">
-                  <i className="fas fa-eye p-1 icon_grn"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
+
+          {data.map((order) => {
+            return (
+              <tbody key={order.id}>
+                <tr>
+                  <th scope="row" className="order_td__order_id">
+                    {order.id}
+                  </th>
+                  <td className="order_td__create_at">{order.create_at}</td>
+                  <td className="order_td__payment_status">
+                    {order.payment_status}
+                  </td>
+                  <td className="order_td__order_status">
+                    {order.order_status}
+                  </td>
+                  <td className="order_td__total">
+                    {order.price * order.amount}
+                  </td>
+                  <td className="p-0">
+                    <button onClick={handleShow} className="detail rounded-3">
+                      <i className="fas fa-eye p-1 icon_grn"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
         </table>
       </div>
 
-      <div className="d-flex d-lg-none justify-content-center mb-3 ">
-        <div className="card cardorder ">
-          <div onClick={handleShow} className="card-body ">
-            <h5 className="card-title">1111</h5>
-            <h6 className="card-subtitle mb-2 text-muted">訂單日期</h6>
-            <div className="card-text">
-              <div className="orderline">
-                <div className="my-3 d-flex justify-content-between">
-                  <div>付款狀態</div>
-                  <div>已付款</div>
-                </div>
+      {/* RWD */}
+      {data.map((order) => {
+        return (
+          <div
+            className="d-flex d-lg-none justify-content-center mb-3 "
+            key={order.id}
+          >
+            <div className="card cardorder ">
+              <div onClick={handleShow} className="card-body ">
+                <h5 className="card-title order_td__order_id">{order.id}</h5>
+                <div className="card-text">
+                  <div className="my-3 d-flex justify-content-between">
+                    <div>訂單日期</div>
+                    <div className="order_td__create_at">{order.create_at}</div>
+                  </div>
+                  <div className="orderline">
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>付款狀態</div>
+                      <div className="order_td__payment_status">
+                        {order.payment_status}
+                      </div>
+                    </div>
 
-                <div className="my-3 d-flex justify-content-between">
-                  <div>訂單狀態</div>
-                  <div>準備中</div>
-                </div>
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>訂單狀態</div>
+                      <div className="order_td__order_status">
+                        {order.order_status}
+                      </div>
+                    </div>
 
-                <div className="my-3 d-flex justify-content-between">
-                  <div>付款狀態</div>
-                  <div>$123</div>
+                    <div className="my-3 d-flex justify-content-between">
+                      <div>總計</div>
+                      <div className="order_td__total">
+                        {order.price * order.amount}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
+        );
+      })}
       <Modal centered show={show} onHide={handleClose} animation={false}>
         <Modal.Header>
           <Modal.Title>您的訂單詳情</Modal.Title>
