@@ -26,6 +26,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",
     "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -33,6 +34,7 @@
     "socket.io-client": "^4.4.1",
     "sweetalert2": "^11.4.4",
     "uuid": "^8.3.2",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

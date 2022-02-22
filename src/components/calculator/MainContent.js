@@ -26,7 +26,7 @@ const MainContent = () => {
                   <div className="model__head--deco-text">GUIDE</div>
                   <div className="model__head--title">
                     打造易瘦體質！
-                    <br class="model_br" />
+                    <br className="model_br" />
                     由計算TDEE開始
                   </div>
                   <div className="model__head--subtitle">

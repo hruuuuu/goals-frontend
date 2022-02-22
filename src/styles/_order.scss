@@ -32,3 +32,25 @@
 .orderline {
   border-top: solid #e0e0e0 2px;
 }
+
+.order_td {
+  @include text--small;
+
+  &__order_id {
+  }
+
+  &__create_at {
+  }
+
+  &__payment_status {
+    color: $color--info;
+  }
+
+  &__order_status {
+    color: $color--error;
+  }
+
+  &__total {
+    color: $color--warning;
+  }
+}
