@@ -1,17 +1,16 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const EditProfile = () => {
   const [member, setMember] = useState({});
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(
-        `http://localhost:3002/api/member/getprofile`,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.get(`${API_URL}/member/getprofile`, {
+        withCredentials: true,
+      });
       setMember(response.data[0]);
     };
     getProfile();
@@ -24,7 +23,7 @@ const EditProfile = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     let response = await axios.post(
-      'http://127.0.0.1:3002/api/member/editprofile',
+      `${API_URL}/api/member/editprofile`,
       member
     );
 

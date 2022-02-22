@@ -6,6 +6,8 @@ import NavbarMobile from './Navbar/NavbarMobile';
 import { useLogin } from '../context/LoginStatus';
 import { GoogleLogout } from 'react-google-login';
 
+import { API_URL } from '../utils/config';
+
 function Navbar() {
   const { login, setLogin, loginOption, setLoginOption } = useLogin();
   const history = useNavigate();
@@ -17,12 +19,9 @@ function Navbar() {
       ...loginOption,
       normal: false,
     });
-    const logoutResult = await axios.post(
-      'http://localhost:3002/api/auth/logout',
-      {
-        withCredentials: true,
-      }
-    );
+    const logoutResult = await axios.post(`${API_URL}/auth/logout`, {
+      withCredentials: true,
+    });
     console.log(logoutResult);
     if (logoutResult.status === 200) {
       history('/');
@@ -44,12 +43,9 @@ function Navbar() {
       ...loginOption,
       google: false,
     });
-    const logoutResult = await axios.post(
-      'http://localhost:3002/api/social/logout',
-      {
-        withCredentials: true,
-      }
-    );
+    const logoutResult = await axios.post(`${API_URL}/social/logout`, {
+      withCredentials: true,
+    });
     console.log(logoutResult);
     if (logoutResult.status === 200) {
       sessionStorage.clear();

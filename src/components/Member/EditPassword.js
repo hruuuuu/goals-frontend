@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const EditPassWord = () => {
   const [member, setMember] = useState({
     //id為登入會員的id
@@ -19,13 +21,10 @@ const EditPassWord = () => {
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(
-        `http://localhost:3002/api/member/getprofile`,
-        {
-          // 為了跨源存取 cookie
-          withCredentials: true,
-        }
-      );
+      let response = await axios.get(`${API_URL}/member/getprofile`, {
+        // 為了跨源存取 cookie
+        withCredentials: true,
+      });
       setData(response.data);
     };
     getProfile();
@@ -40,10 +39,7 @@ const EditPassWord = () => {
       alert('舊密碼輸入錯誤，請確認');
     } else {
       // make API call
-      let response = await axios.post(
-        'http://127.0.0.1:3002/api/member//editpassword',
-        member
-      );
+      let response = await axios.post(`${API_URL}/member/editpassword`, member);
 
       alert('修改成功');
       console.log(response.data);
