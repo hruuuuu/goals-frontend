@@ -65,7 +65,24 @@ function ProductItem(props) {
 
     for (let i = 0; i < cartListData.length; i++) {
       if (cartListData[i].id === newItem.id) {
-        return alert('您已添加此商品進購物車');
+        const newAmountItem = {
+          id: cartListData[i].id,
+          name: cartListData[i].name,
+          image: cartListData[i].image,
+          price: cartListData[i].price,
+          discountPrice: cartListData[i].discountPrice,
+          amount: cartListData[i].amount + newItem.amount,
+        };
+        const oldCartListData = cartListData.filter(
+          (item, i) => item.id !== newItem.id
+        );
+        const newCartListData = [...oldCartListData, newAmountItem];
+
+        setCartListData(newCartListData);
+        return localStorage.setItem(
+          'cartList',
+          JSON.stringify(newCartListData)
+        );
       }
     }
 

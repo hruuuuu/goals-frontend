@@ -13,7 +13,7 @@ function CartMobileItem(props) {
 
   useEffect(() => {
     setCount(amount);
-    setSubtotal(discountPrice * amount);
+    setSubtotal(price * amount);
   }, [amount]);
 
   //移除商品、更新localStorage的value
@@ -36,7 +36,7 @@ function CartMobileItem(props) {
         <div className="mobileCartItem__name">{name}</div>
         <div className="mobileCartItem__price d-flex">
           <p className="txt_gry">單價:</p>
-          <p className="txt_grn">${discountPrice}</p>
+          <p className="txt_grn">${price}</p>
         </div>
         <div className="mobileCartItem__qty_btn">
           <div className="qty_btn">
@@ -44,7 +44,48 @@ function CartMobileItem(props) {
               <div
                 className="btn"
                 onClick={() => {
+                  //數量增減
                   setCount(count - 1);
+
+                  //更新數量到localStorge
+                  let newItem = {
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                    discountPrice: product.discountPrice,
+                    amount: product.amount - 1,
+                  };
+
+                  for (let i = 0; i < cartListData.length; i++) {
+                    if (cartListData[i].id === newItem.id) {
+                      const newAmountItem = {
+                        id: cartListData[i].id,
+                        name: cartListData[i].name,
+                        image: cartListData[i].image,
+                        price: cartListData[i].price,
+                        discountPrice: cartListData[i].discountPrice,
+                        amount: product.amount - 1,
+                      };
+                      const oldCartListData = cartListData.filter(
+                        (item, i) => item.id !== newItem.id
+                      );
+                      const newCartListData = [
+                        ...oldCartListData,
+                        newAmountItem,
+                      ];
+
+                      setCartListData(newCartListData);
+                      return localStorage.setItem(
+                        'cartList',
+                        JSON.stringify(newCartListData)
+                      );
+                    }
+                  }
+
+                  setSubtotal(newItem.amount * discountPrice);
+
+                  //數量不可小於一
                   if (count <= 1) {
                     return setCount(1);
                   }
@@ -57,8 +98,44 @@ function CartMobileItem(props) {
               <div
                 className="btn"
                 onClick={() => {
+                  //數量增減
                   setCount(count + 1);
-                  setSubtotal((count + 1) * discountPrice);
+
+                  //更新數量到localStorge
+                  let newItem = {
+                    id: product.id,
+                    name: product.name,
+                    image: product.image,
+                    price: product.price,
+                    discountPrice: product.discountPrice,
+                    amount: product.amount + 1,
+                  };
+
+                  for (let i = 0; i < cartListData.length; i++) {
+                    if (cartListData[i].id === newItem.id) {
+                      const newAmountItem = {
+                        id: cartListData[i].id,
+                        name: cartListData[i].name,
+                        image: cartListData[i].image,
+                        price: cartListData[i].price,
+                        discountPrice: cartListData[i].discountPrice,
+                        amount: product.amount + 1,
+                      };
+                      const oldCartListData = cartListData.filter(
+                        (item, i) => item.id !== newItem.id
+                      );
+                      const newCartListData = [
+                        ...oldCartListData,
+                        newAmountItem,
+                      ];
+
+                      setCartListData(newCartListData);
+                      return localStorage.setItem(
+                        'cartList',
+                        JSON.stringify(newCartListData)
+                      );
+                    }
+                  }
                 }}
               >
                 <i className="fas fa-plus icon_grn"></i>

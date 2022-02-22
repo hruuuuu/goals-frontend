@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCartList } from '../../context/cart';
 import CartMobileItem from './CartMobileItem';
 
@@ -10,18 +11,18 @@ function CartMoblie(props) {
   useEffect(() => {
     //總計
     let allSubtotal = 0;
-    for (let i = 1; i < cartListData.length; i++) {
-      allSubtotal += cartListData[i].discountPrice * cartListData[i].amount;
+    for (let i = 0; i < cartListData.length; i++) {
+      allSubtotal += cartListData[i].price * cartListData[i].amount;
     }
     setTotal(allSubtotal);
 
     //TODO:活動折扣
-    let priceTotal = 0;
-    for (let i = 1; i < cartListData.length; i++) {
-      priceTotal += cartListData[i].price * cartListData[i].amount;
-      allSubtotal += cartListData[i].discountPrice * cartListData[i].amount;
+    let allDiscountTotal = 0;
+    for (let i = 0; i < cartListData.length; i++) {
+      allDiscountTotal +=
+        cartListData[i].discountPrice * cartListData[i].amount;
     }
-    setDiscountTotal(priceTotal - allSubtotal);
+    setDiscountTotal(allSubtotal - allDiscountTotal);
   }, [cartListData]);
 
   const isFetchingCartList = cartListData.length === 0;
@@ -48,11 +49,13 @@ function CartMoblie(props) {
             <p className="font_larger txt_bolder">總計</p>
             <p className="txt_org txt_bolder fs-2">${total}</p>
           </div>
-          <div className="d-grid gap-2">
-            <button className="btn btn_grn rounded-3 py-2" type="button">
-              前往結帳
-            </button>
-          </div>
+          <Link to={`/member/cart`}>
+            <div className="d-grid gap-2">
+              <button className="btn btn_grn rounded-3 py-2" type="button">
+                前往結帳
+              </button>
+            </div>
+          </Link>
         </div>
       </div>
     </>

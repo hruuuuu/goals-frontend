@@ -107,7 +107,7 @@ function App() {
         value={{ login, setLogin, loginOption, setLoginOption }}
       >
         <CouponsContext.Provider value={{ couponsData, setCouponsData }}>
-          <CouponsReceiveContext
+          <CouponsReceiveContext.Provider
             value={{ couponsReceiveData, setCouponsReceiveData }}
           >
             <ProductsContext.Provider value={{ productsData, setProductsData }}>
@@ -133,7 +133,7 @@ function App() {
                 </FavContext.Provider>
               </CartListContext.Provider>
             </ProductsContext.Provider>
-          </CouponsReceiveContext>
+          </CouponsReceiveContext.Provider>
         </CouponsContext.Provider>
       </LoginContext.Provider>
     </>

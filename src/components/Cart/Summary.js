@@ -1,27 +1,46 @@
 import { React, useEffect, useState } from 'react';
 import CheckoutModal from './CheckoutModal';
 import { useCartList } from '../../context/cart';
+import { useCoupons, useCouponsReceive } from '../../context/coupon';
 
 function Summary(props) {
   const [total, setTotal] = useState();
+  const [discountTotal, setDiscountTotal] = useState();
   const [coupon, setCoupon] = useState();
   const [orderTotal, setOrderTotal] = useState();
   const { cartListData, setCartListData } = useCartList();
+  const { couponsData, setCouponsData } = useCoupons();
+  const { couponsReceiveData, setCouponsReceiveData } = useCouponsReceive();
+
+  const isFetchingCoupons = couponsData.length === 0;
 
   useEffect(() => {
     //總計
     let allSubtotal = 0;
-    for (let i = 1; i < cartListData.length; i++) {
-      allSubtotal += cartListData[i].discountPrice * cartListData[i].amount;
+    for (let i = 0; i < cartListData.length; i++) {
+      allSubtotal += cartListData[i].price * cartListData[i].amount;
     }
-    // console.log(allSubtotal);
     setTotal(allSubtotal);
 
     //TODO:活動折扣
-
+    let allDiscountTotal = 0;
+    for (let i = 0; i < cartListData.length; i++) {
+      allDiscountTotal +=
+        cartListData[i].discountPrice * cartListData[i].amount;
+    }
+    setDiscountTotal(allSubtotal - allDiscountTotal);
     //應付金額
     setOrderTotal(allSubtotal);
-  }, []);
+  }, [cartListData]);
+
+  //拿到 couponsData 之後跟 coupon_receive 的 coupon_id 關聯
+  // useEffect(() => {
+  //   if (!isFetchingCoupons) {
+  //     const matchedCoupons=couponsData.find(
+  //       (coupon)=>coupon.id===
+  //     )
+  //   }
+  // });
 
   return (
     <>
@@ -33,7 +52,7 @@ function Summary(props) {
           </div>
           <div className="d-flex justify-content-between py-2">
             <p>活動折扣</p>
-            <p className="txt_org">- ${coupon}</p>
+            <p className="txt_org">- ${discountTotal}</p>
           </div>
           <div className="d-flex justify-content-between pt-2">
             <input
@@ -52,7 +71,6 @@ function Summary(props) {
             <span className="txt_org fs-1">${orderTotal}</span>
           </div>
           <div className="d-grid gap-2">
-            {/* <Shipping /> */}
             <CheckoutModal />
           </div>
         </div>
