@@ -44,10 +44,15 @@ function CartMobileItem(props) {
               <div
                 className="btn"
                 onClick={() => {
+                  //數量不可小於一
+                  if (count <= 1) {
+                    return setCount(1);
+                  }
                   //數量增減
                   setCount(count - 1);
 
                   //更新數量到localStorge
+                  //準備添加進購物車的物件
                   let newItem = {
                     id: product.id,
                     name: product.name,
@@ -56,7 +61,7 @@ function CartMobileItem(props) {
                     discountPrice: product.discountPrice,
                     amount: product.amount - 1,
                   };
-
+                  //重複添加商品，則更改陣列中應對物件的amount
                   for (let i = 0; i < cartListData.length; i++) {
                     if (cartListData[i].id === newItem.id) {
                       const newAmountItem = {
@@ -74,7 +79,7 @@ function CartMobileItem(props) {
                         ...oldCartListData,
                         newAmountItem,
                       ];
-
+                      //更新至localStorage
                       setCartListData(newCartListData);
                       return localStorage.setItem(
                         'cartList',
@@ -82,14 +87,8 @@ function CartMobileItem(props) {
                       );
                     }
                   }
-
+                  //更新小計
                   setSubtotal(newItem.amount * discountPrice);
-
-                  //數量不可小於一
-                  if (count <= 1) {
-                    return setCount(1);
-                  }
-                  setSubtotal((count - 1) * discountPrice);
                 }}
               >
                 <i className="fas fa-minus icon_grn"></i>
@@ -102,6 +101,7 @@ function CartMobileItem(props) {
                   setCount(count + 1);
 
                   //更新數量到localStorge
+                  //準備添加進購物車的物件
                   let newItem = {
                     id: product.id,
                     name: product.name,
@@ -110,7 +110,7 @@ function CartMobileItem(props) {
                     discountPrice: product.discountPrice,
                     amount: product.amount + 1,
                   };
-
+                  //重複添加商品，則更改陣列中應對物件的amount
                   for (let i = 0; i < cartListData.length; i++) {
                     if (cartListData[i].id === newItem.id) {
                       const newAmountItem = {
@@ -128,7 +128,7 @@ function CartMobileItem(props) {
                         ...oldCartListData,
                         newAmountItem,
                       ];
-
+                      //更新至localStorage
                       setCartListData(newCartListData);
                       return localStorage.setItem(
                         'cartList',
