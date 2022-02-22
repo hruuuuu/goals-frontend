@@ -4,6 +4,8 @@ import { Modal, Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
@@ -16,7 +18,7 @@ const OrderList = () => {
 
   useEffect(() => {
     let getStock = async () => {
-      let response = await axios.get(`http://localhost:3002/api/order`, {
+      let response = await axios.get(`${API_URL}/order`, {
         // 為了跨源存取 cookie
         withCredentials: true,
       });

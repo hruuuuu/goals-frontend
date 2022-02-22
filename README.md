@@ -6,7 +6,7 @@ MFEE22大專Goals-前端
 2. 建立.env 內容在slack`#檔案`裡面
 3. `yarn install`
 4. `yarn start`
-5. 開啟 http://127.0.0.1:3000
+5. 開啟 http://localhost:3000
 
 ## 關於styles
 - `index.scss` 只用來連結檔案

@@ -2,13 +2,15 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const Available = () => {
   const [data, setData] = useState([]);
   const [isActive, setActive] = useState(false);
 
   useEffect(() => {
     let getStock = async () => {
-      let response = await axios.get(`http://127.0.0.1:3002/api/coupon/`, {
+      let response = await axios.get(`${API_URL}/coupon/`, {
         withCredentials: true,
       });
       setData(response.data);

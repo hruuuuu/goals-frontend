@@ -3,17 +3,16 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 function Unvalid() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     let getStock = async () => {
-      let response = await axios.get(
-        `http://127.0.0.1:3002/api/coupon/unvalid`,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.get(`${API_URL}/api/coupon/unvalid`, {
+        withCredentials: true,
+      });
       setData(response.data);
     };
     getStock();
