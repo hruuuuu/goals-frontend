@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
+import Swal from 'sweetalert2';
 
 import { BE_URL } from '../utils/config';
 
@@ -26,7 +27,7 @@ function FloatingChatModal(props) {
     // });
     socket.on(roomName, (message) => {
       setMessages((prev) => [...prev, message]);
-      console.log(message);
+      // console.log(message);
     });
     socket.emit(`join chat ${roomName}`, { identity: 'memberId' });
   };
@@ -66,12 +67,8 @@ function FloatingChatModal(props) {
   是用來配合useEffect+相依性陣列檢查是否有連線成功 */
   useEffect(() => {
     if (socket) {
-      try {
-        initWebSocket();
-        console.log('連線成功');
-      } catch (error) {
-        console.log(error);
-      }
+      initWebSocket();
+      console.log('連線成功');
     }
   }, [socket]);
 
@@ -102,7 +99,7 @@ function FloatingChatModal(props) {
               {!socket ? (
                 <button
                   type="button"
-                  className="e-btn e-btn--primary c-chat__action"
+                  className="e-btn e-btn--primary e-btn--large c-chat__action"
                   onClick={connectWebSocket}
                 >
                   開始使用
@@ -127,9 +124,9 @@ function FloatingChatModal(props) {
               <>
                 <div className="c-chat__footer">
                   <div className="w-100 d-flex align-items-center justify-content-between">
-                    <input
+                    <textarea
                       type="text"
-                      className="form-control c-form__input"
+                      className="form-control c-form__input c-chat__input"
                       placeholder="請輸入..."
                       value={sendingMessage}
                       onChange={handleFieldChange}
@@ -150,11 +147,34 @@ function FloatingChatModal(props) {
         <div
           className="c-floating-menu__bg"
           onClick={() => {
-            if (window.confirm('關閉視窗將失去連線 是否確定要退出?')) {
-              handleCloseChat();
-            } else {
-              return;
-            }
+            Swal.fire({
+              title: '確定退出?',
+              text: '關閉視窗將會失去目前的連線。',
+              icon: 'warning',
+              showConfirmButton: true,
+              confirmButtonText: '確認',
+              showCancelButton: true,
+              cancelButtonText: '返回',
+              buttonsStyling: false,
+              reverseButtons: true,
+              focusConfirm: false,
+              focusDeny: false,
+              focusCancel: false,
+              customClass: {
+                container: 'c-alert__overlay',
+                popup: 'c-alert__modal',
+                title: 'c-alert__title',
+                htmlContainer: 'c-alert__text',
+                confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+                cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+              },
+            }).then((result) => {
+              if (result.isConfirmed) {
+                handleCloseChat();
+              } else if (result.dismiss === Swal.DismissReason.cancel) {
+                return;
+              }
+            });
           }}
         ></div>
       </div>

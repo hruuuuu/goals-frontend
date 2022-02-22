@@ -250,6 +250,28 @@ h6 {
   height: 1.5rem;
 }
 
+.c-alert {
+  &__overlay {
+    background: $color--modal-bg !important;
+  }
+  &__modal {
+    background-color: $color--light !important;
+    border: none !important;
+    border-radius: $border-radius__block !important;
+    box-shadow: $box-shadow__modal !important;
+  }
+  &__title {
+    color: $color__font !important;
+    font-weight: 500 !important;
+    font-size: 1.25rem !important;
+  }
+  &__text {
+    color: $color__font !important;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+  }
+}
+
 .c-form {
   $_: &;
   &__input {
@@ -341,7 +363,9 @@ h6 {
 
 .e-btn {
   width: max-content;
-  padding: 1.25rem;
+  padding: 0 1.25rem;
+
+  @include text--normal;
 
   display: flex;
   align-items: center;
@@ -357,11 +381,13 @@ h6 {
     &:hover {
       color: $color--light;
       background: $color--hover;
+      box-shadow: none;
     }
     &:focus,
     &:active {
       color: $color--light;
       background: $color--active;
+      box-shadow: none;
     }
   }
   &--plain {
@@ -371,14 +397,48 @@ h6 {
     color: $color--light;
 
     transition: $transition;
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
     &:hover {
       color: $color--light;
       background: $color--hover;
+      box-shadow: none;
     }
     &:focus,
     &:active {
       color: $color--light;
       background: $color--active;
+      box-shadow: none;
+    }
+  }
+  &--cancel {
+    border: none;
+    background: $color--gray5;
+    border-radius: $border-radius__input;
+
+    transition: $transition;
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
     }
   }
   &--w100 {

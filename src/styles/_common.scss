@@ -961,6 +961,10 @@
     justify-content: center;
     align-items: center;
   }
+  &__input {
+    padding: 0.75rem;
+    resize: none;
+  }
   &__btn {
     width: $size__icon-btn;
     height: $size__icon-btn;
