@@ -1,4 +1,7 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+
+import { useFav } from '../context/fav';
+
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import ProductDetail from '../components/Products/ProductDetail';
@@ -8,6 +11,7 @@ import FloatingIcon from '../components/FloatingMember';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);
+
   return (
     <>
       <Header />
