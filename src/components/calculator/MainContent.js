@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import CalculatorForm from './CalculatorForm';
+import Bmr from './Bmr.js';
 import RecGood from './RecGood';
 
 import desImg from '../../img/calculator/description.jpg';
@@ -121,7 +122,8 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <CalculatorForm />
+            {/* <CalculatorForm /> */}
+            <Bmr />
           </div>
           <div className="explan">
             <div className="container">
