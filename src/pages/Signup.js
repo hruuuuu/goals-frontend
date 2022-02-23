@@ -9,6 +9,8 @@ import Image from '../img/sign/login.jpg';
 import GoogleLogin from 'react-google-login';
 // import { LineLogin } from 'reactjs-line-login';
 
+import { API_URL } from '../utils/config';
+
 const Signup = () => {
   const history = useNavigate();
   const { login, setLogin, loginOption, setLoginOption } = useLogin();
@@ -53,20 +55,16 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!page) {
-      const forgetEmail = await axios.post(
-        'http://localhost:3002/api/verify/forget',
-        data,
-        { withCredentials: true }
-      );
+      const forgetEmail = await axios.post(`${API_URL}/verify/forget`, data, {
+        withCredentials: true,
+      });
       console.log(forgetEmail);
       setShow(false);
     } else {
       console.log(data);
-      const reVerifyEmail = await axios.post(
-        'http://localhost:3002/api/verify/resend',
-        data,
-        { withCredentials: true }
-      );
+      const reVerifyEmail = await axios.post(`${API_URL}/verify/resend`, data, {
+        withCredentials: true,
+      });
       console.log(reVerifyEmail);
       setShow(false);
       if (reVerifyEmail.status === 200) {
@@ -78,7 +76,7 @@ const Signup = () => {
   // google登入
   const handleGoogleLogIn = async (googleData) => {
     const loginResult = await axios.post(
-      'http://localhost:3002/api/social/google',
+      `${API_URL}/api/social/google`,
       { access_token: googleData.accessToken },
       {
         withCredentials: true,
@@ -100,7 +98,7 @@ const Signup = () => {
   // facebook登入
   // const handleFacebookLogIn = async () => {
   //   const loginResult = await axios.post(
-  //     'http://localhost:3002/api/social/facebook'
+  //     `${API_URL}/social/facebook`
   //   );
   // };
 
@@ -199,11 +197,9 @@ const Signup = () => {
     console.log(values);
     try {
       if (!page) {
-        const loginData = await axios.post(
-          'http://localhost:3002/api/auth/login',
-          values,
-          { withCredentials: true }
-        );
+        const loginData = await axios.post(`${API_URL}/auth/login`, values, {
+          withCredentials: true,
+        });
         const userProfile = loginData.data;
         if (loginData.status === 200) {
           localStorage.setItem('login', true);
@@ -218,11 +214,9 @@ const Signup = () => {
         }
         history('/');
       } else {
-        const signupData = await axios.post(
-          'http://localhost:3002/api/auth/signup',
-          values,
-          { withCredentials: true }
-        );
+        const signupData = await axios.post(`${API_URL}/auth/signup`, values, {
+          withCredentials: true,
+        });
         console.log(signupData.data);
         if (signupData.status === 200) {
           history('/');

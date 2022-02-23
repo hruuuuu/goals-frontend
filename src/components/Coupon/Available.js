@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 
+import { API_URL } from '../../utils/config';
+
 const Available = () => {
   const [data, setData] = useState([]);
   const userID = JSON.parse(localStorage.getItem('user'));
@@ -12,13 +14,9 @@ const Available = () => {
 
   useEffect(() => {
     let couponValid = async () => {
-      let response = await axios.post(
-        `http://127.0.0.1:3002/api/coupon/get/`,
-        userID,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post(`${API_URL}/coupon/get/`, userID, {
+        withCredentials: true,
+      });
       setData(response.data);
     };
     couponValid();

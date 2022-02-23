@@ -3,6 +3,8 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 function ReceiveList() {
   const [data, setData] = useState([]);
   const userID = JSON.parse(localStorage.getItem('user'));
@@ -10,13 +12,9 @@ function ReceiveList() {
 
   useEffect(() => {
     let getcoupon = async () => {
-      let response = await axios.post(
-        `http://127.0.0.1:3002/api/coupon/receive`,
-        userID,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post(`${API_URL}/coupon/receive`, userID, {
+        withCredentials: true,
+      });
       setData(response.data);
     };
     getcoupon();

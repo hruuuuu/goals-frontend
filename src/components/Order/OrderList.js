@@ -4,6 +4,8 @@ import { Modal, Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
@@ -21,7 +23,7 @@ const OrderList = () => {
   useEffect(() => {
     let getOrder = async () => {
       let response = await axios.post(
-        `http://localhost:3002/api/order`,
+        `${API_URL}/order`,
         userID,
 
         {

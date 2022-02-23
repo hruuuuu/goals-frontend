@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { API_URL } from '../../utils/config';
+
 const EditPassWord = () => {
   const [member, setMember] = useState({
     oldpassword: '',
@@ -15,18 +17,13 @@ const EditPassWord = () => {
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
-    // console.log(123);
   }
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.post(
-        `http://localhost:3002/api/member/getprofile`,
-        userID,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
+        withCredentials: true,
+      });
       setData(response.data);
     };
     getProfile();
@@ -42,10 +39,7 @@ const EditPassWord = () => {
     } else if (member.oldpassword !== data[0].password) {
       alert('舊密碼輸入錯誤，請確認');
     } else {
-      let response = await axios.post(
-        'http://127.0.0.1:3002/api/member/editpassword',
-        user
-      );
+      let response = await axios.post(`${API_URL}/member/editpassword`, user);
 
       alert('修改成功');
     }
