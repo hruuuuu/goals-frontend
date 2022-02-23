@@ -27,10 +27,7 @@ const Available = () => {
 
     const couponReceive = { coupon_id: coupon.id, member_id: userID.id };
 
-    let response = await axios.post(
-      'http://127.0.0.1:3002/api/coupon/post',
-      couponReceive
-    );
+    let response = await axios.post(`${API_URL}/coupon/post`, couponReceive);
 
     $(e.target)
       .parent()

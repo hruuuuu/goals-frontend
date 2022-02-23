@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
-
 import { useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../utils/config';
 
 function Invalid() {
   const [data, setData] = useState([]);
@@ -10,13 +10,9 @@ function Invalid() {
 
   useEffect(() => {
     let getcoupon = async () => {
-      let response = await axios.post(
-        `http://127.0.0.1:3002/api/coupon/invalid`,
-        userID,
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post(`${API_URL}/coupon/invalid`, userID, {
+        withCredentials: true,
+      });
       setData(response.data);
     };
     getcoupon();
