@@ -4,10 +4,14 @@ import axios from 'axios';
 const EditProfile = () => {
   const [member, setMember] = useState({});
 
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(
+      let response = await axios.post(
         `http://localhost:3002/api/member/getprofile`,
+        userID,
         {
           withCredentials: true,
         }
@@ -25,7 +29,8 @@ const EditProfile = () => {
     e.preventDefault();
     let response = await axios.post(
       'http://127.0.0.1:3002/api/member/editprofile',
-      member
+      member,
+      userID
     );
 
     alert('修改成功');

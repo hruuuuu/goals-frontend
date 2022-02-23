@@ -5,31 +5,35 @@ import $ from 'jquery';
 
 const Available = () => {
   const [data, setData] = useState([]);
-  const [isActive, setActive] = useState(false);
+  const userID = JSON.parse(localStorage.getItem('user'));
+  const isAvailableList = data.length === 0;
 
   //取得目前可領取的優惠券
+
   useEffect(() => {
     let couponValid = async () => {
-      let response = await axios.get(`http://127.0.0.1:3002/api/coupon/get/`, {
-        withCredentials: true,
-      });
+      let response = await axios.post(
+        `http://127.0.0.1:3002/api/coupon/get/`,
+        userID,
+        {
+          withCredentials: true,
+        }
+      );
       setData(response.data);
     };
     couponValid();
   }, []);
 
-  // async function handleSubmit(e) {
-  //   setActive(!isActive);
+  async function getcoupon(coupon, e) {
+    console.log(coupon.id);
 
-  //   console.log(data);
+    const couponReceive = { coupon_id: coupon.id, member_id: userID.id };
 
-  //   alert('領取成功');
-  // }
+    let response = await axios.post(
+      'http://127.0.0.1:3002/api/coupon/post',
+      couponReceive
+    );
 
-  function getcoupon(name, e) {
-    // setActive(!isActive);
-
-    console.log(name);
     $(e.target)
       .parent()
       .parent()
@@ -42,12 +46,17 @@ const Available = () => {
       .attr('disabled', true)
       .html('已領取');
 
+    $(e.target)
+      .next()
+      .children()
+      .html(coupon.amount - 1);
+
     alert('領取成功');
   }
 
   return (
     <>
-      <div className="container">
+      {!isAvailableList ? (
         <div className="coupons">
           <div className="row">
             {data.map((coupon) => {
@@ -74,11 +83,16 @@ const Available = () => {
                       </div>
                       <button
                         className="couponBtn1 mt-3"
-                        onClick={(e) => getcoupon(coupon.id, e)}
+                        onClick={(e) => {
+                          getcoupon(coupon, e);
+                        }}
                       >
                         可領取
                       </button>
-                      <div className="remain-coupon">剩餘{coupon.amount}張</div>
+
+                      <div className="remain-coupon">
+                        剩餘<span>{coupon.amount}</span>張
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -86,7 +100,9 @@ const Available = () => {
             })}
           </div>
         </div>
-      </div>
+      ) : (
+        <h1>目前還沒有可領取的優惠券</h1>
+      )}
     </>
   );
 };

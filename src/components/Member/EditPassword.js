@@ -3,14 +3,15 @@ import axios from 'axios';
 
 const EditPassWord = () => {
   const [member, setMember] = useState({
-    //id為登入會員的id
-
     oldpassword: '',
     newpassword: '',
     confirmpassword: '',
   });
 
   const [data, setData] = useState([]);
+
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
@@ -19,10 +20,10 @@ const EditPassWord = () => {
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(
+      let response = await axios.post(
         `http://localhost:3002/api/member/getprofile`,
+        userID,
         {
-          // 為了跨源存取 cookie
           withCredentials: true,
         }
       );
@@ -34,19 +35,19 @@ const EditPassWord = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    var user = Object.assign(userID, member);
+
     if (member.newpassword !== member.confirmpassword) {
       alert('新密碼與確認密碼不一致，請確認');
     } else if (member.oldpassword !== data[0].password) {
       alert('舊密碼輸入錯誤，請確認');
     } else {
-      // make API call
       let response = await axios.post(
-        'http://127.0.0.1:3002/api/member//editpassword',
-        member
+        'http://127.0.0.1:3002/api/member/editpassword',
+        user
       );
 
       alert('修改成功');
-      console.log(response.data);
     }
   }
 
