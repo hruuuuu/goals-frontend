@@ -935,21 +935,16 @@
     color: $color--gray4;
     text-align: center;
   }
-  &__content {
-    height: calc(100% - $height__chat-block - 5.25rem);
-    padding: $padding__chat;
-
-    @include scrollbar;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
   &__title {
     @include text--normal;
     color: $color--light;
   }
   &__subtitle {
     @include text--extra-small;
-    color: $color--secondary;
+    color: $color--gray6;
+    &.active {
+      color: $color--secondary;
+    }
   }
   &__footer {
     width: 100%;
@@ -965,12 +960,74 @@
     padding: 0.75rem;
     resize: none;
   }
-  &__btn {
-    width: $size__icon-btn;
-    height: $size__icon-btn;
-  }
   &__icon {
     font-size: 1.25rem;
+  }
+  &__content {
+    @include scrollbar;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  &--client {
+    #{$_}__content {
+      height: calc(100% - $height__chat-block - 5.25rem);
+      padding: $padding__chat;
+    }
+    #{$_}__msg {
+      &[from="client"] {
+        color: $color--light;
+        background: $color--info;
+
+        float: right;
+        #{$_}__time {
+          left: -3rem;
+        }
+      }
+      &[from="admin"] {
+        color: $color--font;
+        background: $color--gray6;
+
+        float: left;
+        #{$_}__time {
+          right: -3rem;
+        }
+      }
+    }
+    #{$_}__btn {
+      width: $size__icon-btn;
+      height: $size__icon-btn;
+    }
+  }
+  &--admin {
+    #{$_}__content {
+      height: calc(100vh - $height__navbar - 11.5rem);
+      padding-right: $padding__chat;
+      margin-bottom: $padding__chat;
+    }
+    #{$_}__msg {
+      &[from="admin"] {
+        color: $color--light;
+        background: $color--info;
+
+        float: right;
+        #{$_}__time {
+          left: -3rem;
+        }
+      }
+      &[from="client"] {
+        color: $color--font;
+        background: $color--gray6;
+
+        float: left;
+        #{$_}__time {
+          right: -3rem;
+        }
+      }
+    }
+    #{$_}__btn {
+      width: max-content;
+      white-space: nowrap;
+    }
   }
   &__msg {
     width: max-content;
@@ -984,24 +1041,6 @@
     clear: both;
     display: block;
     position: relative;
-    &[sender="user"] {
-      color: $color--light;
-      background: $color--info;
-
-      float: right;
-      #{$_}__time {
-        left: -3rem;
-      }
-    }
-    &[sender="admin"] {
-      color: $color--font;
-      background: $color--gray6;
-
-      float: left;
-      #{$_}__time {
-        right: -3rem;
-      }
-    }
   }
   &__time {
     @include text--extra-small;
