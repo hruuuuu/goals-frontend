@@ -23,7 +23,7 @@ const Available = () => {
   }, []);
 
   async function getcoupon(coupon, e) {
-    console.log(coupon.id);
+    // console.log(coupon.id);
 
     const couponReceive = { coupon_id: coupon.id, member_id: userID.id };
 
