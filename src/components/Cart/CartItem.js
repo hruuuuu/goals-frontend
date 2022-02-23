@@ -48,44 +48,25 @@ function CartItem(props) {
                   //數量增減
                   setCount(count - 1);
 
-                  //更新數量到localStorge
-                  //準備添加進購物車的物件
-                  let newItem = {
-                    id: product.id,
-                    name: product.name,
-                    image: product.image,
-                    price: product.price,
-                    discountPrice: product.discountPrice,
-                    amount: product.amount - 1,
-                  };
-                  //重複添加商品，則更改陣列中應對物件的amount
-                  for (let i = 0; i < cartListData.length; i++) {
-                    if (cartListData[i].id === newItem.id) {
-                      const newAmountItem = {
-                        id: cartListData[i].id,
-                        name: cartListData[i].name,
-                        image: cartListData[i].image,
-                        price: cartListData[i].price,
-                        discountPrice: cartListData[i].discountPrice,
-                        amount: product.amount - 1,
-                      };
-                      const oldCartListData = cartListData.filter(
-                        (item, i) => item.id !== newItem.id
-                      );
-                      const newCartListData = [
-                        ...oldCartListData,
-                        newAmountItem,
-                      ];
-                      //更新至localStorage
-                      setCartListData(newCartListData);
-                      return localStorage.setItem(
-                        'cartList',
-                        JSON.stringify(newCartListData)
-                      );
-                    }
-                  }
+                  const newAmount = amount - 1;
+                  //找到相同id物件的index
+                  const index = cartListData.findIndex(
+                    (item, i) => item.id === id
+                  );
+                  //產生一個新的陣列
+                  const newCartListData = [...cartListData];
+                  //更新數量到物件中
+                  newCartListData[index].amount = newAmount;
+
+                  //將更新後的陣列傳回cartListData
+                  setCartListData(newCartListData);
                   //更新小計
-                  setSubtotal(newItem.amount * discountPrice);
+                  setSubtotal(newAmount * discountPrice);
+                  //將更新後的cartListData傳回localStorage
+                  localStorage.setItem(
+                    'cartList',
+                    JSON.stringify(newCartListData)
+                  );
                 }}
               >
                 <i className="fas fa-minus icon_grn"></i>
@@ -97,42 +78,25 @@ function CartItem(props) {
                   //數量增減
                   setCount(count + 1);
 
-                  //更新數量到localStorge
-                  //準備添加進購物車的物件
-                  let newItem = {
-                    id: product.id,
-                    name: product.name,
-                    image: product.image,
-                    price: product.price,
-                    discountPrice: product.discountPrice,
-                    amount: product.amount + 1,
-                  };
-                  //重複添加商品，則更改陣列中應對物件的amount
-                  for (let i = 0; i < cartListData.length; i++) {
-                    if (cartListData[i].id === newItem.id) {
-                      const newAmountItem = {
-                        id: cartListData[i].id,
-                        name: cartListData[i].name,
-                        image: cartListData[i].image,
-                        price: cartListData[i].price,
-                        discountPrice: cartListData[i].discountPrice,
-                        amount: product.amount + 1,
-                      };
-                      const oldCartListData = cartListData.filter(
-                        (item, i) => item.id !== newItem.id
-                      );
-                      const newCartListData = [
-                        ...oldCartListData,
-                        newAmountItem,
-                      ];
-                      //更新至localStorage
-                      setCartListData(newCartListData);
-                      return localStorage.setItem(
-                        'cartList',
-                        JSON.stringify(newCartListData)
-                      );
-                    }
-                  }
+                  const newAmount = amount + 1;
+                  //找到相同id物件的index
+                  const index = cartListData.findIndex(
+                    (item, i) => item.id === id
+                  );
+                  //產生一個新的陣列
+                  const newCartListData = [...cartListData];
+                  //更新數量到物件中
+                  newCartListData[index].amount = newAmount;
+
+                  //將更新後的陣列傳回cartListData
+                  setCartListData(newCartListData);
+                  //更新小計
+                  setSubtotal(newAmount * discountPrice);
+                  //將更新後的cartListData傳回localStorage
+                  localStorage.setItem(
+                    'cartList',
+                    JSON.stringify(newCartListData)
+                  );
                 }}
               >
                 <i className="fas fa-plus icon_grn"></i>

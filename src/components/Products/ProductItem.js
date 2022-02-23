@@ -52,7 +52,7 @@ function ProductItem(props) {
 
   //加入購物車
   const addCart = () => {
-    let newItem = {
+    const newItem = {
       id: product.id,
       name: product.name,
       image: product.image,
