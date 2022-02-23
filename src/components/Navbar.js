@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
 import { useLogin } from '../context/LoginStatus';
 import { GoogleLogout } from 'react-google-login';
+import { useCartList } from '../context/cart';
 
 import { API_URL } from '../utils/config';
 
-function Navbar() {
+function Navbar(props) {
   const { login, setLogin, loginOption, setLoginOption } = useLogin();
   const history = useNavigate();
+  const { cartListData, setCartListData } = useCartList();
+  const [cartIconLength, setCartIconLength] = useState();
+
+  useEffect(() => {
+    setCartIconLength(cartListData.length);
+  }, [cartListData]);
 
   const handleLogout = async () => {
     localStorage.clear();
@@ -139,7 +146,7 @@ function Navbar() {
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
       iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
-      tagDesktop: <div className="e-tag e-tag--corner">5</div>,
+      tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
       route: `/member/cart`,
     },
     {
