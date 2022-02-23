@@ -6,9 +6,12 @@ import { API_URL } from '../../utils/config';
 const EditProfile = () => {
   const [member, setMember] = useState({});
 
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(`${API_URL}/member/getprofile`, {
+      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
         withCredentials: true,
       });
       setMember(response.data[0]);
@@ -23,8 +26,9 @@ const EditProfile = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     let response = await axios.post(
-      `${API_URL}/api/member/editprofile`,
-      member
+      `${API_URL}/member/editprofile`,
+      member,
+      userID
     );
 
     alert('修改成功');
