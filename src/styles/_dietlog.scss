@@ -1,0 +1,115 @@
+.l-dietlog {
+  width: 100%;
+  height: $height__content;
+  &__icon {
+    color: $color--primary;
+  }
+  .react-calendar {
+    &__tile {
+      height: $height__calendar;
+      padding: 0;
+      margin: 0.5rem;
+
+      @include clear__btn;
+      border-radius: 50%;
+
+      transition: $transition;
+      &:hover {
+        background: $color--gray6;
+      }
+      &--now {
+        color: $color--light;
+        background: $color--primary;
+        @include interaction__btn;
+      }
+      &--active {
+        background: $color--warning;
+        @include interaction__btn;
+      }
+    }
+    &__navigation {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &__label {
+        @include clear__btn;
+
+        @include text--normal-bold;
+        color: $color--primary;
+
+        @include cursor(pointer);
+      }
+      &__arrow {
+        width: $size__icon-btn;
+        height: $size__icon-btn;
+
+        @include clear__btn;
+
+        position: relative;
+        &::before {
+          color: $color--primary;
+          font-size: 1rem;
+
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          @include interaction__link;
+        }
+      }
+      &__next-button {
+        &::before {
+          @include icon--absolute("\f105");
+        }
+      }
+      &__next2-button {
+        &::before {
+          @include icon--absolute("\f101");
+        }
+      }
+      &__prev-button {
+        &::before {
+          @include icon--absolute("\f104");
+        }
+      }
+      &__prev2-button {
+        &::before {
+          @include icon--absolute("\f100");
+        }
+      }
+    }
+    &__month-view {
+      &__weekdays {
+        &__weekday {
+          height: $height__calendar;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          abbr {
+            color: $color--gray3;
+            text-decoration: none;
+            cursor: default;
+          }
+        }
+      }
+      &__days {
+        justify-content: space-between;
+        &__day {
+          max-width: $height__calendar;
+          &--neighboringMonth {
+            color: $color--gray4;
+          }
+        }
+      }
+    }
+    &__year-view {
+      &__months {
+        justify-content: space-around;
+        &__month {
+          border-radius: $border-radius__btn;
+        }
+      }
+    }
+  }
+}

@@ -184,6 +184,13 @@ h6 {
   font-size: 0.75rem;
 }
 
+@mixin clear__btn {
+  background: transparent;
+  border: none;
+
+  @include cursor(pointer);
+}
+
 @mixin interaction__link {
   transition: $transition;
   &:hover {
@@ -192,6 +199,19 @@ h6 {
   &:focus,
   &:active {
     color: $color--active;
+  }
+}
+
+@mixin interaction__btn {
+  transition: $transition;
+  &:hover {
+    color: $color--light;
+    background: $color--hover;
+  }
+  &:focus,
+  &:active {
+    color: $color--light;
+    background: $color--active;
   }
 }
 

@@ -75,6 +75,11 @@ function Navbar() {
       name: '健康新知',
       route: `/blog`,
     },
+    {
+      id: 5,
+      name: '飲食日誌',
+      route: `/dietlog`,
+    },
   ];
 
   const navActions = [
@@ -142,26 +147,26 @@ function Navbar() {
       tagDesktop: <div className="e-tag e-tag--corner">5</div>,
       route: `/member/cart`,
     },
-    {
-      id: 4,
-      name: '優惠券',
-      iconMobile: (
-        <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ),
-      iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
-      tagDesktop: ``,
-      route: `/member/coupon`,
-    },
-    {
-      id: 5,
-      name: '搜索',
-      iconMobile: (
-        <i className="fas fa-search l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ),
-      iconDesktop: <i className="fas fa-search l-navbar__font"></i>,
-      tagDesktop: ``,
-      route: `/`,
-    },
+    // {
+    //   id: 4,
+    //   name: '優惠券',
+    //   iconMobile: (
+    //     <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+    //   ),
+    //   iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
+    //   tagDesktop: ``,
+    //   route: `/member/coupon`,
+    // },
+    // {
+    //   id: 5,
+    //   name: '搜索',
+    //   iconMobile: (
+    //     <i className="fas fa-search l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+    //   ),
+    //   iconDesktop: <i className="fas fa-search l-navbar__font"></i>,
+    //   tagDesktop: ``,
+    //   route: `/`,
+    // },
   ];
   return (
     <>
