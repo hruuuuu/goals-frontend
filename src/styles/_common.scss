@@ -658,6 +658,7 @@
       align-items: center;
 
       @include cursor(pointer);
+      // cart-right/ chat-right的cart
       @media screen and (min-width: $lg) {
         width: $radius__floating-icon;
         height: $diameter__floating-icon;
@@ -693,11 +694,21 @@
       }
     }
   }
-  &--double {
+  // cart-right/ chat-right的chat
+  &--product-desktop {
     #{$_}__btn {
       border-top-left-radius: 0 !important;
 
       top: calc(50% + $radius__floating-icon) !important;
+    }
+  }
+  // cart-bottom/ chat-right的chat
+  &--product-mobile {
+    #{$_}__btn {
+      @media screen and (max-width: $lg) {
+        border-top-left-radius: $border-radius__btn !important;
+        top: 50% !important;
+      }
     }
   }
   &__icon {

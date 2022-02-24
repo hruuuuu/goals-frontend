@@ -7,13 +7,13 @@ function FloatingChatIcon(props) {
   /* 如果是在商品頁 就用不同樣式的class */
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
-  const isDouble = matchProduct !== null || matchProducts !== null;
+  const isProduct = matchProduct !== null || matchProducts !== null;
 
   return (
     <>
       <div
-        className={`c-floating-icon c-floating-icon--chat ${
-          isDouble ? 'c-floating-icon--double' : ''
+        className={`c-floating-icon c-floating-icon--chat c-floating-icon--product-mobile ${
+          isProduct ? 'c-floating-icon--product-desktop' : ''
         }`}
       >
         <button
