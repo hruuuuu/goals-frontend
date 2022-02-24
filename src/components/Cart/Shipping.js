@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import TwCitySelector from '../../../node_modules/tw-city-selector/dist/tw-city-selector';
 
 function Shipping() {
+  useEffect(() => {
+    cityselect();
+  }, []);
+
+  function cityselect() {
+    new TwCitySelector({
+      el: '.my-selector-c',
+      elCounty: '.county', // 在 el 裡查找 dom
+      elDistrict: '.district', // 在 el 裡查找 dom
+      elZipcode: '.zipcode', // 在 el 裡查找 dom
+    });
+  }
   return (
     <>
       <div className="container">
@@ -20,31 +33,37 @@ function Shipping() {
           />
           <div className="invalid-feedback">Valid first name is required.</div>
         </div>
-        <div className="row g-3 mb-2">
+        <div className="row g-3 mb-2 my-selector-c">
           <div className="col-6">
             <label htmlFor="country" className="form-label label_fs">
               縣市
             </label>
-            <select className="form-select styled-select" id="country" required>
-              <option className="option_font" value="">
-                請選擇
-              </option>
-              <option className="option_font">桃園市</option>
+            <select
+              className="form-select styled-select county"
+              id="country"
+              required
+            >
+              {/* <option className="option_font" key={county.id}></option>
+              <option className="option_font">桃園市</option> */}
             </select>
             <div className="invalid-feedback">
               Please select a valid country.
             </div>
           </div>
           <div className="col-6">
-            <label htmlFor="state" className="form-label label_fs">
+            <label htmlFor="district" className="form-label label_fs">
               鄉鎮市區
             </label>
-            <select className="form-select styled-select" id="state" required>
-              <option className="option_font">請選擇</option>
-              <option className="option_font">中壢區</option>
+            <select
+              className="form-select styled-select district"
+              id="state"
+              required
+            >
+              {/* <option className="option_font">請選擇</option>
+              <option className="option_font">中壢區</option> */}
             </select>
             <div className="invalid-feedback">
-              Please provide a valid state.
+              Please provide a valid district.
             </div>
           </div>
         </div>
@@ -95,7 +114,9 @@ function Shipping() {
               <option className="option_font" value="">
                 請選擇
               </option>
+              {/* <option className="option_font">超商取貨</option> */}
               <option className="option_font">宅配到府</option>
+              {/* <option className="option_font">門市自取</option> */}
             </select>
             <div className="invalid-feedback">
               Please provide a valid state.

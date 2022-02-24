@@ -31,6 +31,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "sass": "^1.49.7",
+    "tw-city-selector": "^2.1.1",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
