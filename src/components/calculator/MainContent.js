@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header';
 import CalculatorForm from './CalculatorForm';
 import Bmr from './Bmr.js';
@@ -8,6 +8,21 @@ import desImg from '../../img/calculator/description.jpg';
 import logoOriginal from '../../img/common/logo--original.svg';
 
 const MainContent = () => {
+  const [data, setData] = useState({
+    gender: '',
+    weightp: '',
+    weightkg: '',
+    age: '',
+    heightFeet: '',
+    heightInches: '',
+    heightcenti: '',
+    bmr: '',
+    activity: '',
+    error: '',
+    calories: '',
+    unit: '',
+  });
+
   return (
     <>
       <div className="main-content">

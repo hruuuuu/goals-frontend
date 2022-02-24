@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+// import BMR from './Bmr';
 
-const RecGood = () => {
+function RecGood(props) {
+  // let { data } = this.props;
+  // console.log(data);
   return (
     <>
-      <h1>RecGood</h1>
+      <h1>{props.calories}</h1>
     </>
   );
-};
+}
 
 export default RecGood;

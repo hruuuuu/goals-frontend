@@ -7,10 +7,11 @@ import Select from '@mui/material/Select';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import NativeSelect from '@mui/material/NativeSelect';
 
 class BMR extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       gender: '',
       weightp: '',
@@ -100,6 +101,7 @@ class BMR extends Component {
 
     this.setState({ error: '' });
   }
+
   calActivity() {
     let act = this.state.activity;
     let bmr = this.state.bmr;
@@ -154,42 +156,27 @@ class BMR extends Component {
     }
 
     return (
-      <div id="bmrcalc" class="calculator__form">
+      <div id="bmrcalc" className="calculator__form">
         <div className="form row">
           {error}
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group">
-              <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                  <InputLabel
-                    className="form-label"
-                    id="demo-simple-select-label"
-                  >
-                    量測單位
-                  </InputLabel>
-                  {/* <InputLabel
-                  className="form-label"
-                  variant="standard"
-                  htmlFor="uncontrolled-native"
+              <div className="inputwrap">
+                <label className="label">量測單位</label>
+                <select
+                  className="activity"
+                  name="activity"
+                  value={this.state.unit}
+                  onChange={this.handleunitChange}
                 >
-                  量測單位
-                </InputLabel> */}
-                  <Select
-                    className="activity"
-                    name="activity"
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={this.state.unit}
-                    onChange={this.handleunitChange}
-                  >
-                    <MenuItem value={1}>英制</MenuItem>
-                    <MenuItem value={2}>公制</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
+                  <option value="">請選擇</option>
+                  <option value="1">英制</option>
+                  <option value="2">公制</option>
+                </select>
+              </div>
             </div>
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group">
               <FormControl>
                 <label className="form-label">性別</label>
@@ -221,7 +208,7 @@ class BMR extends Component {
               </FormControl>
             </div>
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group imperial">
               <label className="form-label">體重(磅)</label>
               <input
@@ -235,7 +222,7 @@ class BMR extends Component {
               />
             </div>
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group metric">
               <label className="form-label">體重(公斤)</label>
               <input
@@ -249,7 +236,7 @@ class BMR extends Component {
               />
             </div>
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group imperial">
               <label className="form-label">身高(英吋)</label>
               <input
@@ -284,7 +271,7 @@ class BMR extends Component {
               />
             </div>
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div className="col-xl-12 col-md-12">
             <div className="form-group">
               <label className="form-label">年齡</label>
               <input
@@ -298,7 +285,7 @@ class BMR extends Component {
               />
             </div>
           </div>
-          <div class="col-sm-12 calculator__form--btn">
+          <div className="col-sm-12 calculator__form--btn">
             <button
               type="button"
               className="e-btn--primary e-btn--medium"
@@ -329,7 +316,7 @@ class BMR extends Component {
                 <option value="1.9">每天運動訓練 2 次、勞力工作者F</option>
               </select>
             </div>
-            <div class="col-sm-12 calculator__form--btn">
+            <div className="col-sm-12 calculator__form--btn">
               <button
                 type="button"
                 className="e-btn--primary e-btn--medium"
