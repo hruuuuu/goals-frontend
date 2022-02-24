@@ -35,7 +35,7 @@ function FloatingMenu(props) {
             setAnimation(true);
             setTimeout(() => {
               setIsDisplay(false);
-            }, 1000);
+            }, 500);
           }}
         ></div>
       </div>
