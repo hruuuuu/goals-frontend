@@ -20,6 +20,8 @@ const Available = () => {
       setData(response.data);
     };
     couponValid();
+
+    console.log(userID);
   }, []);
 
   async function getcoupon(coupon, e) {
@@ -64,8 +66,8 @@ const Available = () => {
                     <div className="coupon">
                       <div className="coupon-detail">
                         <h2 className="coupon-amount">
-                          <i className="fas fa-dollar-sign"></i>
-                          <p>50</p>
+                          {/* <i className="fas fa-dollar-sign"></i> */}
+                          <p>{coupon.title}</p>
                         </h2>
                         <div className="sperate-line"></div>
                         <div className="coupon-statement">
