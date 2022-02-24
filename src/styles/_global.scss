@@ -239,6 +239,14 @@ h6 {
   }
 }
 
+@mixin scrollbar--hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @mixin placeholder__rec($margin) {
   width: 100%;
   margin: $margin;
@@ -250,11 +258,34 @@ h6 {
   height: 1.5rem;
 }
 
+.c-alert {
+  &__overlay {
+    background: $color--modal-bg !important;
+  }
+  &__modal {
+    background-color: $color--light !important;
+    border: none !important;
+    border-radius: $border-radius__block !important;
+    box-shadow: $box-shadow__modal !important;
+  }
+  &__title {
+    color: $color__font !important;
+    font-weight: 500 !important;
+    font-size: 1.25rem !important;
+  }
+  &__text {
+    color: $color__font !important;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+  }
+}
+
 .c-form {
   $_: &;
   &__input {
     height: $height__input;
 
+    border: $border__input;
     border-radius: $border-radius__input;
     @include text--small;
     &::placeholder {
@@ -275,7 +306,8 @@ h6 {
         background-color: $color--primary;
       }
     }
-    &:focus {
+    &:focus,
+    &:focus-visible {
       border: $border__input--focus;
       box-shadow: none;
     }
@@ -339,7 +371,9 @@ h6 {
 
 .e-btn {
   width: max-content;
-  padding: 1.25rem;
+  padding: 0 1.25rem;
+
+  @include text--normal;
 
   display: flex;
   align-items: center;
@@ -355,11 +389,13 @@ h6 {
     &:hover {
       color: $color--light;
       background: $color--hover;
+      box-shadow: none;
     }
     &:focus,
     &:active {
       color: $color--light;
       background: $color--active;
+      box-shadow: none;
     }
   }
   &--plain {
@@ -369,14 +405,48 @@ h6 {
     color: $color--light;
 
     transition: $transition;
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
     &:hover {
       color: $color--light;
       background: $color--hover;
+      box-shadow: none;
     }
     &:focus,
     &:active {
       color: $color--light;
       background: $color--active;
+      box-shadow: none;
+    }
+  }
+  &--cancel {
+    border: none;
+    background: $color--gray5;
+    border-radius: $border-radius__input;
+
+    transition: $transition;
+    &:not([disabled]) {
+      &:hover {
+        color: $color--light;
+        background: $color--hover;
+        box-shadow: none;
+      }
+    }
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
     }
   }
   &--w100 {
@@ -392,6 +462,10 @@ h6 {
     height: $height__btn--meduim;
   }
   &--icon {
+    width: $size__icon-btn;
+    height: $size__icon-btn;
+    padding: 0;
+
     background: transparent;
     border: none;
   }

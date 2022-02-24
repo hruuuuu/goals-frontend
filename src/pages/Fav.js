@@ -1,13 +1,16 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+
+import { useFav } from '../context/fav';
+
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
-import ProductDetail from '../components/Products/ProductDetail';
 import FavList from '../components/Fav/FavList';
 import FloatingMember from '../components/FloatingMember';
-import FloatingIcon from '../components/FloatingMember';
+import FloatingChat from '../components/FloatingChat';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);
+
   return (
     <>
       <Header />
@@ -25,6 +28,7 @@ function Fav() {
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
+      <FloatingChat />
     </>
   );
 }

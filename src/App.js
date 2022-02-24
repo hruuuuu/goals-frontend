@@ -9,8 +9,7 @@ import { CartListContext } from './context/cart';
 import { ProductsContext, CategoryContext } from './context/products';
 import { FavContext } from './context/fav';
 import { ActivityContext } from './context/activity';
-
-// import { ShowContext } from './context/ProductDetail';
+import { AdminContext } from './context/admin';
 import { LoginContext } from './context/LoginStatus';
 
 import routerList from './config/routerList';
@@ -34,6 +33,10 @@ function App() {
   const [activityData, setActivityData] = useState([]);
   const [favItemsArr, setFavItemsArr] = useState([]);
   const [favData, setFavData] = useState([]);
+  const [adminOnline, setAdminOnline] = useState(false);
+
+  const hasLocalStorage = localStorage.getItem('fav');
+
   useEffect(() => {
     (async () => {
       try {
@@ -76,6 +79,17 @@ function App() {
         console.log(error);
       }
     })();
+
+    /* 一開始載入時先取出local storage的收藏陣列 設定到資料state */
+    if (hasLocalStorage) {
+      const favItems = localStorage
+        .getItem('fav')
+        .split(',')
+        .map((item) => parseInt(item, 10));
+      setFavItemsArr([...favItems]);
+    } else {
+      localStorage.setItem('fav', '');
+    }
   }, []);
 
   return (
@@ -83,27 +97,29 @@ function App() {
       <LoginContext.Provider
         value={{ login, setLogin, loginOption, setLoginOption }}
       >
-        <ProductsContext.Provider value={{ productsData, setProductsData }}>
-          <CartListContext.Provider value={{ cartListData, setCartListData }}>
-            <FavContext.Provider
-              value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
-            >
-              <ActivityContext.Provider
-                value={{ activityData, setActivityData }}
+        <AdminContext.Provider value={{ adminOnline, setAdminOnline }}>
+          <ProductsContext.Provider value={{ productsData, setProductsData }}>
+            <CartListContext.Provider value={{ cartListData, setCartListData }}>
+              <FavContext.Provider
+                value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
               >
-                <CategoryContext.Provider
-                  value={{ categoryData, setCategoryData }}
+                <ActivityContext.Provider
+                  value={{ activityData, setActivityData }}
                 >
-                  <ShowContext.Provider value={{ show, setShow }}>
-                    <Navbar />
-                    {useRoutes(routerList)}
-                    <Footer />
-                  </ShowContext.Provider>
-                </CategoryContext.Provider>
-              </ActivityContext.Provider>
-            </FavContext.Provider>
-          </CartListContext.Provider>
-        </ProductsContext.Provider>
+                  <CategoryContext.Provider
+                    value={{ categoryData, setCategoryData }}
+                  >
+                    <ShowContext.Provider value={{ show, setShow }}>
+                      <Navbar />
+                      {useRoutes(routerList)}
+                      <Footer />
+                    </ShowContext.Provider>
+                  </CategoryContext.Provider>
+                </ActivityContext.Provider>
+              </FavContext.Provider>
+            </CartListContext.Provider>
+          </ProductsContext.Provider>
+        </AdminContext.Provider>
       </LoginContext.Provider>
     </>
   );

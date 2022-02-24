@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 
 import FloatingMember from '../components/FloatingMember';
+import FloatingChat from '../components/FloatingChat';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -23,6 +24,7 @@ function Cart() {
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
+      <FloatingChat />
     </>
   );
 }

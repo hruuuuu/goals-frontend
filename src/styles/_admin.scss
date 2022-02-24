@@ -1,0 +1,58 @@
+.l-admin-chat {
+  width: 100vw;
+  height: calc(100vh - $height__navbar);
+
+  position: relative;
+  &__hint {
+    margin-bottom: 0.5rem;
+    @include text--small;
+  }
+  &__tab {
+    width: 100%;
+    height: $height__input;
+    margin-bottom: 0.5rem;
+
+    background: $color--gray6;
+    border: none;
+    border-radius: $border-radius__input;
+    @include text--normal;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    &.active {
+      background: $color--primary;
+      color: $color--light;
+    }
+    &--default {
+      background: $color--gray6;
+      &.active {
+        color: $color--light;
+        background-color: $color--success;
+      }
+    }
+  }
+  &__read-hint {
+    width: 0.5rem;
+    height: 0.5rem;
+
+    background: $color--secondary;
+    border-radius: 50%;
+    box-shadow: $box-shadow__icon;
+
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+  }
+  &__sidebar {
+    height: calc(100vh - $height__navbar - 14.125rem);
+    padding-right: $padding__chat;
+
+    @include scrollbar;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

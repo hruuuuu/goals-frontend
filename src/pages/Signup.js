@@ -7,6 +7,8 @@ import SignupModal from '../components/Signup/Modal';
 import SocialArea from '../components/Signup/SocialArea';
 import CustomForm from '../components/Signup/CustomForm';
 
+import { API_URL } from '../utils/config';
+
 const Signup = () => {
   const history = useNavigate();
   const { login, setLogin, loginOption, setLoginOption } = useLogin();
@@ -34,11 +36,9 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!page) {
-      const forgetEmail = await axios.post(
-        `${process.env.BACKEND_API_URL}/api/verify/forget`,
-        data,
-        { withCredentials: true }
-      );
+      const forgetEmail = await axios.post(`${API_URL}/verify/forget`, data, {
+        withCredentials: true,
+      });
       setShow(false);
       if (forgetEmail.status === 200 && forgetEmail.data.code < 30000) {
         alert(forgetEmail.data.msg);
@@ -53,11 +53,9 @@ const Signup = () => {
       }
     } else {
       console.log(data);
-      const reVerifyEmail = await axios.post(
-        `${process.env.BACKEND_API_URL}/api/verify/resend`,
-        data,
-        { withCredentials: true }
-      );
+      const reVerifyEmail = await axios.post(`${API_URL}/verify/resend`, data, {
+        withCredentials: true,
+      });
       setShow(false);
       if (reVerifyEmail.status === 200 && reVerifyEmail.data.code < 30000) {
         alert(reVerifyEmail.data.msg);
@@ -76,7 +74,7 @@ const Signup = () => {
   // google登入
   const handleGoogleLogIn = async (googleData) => {
     const loginResult = await axios.post(
-      `${process.env.BACKEND_API_URL}/api/social/google`,
+      `${API_URL}/social/google`,
       { access_token: googleData.accessToken },
       {
         withCredentials: true,
@@ -98,7 +96,7 @@ const Signup = () => {
   // Facebook登入
   // const handleFacebookLogIn = async () => {
   //   const loginResult = await axios.post(
-  //     `${process.env.BACKEND_API_URL}/api/social/facebook`,
+  //     `${API_URL}/social/facebook`,
   //     { withCredentials: true }
   //   );
   //   console.log(loginResult);
