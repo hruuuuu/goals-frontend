@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { BE_URL } from '../utils/config';
 import { useAdmin } from '../context/admin';
 
+import Header from '../components/Header';
 import ChatView from '../components/Admin/ChatView';
 
 function AdminChat() {
@@ -80,17 +81,6 @@ function AdminChat() {
     }
   };
 
-  useEffect(() => {
-    if (socket) {
-      try {
-        initWebSocket();
-        // console.log('連線成功');
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, [socket]);
-
   const handleCurrentClient = (e) => {
     setCurrentClient({
       chatId: e.target.attributes.chatid.value,
@@ -110,9 +100,21 @@ function AdminChat() {
     });
   };
 
+  useEffect(() => {
+    if (socket) {
+      try {
+        initWebSocket();
+        // console.log('連線成功');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [socket]);
+
   return (
     <>
       <div className="l-admin-chat c-chat c-chat--admin">
+        <Header />
         <div className="container">
           <div className="row">
             <div className="col-3">

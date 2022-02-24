@@ -1021,7 +1021,7 @@
   }
   &--admin {
     #{$_}__content {
-      height: calc(100vh - $height__navbar - 11.5rem);
+      height: calc(100vh - $height__navbar - 20.875rem);
       padding-right: $padding__chat;
       margin-bottom: $padding__chat;
     }

@@ -1,7 +1,6 @@
 .l-admin-chat {
   width: 100vw;
-  height: calc(100vh - $height__navbar - 2.5rem);
-  padding: 2.5rem;
+  height: calc(100vh - $height__navbar);
 
   position: relative;
   &__hint {
@@ -49,7 +48,7 @@
     transform: translateY(-50%);
   }
   &__sidebar {
-    height: calc(100vh - $height__navbar - 5rem);
+    height: calc(100vh - $height__navbar - 14.125rem);
     padding-right: $padding__chat;
 
     @include scrollbar;

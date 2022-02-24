@@ -150,6 +150,9 @@ const routerList = [
   {
     path: `admin`,
     element: <AdminChat />,
+    breadcrumbName: '客服系統',
+    header: '客服系統',
+    headerImg: imgFood,
   },
   {
     path: '*',
