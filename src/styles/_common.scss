@@ -677,12 +677,12 @@
       width: $radius__floating-icon;
       height: $diameter__floating-icon;
 
-      border-top-left-radius: 0;
+      border-top-left-radius: $border-radius__btn;
       border-bottom-left-radius: $border-radius__btn;
       border-top-right-radius: 0;
 
       position: fixed;
-      top: calc(50% + $radius__floating-icon);
+      top: 50%;
       right: 0;
       transform: translateY(-50%);
       @media screen and (max-width: $lg) {
@@ -691,6 +691,13 @@
 
         top: 50%;
       }
+    }
+  }
+  &--double {
+    #{$_}__btn {
+      border-top-left-radius: 0 !important;
+
+      top: calc(50% + $radius__floating-icon) !important;
     }
   }
   &__icon {
@@ -957,8 +964,11 @@
     align-items: center;
   }
   &__input {
-    padding: 0.75rem;
+    min-height: $height__input !important;
+    padding: 0.7rem;
     resize: none;
+
+    @include scrollbar--hidden;
   }
   &__icon {
     font-size: 1.25rem;

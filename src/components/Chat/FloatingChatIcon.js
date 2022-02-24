@@ -1,11 +1,21 @@
 import React from 'react';
+import { useMatch } from 'react-router-dom';
 
 function FloatingChatIcon(props) {
   const { isExpand, setIsExpand } = props;
 
+  /* 如果是在商品頁 就用不同樣式的class */
+  const matchProduct = useMatch('/product');
+  const matchProducts = useMatch('/product/:productId');
+  const isDouble = matchProduct !== null || matchProducts !== null;
+
   return (
     <>
-      <div className="c-floating-icon c-floating-icon--chat">
+      <div
+        className={`c-floating-icon c-floating-icon--chat ${
+          isDouble ? 'c-floating-icon--double' : ''
+        }`}
+      >
         <button
           type="button"
           className="c-floating-icon__btn"

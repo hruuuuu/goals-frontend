@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import { useBeforeunload } from 'react-beforeunload';
 
-import { BE_URL } from '../utils/config';
-import { useAdmin } from '../context/admin';
+import { BE_URL } from '../../utils/config';
+import { useAdmin } from '../../context/admin';
 
 function FloatingChatModal(props) {
   const { isExpand, setIsExpand } = props;

@@ -9,14 +9,11 @@ import ProductDetail from '../components/Products/ProductDetail';
 import FilterMobile from '../components/Products/FilterMobile';
 import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
-import FloatingChatIcon from '../components/FloatingChatIcon';
-import FloatingChatModal from '../components/FloatingChatModal';
+import FloatingChat from '../components/FloatingChat';
 
 function Products() {
   /* 控制floatingMenu */
   const [isDisplay, setIsDisplay] = useState(false);
-  /* 控制floatingChatModal */
-  const [isExpand, setIsExpand] = useState(false);
   const [category, setCategory] = useState({
     id: '',
     name: '',
@@ -50,11 +47,7 @@ function Products() {
       </div>
       <FilterMobile />
       <ProductDetail category={category} setCategory={setCategory} />
-
-      <FloatingChatIcon isExpand={isExpand} setIsExpand={setIsExpand} />
-      {isExpand && (
-        <FloatingChatModal isExpand={isExpand} setIsExpand={setIsExpand} />
-      )}
+      <FloatingChat />
     </>
   );
 }
