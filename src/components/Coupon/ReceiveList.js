@@ -26,24 +26,24 @@ function ReceiveList() {
       {!isReceiveList ? (
         <div className="coupons">
           <div className="row">
-            {data.map((order) => {
+            {data.map((coupon) => {
               return (
                 <div
                   className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                  key={order.id}
+                  key={coupon.id}
                 >
                   <div className="couponWrapper1 mt-3">
                     <div className="coupon">
                       <div className="coupon-detail">
                         <h2 className="coupon-amount">
-                          <i className="fas fa-dollar-sign"></i>
-                          <p>50</p>
+                          {/* <i className="fas fa-dollar-sign"></i> */}
+                          <p>{coupon.title}</p>
                         </h2>
                         <div className="sperate-line"></div>
                         <div className="coupon-statement">
-                          <h5 className="coupon-title">{order.discription}</h5>
+                          <h5 className="coupon-title">{coupon.discription}</h5>
                           <p className="coupon-period">
-                            使用期間: {order.start_time} 至 {order.end_time}{' '}
+                            使用期間: {coupon.start_time} 至 {coupon.end_time}{' '}
                             有效
                           </p>
                         </div>
