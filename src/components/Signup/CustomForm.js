@@ -40,9 +40,6 @@ const CustomForm = ({
           { withCredentials: true }
         );
         const userProfile = loginData.data;
-        // 有錯誤代碼 -> 導回首頁顯示alert顯示網頁 (80% done)
-        // 將登入的使用者資訊存session(doing...)
-        // 將登入用戶分為一般用戶跟admin
         if (loginData.status === 200 && userProfile.code < 30000) {
           localStorage.setItem('login', true);
           localStorage.setItem('user', JSON.stringify(userProfile.data));
