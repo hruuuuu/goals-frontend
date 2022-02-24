@@ -130,7 +130,7 @@ const OrderList = () => {
           );
         })
       ) : (
-        <h1>沒有過去訂單</h1>
+        <h1></h1>
       )}
       <Modal centered show={show} onHide={handleClose} animation={false}>
         <Modal.Header>

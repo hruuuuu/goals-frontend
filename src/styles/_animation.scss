@@ -97,6 +97,15 @@
       }
     }
   }
+  &__floating-chat {
+    animation-duration: 0.2s;
+    &--in {
+      animation-name: fadeIn;
+    }
+    &--out {
+      animation-name: fadeOut;
+    }
+  }
   &__modal {
     animation-duration: 0.3s;
     &--in {

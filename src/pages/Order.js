@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import OrderList from '../components/Order/OrderList';
 import FloatingMember from '../components/FloatingMember';
+import FloatingChat from '../components/FloatingChat';
 
 function Order() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -21,6 +22,7 @@ function Order() {
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
+      <FloatingChat />
     </>
   );
 }

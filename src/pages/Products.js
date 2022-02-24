@@ -9,8 +9,10 @@ import ProductDetail from '../components/Products/ProductDetail';
 import FilterMobile from '../components/Products/FilterMobile';
 import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
+import FloatingChat from '../components/FloatingChat';
 
 function Products() {
+  /* 控制floatingMenu */
   const [isDisplay, setIsDisplay] = useState(false);
   const [category, setCategory] = useState({
     id: '',
@@ -18,11 +20,7 @@ function Products() {
   });
   const matchProduct = useMatch('/product');
   const matchProducts = useMatch('/product/:productId');
-  const isLower = () => {
-    if (matchProduct !== null || matchProducts !== null) {
-      return true;
-    }
-  };
+  const isLower = matchProduct !== null || matchProducts !== null;
 
   return (
     <>
@@ -49,6 +47,7 @@ function Products() {
       </div>
       <FilterMobile />
       <ProductDetail category={category} setCategory={setCategory} />
+      <FloatingChat />
     </>
   );
 }

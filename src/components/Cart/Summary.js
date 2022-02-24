@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import CheckoutModal from './CheckoutModal';
 import { useCartList } from '../../context/cart';
-import { useCoupons, useCouponsReceive } from '../../context/coupon';
 
 function Summary(props) {
   const [total, setTotal] = useState();
@@ -9,10 +8,6 @@ function Summary(props) {
   const [coupon, setCoupon] = useState();
   const [orderTotal, setOrderTotal] = useState();
   const { cartListData, setCartListData } = useCartList();
-  const { couponsData, setCouponsData } = useCoupons();
-  const { couponsReceiveData, setCouponsReceiveData } = useCouponsReceive();
-
-  const isFetchingCoupons = couponsData.length === 0;
 
   useEffect(() => {
     //總計

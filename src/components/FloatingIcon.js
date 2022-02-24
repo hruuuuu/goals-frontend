@@ -19,9 +19,6 @@ function FloatingIcon(props) {
           onClick={() => {
             setIsDisplay(true);
           }}
-          onMouseEnter={() => {
-            setIsDisplay(true);
-          }}
         >
           {page === 'member' ? (
             <>

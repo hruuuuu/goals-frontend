@@ -138,7 +138,6 @@ const Login = () => {
           </button>
         </div>
       </Modal>
-      {/* Modal */}
     </>
   );
 };
