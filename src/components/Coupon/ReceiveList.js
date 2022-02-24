@@ -18,6 +18,8 @@ function ReceiveList() {
       setData(response.data);
     };
     getcoupon();
+
+    console.log(userID);
   }, []);
   return (
     <>
