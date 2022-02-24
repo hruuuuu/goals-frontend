@@ -18,14 +18,16 @@ function Navbar() {
       normal: false,
     });
     const logoutResult = await axios.post(
-      'http://localhost:3002/api/auth/logout',
+      `${process.env.BACKEND_API_URL}/api/auth/logout`,
       {
         withCredentials: true,
       }
     );
-    console.log(logoutResult);
-    if (logoutResult.status === 200) {
-      history('/');
+    if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
+      alert(logoutResult.data.msg);
+      setTimeout(() => {
+        history('/');
+      });
     }
   };
 
@@ -45,7 +47,7 @@ function Navbar() {
       google: false,
     });
     const logoutResult = await axios.post(
-      'http://localhost:3002/api/social/logout',
+      `${process.env.BACKEND_API_URL}/api/social/logout`,
       {
         withCredentials: true,
       }

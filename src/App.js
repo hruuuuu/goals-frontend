@@ -26,8 +26,6 @@ function App() {
   const [loginOption, setLoginOption] = useState({
     normal: false,
     google: false,
-    facebook: false,
-    line: false,
   });
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
