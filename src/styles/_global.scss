@@ -343,6 +343,11 @@ h6 {
       border: $border__input--focus;
       box-shadow: none;
     }
+    &--textarea {
+      min-height: $height__input;
+      padding: 0.7rem;
+      resize: none;
+    }
   }
   &__label {
     margin-bottom: 0.5rem;
@@ -353,6 +358,7 @@ h6 {
     height: $height__input;
 
     @include text--small;
+    border: $border__input;
     border-radius: $border-radius__input;
     background-image: url("../img/common/icon/down.svg");
     &:focus {

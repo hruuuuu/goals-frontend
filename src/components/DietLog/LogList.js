@@ -69,7 +69,9 @@ function LogList() {
         <>
           {dietlogData.map((log) => {
             const { id } = log;
-            return <LogItem key={id} dietlog={log} />;
+            return (
+              <LogItem key={id} dietlog={log} getDietlogData={getDietlogData} />
+            );
           })}
         </>
       ) : (
