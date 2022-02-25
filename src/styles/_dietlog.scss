@@ -1,30 +1,54 @@
 .l-dietlog {
   width: 100%;
-  height: $height__content;
+  height: max-content;
+  min-height: $height__content;
+  &__sidebar {
+    position: sticky;
+    top: $height__navbar + 2.5rem;
+  }
   &__icon {
     color: $color--primary;
   }
   .react-calendar {
+    $_: &;
     &__tile {
       height: $height__calendar;
-      padding: 0;
-      margin: 0.5rem;
+      padding: 2rem 0;
 
       @include clear__btn;
-      border-radius: 50%;
 
-      transition: $transition;
-      &:hover {
-        background: $color--gray6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      abbr {
+        width: $height__calendar;
+        height: $height__calendar;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: $transition;
+        &:hover {
+          background: $color--gray6;
+        }
       }
       &--now {
-        color: $color--light;
-        background: $color--primary;
-        @include interaction__btn;
+        abbr {
+          color: $color--light;
+          background: $color--primary;
+          @include interaction__btn;
+        }
       }
       &--active {
-        background: $color--warning;
-        @include interaction__btn;
+        abbr {
+          color: $color--font;
+          background: $color--secondary;
+          @include interaction__btn;
+        }
       }
     }
     &__navigation {
@@ -39,23 +63,6 @@
         color: $color--primary;
 
         @include cursor(pointer);
-      }
-      &__arrow {
-        width: $size__icon-btn;
-        height: $size__icon-btn;
-
-        @include clear__btn;
-
-        position: relative;
-        &::before {
-          color: $color--primary;
-          font-size: 1rem;
-
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          @include interaction__link;
-        }
       }
       &__next-button {
         &::before {
@@ -77,6 +84,29 @@
           @include icon--absolute("\f100");
         }
       }
+      &__arrow {
+        width: $size__icon-btn;
+        height: $size__icon-btn;
+
+        @include clear__btn;
+        border-radius: 50%;
+
+        transition: $transition;
+
+        position: relative;
+        &::before {
+          color: $color--primary;
+          font-size: 1rem;
+
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          @include interaction__link;
+        }
+        &:hover {
+          background: $color--opacity;
+        }
+      }
     }
     &__month-view {
       &__weekdays {
@@ -94,9 +124,7 @@
         }
       }
       &__days {
-        justify-content: space-between;
         &__day {
-          max-width: $height__calendar;
           &--neighboringMonth {
             color: $color--gray4;
           }
@@ -111,5 +139,65 @@
         }
       }
     }
+  }
+  &__accordion {
+    margin-bottom: 1.5rem;
+
+    border: none;
+
+    @include cursor(pointer);
+  }
+  &__card {
+    width: 100%;
+    height: max-content;
+    padding: $padding__card;
+
+    border: none;
+    border-radius: $border-radius__block;
+
+    transition: $transition;
+    &:hover {
+      box-shadow: $box-shadow__card--active;
+    }
+    &:focus,
+    &:active {
+      outline: none;
+    }
+    &--breakfast {
+      background: $color__bg--secondary;
+    }
+    &--lunch {
+      background: $color__bg--analogous2;
+    }
+    &--dinner {
+      background: $color__bg--info;
+    }
+    &--others {
+      background: $color__bg--analogous1;
+    }
+  }
+  &__cover {
+    width: 3rem;
+    height: 3rem;
+    border-radius: $border-radius__input;
+    overflow: hidden;
+  }
+  &__heading {
+    margin-right: 1rem;
+    @include text--normal-bold;
+    @include text--truncate(1);
+    text-align: start;
+  }
+  &__cal {
+    @include text--normal;
+    color: $color--error;
+  }
+  &__time {
+    @include text--extra-small;
+    color: $color--gray3;
+  }
+  &__text {
+    @include text--small;
+    text-align: start;
   }
 }

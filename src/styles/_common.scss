@@ -169,6 +169,7 @@
 
   @include text--extra-small;
   color: $color--light;
+  white-space: nowrap;
 
   display: flex;
   justify-content: center;
@@ -202,6 +203,18 @@
       top: 40%;
       left: 80%;
     }
+  }
+  &--analogous1 {
+    background: $color--analogous1;
+  }
+  &--analogous2 {
+    background: $color--analogous2;
+  }
+  &--info {
+    background: $color--info;
+  }
+  &--error {
+    background: $color--error;
   }
 }
 
@@ -343,7 +356,7 @@
   height: 1rem;
   font-size: 1rem;
   &--left {
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
   }
   &--left-large {
     margin-right: 0.5rem;

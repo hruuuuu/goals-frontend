@@ -207,11 +207,17 @@ h6 {
   &:hover {
     color: $color--light;
     background: $color--hover;
+    i {
+      color: $color--light;
+    }
   }
   &:focus,
   &:active {
     color: $color--light;
     background: $color--active;
+    i {
+      color: $color--light;
+    }
   }
 }
 
@@ -276,6 +282,12 @@ h6 {
 @mixin placeholder__text {
   width: 100%;
   height: 1.5rem;
+}
+@mixin text--truncate($line) {
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 .c-alert {
@@ -507,6 +519,15 @@ h6 {
       }
     }
   }
+  &--secondary {
+    @include text--normal;
+    background: $color--gray6;
+  }
+  &--outline {
+    border: $border__input;
+    border-radius: $border-radius__input;
+    @include interaction__btn;
+  }
 }
 
 .ellipsis {
@@ -521,5 +542,45 @@ h6 {
     -webkit-box-orient: vertical;
     white-space: normal;
     overflow: hidden;
+  }
+}
+
+.e-img {
+  &--cover {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+  &--contain {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+}
+
+.c-tabs {
+  display: flex;
+  &__btn {
+    padding: 0.625rem 1.25rem;
+    @include clear__btn;
+    @include text--normal-bold;
+    color: $color--gray4;
+
+    border-radius: $border-radius__tabs;
+    border-bottom: $border__tabs;
+
+    transition: $transition;
+    &:hover {
+      background: $color--opacity;
+    }
+    &.active {
+      color: $color--primary;
+      border-bottom: $border__tabs--active;
+    }
+    &--w100 {
+      width: 100%;
+    }
   }
 }
