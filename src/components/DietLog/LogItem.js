@@ -1,22 +1,72 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import dayjs from 'dayjs';
 
 import { IMG_URL } from '../../utils/config';
+import { useDietlog } from '../../context/dietlog';
 
-function LogItem() {
+function LogItem(props) {
+  const { dietlog } = props;
+  const { title, description, created_at } = dietlog;
+  const { dietlogCategoryData } = useDietlog();
+  const [category, setCategory] = useState({ id: '', name: '' });
+
+  const isFetchingCategory = dietlogCategoryData.length === 0;
+  const isEmptyDescription = description === null || description === '';
+  const time = dayjs(created_at).format('HH:MM');
+
+  const categoryTagClass = () => {
+    switch (category.id) {
+      case 1:
+        return 'e-tag--breakfast';
+      case 2:
+        return 'e-tag--lunch';
+      case 3:
+        return 'e-tag--dinner';
+      case 4:
+        return 'e-tag--others';
+      default:
+        return;
+    }
+  };
+
+  const cardClass = () => {
+    switch (category.id) {
+      case 1:
+        return 'l-dietlog__card--breakfast';
+      case 2:
+        return 'l-dietlog__card--lunch';
+      case 3:
+        return 'l-dietlog__card--dinner';
+      case 4:
+        return 'l-dietlog__card--others';
+      default:
+        return;
+    }
+  };
+
+  useEffect(() => {
+    if (!isFetchingCategory) {
+      const matchedCategory = dietlogCategoryData.find(
+        (category) => dietlog.category_id === category.id
+      );
+      setCategory({ ...matchedCategory });
+    }
+  }, [dietlogCategoryData]);
+
   return (
     <>
       <Accordion>
         <Accordion.Item eventKey="0" bsPrefix="l-dietlog__accordion">
-          <Accordion.Button bsPrefix="l-dietlog__card l-dietlog__card--breakfast">
-            <div className="e-tag e-tag--normal mb-2">早餐</div>
+          <Accordion.Button bsPrefix={`l-dietlog__card ${cardClass()}`}>
+            <div className={`e-tag e-tag--normal mb-2 ${categoryTagClass()}`}>
+              {category.name}
+            </div>
             <div className="d-flex align-items-start justify-content-between">
               <div className="d-flex flex-column align-items-start justify-content-end">
-                <h6 className="l-dietlog__heading">
-                  7-11草莓優格、焦糖瑪奇朵、熱狗、水煮蛋
-                </h6>
+                <h6 className="l-dietlog__heading">{title}</h6>
                 {/* <div className="l-dietlog__cal">熱量300卡</div> */}
-                <div className="l-dietlog__time">09:00</div>
+                <div className="l-dietlog__time">{time}</div>
               </div>
               <div className="l-dietlog__cover">
                 <img
@@ -28,13 +78,13 @@ function LogItem() {
             </div>
           </Accordion.Button>
           <Accordion.Body>
-            <h6 className="l-dietlog__heading mb-2">
-              7-11草莓優格、焦糖瑪奇朵、熱狗、水煮蛋
-            </h6>
-            <p className="l-dietlog__text mb-2">
-              <i className="fas fa-sticky-note e-icon e-icon--left e-icon--primary"></i>
-              早上胃口不好 隨便亂吃
-            </p>
+            <h6 className="l-dietlog__heading mb-2">{title}</h6>
+            {!isEmptyDescription && (
+              <p className="l-dietlog__text mb-2">
+                <i className="fas fa-sticky-note e-icon e-icon--left e-icon--primary"></i>
+                {description}
+              </p>
+            )}
             {/* <div>熱量</div>
             <div>蛋白質</div>
             <div>脂肪</div>

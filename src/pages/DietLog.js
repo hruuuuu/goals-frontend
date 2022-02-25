@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import LogList from '../components/DietLog/LogList';
 import LogSidebar from '../components/DietLog/LogSidebar';
+import FloatingChat from '../components/FloatingChat';
 
 function DietLog() {
   return (
@@ -20,6 +21,7 @@ function DietLog() {
           </div>
         </div>
       </div>
+      <FloatingChat />
     </>
   );
 }

@@ -204,17 +204,17 @@
       left: 80%;
     }
   }
-  &--analogous1 {
-    background: $color--analogous1;
+  &--breakfast {
+    background: $color--secondary;
   }
-  &--analogous2 {
-    background: $color--analogous2;
+  &--lunch {
+    background: $color--error;
   }
-  &--info {
+  &--dinner {
     background: $color--info;
   }
-  &--error {
-    background: $color--error;
+  &--others {
+    background: $color--analogous1;
   }
 }
 

@@ -153,7 +153,7 @@
     padding: $padding__card;
 
     border: none;
-    border-radius: $border-radius__block;
+    border-radius: $border-radius__small-block;
 
     transition: $transition;
     &:hover {
@@ -167,7 +167,7 @@
       background: $color__bg--secondary;
     }
     &--lunch {
-      background: $color__bg--analogous2;
+      background: $color__bg--error;
     }
     &--dinner {
       background: $color__bg--info;
@@ -197,7 +197,26 @@
     color: $color--gray3;
   }
   &__text {
+    padding: $padding__chat-msg;
+
     @include text--small;
     text-align: start;
+
+    border-radius: $border-radius__input;
+    background-color: $color--gray6;
+
+    position: relative;
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 0.5rem 1rem 0.5rem;
+      border-color: transparent transparent $color--gray6 transparent;
+
+      position: absolute;
+      top: -1rem;
+      right: 1rem;
+    }
   }
 }
