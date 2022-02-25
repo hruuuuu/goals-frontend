@@ -361,6 +361,8 @@ h6 {
     border: $border__input;
     border-radius: $border-radius__input;
     background-image: url("../img/common/icon/down.svg");
+
+    @include cursor(pointer);
     &:focus {
       border: $border__input--focus;
       box-shadow: none;

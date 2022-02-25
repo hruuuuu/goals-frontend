@@ -11,7 +11,8 @@ import { useDietlog } from '../../context/dietlog';
 
 function LogItem(props) {
   const { dietlog, getDietlogData } = props;
-  const { id, title, description, image, created_at, category_id } = dietlog;
+  const { id, title, description, image, created_at, edited_at, category_id } =
+    dietlog;
   const { setDietlogData, dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
   const [editMode, setEditMode] = useState(false);
@@ -24,7 +25,10 @@ function LogItem(props) {
   const isFetchingCategory = dietlogCategoryData.length === 0;
   const isEmptyDescription = description === null || description === '';
   const isEmptyImage = image === null || image === '';
-  const time = dayjs(created_at).format('HH:MM');
+  const isEmptyEditedAt = edited_at === null || edited_at === '';
+
+  const createdAt = dayjs(created_at).format('HH:mm');
+  const editedAt = dayjs(edited_at).format('HH:mm');
 
   const Toast = Swal.mixin({
     toast: true,
@@ -76,13 +80,54 @@ function LogItem(props) {
     setEditFields({ ...editFields, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {};
+  const handleBack = () => {
+    setEditMode(false);
+  };
+
+  const handleSave = async () => {
+    const editData = {
+      id: id,
+      title: editFields.title,
+      description: editFields.description,
+      category: editFields.category,
+      time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+    };
+    try {
+      const response = await axios.patch(
+        `${API_URL}/dietlog/update/data`,
+        editData,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 202) {
+        Toast.fire({
+          icon: 'success',
+          title: '編輯成功',
+        });
+      } else if (response.status === 400) {
+        Toast.fire({
+          icon: 'error',
+          title: '有東西出錯了',
+        });
+      }
+      getDietlogData();
+      handleBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleDelete = async () => {
+    const data = { id: id };
     try {
-      const response = await axios.post(`${API_URL}/dietlog/${id}`, {
-        withCredentials: true,
-      });
+      const response = await axios.patch(
+        `${API_URL}/dietlog/update/valid`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
       if (response.status === 202) {
         Toast.fire({
           icon: 'success',
@@ -145,7 +190,10 @@ function LogItem(props) {
               <div className="d-flex flex-column align-items-start justify-content-end">
                 <h6 className="l-dietlog__heading">{title}</h6>
                 {/* <div className="l-dietlog__cal">熱量300卡</div> */}
-                <div className="l-dietlog__time">{time}</div>
+                {isEmptyEditedAt}
+                <div className="l-dietlog__time">
+                  {!isEmptyEditedAt ? editedAt : createdAt}
+                </div>
               </div>
               {!isEmptyImage && (
                 <div className="l-dietlog__cover">
@@ -199,7 +247,6 @@ function LogItem(props) {
                   <label htmlFor="title" className="form-label c-form__label">
                     標題
                   </label>
-
                   <textarea
                     type="text"
                     className="form-control c-form__input c-form__input--textarea"
@@ -222,15 +269,24 @@ function LogItem(props) {
             <div>鈉</div> */}
             <div className="d-flex align-items-center justify-content-end mt-4">
               {!editMode ? (
-                <button
-                  type="button"
-                  className="e-btn e-btn--icon e-btn--outline me-2"
-                  onClick={handleEdit}
-                >
-                  <i className="fas fa-edit e-icon e-icon--primary"></i>
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="e-btn e-btn--icon e-btn--outline me-2"
+                    onClick={handleEdit}
+                  >
+                    <i className="fas fa-edit e-icon e-icon--primary"></i>
+                  </button>
+                </>
               ) : (
                 <>
+                  <button
+                    type="button"
+                    className="e-btn e-btn--icon e-btn--outline me-2"
+                    onClick={handleBack}
+                  >
+                    <i className="fas fa-undo-alt e-icon e-icon--primary"></i>
+                  </button>
                   <button
                     type="button"
                     className="e-btn e-btn--icon e-btn--outline me-2"
