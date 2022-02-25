@@ -2,17 +2,18 @@ import { React, useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import dayjs from 'dayjs';
 
-import { IMG_URL } from '../../utils/config';
+import { UPLOAD_URL } from '../../utils/config';
 import { useDietlog } from '../../context/dietlog';
 
 function LogItem(props) {
   const { dietlog } = props;
-  const { title, description, created_at } = dietlog;
+  const { id, title, description, image, created_at } = dietlog;
   const { dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
 
   const isFetchingCategory = dietlogCategoryData.length === 0;
   const isEmptyDescription = description === null || description === '';
+  const isEmptyImage = image === null || image === '';
   const time = dayjs(created_at).format('HH:MM');
 
   const categoryTagClass = () => {
@@ -68,22 +69,24 @@ function LogItem(props) {
                 {/* <div className="l-dietlog__cal">熱量300卡</div> */}
                 <div className="l-dietlog__time">{time}</div>
               </div>
-              <div className="l-dietlog__cover">
-                <img
-                  className="e-img--cover"
-                  src={`${IMG_URL}/products/salmon.jpeg`}
-                  alt="diet-img"
-                />
-              </div>
+              {!isEmptyImage && (
+                <div className="l-dietlog__cover">
+                  <img
+                    className="e-img--cover"
+                    src={`${UPLOAD_URL}/${image}`}
+                    alt="diet-img"
+                  />
+                </div>
+              )}
             </div>
           </Accordion.Button>
           <Accordion.Body>
-            <h6 className="l-dietlog__heading mb-2">{title}</h6>
+            <h6 className="l-dietlog__heading mb-2">
+              <i className="fas fa-pencil-alt e-icon e-icon--left e-icon--primary"></i>
+              {title}
+            </h6>
             {!isEmptyDescription && (
-              <p className="l-dietlog__text mb-2">
-                <i className="fas fa-sticky-note e-icon e-icon--left e-icon--primary"></i>
-                {description}
-              </p>
+              <p className="l-dietlog__text mb-2">{description}</p>
             )}
             {/* <div>熱量</div>
             <div>蛋白質</div>
@@ -94,10 +97,16 @@ function LogItem(props) {
             <div>糖</div>
             <div>鈉</div> */}
             <div className="d-flex align-items-center justify-content-end">
-              <button className="e-btn e-btn--icon e-btn--outline me-2">
+              <button
+                type="button"
+                className="e-btn e-btn--icon e-btn--outline me-2"
+              >
                 <i className="fas fa-edit e-icon e-icon--primary"></i>
               </button>
-              <button className="e-btn e-btn--icon e-btn--outline">
+              <button
+                type="button"
+                className="e-btn e-btn--icon e-btn--outline"
+              >
                 <i className="fas fa-trash-alt e-icon e-icon--primary"></i>
               </button>
             </div>
