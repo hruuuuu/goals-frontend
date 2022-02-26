@@ -348,6 +348,25 @@ h6 {
       padding: 0.7rem;
       resize: none;
     }
+    &[type="file"] {
+      width: 100%;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+
+      @include cursor(pointer);
+
+      position: relative;
+      &::-webkit-file-upload-button {
+        display: none;
+      }
+      &::after {
+        @include icon--absolute("\2b");
+        color: $color--gray4;
+
+        top: 45%;
+        left: 0.75rem;
+        transform: translateY(-50%);
+      }
+    }
   }
   &__label {
     margin-bottom: 0.5rem;
@@ -368,6 +387,45 @@ h6 {
       box-shadow: none;
     }
   }
+  // &__file {
+  //   width: $height__input--file;
+  //   height: $height__input--file;
+
+  //   @include clear__btn;
+  //   border-radius: $border-radius__input;
+  //   border: $border__input;
+
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  //   position: relative;
+  //   span {
+  //   }
+  //   &::after {
+  //     @include icon--absolute("\2b");
+  //     color: $color--gray4;
+
+  //     top: 45%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //   }
+  //   &::-webkit-file-upload-button {
+  //     width: $height__input--file;
+  //     height: $height__input--file;
+  //     padding: 0;
+  //     margin: 0;
+
+  //     @include clear__btn;
+  //     opacity: 0;
+
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+
+  //     @include cursor(pointer);
+  //   }
+  // }
   &--disabled {
     #{$_}__input {
       color: $color--disabled;

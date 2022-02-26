@@ -1,4 +1,5 @@
 .l-dietlog {
+  $_: &;
   width: 100%;
   height: max-content;
   min-height: $height__content;
@@ -176,13 +177,20 @@
       background: $color__bg--analogous1;
     }
   }
+  &__row {
+    display: flex;
+    align-items: center;
+  }
   &__cover {
-    width: 3rem;
-    height: 3rem;
-    margin-left: 1rem;
+    width: $height__input--file;
+    height: $height__input--file;
+    margin-right: 0.5rem;
 
     border-radius: $border-radius__input;
     overflow: hidden;
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
   &__heading {
     @include text--normal-bold;

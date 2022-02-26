@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 
 import Accordion from 'react-bootstrap/Accordion';
 
@@ -11,7 +12,7 @@ import { useDietlog } from '../../context/dietlog';
 
 function LogItem(props) {
   const { dietlog, getDietlogData } = props;
-  const { id, title, description, image, created_at, edited_at, category_id } =
+  const { id, title, description, created_at, edited_at, category_id } =
     dietlog;
   const { setDietlogData, dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
@@ -20,11 +21,13 @@ function LogItem(props) {
     title: title,
     description: description,
     category: category_id,
+    imgs: [],
   });
+  const [dietlogImg, setDietlogImg] = useState([]);
 
   const isFetchingCategory = dietlogCategoryData.length === 0;
   const isEmptyDescription = description === null || description === '';
-  const isEmptyImage = image === null || image === '';
+  const isEmptyImage = dietlogImg.length === 0;
   const isEmptyEditedAt = edited_at === null || edited_at === '';
 
   const createdAt = dayjs(created_at).format('HH:mm');
@@ -72,6 +75,17 @@ function LogItem(props) {
     }
   };
 
+  const getDietlogImg = async () => {
+    const data = { id: id };
+    try {
+      const response = await axios.post(`${API_URL}/dietlog/image`, data, {
+        withCredentials: true,
+      });
+      const dietlogImg = response.data;
+      setDietlogImg([...dietlogImg]);
+    } catch (error) {}
+  };
+
   const handleEdit = () => {
     setEditMode(true);
   };
@@ -80,20 +94,33 @@ function LogItem(props) {
     setEditFields({ ...editFields, [e.target.name]: e.target.value });
   };
 
+  const handleImgChange = (e) => {
+    let imgArr = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      imgArr.push(e.target.files[i]);
+    }
+    setEditFields({ ...editFields, [e.target.name]: imgArr });
+  };
+
   const handleBack = () => {
     setEditMode(false);
   };
 
   const handleSave = async () => {
-    const editData = {
-      id: id,
-      title: editFields.title,
-      description: editFields.description,
-      category: editFields.category,
-      time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    };
+    const editData = new FormData();
+    editData.append('id', id);
+    editData.append('title', editFields.title);
+    editData.append('description', editFields.description);
+    editData.append('category', editFields.category);
+    editFields.imgs.forEach((img) => {
+      editData.append('imgs', img);
+    });
+    editData.append('time', dayjs().format('YYYY-MM-DD HH:mm:ss'));
+    // for (var pair of editData.entries()) {
+    //   console.log(pair[0] + ' : ' + pair[1]);
+    // }
     try {
-      const response = await axios.patch(
+      const response = await axios.post(
         `${API_URL}/dietlog/update/data`,
         editData,
         {
@@ -105,16 +132,16 @@ function LogItem(props) {
           icon: 'success',
           title: '編輯成功',
         });
-      } else if (response.status === 400) {
-        Toast.fire({
-          icon: 'error',
-          title: '有東西出錯了',
-        });
       }
       getDietlogData();
+      getDietlogImg();
       handleBack();
     } catch (error) {
       console.log(error);
+      Toast.fire({
+        icon: 'error',
+        title: '有東西出錯了',
+      });
     }
   };
 
@@ -133,15 +160,14 @@ function LogItem(props) {
           icon: 'success',
           title: '刪除成功',
         });
-      } else if (response.status === 400) {
-        Toast.fire({
-          icon: 'error',
-          title: '有東西出錯了',
-        });
       }
       getDietlogData();
     } catch (error) {
       console.log(error);
+      Toast.fire({
+        icon: 'error',
+        title: '有東西出錯了',
+      });
     }
   };
 
@@ -178,6 +204,10 @@ function LogItem(props) {
     }
   }, [dietlogCategoryData]);
 
+  useEffect(() => {
+    getDietlogImg();
+  }, []);
+
   return (
     <>
       <Accordion>
@@ -195,15 +225,6 @@ function LogItem(props) {
                   {!isEmptyEditedAt ? editedAt : createdAt}
                 </div>
               </div>
-              {!isEmptyImage && (
-                <div className="l-dietlog__cover">
-                  <img
-                    className="e-img--cover"
-                    src={`${UPLOAD_URL}/${image}`}
-                    alt="diet-img"
-                  />
-                </div>
-              )}
             </div>
           </Accordion.Button>
           <Accordion.Body>
@@ -259,6 +280,27 @@ function LogItem(props) {
               )}
             </div>
             {descriptionLayout()}
+            {!editMode && (
+              <div className="l-dietlog__row mt-2">
+                {!isEmptyImage &&
+                  dietlogImg.map((img) => {
+                    const { id, name } = img;
+                    return (
+                      <div key={id} className="l-dietlog__cover">
+                        <img
+                          className="e-img--cover"
+                          src={`${UPLOAD_URL}/${name}`}
+                          alt="diet-img"
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
+            {/* <form action="" enctype="multipart/form-data">
+              <input type="file" />
+              <button type="submit" onClick="">submit</button>
+            </form> */}
             {/* <div>熱量</div>
             <div>蛋白質</div>
             <div>脂肪</div>
@@ -267,6 +309,22 @@ function LogItem(props) {
             <div>碳水化合物</div>
             <div>糖</div>
             <div>鈉</div> */}
+            {editMode && (
+              <div className="mt-2">
+                <label htmlFor="imgs" className="c-form__label">
+                  上傳圖片(上限5張)
+                </label>
+                <input
+                  type="file"
+                  className="c-form__input"
+                  name="imgs"
+                  id="imgs"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImgChange}
+                />
+              </div>
+            )}
             <div className="d-flex align-items-center justify-content-end mt-4">
               {!editMode ? (
                 <>
