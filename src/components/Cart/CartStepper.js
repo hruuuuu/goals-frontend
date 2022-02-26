@@ -18,6 +18,10 @@ function CartStepper(props) {
   const [skipped, setSkipped] = React.useState(new Set());
   const { cartListData, setCartListData } = useCartList();
   const [shippingData, setShippingData] = React.useState({
+    order_status_id: '1',
+    delivery_status_id: '1',
+    payment_status_id: '4',
+    payment_id: '1',
     name: '',
     county: '',
     district: '',
@@ -26,9 +30,18 @@ function CartStepper(props) {
     tel: '',
   });
   const { orderTotal, setOrderTotal } = props;
-  const [member, setMember] = React.useState({});
+  const { couponId, setCouponId } = props;
+
   //取得已登入會員的ID
   const userID = JSON.parse(localStorage.getItem('user'));
+  // console.log(userID);
+
+  //coupon_receive
+  const usedCouponData = {
+    member_id: userID.id,
+    coupon_id: couponId,
+  };
+  console.log(usedCouponData);
 
   //order_items
   // ->準備好要傳回資料庫的product_id, amount
@@ -64,9 +77,7 @@ function CartStepper(props) {
 
   //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
-    // 關掉原本預設的行為
-    // e.preventDefault();
-
+    //orderDetails
     let orderDetailsResponse = await axios.post(
       `${API_URL}/cart/orderDetails`,
       cartDetails
@@ -77,11 +88,11 @@ function CartStepper(props) {
       cartItems
     );
 
-    console.log(cartItems);
-    //order_details
-    console.log(cartDetails);
-
-    // console.log(orderDetailsResponse.data);
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
   }
   return (
     <>

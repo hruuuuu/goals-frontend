@@ -8,6 +8,8 @@ function CheckoutModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { orderTotal, setOrderTotal } = props;
+  const { couponId, setCouponId } = props;
+
   return (
     <>
       <button className="btn_grn py-3" type="button" onClick={handleShow}>
@@ -32,6 +34,8 @@ function CheckoutModal(props) {
             handleClose={handleClose}
             orderTotal={orderTotal}
             setOrderTotal={setOrderTotal}
+            couponId={couponId}
+            setCouponId={setCouponId}
           />
         </div>
       </Modal>
