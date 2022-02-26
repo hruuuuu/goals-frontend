@@ -17,9 +17,26 @@ function CartStepper(props) {
   const [activeStep, setActiveStep] = React.useState(1);
   const [skipped, setSkipped] = React.useState(new Set());
   const { cartListData, setCartListData } = useCartList();
+  const [shippingData, setShippingData] = React.useState({
+    name: '',
+    county: '',
+    district: '',
+    address: '',
+    recipient: '',
+    tel: '',
+  });
+  const { orderTotal, setOrderTotal } = props;
+  const [orderDetailData, setOrderDetailData] = React.useState({});
 
+  //order_items
+  // ->準備好要傳回資料庫的product_id, amount
   const cartItems = { ...cartListData };
   console.log(cartItems);
+
+  //order_details
+  // ->準備好要傳回資料庫的應付金額
+  const cartDetails = { ...shippingData, total: Number(orderTotal) };
+  console.log(cartDetails);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -39,23 +56,22 @@ function CartStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  //送出訂單
+  //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
     // 關掉原本預設的行為
     e.preventDefault();
     //order_items
     let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/submitOrder`,
-      cartItems,
+      `${API_URL}/cart/orderItems`,
+      cartItems
     );
     console.log(orderItemsResponse.data);
     //order_details
-    // let orderDetailsResponse = await axios.post(
-    //   `${API_URL}/cart/submitOrder`,
-    //   cartItems,
-    //   userID
-    // );
-    // console.log(orderDetailsResponse.data);
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails
+    );
+    console.log(orderDetailsResponse.data);
   }
   return (
     <>
@@ -87,7 +103,14 @@ function CartStepper(props) {
         ) : (
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
-              {activeStep === steps.length - 1 ? <Checkout /> : <Shipping />}
+              {activeStep === steps.length - 1 ? (
+                <Checkout />
+              ) : (
+                <Shipping
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                />
+              )}
             </div>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />

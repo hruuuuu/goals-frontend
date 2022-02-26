@@ -10,6 +10,7 @@ function Summary(props) {
   const [total, setTotal] = useState();
   const [discountTotal, setDiscountTotal] = useState(0);
   // const [couponDiscountTotal, setCouponDiscountTotal] = useState(0);
+  const [coupon, setCoupon] = useState({ id: '', value: 0 });
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [orderTotal, setOrderTotal] = useState();
   const { cartListData, setCartListData } = useCartList();
@@ -52,10 +53,9 @@ function Summary(props) {
 
   //選定折價券後，回傳折扣內容，更新活動折扣跟應付金額
   const handleChange = (e) => {
-    setCouponDiscount(Number(e.target.value));
+    setCoupon(e.target.value);
+    setCouponDiscount();
   };
-  // console.log(couponDiscount);
-  // console.log(typeof couponDiscount);
 
   return (
     <>
@@ -74,6 +74,7 @@ function Summary(props) {
               <select
                 className="form-select styled-select"
                 id="coupon"
+                name="coupon"
                 onChange={handleChange}
               >
                 <option className="option_font" value={total}>
@@ -86,9 +87,10 @@ function Summary(props) {
                       key={coupon.id}
                       coupon={coupon}
                       value={
-                        total -
-                        (total * coupon.discount_multiplication -
-                          coupon.discount_minus)
+                        coupon.id
+                        // total -
+                        // (total * coupon.discount_multiplication -
+                        //   coupon.discount_minus)
                       }
                     >
                       {coupon.discription}
@@ -114,7 +116,10 @@ function Summary(props) {
             <span className="txt_org fs-1">${orderTotal}</span>
           </div>
           <div className="d-grid gap-2">
-            <CheckoutModal />
+            <CheckoutModal
+              orderTotal={orderTotal}
+              setOrderTotal={setOrderTotal}
+            />
           </div>
         </div>
       </div>
