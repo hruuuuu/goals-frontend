@@ -49,6 +49,7 @@ const routerList = [
         breadcrumbName: '商品細節',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
     ],
   },
