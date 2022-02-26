@@ -1,25 +1,29 @@
 /* C/C */
 import { React, useState, useEffect } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Skeleton from '@mui/material/Skeleton';
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2';
 
 import { API_URL, IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
 import { useActivity } from '../../context/activity';
+import { useCartList } from '../../context/cart';
 
 import ProductDetailFavIcon from './ProductDetailFavIcon';
 import Counter from '../Counter';
 
 function ProductDetail(props) {
+  const [number, setNumber] = useState(1);
   const { show, setShow } = useShow();
   const navigate = useNavigate();
-  const locationPath = useLocation().pathname;
+  const { cartListData, setCartListData } = useCartList();
   const [detailData, setDetailData] = useState({
     id: '',
-    image: 'salmon.jpeg',
+    image: '',
     name: '',
     price: 0,
     calories: 0,
@@ -41,7 +45,7 @@ function ProductDetail(props) {
     carb,
     description,
     ingredients,
-    category_id,
+    discountPrice,
   } = detailData;
   const { categoryData } = useCategory();
   const { activityData } = useActivity();
@@ -49,10 +53,10 @@ function ProductDetail(props) {
   const [activity, setActivity] = useState({ id: '', discount: 0 });
 
   const isFetchingDetail = detailData.id === '';
+  // const isFetchingDetail = true;
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
-
-  const discountPrice = Math.ceil(price * activity.discount);
+  const isNoActivity = activity.id === 0;
 
   /* 1.取得網址params 2.打api拿特定product id的資料 */
   //params productId -> 打api用
@@ -61,16 +65,30 @@ function ProductDetail(props) {
     if (productId) {
       let response = await axios.get(`${API_URL}/product/${productId}`);
       const details = response.data[0];
-      setDetailData({ ...detailData, ...details });
+      setDetailData({ ...details });
     }
   };
 
   /* 設定url一進入/:productId就開啟modal*/
   useEffect(() => {
     if (productId) {
+      setDetailData({
+        id: '',
+        image: '',
+        name: '',
+        price: 0,
+        calories: 0,
+        fat: 0,
+        protein: 0,
+        carb: 0,
+        description: '',
+        ingredients: '',
+        category_id: 0,
+      });
+      getDetail();
       setShow({ ...show, in: true });
     }
-  }, []);
+  }, [productId]);
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -92,10 +110,6 @@ function ProductDetail(props) {
     }
   }, [detailData, activityData]);
 
-  useEffect(() => {
-    getDetail();
-  }, [productId]);
-
   /* 控制modal關閉 & 淡出淡入效果 */
   const handleClose = () => {
     setShow({ ...show, out: true });
@@ -113,20 +127,83 @@ function ProductDetail(props) {
     ? 'animation animation__modal animation__modal--out'
     : '';
 
+  //加入購物車
+  const addCart = () => {
+    //加入購物車alert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '商品已加入購物車',
+    });
+
+    const newItem = {
+      id: detailData.id,
+      name: detailData.name,
+      image: detailData.image,
+      price: detailData.price,
+      discountPrice: detailData.discountPrice,
+      amount: number,
+    };
+
+    const newItemData = [...cartListData, newItem];
+
+    for (let i = 0; i < cartListData.length; i++) {
+      if (cartListData[i].id === newItem.id) {
+        const newAmountItem = {
+          id: cartListData[i].id,
+          name: cartListData[i].name,
+          image: cartListData[i].image,
+          price: cartListData[i].price,
+          discountPrice: cartListData[i].discountPrice,
+          amount: cartListData[i].amount + newItem.amount,
+        };
+        const oldCartListData = cartListData.filter(
+          (item, i) => item.id !== newItem.id
+        );
+        const newCartListData = [...oldCartListData, newAmountItem];
+
+        setCartListData(newCartListData);
+        return localStorage.setItem(
+          'cartList',
+          JSON.stringify(newCartListData)
+        );
+      }
+    }
+
+    if (cartListData.length !== 0) {
+      setCartListData(newItemData);
+      localStorage.setItem('cartList', JSON.stringify(newItemData));
+    } else {
+      setCartListData([newItem]);
+      localStorage.setItem('cartList', JSON.stringify([newItem]));
+    }
+  };
+
   return (
     <>
-      {!isFetchingCategory && !isFetchingActivity ? (
-        <>
-          <Modal
-            show={show.in}
-            onHide={handleClose}
-            dialogClassName={`c-product-detail__modal ${handleIn} ${handleOut}`}
-            backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
-            contentClassName="c-product-detail__wrapper"
-            centered
-            animation={false}
-            fullscreen="md-down"
-          >
+      <Modal
+        show={show.in}
+        onHide={handleClose}
+        dialogClassName={`c-product-detail c-product-detail__modal ${handleIn} ${handleOut}`}
+        backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
+        contentClassName="c-product-detail__wrapper"
+        centered
+        animation={false}
+        fullscreen="md-down"
+      >
+        {!isFetchingDetail && !isFetchingCategory && !isFetchingActivity ? (
+          <>
             <button
               onClick={handleClose}
               className="c-product-detail__close e-btn e-btn--icon"
@@ -153,7 +230,11 @@ function ProductDetail(props) {
                         <h4 className="c-product-detail__price me-2">
                           ${discountPrice}
                         </h4>
-                        <h6 className="c-product-detail__o-price">${price}</h6>
+                        {!isNoActivity && (
+                          <h6 className="c-product-detail__o-price">
+                            ${price}
+                          </h6>
+                        )}
                       </div>
                       <ProductDetailFavIcon id={id} />
                       <div className="c-product-detail__nutrition d-flex">
@@ -201,18 +282,29 @@ function ProductDetail(props) {
                       <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
                       <div className="row">
                         <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
-                          <Counter />
+                          <Counter number={number} setNumber={setNumber} />
                           <div className="d-none d-md-flex flex-column align-items-end ps-5">
-                            <h6 className="c-product-detail__o-price">
-                              ${price}
-                            </h6>
-                            <h2 className="c-product-detail__price">
+                            {!isNoActivity && (
+                              <h6 className="c-product-detail__o-price">
+                                ${price}
+                              </h6>
+                            )}
+                            <h2
+                              className={`c-product-detail__price ${
+                                isNoActivity
+                                  ? 'c-product-detail__price--top'
+                                  : ''
+                              }`}
+                            >
                               ${discountPrice}
                             </h2>
                           </div>
                         </div>
                         <div className="col-6 col-md-12">
-                          <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
+                          <button
+                            className="e-btn e-btn--primary e-btn--w100 e-btn--large"
+                            onClick={addCart}
+                          >
                             加入購物車
                           </button>
                         </div>
@@ -222,13 +314,25 @@ function ProductDetail(props) {
                 </div>
               </div>
             </div>
-          </Modal>
-        </>
-      ) : (
-        <>
-          <h1>Spinner</h1>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-12 col-md-7">
+                <Skeleton variant="rectangular" animation="wave" />
+              </div>
+              <div className="col-12 col-md-5">
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
+            </div>
+          </>
+        )}
+      </Modal>
     </>
   );
 }

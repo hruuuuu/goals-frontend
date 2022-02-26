@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CartStepper from './CartStepper';
 
-function CheckoutModal() {
+function CheckoutModal(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { orderTotal, setOrderTotal } = props;
+  const { couponId, setCouponId } = props;
+
   return (
     <>
       <button className="btn_grn py-3" type="button" onClick={handleShow}>
@@ -27,7 +30,13 @@ function CheckoutModal() {
           </button>
         </div>
         <div className="container mb-4 px-5">
-          <CartStepper handleClose={handleClose} />
+          <CartStepper
+            handleClose={handleClose}
+            orderTotal={orderTotal}
+            setOrderTotal={setOrderTotal}
+            couponId={couponId}
+            setCouponId={setCouponId}
+          />
         </div>
       </Modal>
     </>

@@ -1,59 +1,25 @@
 import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import $ from 'jquery';
-
 import { API_URL } from '../../utils/config';
 
-const Available = () => {
+function Invalid() {
   const [data, setData] = useState([]);
   const userID = JSON.parse(localStorage.getItem('user'));
-  const isAvailableList = data.length === 0;
-
-  //取得目前可領取的優惠券
+  const isInvalidList = data.length === 0;
 
   useEffect(() => {
-    let couponValid = async () => {
-      let response = await axios.post(`${API_URL}/coupon/get/`, userID, {
+    let getcoupon = async () => {
+      let response = await axios.post(`${API_URL}/coupon/invalid`, userID, {
         withCredentials: true,
       });
       setData(response.data);
     };
-    couponValid();
-
-    console.log(userID);
+    getcoupon();
   }, []);
-
-  async function getcoupon(coupon, e) {
-    // console.log(coupon.id);
-
-    const couponReceive = { coupon_id: coupon.id, member_id: userID.id };
-
-    let response = await axios.post(`${API_URL}/coupon/post`, couponReceive);
-
-    $(e.target)
-      .parent()
-      .parent()
-      .removeClass('couponWrapper1')
-      .addClass('couponWrapper');
-
-    $(e.target)
-      .removeClass('couponBtn1')
-      .addClass('couponBtn')
-      .attr('disabled', true)
-      .html('已領取');
-
-    $(e.target)
-      .next()
-      .children()
-      .html(coupon.amount - 1);
-
-    alert('領取成功');
-  }
-
   return (
     <>
-      {!isAvailableList ? (
+      {!isInvalidList ? (
         <div className="coupons">
           <div className="row">
             {data.map((coupon) => {
@@ -62,7 +28,7 @@ const Available = () => {
                   className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
                   key={coupon.id}
                 >
-                  <div className="couponWrapper1 mt-3">
+                  <div className="couponWrapper mt-3">
                     <div className="coupon">
                       <div className="coupon-detail">
                         <h2 className="coupon-amount">
@@ -78,18 +44,8 @@ const Available = () => {
                           </p>
                         </div>
                       </div>
-                      <button
-                        className="couponBtn1 mt-3"
-                        onClick={(e) => {
-                          getcoupon(coupon, e);
-                        }}
-                      >
-                        可領取
-                      </button>
-
-                      <div className="remain-coupon">
-                        剩餘<span>{coupon.amount}</span>張
-                      </div>
+                      {/* <button className="couponBtn">已領取</button> */}
+                      {/* <div className="remain-coupon">剩餘{order.amount}張</div> */}
                     </div>
                   </div>
                 </div>
@@ -98,10 +54,10 @@ const Available = () => {
           </div>
         </div>
       ) : (
-        <h1>目前還沒有可領取的優惠券</h1>
+        <h1>沒有失效的優惠券</h1>
       )}
     </>
   );
-};
+}
 
-export default Available;
+export default Invalid;

@@ -1,15 +1,26 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, Component } from 'react';
 import axios from 'axios';
+import TwCitySelector from '../../../node_modules/tw-city-selector/dist/tw-city-selector';
 
 import { API_URL } from '../../utils/config';
+// import $ from 'jquery';
 
 const EditProfile = () => {
   const [member, setMember] = useState({});
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.get(`${API_URL}/member/getprofile`, {
+      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
         withCredentials: true,
+      });
+      new TwCitySelector({
+        el: '.my-selector-c',
+        elCounty: '.county',
+        elDistrict: '.district',
+        countyValue: response.data[0].county, //預設填入從資料庫取回的資料
+        districtValue: response.data[0].district,
       });
       setMember(response.data[0]);
     };
@@ -23,10 +34,10 @@ const EditProfile = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     let response = await axios.post(
-      `${API_URL}/api/member/editprofile`,
-      member
+      `${API_URL}/member/editprofile`,
+      member,
+      userID
     );
-
     alert('修改成功');
   }
 
@@ -64,8 +75,9 @@ const EditProfile = () => {
                 onChange={handleChange}
               />
             </div>
+
             <div className="col-12">
-              <div className="row gx-3 gy-4">
+              <div className="row gx-3 gy-4 my-selector-c">
                 <div className="col-12 col-sm-6 col-lg-3">
                   <label
                     htmlFor="SelectCity"
@@ -73,19 +85,15 @@ const EditProfile = () => {
                   >
                     縣市
                   </label>
+
                   <select
                     id="SelectCity"
-                    className="form-select c-form__select"
-                  >
-                    <option value="DEFAULT" disabled>
-                      Choose a salutation ...
-                    </option>
-                    <option value="1">Mr</option>
-                    <option value="2">Mrs</option>
-                    <option value="3">Ms</option>
-                    <option value="4">Miss</option>
-                    <option value="5">Dr</option>
-                  </select>
+                    className="form-select c-form__select county"
+                    name="county"
+                    value={member.county ? member.county : ''}
+                    id="county"
+                    onChange={handleChange}
+                  ></select>
                 </div>
                 <div className="col-12 col-sm-6 col-lg-3">
                   <label
@@ -96,17 +104,12 @@ const EditProfile = () => {
                   </label>
                   <select
                     id="SelectDistrict"
-                    className="form-select c-form__select"
-                  >
-                    <option value="DEFAULT" disabled>
-                      Choose a salutation ...
-                    </option>
-                    <option value="1">Mr</option>
-                    <option value="2">Mrs</option>
-                    <option value="3">Ms</option>
-                    <option value="4">Miss</option>
-                    <option value="5">Dr</option>
-                  </select>
+                    className="form-select c-form__select district"
+                    name="district"
+                    value={member.district ? member.district : ''}
+                    id="district"
+                    onChange={handleChange}
+                  ></select>
                 </div>
                 <div className="col-12 col-sm-12 col-lg-6">
                   <label

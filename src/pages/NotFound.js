@@ -1,11 +1,10 @@
-import { React, useEffect } from 'react';
+import React from 'react';
+import FloatingChat from '../components/FloatingChat';
 
 function NotFound() {
-  useEffect(() => {}, []);
-
   return (
     <>
-      <h1>404 NotFound</h1>
+      <FloatingChat />
     </>
   );
 }

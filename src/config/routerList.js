@@ -18,6 +18,8 @@ import ResetPassword from '../pages/ResetPassword';
 
 import BlogArticle from '../components/Blog/BlogArticle';
 
+import AdminChat from '../pages/AdminChat';
+
 import imgFood from '../img/common/illustration/food.svg';
 
 const routerList = [
@@ -47,6 +49,7 @@ const routerList = [
         breadcrumbName: '商品細節',
         header: '健康餐盒',
         headerImg: imgFood,
+        layout: <Sort />,
       },
     ],
   },
@@ -144,6 +147,13 @@ const routerList = [
   {
     path: `/reset/:resetString`,
     element: <ResetPassword />,
+  },
+  {
+    path: `admin`,
+    element: <AdminChat />,
+    breadcrumbName: '客服系統',
+    header: '客服系統',
+    headerImg: imgFood,
   },
   {
     path: '*',

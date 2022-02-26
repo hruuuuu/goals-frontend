@@ -4,6 +4,7 @@ import MemberSidebar from '../components/MemberSidebar';
 import EditProfile from '../components/Member/EditProfile';
 import EditPassWord from '../components/Member/EditPassword';
 import FloatingMember from '../components/FloatingMember';
+import FloatingChat from '../components/FloatingChat';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -24,6 +25,7 @@ function Member() {
       </div>
       {/* 浮動視窗 */}
       <FloatingMember />
+      <FloatingChat />
     </>
   );
 }

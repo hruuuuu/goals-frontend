@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import Available from './Available';
 import ReceiveList from './ReceiveList';
-import Unvalid from './Unvalid';
+import Invalid from './Invalid';
 
 const Coupon = () => {
   return (
@@ -16,7 +16,7 @@ const Coupon = () => {
             <NavLink to="ReceiveList" className="canUse ">
               可使用
             </NavLink>
-            <NavLink to="Unvalid" className="expired">
+            <NavLink to="Invalid" className="expired">
               已失效
             </NavLink>
           </ul>
@@ -25,7 +25,7 @@ const Coupon = () => {
         <Routes>
           <Route path="Available" element={<Available />} />
           <Route path="ReceiveList" element={<ReceiveList />} />
-          <Route path="Unvalid" element={<Unvalid />} />
+          <Route path="Invalid" element={<Invalid />} />
           <Route path="*" element={<Navigate to="Available" />} />
         </Routes>
       </div>
