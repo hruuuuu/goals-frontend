@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Skeleton from '@mui/material/Skeleton';
+import Swal from 'sweetalert2';
 
 import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
@@ -65,6 +66,23 @@ function FavItem(props) {
 
   //加入購物車
   const addCart = () => {
+    //加入購物車alert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '商品已加入購物車',
+    });
     let newItem = {
       id: product.id,
       name: product.name,

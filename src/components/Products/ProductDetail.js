@@ -5,18 +5,22 @@ import axios from 'axios';
 
 import Skeleton from '@mui/material/Skeleton';
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2';
 
 import { API_URL, IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
 import { useActivity } from '../../context/activity';
+import { useCartList } from '../../context/cart';
 
 import ProductDetailFavIcon from './ProductDetailFavIcon';
 import Counter from '../Counter';
 
 function ProductDetail(props) {
+  const [number, setNumber] = useState(1);
   const { show, setShow } = useShow();
   const navigate = useNavigate();
+  const { cartListData, setCartListData } = useCartList();
   const [detailData, setDetailData] = useState({
     id: '',
     image: '',
@@ -123,6 +127,69 @@ function ProductDetail(props) {
     ? 'animation animation__modal animation__modal--out'
     : '';
 
+  //加入購物車
+  const addCart = () => {
+    //加入購物車alert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '商品已加入購物車',
+    });
+
+    const newItem = {
+      id: detailData.id,
+      name: detailData.name,
+      image: detailData.image,
+      price: detailData.price,
+      discountPrice: detailData.discountPrice,
+      amount: number,
+    };
+
+    const newItemData = [...cartListData, newItem];
+
+    for (let i = 0; i < cartListData.length; i++) {
+      if (cartListData[i].id === newItem.id) {
+        const newAmountItem = {
+          id: cartListData[i].id,
+          name: cartListData[i].name,
+          image: cartListData[i].image,
+          price: cartListData[i].price,
+          discountPrice: cartListData[i].discountPrice,
+          amount: cartListData[i].amount + newItem.amount,
+        };
+        const oldCartListData = cartListData.filter(
+          (item, i) => item.id !== newItem.id
+        );
+        const newCartListData = [...oldCartListData, newAmountItem];
+
+        setCartListData(newCartListData);
+        return localStorage.setItem(
+          'cartList',
+          JSON.stringify(newCartListData)
+        );
+      }
+    }
+
+    if (cartListData.length !== 0) {
+      setCartListData(newItemData);
+      localStorage.setItem('cartList', JSON.stringify(newItemData));
+    } else {
+      setCartListData([newItem]);
+      localStorage.setItem('cartList', JSON.stringify([newItem]));
+    }
+  };
+
   return (
     <>
       <Modal
@@ -215,7 +282,7 @@ function ProductDetail(props) {
                       <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
                       <div className="row">
                         <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
-                          <Counter />
+                          <Counter number={number} setNumber={setNumber} />
                           <div className="d-none d-md-flex flex-column align-items-end ps-5">
                             {!isNoActivity && (
                               <h6 className="c-product-detail__o-price">
@@ -234,7 +301,10 @@ function ProductDetail(props) {
                           </div>
                         </div>
                         <div className="col-6 col-md-12">
-                          <button className="e-btn e-btn--primary e-btn--w100 e-btn--large">
+                          <button
+                            className="e-btn e-btn--primary e-btn--w100 e-btn--large"
+                            onClick={addCart}
+                          >
                             加入購物車
                           </button>
                         </div>
