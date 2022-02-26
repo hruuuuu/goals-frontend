@@ -11,8 +11,7 @@ import { useDietlog } from '../../context/dietlog';
 
 function LogItem(props) {
   const { dietlog, getDietlogData, refreshImg, setRefreshImg } = props;
-  const { id, title, description, created_at, edited_at, category_id } =
-    dietlog;
+  const { id, title, description, datetime, edited_at, category_id } = dietlog;
   const { setDietlogData, dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
   const [dietlogImg, setDietlogImg] = useState([]);
@@ -31,7 +30,7 @@ function LogItem(props) {
   const isEmptyEditedAt = edited_at === null || edited_at === '';
   const isEmptyEditImage = editFields.imgs.length === 0;
 
-  const createdAt = dayjs(created_at).format('HH:mm');
+  const createdAt = dayjs(datetime).format('HH:mm');
   const editedAt = dayjs(edited_at).format('HH:mm');
 
   const Toast = Swal.mixin({
@@ -312,21 +311,23 @@ function LogItem(props) {
               )}
             </div>
             {descriptionLayout()}
-            <div className="l-dietlog__row mt-2">
-              {!isEmptyImage &&
-                dietlogImg.map((img) => {
-                  const { id, name } = img;
-                  return (
-                    <div key={id} className="l-dietlog__cover">
-                      <img
-                        className="e-img--cover"
-                        src={`${UPLOAD_URL}/${name}`}
-                        alt="diet-img"
-                      />
-                    </div>
-                  );
-                })}
-            </div>
+            {!editMode && (
+              <div className="l-dietlog__row mt-2">
+                {!isEmptyImage &&
+                  dietlogImg.map((img) => {
+                    const { id, name } = img;
+                    return (
+                      <div key={id} className="l-dietlog__cover">
+                        <img
+                          className="e-img--cover"
+                          src={`${UPLOAD_URL}/${name}`}
+                          alt="diet-img"
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
             {/* <div>熱量</div>
             <div>蛋白質</div>
             <div>脂肪</div>
