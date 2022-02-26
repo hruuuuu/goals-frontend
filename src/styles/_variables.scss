@@ -47,14 +47,14 @@ $box-shadow--active: 0px 0px 2rem rgba(0, 0, 0, 0.3);
 $box-shadow__card--active: 0px 0px 1rem rgba(0, 0, 0, 0.2);
 
 /* border-radius */
-$border-radius__navbar: 0 0 3.125rem 3.125rem;
-$border-radius__footer: 3.125rem 3.125rem 0 0;
-$border-radius__footer--lg: 6rem 6rem 0 0;
+$border-radius__navbar: 0 0 2.5rem 2.5rem;
+$border-radius__footer: 2.5rem 2.5rem 0 0;
+$border-radius__footer--lg: 4rem 4rem 0 0;
 $border-radius__input: 0.3125rem;
 $border-radius__tabs: 0.3125rem 0.3125rem 0 0;
 $border-radius__btn: 0.625rem;
 $border-radius__block: 1.25rem;
-$border-radius__modal: 2.5rem;
+$border-radius__modal: 1.25rem;
 $border-radius__small-block: $border-radius__input;
 $border-radius__floating-filter: 0 0 1.875rem 1.875rem;
 

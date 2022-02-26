@@ -2,7 +2,6 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
-import { v4 as uuidv4 } from 'uuid';
 
 import Accordion from 'react-bootstrap/Accordion';
 
@@ -11,11 +10,12 @@ import { API_URL } from '../../utils/config';
 import { useDietlog } from '../../context/dietlog';
 
 function LogItem(props) {
-  const { dietlog, getDietlogData } = props;
+  const { dietlog, getDietlogData, refreshImg, setRefreshImg } = props;
   const { id, title, description, created_at, edited_at, category_id } =
     dietlog;
   const { setDietlogData, dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
+  const [dietlogImg, setDietlogImg] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [editFields, setEditFields] = useState({
     title: title,
@@ -23,12 +23,13 @@ function LogItem(props) {
     category: category_id,
     imgs: [],
   });
-  const [dietlogImg, setDietlogImg] = useState([]);
 
   const isFetchingCategory = dietlogCategoryData.length === 0;
-  const isEmptyDescription = description === null || description === '';
+  const isEmptyDescription =
+    description === null || description === '' || description === 'null';
   const isEmptyImage = dietlogImg.length === 0;
   const isEmptyEditedAt = edited_at === null || edited_at === '';
+  const isEmptyEditImage = editFields.imgs.length === 0;
 
   const createdAt = dayjs(created_at).format('HH:mm');
   const editedAt = dayjs(edited_at).format('HH:mm');
@@ -112,10 +113,12 @@ function LogItem(props) {
     editData.append('title', editFields.title);
     editData.append('description', editFields.description);
     editData.append('category', editFields.category);
-    editFields.imgs.forEach((img) => {
-      editData.append('imgs', img);
-    });
-    editData.append('time', dayjs().format('YYYY-MM-DD HH:mm:ss'));
+    if (!isEmptyEditImage) {
+      editFields.imgs.forEach((img) => {
+        editData.append('imgs', img);
+      });
+    }
+    editData.append('datetime', dayjs().format('YYYY-MM-DD HH:mm:ss'));
     // for (var pair of editData.entries()) {
     //   console.log(pair[0] + ' : ' + pair[1]);
     // }
@@ -134,7 +137,10 @@ function LogItem(props) {
         });
       }
       getDietlogData();
-      getDietlogImg();
+      setRefreshImg(true);
+      setTimeout(() => {
+        setRefreshImg(false);
+      }, 1000);
       handleBack();
     } catch (error) {
       console.log(error);
@@ -174,7 +180,10 @@ function LogItem(props) {
   const descriptionLayout = () => {
     if (!isEmptyDescription && !editMode) {
       return <p className="l-dietlog__text">{description}</p>;
-    } else if (!isEmptyDescription && editMode) {
+    } else if (
+      (!isEmptyDescription && editMode) ||
+      (isEmptyDescription && editMode)
+    ) {
       return (
         <>
           <label htmlFor="description" className="form-label c-form__label">
@@ -187,6 +196,7 @@ function LogItem(props) {
             name="description"
             value={editFields.description}
             onChange={handleFieldChange}
+            placeholder="請輸入內容..."
           />
         </>
       );
@@ -205,6 +215,12 @@ function LogItem(props) {
   }, [dietlogCategoryData]);
 
   useEffect(() => {
+    if (refreshImg) {
+      getDietlogImg();
+    }
+  }, [refreshImg]);
+
+  useEffect(() => {
     getDietlogImg();
   }, []);
 
@@ -220,10 +236,25 @@ function LogItem(props) {
               <div className="d-flex flex-column align-items-start justify-content-end">
                 <h6 className="l-dietlog__heading">{title}</h6>
                 {/* <div className="l-dietlog__cal">熱量300卡</div> */}
-                {isEmptyEditedAt}
+                {!isEmptyImage && (
+                  <div className="l-dietlog__hint">
+                    {dietlogImg.length}張照片
+                  </div>
+                )}
                 <div className="l-dietlog__time">
                   {!isEmptyEditedAt ? editedAt : createdAt}
                 </div>
+              </div>
+              <div className="l-dietlog__row mt-2">
+                {!isEmptyImage && (
+                  <div className="l-dietlog__cover">
+                    <img
+                      className="e-img--cover"
+                      src={`${UPLOAD_URL}/${dietlogImg[0]['name']}`}
+                      alt="diet-img"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </Accordion.Button>
@@ -275,32 +306,27 @@ function LogItem(props) {
                     id="title"
                     value={editFields.title}
                     onChange={handleFieldChange}
+                    placeholder="請輸入標題..."
                   />
                 </>
               )}
             </div>
             {descriptionLayout()}
-            {!editMode && (
-              <div className="l-dietlog__row mt-2">
-                {!isEmptyImage &&
-                  dietlogImg.map((img) => {
-                    const { id, name } = img;
-                    return (
-                      <div key={id} className="l-dietlog__cover">
-                        <img
-                          className="e-img--cover"
-                          src={`${UPLOAD_URL}/${name}`}
-                          alt="diet-img"
-                        />
-                      </div>
-                    );
-                  })}
-              </div>
-            )}
-            {/* <form action="" enctype="multipart/form-data">
-              <input type="file" />
-              <button type="submit" onClick="">submit</button>
-            </form> */}
+            <div className="l-dietlog__row mt-2">
+              {!isEmptyImage &&
+                dietlogImg.map((img) => {
+                  const { id, name } = img;
+                  return (
+                    <div key={id} className="l-dietlog__cover">
+                      <img
+                        className="e-img--cover"
+                        src={`${UPLOAD_URL}/${name}`}
+                        alt="diet-img"
+                      />
+                    </div>
+                  );
+                })}
+            </div>
             {/* <div>熱量</div>
             <div>蛋白質</div>
             <div>脂肪</div>
@@ -312,7 +338,7 @@ function LogItem(props) {
             {editMode && (
               <div className="mt-2">
                 <label htmlFor="imgs" className="c-form__label">
-                  上傳圖片(上限5張)
+                  上傳圖片(上限6張)
                 </label>
                 <input
                   type="file"

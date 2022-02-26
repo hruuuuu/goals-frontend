@@ -6,7 +6,14 @@ import dayjs from 'dayjs';
 
 import { useDietlog } from '../../context/dietlog';
 
-function LogSidebar() {
+import LogModal from './LogModal';
+
+function LogSidebar(props) {
+  const { getDietlogData, refreshImg, setRefreshImg } = props;
+  const [showModal, setShowModal] = useState({
+    in: false,
+    out: false,
+  });
   const { canlendarDate, setCalendarDate } = useDietlog();
   const [calendar, setCalendar] = useState(new Date());
   const navigate = useNavigate();
@@ -23,6 +30,11 @@ function LogSidebar() {
     const date = dayjs(value).format('YYYY-MM-DD');
     // navigate(`/dietlog?date=${date}`);
     setCalendarDate(date);
+  };
+
+  /* 控制modal顯示 */
+  const handleShow = () => {
+    setShowModal({ ...setShowModal, in: true });
   };
   return (
     <>
@@ -49,10 +61,20 @@ function LogSidebar() {
         <button
           type="button"
           className="e-btn e-btn--primary e-btn--medium e-btn--w100"
+          onClick={handleShow}
         >
           <i className="fas fa-pencil-alt e-icon e-icon--left"></i>
           增加紀錄
         </button>
+        {showModal && (
+          <LogModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            getDietlogData={getDietlogData}
+            refreshImg={refreshImg}
+            setRefreshImg={setRefreshImg}
+          />
+        )}
       </div>
     </>
   );

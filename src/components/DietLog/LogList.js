@@ -1,33 +1,16 @@
 import { React, useState, useEffect } from 'react';
-import axios from 'axios';
 
-import { API_URL } from '../../utils/config';
 import { useDietlog } from '../../context/dietlog';
 
 import LogItem from './LogItem';
-import LogAdd from './LogAdd';
 
-function LogList() {
+function LogList(props) {
+  const { getDietlogData, dietlogImg, refreshImg, setRefreshImg } = props;
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
   const [tab, setTab] = useState(1);
 
   const isEmptyDietlog = dietlogData.length === 0;
-
-  const getDietlogData = async () => {
-    try {
-      const response = await axios.get(
-        `${API_URL}/dietlog?date=${calendarDate}`,
-        {
-          withCredentials: true,
-        }
-      );
-      const dietData = response.data;
-      setDietlogData([...dietData]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     if (calendarDate) {
@@ -70,7 +53,14 @@ function LogList() {
           {dietlogData.map((log) => {
             const { id } = log;
             return (
-              <LogItem key={id} dietlog={log} getDietlogData={getDietlogData} />
+              <LogItem
+                key={id}
+                dietlog={log}
+                getDietlogData={getDietlogData}
+                dietlogImg={dietlogImg}
+                refreshImg={refreshImg}
+                setRefreshImg={setRefreshImg}
+              />
             );
           })}
         </>
