@@ -3,15 +3,23 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 import Shipping from './Shipping';
 import Checkout from './Checkout';
+import { useCartList } from '../../context/cart';
 
 const steps = ['購物車', '運送資訊', '付款資訊'];
 
 function CartStepper(props) {
   const [activeStep, setActiveStep] = React.useState(1);
   const [skipped, setSkipped] = React.useState(new Set());
+  const { cartListData, setCartListData } = useCartList();
+
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -31,24 +39,17 @@ function CartStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  //   const handleSkip = () => {
-  //     if (!isStepOptional(activeStep)) {
-  //       // You probably want to guard against something like this,
-  //       // it should never occur unless someone's actively trying to break something.
-  //       throw new Error("You can't skip a step that isn't optional.");
-  //     }
+  async function handleSubmit(e) {
+    // 關掉原本預設的行為
+    e.preventDefault();
 
-  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     setSkipped((prevSkipped) => {
-  //       const newSkipped = new Set(prevSkipped.values());
-  //       newSkipped.add(activeStep);
-  //       return newSkipped;
-  //     });
-  //   };
-
-  const handleReset = () => {
-    setActiveStep(1);
-  };
+    let response = await axios.post(
+      `${API_URL}/cart/submitOrder`,
+      cartListData,
+      userID
+    );
+    console.log(response.data);
+  }
   return (
     <>
       <Box className="box" sx={{ width: '100%' }}>
@@ -107,11 +108,24 @@ function CartStepper(props) {
                   </div>
                   <div className="col-6 mt-2">
                     <div className="d-grid">
-                      <button className="btn_grn p-2" onClick={handleNext}>
-                        {activeStep === steps.length - 1
-                          ? '確認付款'
-                          : '下一步'}
-                      </button>
+                      {activeStep === steps.length - 1 ? (
+                        <button
+                          className="btn_outline btn_grn p-2"
+                          onClick={() => {
+                            handleSubmit();
+                            handleNext();
+                          }}
+                        >
+                          確認付款
+                        </button>
+                      ) : (
+                        <button
+                          className="btn_outline btn_grn p-2"
+                          onClick={handleNext}
+                        >
+                          下一步
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

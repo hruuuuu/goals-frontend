@@ -1,7 +1,13 @@
 import React from 'react';
 
+import FloatingChat from '../components/FloatingChat';
+
 function Home() {
-  return <h1>Home</h1>;
+  return (
+    <>
+      <FloatingChat />
+    </>
+  );
 }
 
 export default Home;

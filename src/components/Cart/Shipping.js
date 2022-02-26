@@ -1,7 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TwCitySelector from '../../../node_modules/tw-city-selector/dist/tw-city-selector';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 function Shipping() {
+  const [delivery, setDelivery] = useState([]);
+
+  //取得運送方式
+  useEffect(() => {
+    let getDelivery = async () => {
+      let response = await axios.post(
+        `${API_URL}/cart/deliveryMethod`,
+
+        {
+          withCredentials: true,
+        }
+      );
+      setDelivery(response.data);
+    };
+    getDelivery();
+  }, []);
+
+  //取得縣市行政區API資料
   useEffect(() => {
     cityselect();
   }, []);
@@ -114,9 +135,17 @@ function Shipping() {
               <option className="option_font" value="">
                 請選擇
               </option>
-              {/* <option className="option_font">超商取貨</option> */}
-              <option className="option_font">宅配到府</option>
-              {/* <option className="option_font">門市自取</option> */}
+              {delivery.map((method, i) => {
+                return (
+                  <option
+                    className="option_font"
+                    key={method.id}
+                    method={method}
+                  >
+                    {method.method}
+                  </option>
+                );
+              })}
             </select>
             <div className="invalid-feedback">
               Please provide a valid state.

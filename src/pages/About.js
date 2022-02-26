@@ -2,6 +2,8 @@ import React from 'react';
 import PageBanner from '../components/PageBanner';
 import Header from '../components/Header';
 
+import FloatingChat from '../components/FloatingChat';
+
 function About() {
   return (
     <>
@@ -45,6 +47,7 @@ function About() {
             </div>
           </div>
         </div>
+        <FloatingChat />
       </div>
     </>
   );
