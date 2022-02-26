@@ -1,8 +1,9 @@
 /* C/C */
 import { React, useState, useEffect } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Skeleton from '@mui/material/Skeleton';
 import Modal from 'react-bootstrap/Modal';
 
 import { API_URL, IMG_URL } from '../../utils/config';
@@ -16,10 +17,9 @@ import Counter from '../Counter';
 function ProductDetail(props) {
   const { show, setShow } = useShow();
   const navigate = useNavigate();
-  const locationPath = useLocation().pathname;
   const [detailData, setDetailData] = useState({
     id: '',
-    image: 'salmon.jpeg',
+    image: '',
     name: '',
     price: 0,
     calories: 0,
@@ -41,7 +41,7 @@ function ProductDetail(props) {
     carb,
     description,
     ingredients,
-    category_id,
+    discountPrice,
   } = detailData;
   const { categoryData } = useCategory();
   const { activityData } = useActivity();
@@ -49,10 +49,10 @@ function ProductDetail(props) {
   const [activity, setActivity] = useState({ id: '', discount: 0 });
 
   const isFetchingDetail = detailData.id === '';
+  // const isFetchingDetail = true;
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
-
-  const discountPrice = Math.ceil(price * activity.discount);
+  const isNoActivity = activity.id === 0;
 
   /* 1.取得網址params 2.打api拿特定product id的資料 */
   //params productId -> 打api用
@@ -61,16 +61,30 @@ function ProductDetail(props) {
     if (productId) {
       let response = await axios.get(`${API_URL}/product/${productId}`);
       const details = response.data[0];
-      setDetailData({ ...detailData, ...details });
+      setDetailData({ ...details });
     }
   };
 
   /* 設定url一進入/:productId就開啟modal*/
   useEffect(() => {
     if (productId) {
+      setDetailData({
+        id: '',
+        image: '',
+        name: '',
+        price: 0,
+        calories: 0,
+        fat: 0,
+        protein: 0,
+        carb: 0,
+        description: '',
+        ingredients: '',
+        category_id: 0,
+      });
+      getDetail();
       setShow({ ...show, in: true });
     }
-  }, []);
+  }, [productId]);
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -92,10 +106,6 @@ function ProductDetail(props) {
     }
   }, [detailData, activityData]);
 
-  useEffect(() => {
-    getDetail();
-  }, [productId]);
-
   /* 控制modal關閉 & 淡出淡入效果 */
   const handleClose = () => {
     setShow({ ...show, out: true });
@@ -115,18 +125,18 @@ function ProductDetail(props) {
 
   return (
     <>
-      {!isFetchingCategory && !isFetchingActivity ? (
-        <>
-          <Modal
-            show={show.in}
-            onHide={handleClose}
-            dialogClassName={`c-product-detail__modal ${handleIn} ${handleOut}`}
-            backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
-            contentClassName="c-product-detail__wrapper"
-            centered
-            animation={false}
-            fullscreen="md-down"
-          >
+      <Modal
+        show={show.in}
+        onHide={handleClose}
+        dialogClassName={`c-product-detail c-product-detail__modal ${handleIn} ${handleOut}`}
+        backdropClassName={`c-product-detail__backdrop ${handleIn} ${handleOut}`}
+        contentClassName="c-product-detail__wrapper"
+        centered
+        animation={false}
+        fullscreen="md-down"
+      >
+        {!isFetchingDetail && !isFetchingCategory && !isFetchingActivity ? (
+          <>
             <button
               onClick={handleClose}
               className="c-product-detail__close e-btn e-btn--icon"
@@ -153,7 +163,11 @@ function ProductDetail(props) {
                         <h4 className="c-product-detail__price me-2">
                           ${discountPrice}
                         </h4>
-                        <h6 className="c-product-detail__o-price">${price}</h6>
+                        {!isNoActivity && (
+                          <h6 className="c-product-detail__o-price">
+                            ${price}
+                          </h6>
+                        )}
                       </div>
                       <ProductDetailFavIcon id={id} />
                       <div className="c-product-detail__nutrition d-flex">
@@ -203,10 +217,18 @@ function ProductDetail(props) {
                         <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
                           <Counter />
                           <div className="d-none d-md-flex flex-column align-items-end ps-5">
-                            <h6 className="c-product-detail__o-price">
-                              ${price}
-                            </h6>
-                            <h2 className="c-product-detail__price">
+                            {!isNoActivity && (
+                              <h6 className="c-product-detail__o-price">
+                                ${price}
+                              </h6>
+                            )}
+                            <h2
+                              className={`c-product-detail__price ${
+                                isNoActivity
+                                  ? 'c-product-detail__price--top'
+                                  : ''
+                              }`}
+                            >
                               ${discountPrice}
                             </h2>
                           </div>
@@ -222,13 +244,25 @@ function ProductDetail(props) {
                 </div>
               </div>
             </div>
-          </Modal>
-        </>
-      ) : (
-        <>
-          <h1>Spinner</h1>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <div className="row">
+              <div className="col-12 col-md-7">
+                <Skeleton variant="rectangular" animation="wave" />
+              </div>
+              <div className="col-12 col-md-5">
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+                <Skeleton variant="text" animation="wave" />
+              </div>
+            </div>
+          </>
+        )}
+      </Modal>
     </>
   );
 }

@@ -18,8 +18,8 @@ function CartStepper(props) {
   const [skipped, setSkipped] = React.useState(new Set());
   const { cartListData, setCartListData } = useCartList();
 
-  //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
+  const cartItems = { ...cartListData };
+  console.log(cartItems);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -39,16 +39,23 @@ function CartStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  //送出訂單
   async function handleSubmit(e) {
     // 關掉原本預設的行為
     e.preventDefault();
-
-    let response = await axios.post(
+    //order_items
+    let orderItemsResponse = await axios.post(
       `${API_URL}/cart/submitOrder`,
-      cartListData,
-      userID
+      cartItems,
     );
-    console.log(response.data);
+    console.log(orderItemsResponse.data);
+    //order_details
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/submitOrder`,
+    //   cartItems,
+    //   userID
+    // );
+    // console.log(orderDetailsResponse.data);
   }
   return (
     <>

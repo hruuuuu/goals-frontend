@@ -41,6 +41,7 @@ function FavItem(props) {
 
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
+  const isNoActivity = activity.id === 0;
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -124,6 +125,7 @@ function FavItem(props) {
                     />
                   </div>
                 </div>
+                {/* mobile */}
                 <div className="col-12 col-md-5 d-flex flex-column justify-content-between">
                   <div className="d-flex flex-column">
                     <div className="e-tag e-tag--normal">{category.name}</div>
@@ -140,9 +142,11 @@ function FavItem(props) {
                         <div className="c-product-item-detail__cal">
                           熱量{calories}卡
                         </div>
-                        <div className="c-product-item-detail__o-price">
-                          ${price}
-                        </div>
+                        {!isNoActivity && (
+                          <div className="c-product-item-detail__o-price">
+                            ${price}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <p className="c-product-detail__text d-none d-md-block">
@@ -150,6 +154,7 @@ function FavItem(props) {
                     </p>
                   </div>
                 </div>
+                {/* desktop */}
                 <div className="col-12 col-md-4 d-none d-md-flex flex-column align-items-end">
                   <div className="c-product-detail__nutrition mt-0 mt-md-5">
                     <ul className="c-product-detail__list mb-2">
@@ -175,7 +180,9 @@ function FavItem(props) {
                     <h4 className="c-product-detail__price me-2">
                       ${discountPrice}
                     </h4>
-                    <h6 className="c-product-detail__o-price">${price}</h6>
+                    {!isNoActivity && (
+                      <h6 className="c-product-detail__o-price">${price}</h6>
+                    )}
                   </div>
                   <Counter number={number} setNumber={setNumber} />
                 </div>
