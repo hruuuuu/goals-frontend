@@ -26,7 +26,10 @@ function CartStepper(props) {
     tel: '',
   });
   const { orderTotal, setOrderTotal } = props;
-  const [orderDetailData, setOrderDetailData] = React.useState({});
+  const [member, setMember] = React.useState({});
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
+  console.log(userID);
 
   //order_items
   // ->準備好要傳回資料庫的product_id, amount
@@ -35,7 +38,11 @@ function CartStepper(props) {
 
   //order_details
   // ->準備好要傳回資料庫的應付金額
-  const cartDetails = { ...shippingData, total: Number(orderTotal) };
+  const cartDetails = {
+    ...shippingData,
+    total: Number(orderTotal),
+    member_id: userID.id,
+  };
   console.log(cartDetails);
 
   const isStepSkipped = (step) => {

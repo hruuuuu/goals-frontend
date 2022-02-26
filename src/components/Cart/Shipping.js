@@ -40,7 +40,7 @@ function Shipping(props) {
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
   }
-  console.log(shippingData);
+  // console.log(shippingData);
 
   return (
     <>
