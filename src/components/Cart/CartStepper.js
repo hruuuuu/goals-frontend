@@ -46,7 +46,7 @@ function CartStepper(props) {
   //order_items
   // ->準備好要傳回資料庫的product_id, amount
   const cartItems = { ...cartListData };
-  console.log(cartItems);
+  // console.log(cartItems);
 
   //order_details
   // ->準備好要傳回資料庫的應付金額
@@ -55,7 +55,7 @@ function CartStepper(props) {
     total: Number(orderTotal),
     member_id: userID.id,
   };
-  console.log(cartDetails);
+  // console.log(cartDetails);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -77,26 +77,22 @@ function CartStepper(props) {
 
   //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
-    // 關掉原本預設的行為
-    e.preventDefault();
+    //orderDetails
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails
+    );
     //order_items
     let orderItemsResponse = await axios.post(
       `${API_URL}/cart/orderItems`,
       cartItems
     );
-    console.log(orderItemsResponse.data);
-    //order_details
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartDetails
-    );
-    console.log(orderDetailsResponse.data);
+
     //coupon_receive
     let couponReceiveResponse = await axios.post(
       `${API_URL}/cart/orderItemsCoupon`,
       usedCouponData
     );
-    console.log(couponReceiveResponse.data);
   }
   return (
     <>
