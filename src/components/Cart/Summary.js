@@ -10,7 +10,7 @@ function Summary(props) {
   const [total, setTotal] = useState();
   const [discountTotal, setDiscountTotal] = useState(0);
   // const [couponDiscountTotal, setCouponDiscountTotal] = useState(0);
-  const [coupon, setCoupon] = useState({ id: '', value: 0 });
+  const [couponId, setCouponId] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [orderTotal, setOrderTotal] = useState();
   const { cartListData, setCartListData } = useCartList();
@@ -46,6 +46,7 @@ function Summary(props) {
       allDiscountTotal +=
         cartListData[i].discountPrice * cartListData[i].amount;
     }
+
     setDiscountTotal(allSubtotal - allDiscountTotal + couponDiscount);
     //應付金額
     setOrderTotal(allDiscountTotal - couponDiscount);
@@ -53,9 +54,19 @@ function Summary(props) {
 
   //選定折價券後，回傳折扣內容，更新活動折扣跟應付金額
   const handleChange = (e) => {
-    setCoupon(e.target.value);
-    setCouponDiscount();
+    setCouponId(Number(e.target.value));
+    // console.log(data);
+    const usedCoupon = data.find(
+      (coupon) => coupon.id === Number(e.target.value)
+    );
+    // console.log(usedCoupon);
+    setCouponDiscount(
+      total -
+        (total * usedCoupon.discount_multiplication - usedCoupon.discount_minus)
+    );
   };
+  // console.log(couponDiscount);
+  // console.log(couponId);
 
   return (
     <>
@@ -77,7 +88,7 @@ function Summary(props) {
                 name="coupon"
                 onChange={handleChange}
               >
-                <option className="option_font" value={total}>
+                <option className="option_font" value="0" disabled>
                   請選擇
                 </option>
                 {data.map((coupon, i) => {
@@ -119,6 +130,8 @@ function Summary(props) {
             <CheckoutModal
               orderTotal={orderTotal}
               setOrderTotal={setOrderTotal}
+              couponId={couponId}
+              setCouponId={setCouponId}
             />
           </div>
         </div>
