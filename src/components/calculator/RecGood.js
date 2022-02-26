@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-// import BMR from './Bmr';
 
 function RecGood(props) {
-  // let { data } = this.props;
-  // console.log(data);
+  // const { caloriesTdee } = props;
   return (
     <>
       <h1>{props.calories}</h1>
+      <div className="row">
+        <div className="col-lg-4 col-md-12"></div>
+        <div className="col-lg-4 col-md-6 col-xs-12"></div>
+        <div className="col-lg-4 col-md-6 col-xs-12"></div>
+      </div>
     </>
   );
 }

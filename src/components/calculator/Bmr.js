@@ -119,6 +119,7 @@ class BMR extends Component {
       cal = bmr * 1.9;
     }
     this.setState({ calories: cal });
+    this.props.setCalories(cal);
   }
 
   render() {
