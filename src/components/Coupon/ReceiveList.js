@@ -4,22 +4,23 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
 
 function ReceiveList() {
   const [data, setData] = useState([]);
-  const userID = JSON.parse(localStorage.getItem('user'));
+  const { user } = useLogin();
   const isReceiveList = data.length === 0;
 
   useEffect(() => {
     let getcoupon = async () => {
-      let response = await axios.post(`${API_URL}/coupon/receive`, userID, {
+      let response = await axios.post(`${API_URL}/coupon/receive`, user, {
         withCredentials: true,
       });
       setData(response.data);
     };
     getcoupon();
 
-    console.log(userID);
+    console.log(user);
   }, []);
   return (
     <>

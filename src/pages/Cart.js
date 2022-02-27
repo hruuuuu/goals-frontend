@@ -5,10 +5,15 @@ import MemberSidebar from '../components/MemberSidebar';
 
 import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
+import { useLogin } from '../context/LoginStatus';
+import { Navigate } from 'react-router-dom';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);
-
+  const { login } = useLogin();
+  if (!login) {
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <Header />

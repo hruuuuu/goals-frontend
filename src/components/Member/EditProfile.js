@@ -3,16 +3,17 @@ import axios from 'axios';
 import TwCitySelector from '../../../node_modules/tw-city-selector/dist/tw-city-selector';
 
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
 // import $ from 'jquery';
 
 const EditProfile = () => {
   const [member, setMember] = useState({});
-  //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
+  //取得已登入會員的資料
+  const { user } = useLogin();
 
   useEffect(() => {
     let getProfile = async () => {
-      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
+      let response = await axios.post(`${API_URL}/member/getprofile`, user, {
         withCredentials: true,
       });
       new TwCitySelector({
@@ -25,7 +26,7 @@ const EditProfile = () => {
       setMember(response.data[0]);
     };
     getProfile();
-  }, []);
+  }, [user]);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
@@ -36,7 +37,7 @@ const EditProfile = () => {
     let response = await axios.post(
       `${API_URL}/member/editprofile`,
       member,
-      userID
+      user
     );
     alert('修改成功');
   }
