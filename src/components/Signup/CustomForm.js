@@ -3,15 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Form, useField, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { API_URL } from '../../utils/config';
 
-const CustomForm = ({
-  page,
-  setPage,
-  setLogin,
-  loginOption,
-  setLoginOption,
-  handleShow,
-}) => {
+const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
   const history = useNavigate();
   // 切換看得到/看不到密碼
   const [passwordField, setPasswordField] = useState(false);
@@ -34,44 +29,46 @@ const CustomForm = ({
   const submitHandler = async (values) => {
     try {
       if (!page) {
-        const loginData = await axios.post(
-          `${process.env.BACKEND_API_URL}/api/auth/login`,
-          values,
-          { withCredentials: true }
-        );
+        const loginData = await axios.post(`${API_URL}/auth/login`, values, {
+          withCredentials: true,
+        });
         const userProfile = loginData.data;
         if (loginData.status === 200 && userProfile.code < 30000) {
-          localStorage.setItem('login', true);
-          localStorage.setItem('user', JSON.stringify(userProfile.data));
-          setLogin(true);
-          setLoginOption({
-            ...loginOption,
-            normal: true,
+          Swal.fire({
+            icon: 'success',
+            html: userProfile.msg,
           });
-          alert(userProfile.msg);
+          setLogin(true);
           setTimeout(() => {
             history('/');
           });
         } else {
-          alert(userProfile.msg);
+          Swal.fire({
+            icon: 'error',
+            html: userProfile.msg,
+          });
           setTimeout(() => {
             history('/');
           });
         }
       } else {
-        const signupData = await axios.post(
-          `${process.env.BACKEND_API_URL}/api/auth/signup`,
-          values,
-          { withCredentials: true }
-        );
+        const signupData = await axios.post(`${API_URL}/auth/signup`, values, {
+          withCredentials: true,
+        });
         const userProfile = signupData.data;
         if (signupData.status === 200 && userProfile.code < 30000) {
-          alert(userProfile.msg);
+          Swal.fire({
+            icon: 'success',
+            html: userProfile.msg,
+          });
           setTimeout(() => {
             history('/');
           });
         } else {
-          alert(userProfile.msg);
+          Swal.fire({
+            icon: 'error',
+            html: userProfile.msg,
+          });
           setTimeout(() => {
             history('/');
           });

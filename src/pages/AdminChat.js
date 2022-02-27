@@ -8,8 +8,11 @@ import { useAdmin } from '../context/admin';
 
 import Header from '../components/Header';
 import ChatView from '../components/Admin/ChatView';
+import { Navigate } from 'react-router-dom';
+import { useLogin } from '../context/LoginStatus';
 
 function AdminChat() {
+  const { admin } = useLogin();
   const { adminOnline, setAdminOnline } = useAdmin();
   const [socket, setSocket] = useState();
   const [clientList, setClientList] = useState([]);
@@ -110,6 +113,12 @@ function AdminChat() {
       }
     }
   }, [socket]);
+
+  useEffect(() => {
+    if (!admin) {
+      return <Navigate to="/" />;
+    }
+  }, [admin]);
 
   return (
     <>

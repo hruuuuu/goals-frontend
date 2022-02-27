@@ -6,12 +6,13 @@ import Image from '../img/sign/login.jpg';
 import SignupModal from '../components/Signup/Modal';
 import SocialArea from '../components/Signup/SocialArea';
 import CustomForm from '../components/Signup/CustomForm';
+import Swal from 'sweetalert2';
 
 import { API_URL } from '../utils/config';
 
 const Signup = () => {
   const history = useNavigate();
-  const { login, setLogin, loginOption, setLoginOption } = useLogin();
+  const { login, setLogin, isSocial, setIsSocial } = useLogin();
   // 預設false為登入頁面
   const [page, setPage] = useState(false);
 
@@ -41,12 +42,18 @@ const Signup = () => {
       });
       setShow(false);
       if (forgetEmail.status === 200 && forgetEmail.data.code < 30000) {
-        alert(forgetEmail.data.msg);
+        Swal.fire({
+          icon: 'success',
+          html: forgetEmail.data.msg,
+        });
         setTimeout(() => {
           history('/');
         });
       } else {
-        alert(forgetEmail.data.msg);
+        Swal.fire({
+          icon: 'error',
+          html: forgetEmail.data.msg,
+        });
         setTimeout(() => {
           history('/');
         });
@@ -58,12 +65,18 @@ const Signup = () => {
       });
       setShow(false);
       if (reVerifyEmail.status === 200 && reVerifyEmail.data.code < 30000) {
-        alert(reVerifyEmail.data.msg);
+        Swal.fire({
+          icon: 'success',
+          html: reVerifyEmail.data.msg,
+        });
         setTimeout(() => {
           history('/');
         });
       } else {
-        alert(reVerifyEmail.data.msg);
+        Swal.fire({
+          icon: 'error',
+          html: reVerifyEmail.data.msg,
+        });
         setTimeout(() => {
           history('/');
         });
@@ -80,26 +93,40 @@ const Signup = () => {
         withCredentials: true,
       }
     );
-
-    console.log(loginResult);
-    if (loginResult.status === 200) {
-      localStorage.setItem('login', true);
+    if (loginResult.status === 200 && loginResult.data.code < 30000) {
       setLogin(true);
-      setLoginOption({
-        ...loginOption,
-        google: true,
+      setIsSocial(true);
+      Swal.fire({
+        icon: 'success',
+        html: loginResult.data.msg,
+      });
+      setTimeout(() => {
+        history('/');
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        html: loginResult.data.msg,
+      });
+      setTimeout(() => {
+        history('/');
       });
     }
-    history('/');
   };
 
-  // Facebook登入
-  // const handleFacebookLogIn = async () => {
-  //   const loginResult = await axios.post(
-  //     `${API_URL}/social/facebook`,
-  //     { withCredentials: true }
-  //   );
-  //   console.log(loginResult);
+  // Facebook憑證
+  // const handleGetFacebookCredential = async () => {
+  //   try {
+  //     const loginResult = await axios.post(
+  //       `${API_URL}/social/facebook/getCredential`,
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     console.log('loginResult', loginResult);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
   // };
 
   if (login) {
@@ -115,15 +142,16 @@ const Signup = () => {
           <CustomForm
             page={page}
             setLogin={setLogin}
-            loginOption={loginOption}
-            setLoginOption={setLoginOption}
+            isSocial={isSocial}
+            setIsSocial={setIsSocial}
             setPage={setPage}
             handleShow={handleShow}
           />
           {!page && (
             <SocialArea
               handleGoogleLogIn={handleGoogleLogIn}
-              // handleFacebookLogIn={handleFacebookLogIn}
+              setLogin={setLogin}
+              setIsSocial={setIsSocial}
             />
           )}
           <SignupModal

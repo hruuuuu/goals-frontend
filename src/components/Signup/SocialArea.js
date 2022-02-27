@@ -1,8 +1,42 @@
 import React from 'react';
+import axios from 'axios';
 import GoogleLogin from 'react-google-login';
-// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login';
+import { API_URL } from '../../utils/config';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const SocialArea = ({ handleGoogleLogIn }) => {
+const SocialArea = ({ handleGoogleLogIn, setLogin, setIsSocial }) => {
+  const history = useNavigate();
+  // Facebook登入
+  const handleFacebookLogIn = async (response) => {
+    if (response.status === 'unknown') {
+      Swal.fire({
+        icon: 'error',
+        html: '授權失敗',
+      });
+      history('/');
+      return;
+    }
+    const sendFBData = await axios.post(
+      `${API_URL}/social/facebook`,
+      { access_token: response.accessToken },
+      {
+        withCredentials: true,
+      }
+    );
+    if (sendFBData.status === 200 && sendFBData.data.code < 30000) {
+      setLogin(true);
+      setIsSocial(true);
+      Swal.fire({
+        icon: 'success',
+        html: sendFBData.data.msg,
+      });
+      setTimeout(() => {
+        history('/');
+      });
+    }
+  };
   return (
     <div className="another-login">
       <p className="another-login_title-wrapper">
@@ -18,16 +52,15 @@ const SocialArea = ({ handleGoogleLogIn }) => {
           buttonText="Google"
           onSuccess={handleGoogleLogIn}
           onFailure={handleGoogleLogIn}
-          // isSignedIn={true}
         />
-        {/* <FacebookLogin
+        <FacebookLogin
           appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
+          autoLoad={false}
           icon="fa-facebook"
           textButton="Facebook"
           fields="name,email"
-          scope="public_profile, email"
-          onClick={handleFacebookLogIn}
-        /> */}
+          callback={handleFacebookLogIn}
+        />
       </div>
     </div>
   );

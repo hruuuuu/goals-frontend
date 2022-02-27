@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
 
 const OrderList = () => {
   const [show, setShow] = useState(false);
@@ -18,13 +19,13 @@ const OrderList = () => {
   const isOrderList = data.length === 0;
 
   //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
+  const { user } = useLogin();
 
   useEffect(() => {
     let getOrder = async () => {
       let response = await axios.post(
         `${API_URL}/order`,
-        userID,
+        user,
 
         {
           withCredentials: true,
