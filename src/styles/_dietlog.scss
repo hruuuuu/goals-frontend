@@ -196,6 +196,7 @@
     @include text--normal-bold;
     @include text--truncate(1);
     text-align: start;
+    display: inline;
   }
   &__cal {
     @include text--small-bold;
@@ -232,9 +233,14 @@
       right: 1rem;
     }
   }
+  .css-1slz293-MuiSkeleton-root {
+    height: 10rem;
+    @include placeholder__rec(0 0 0.5rem 0);
+  }
 }
 
 .c-dietlog-modal {
+  min-width: 80%;
   &__form {
     display: flex;
     flex-direction: column;
@@ -246,5 +252,48 @@
   }
   &__textarea {
     height: 6.25rem;
+  }
+}
+
+.c-dietlog-fields {
+  margin: 1rem 0;
+  &__input {
+    &[type="number"] {
+      padding: 0.125rem;
+
+      @include text--small;
+      @include clear__number-arrow;
+    }
+  }
+  &__label {
+    $_: &;
+    height: $height__input;
+    @include text--small;
+    color: $color--gray3;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:not(#{$_}--start) {
+      color: $color--font;
+    }
+    &--start {
+      height: max-content;
+      align-items: flex-start;
+    }
+    &--name {
+      height: $height__input;
+      justify-content: flex-start;
+      &:not(#{$_}--start) {
+        @include text--small-bold;
+        color: $color--primary;
+      }
+    }
+  }
+  &__field {
+    margin-bottom: 0.5rem;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 }

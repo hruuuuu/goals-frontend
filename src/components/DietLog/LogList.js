@@ -5,7 +5,16 @@ import { useDietlog } from '../../context/dietlog';
 import LogItem from './LogItem';
 
 function LogList(props) {
-  const { getDietlogData, dietlogImg, refreshImg, setRefreshImg } = props;
+  const {
+    getDietlogData,
+    dietlogImg,
+    refresh,
+    setRefresh,
+    foodFields,
+    setFoodFields,
+    editMode,
+    setEditMode,
+  } = props;
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
   const [tab, setTab] = useState(1);
@@ -58,8 +67,12 @@ function LogList(props) {
                 dietlog={log}
                 getDietlogData={getDietlogData}
                 dietlogImg={dietlogImg}
-                refreshImg={refreshImg}
-                setRefreshImg={setRefreshImg}
+                refresh={refresh}
+                setRefresh={setRefresh}
+                foodFields={foodFields}
+                setFoodFields={setFoodFields}
+                editMode={editMode}
+                setEditMode={setEditMode}
               />
             );
           })}

@@ -221,6 +221,25 @@ h6 {
   }
 }
 
+@mixin interaction__tab {
+  transition: $transition;
+  &:hover {
+    color: $color--primary;
+    background: $color--opacity;
+    i {
+      color: $color--primary;
+    }
+  }
+  &:focus,
+  &:active {
+    color: $color--primary;
+    background: $color--opacity;
+    i {
+      color: $color--primary;
+    }
+  }
+}
+
 @mixin icon--absolute($content) {
   content: $content;
   width: max-content;
@@ -288,6 +307,18 @@ h6 {
   -webkit-box-orient: vertical;
   display: -webkit-box;
   overflow: hidden;
+}
+
+@mixin clear__number-arrow {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
 
 .c-alert {
@@ -476,6 +507,12 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      background: transparent;
+    }
+  }
   &--primary {
     border: none;
     background: $color--primary;
@@ -566,6 +603,8 @@ h6 {
 
     background: transparent;
     border: none;
+    border-radius: $border-radius__btn;
+    @include interaction__tab;
   }
   &--mobile {
     @include cursor(pointer);
@@ -592,7 +631,7 @@ h6 {
   &--outline {
     border: $border__input;
     border-radius: $border-radius__input;
-    @include interaction__btn;
+    @include interaction__tab;
   }
 }
 
@@ -665,6 +704,9 @@ h6 {
     border: none;
     box-shadow: $box-shadow__modal;
     border-radius: $border-radius__modal;
+
+    @include scrollbar;
+    overflow-y: auto;
     @media screen and (min-width: $md) and (max-width: $lg) {
       padding: $padding__modal--md;
     }

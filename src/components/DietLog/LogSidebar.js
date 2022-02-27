@@ -9,26 +9,31 @@ import { useDietlog } from '../../context/dietlog';
 import LogModal from './LogModal';
 
 function LogSidebar(props) {
-  const { getDietlogData, refreshImg, setRefreshImg } = props;
+  const {
+    getDietlogData,
+    refresh,
+    setRefresh,
+    foodFields,
+    setFoodFields,
+    editMode,
+    setEditMode,
+  } = props;
   const [showModal, setShowModal] = useState({
     in: false,
     out: false,
   });
   const { canlendarDate, setCalendarDate } = useDietlog();
   const [calendar, setCalendar] = useState(new Date());
-  const navigate = useNavigate();
 
   const handleSelectToday = () => {
     setCalendar(new Date());
     const date = dayjs(new Date()).format('YYYY-MM-DD');
-    // navigate(`/dietlog?date=${date}`);
     setCalendarDate(date);
   };
 
   const handleSelectDate = (value, e) => {
     setCalendar();
     const date = dayjs(value).format('YYYY-MM-DD');
-    // navigate(`/dietlog?date=${date}`);
     setCalendarDate(date);
   };
 
@@ -71,8 +76,12 @@ function LogSidebar(props) {
             showModal={showModal}
             setShowModal={setShowModal}
             getDietlogData={getDietlogData}
-            refreshImg={refreshImg}
-            setRefreshImg={setRefreshImg}
+            refresh={refresh}
+            setRefresh={setRefresh}
+            foodFields={foodFields}
+            setFoodFields={setFoodFields}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         )}
       </div>

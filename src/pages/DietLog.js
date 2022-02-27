@@ -12,7 +12,9 @@ import FloatingChat from '../components/FloatingChat';
 function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
-  const [refreshImg, setRefreshImg] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+  const [foodFields, setFoodFields] = useState([]);
+  const [editMode, setEditMode] = useState(false);
 
   const getDietlogData = async () => {
     try {
@@ -34,18 +36,24 @@ function DietLog() {
       <div className="l-dietlog">
         <div className="container">
           <div className="row gx-5">
-            <div className="col-6">
+            <div className="col-5">
               <LogSidebar
                 getDietlogData={getDietlogData}
-                refreshImg={refreshImg}
-                setRefreshImg={setRefreshImg}
+                refresh={refresh}
+                setRefresh={setRefresh}
+                editMode={editMode}
+                setEditMode={setEditMode}
               />
             </div>
-            <div className="col-6">
+            <div className="col-7">
               <LogList
                 getDietlogData={getDietlogData}
-                refreshImg={refreshImg}
-                setRefreshImg={setRefreshImg}
+                refresh={refresh}
+                setRefresh={setRefresh}
+                foodFields={foodFields}
+                setFoodFields={setFoodFields}
+                editMode={editMode}
+                setEditMode={setEditMode}
               />
             </div>
           </div>
