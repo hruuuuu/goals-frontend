@@ -26,7 +26,7 @@ const EditProfile = () => {
       setMember(response.data[0]);
     };
     getProfile();
-  }, [user]);
+  }, []);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });

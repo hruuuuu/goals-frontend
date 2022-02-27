@@ -10,6 +10,7 @@ const Available = () => {
   const [data, setData] = useState([]);
   const { user } = useLogin();
   const isAvailableList = data.length === 0;
+  const [member, setMember] = useState({});
 
   //取得目前可領取的優惠券
 
@@ -22,13 +23,21 @@ const Available = () => {
     };
     couponValid();
 
-    console.log(data);
+    let getProfile = async () => {
+      let response = await axios.post(`${API_URL}/member/getprofile`, user, {
+        withCredentials: true,
+      });
+
+      setMember(response.data[0]);
+    };
+
+    getProfile();
   }, []);
 
   async function getcoupon(coupon, e) {
     // console.log(coupon.id);
 
-    const couponReceive = { coupon_id: coupon.id, member_id: user.id };
+    const couponReceive = { coupon_id: coupon.id, member_id: member.id };
     console.log(user);
     let response = await axios.post(`${API_URL}/coupon/post`, couponReceive);
 
