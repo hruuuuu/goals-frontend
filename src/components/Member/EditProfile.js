@@ -34,7 +34,7 @@ const EditProfile = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    let response = await axios.post(`${API_URL}/member/editprofile`, user);
+    let response = await axios.post(`${API_URL}/member/editprofile`, member);
     alert('修改成功');
   }
 
