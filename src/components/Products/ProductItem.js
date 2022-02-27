@@ -2,6 +2,7 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Skeleton from '@mui/material/Skeleton';
+import Swal from 'sweetalert2';
 
 import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
@@ -52,7 +53,25 @@ function ProductItem(props) {
 
   //加入購物車
   const addCart = () => {
-    let newItem = {
+    //加入購物車alert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '商品已加入購物車',
+    });
+
+    const newItem = {
       id: product.id,
       name: product.name,
       image: product.image,
@@ -65,7 +84,24 @@ function ProductItem(props) {
 
     for (let i = 0; i < cartListData.length; i++) {
       if (cartListData[i].id === newItem.id) {
-        return alert('您已添加此商品進購物車');
+        const newAmountItem = {
+          id: cartListData[i].id,
+          name: cartListData[i].name,
+          image: cartListData[i].image,
+          price: cartListData[i].price,
+          discountPrice: cartListData[i].discountPrice,
+          amount: cartListData[i].amount + newItem.amount,
+        };
+        const oldCartListData = cartListData.filter(
+          (item, i) => item.id !== newItem.id
+        );
+        const newCartListData = [...oldCartListData, newAmountItem];
+
+        setCartListData(newCartListData);
+        return localStorage.setItem(
+          'cartList',
+          JSON.stringify(newCartListData)
+        );
       }
     }
 

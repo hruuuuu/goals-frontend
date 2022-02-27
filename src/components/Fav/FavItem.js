@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Skeleton from '@mui/material/Skeleton';
+import Swal from 'sweetalert2';
 
 import { IMG_URL } from '../../utils/config';
 import { useShow } from '../../context/showProductDetail';
@@ -41,6 +42,7 @@ function FavItem(props) {
 
   const isFetchingCategory = categoryData.id === '';
   const isFetchingActivity = activityData.id === '';
+  const isNoActivity = activity.id === 0;
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -64,6 +66,23 @@ function FavItem(props) {
 
   //加入購物車
   const addCart = () => {
+    //加入購物車alert
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '商品已加入購物車',
+    });
     let newItem = {
       id: product.id,
       name: product.name,
@@ -77,7 +96,24 @@ function FavItem(props) {
 
     for (let i = 0; i < cartListData.length; i++) {
       if (cartListData[i].id === newItem.id) {
-        return alert('您已添加此商品進購物車');
+        const newAmountItem = {
+          id: cartListData[i].id,
+          name: cartListData[i].name,
+          image: cartListData[i].image,
+          price: cartListData[i].price,
+          discountPrice: cartListData[i].discountPrice,
+          amount: cartListData[i].amount + newItem.amount,
+        };
+        const oldCartListData = cartListData.filter(
+          (item, i) => item.id !== newItem.id
+        );
+        const newCartListData = [...oldCartListData, newAmountItem];
+
+        setCartListData(newCartListData);
+        return localStorage.setItem(
+          'cartList',
+          JSON.stringify(newCartListData)
+        );
       }
     }
 
@@ -107,6 +143,7 @@ function FavItem(props) {
                     />
                   </div>
                 </div>
+                {/* mobile */}
                 <div className="col-12 col-md-5 d-flex flex-column justify-content-between">
                   <div className="d-flex flex-column">
                     <div className="e-tag e-tag--normal">{category.name}</div>
@@ -123,9 +160,11 @@ function FavItem(props) {
                         <div className="c-product-item-detail__cal">
                           熱量{calories}卡
                         </div>
-                        <div className="c-product-item-detail__o-price">
-                          ${price}
-                        </div>
+                        {!isNoActivity && (
+                          <div className="c-product-item-detail__o-price">
+                            ${price}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <p className="c-product-detail__text d-none d-md-block">
@@ -133,6 +172,7 @@ function FavItem(props) {
                     </p>
                   </div>
                 </div>
+                {/* desktop */}
                 <div className="col-12 col-md-4 d-none d-md-flex flex-column align-items-end">
                   <div className="c-product-detail__nutrition mt-0 mt-md-5">
                     <ul className="c-product-detail__list mb-2">
@@ -158,7 +198,9 @@ function FavItem(props) {
                     <h4 className="c-product-detail__price me-2">
                       ${discountPrice}
                     </h4>
-                    <h6 className="c-product-detail__o-price">${price}</h6>
+                    {!isNoActivity && (
+                      <h6 className="c-product-detail__o-price">${price}</h6>
+                    )}
                   </div>
                   <Counter number={number} setNumber={setNumber} />
                 </div>

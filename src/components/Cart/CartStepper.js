@@ -3,15 +3,59 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 import Shipping from './Shipping';
 import Checkout from './Checkout';
+import { useCartList } from '../../context/cart';
 
 const steps = ['購物車', '運送資訊', '付款資訊'];
 
 function CartStepper(props) {
   const [activeStep, setActiveStep] = React.useState(1);
   const [skipped, setSkipped] = React.useState(new Set());
+  const { cartListData, setCartListData } = useCartList();
+  const [shippingData, setShippingData] = React.useState({
+    order_status_id: '1',
+    delivery_status_id: '1',
+    payment_status_id: '4',
+    payment_id: '1',
+    name: '',
+    county: '',
+    district: '',
+    address: '',
+    recipient: '',
+    tel: '',
+  });
+  const { orderTotal, setOrderTotal } = props;
+  const { couponId, setCouponId } = props;
+
+  //取得已登入會員的ID
+  const userID = JSON.parse(localStorage.getItem('user'));
+  // console.log(userID);
+
+  //coupon_receive
+  const usedCouponData = {
+    member_id: userID.id,
+    coupon_id: couponId,
+  };
+  console.log(usedCouponData);
+
+  //order_items
+  // ->準備好要傳回資料庫的product_id, amount
+  const cartItems = { ...cartListData };
+  // console.log(cartItems);
+
+  //order_details
+  // ->準備好要傳回資料庫的應付金額
+  const cartDetails = {
+    ...shippingData,
+    total: Number(orderTotal),
+    member_id: userID.id,
+  };
+  // console.log(cartDetails);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -31,24 +75,25 @@ function CartStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  //   const handleSkip = () => {
-  //     if (!isStepOptional(activeStep)) {
-  //       // You probably want to guard against something like this,
-  //       // it should never occur unless someone's actively trying to break something.
-  //       throw new Error("You can't skip a step that isn't optional.");
-  //     }
+  //送出訂單 ->傳回資料庫
+  async function handleSubmit(e) {
+    //orderDetails
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails
+    );
+    //order_items
+    let orderItemsResponse = await axios.post(
+      `${API_URL}/cart/orderItems`,
+      cartItems
+    );
 
-  //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     setSkipped((prevSkipped) => {
-  //       const newSkipped = new Set(prevSkipped.values());
-  //       newSkipped.add(activeStep);
-  //       return newSkipped;
-  //     });
-  //   };
-
-  const handleReset = () => {
-    setActiveStep(1);
-  };
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
+  }
   return (
     <>
       <Box className="box" sx={{ width: '100%' }}>
@@ -79,7 +124,14 @@ function CartStepper(props) {
         ) : (
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
-              {activeStep === steps.length - 1 ? <Checkout /> : <Shipping />}
+              {activeStep === steps.length - 1 ? (
+                <Checkout />
+              ) : (
+                <Shipping
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                />
+              )}
             </div>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
@@ -107,11 +159,24 @@ function CartStepper(props) {
                   </div>
                   <div className="col-6 mt-2">
                     <div className="d-grid">
-                      <button className="btn_grn p-2" onClick={handleNext}>
-                        {activeStep === steps.length - 1
-                          ? '確認付款'
-                          : '下一步'}
-                      </button>
+                      {activeStep === steps.length - 1 ? (
+                        <button
+                          className="btn_outline btn_grn p-2"
+                          onClick={() => {
+                            handleSubmit();
+                            handleNext();
+                          }}
+                        >
+                          確認付款
+                        </button>
+                      ) : (
+                        <button
+                          className="btn_outline btn_grn p-2"
+                          onClick={handleNext}
+                        >
+                          下一步
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
