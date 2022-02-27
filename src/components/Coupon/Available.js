@@ -38,7 +38,6 @@ const Available = () => {
     // console.log(coupon.id);
 
     const couponReceive = { coupon_id: coupon.id, member_id: member.id };
-    console.log(user);
     let response = await axios.post(`${API_URL}/coupon/post`, couponReceive);
 
     $(e.target)
