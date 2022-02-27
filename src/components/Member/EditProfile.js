@@ -26,7 +26,7 @@ const EditProfile = () => {
       setMember(response.data[0]);
     };
     getProfile();
-  }, []);
+  }, [user]);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
@@ -34,11 +34,7 @@ const EditProfile = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    let response = await axios.post(
-      `${API_URL}/member/editprofile`,
-      member,
-      user
-    );
+    let response = await axios.post(`${API_URL}/member/editprofile`, user);
     alert('修改成功');
   }
 

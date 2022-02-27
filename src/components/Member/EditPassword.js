@@ -19,15 +19,15 @@ const EditPassWord = () => {
     setMember({ ...member, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    let getProfile = async () => {
-      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
-        withCredentials: true,
-      });
-      setData(response.data);
-    };
-    getProfile();
-  }, []);
+  // useEffect(() => {
+  //   let getProfile = async () => {
+  //     let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
+  //       withCredentials: true,
+  //     });
+  //     setData(response.data);
+  //   };
+  //   getProfile();
+  // }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
