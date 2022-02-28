@@ -117,9 +117,7 @@ const OrderList = () => {
 
                       <div className="my-3 d-flex justify-content-between">
                         <div>總計</div>
-                        <div className="order_td__total">
-                          {order.price * order.amount}
-                        </div>
+                        <div className="order_td__total">{order.total}</div>
                       </div>
                     </div>
                   </div>

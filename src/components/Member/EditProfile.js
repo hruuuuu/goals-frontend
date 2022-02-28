@@ -140,7 +140,7 @@ const EditProfile = () => {
                     required
                   ></Form.Select>
                 </div>
-                <Form.Group as={Col} md="6" sm="12">
+                <Form.Group as={Col} lg="6" sm="12">
                   {/* <div className="col-12 col-sm-12 col-lg-6"> */}
                   <Form.Label
                     htmlFor="inputAddress"
