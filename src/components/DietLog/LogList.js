@@ -6,6 +6,7 @@ import { useDietlog } from '../../context/dietlog';
 import { API_URL } from '../../utils/config';
 
 import LogItem from './LogItem';
+import Statistics from './Statistics';
 
 function LogList(props) {
   const {
@@ -18,6 +19,7 @@ function LogList(props) {
     editMode,
     setEditMode,
     dayDietlog,
+    mealDietlog,
   } = props;
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
@@ -36,22 +38,22 @@ function LogList(props) {
   const isEmptyDietlog = dietlogData.length === 0;
   const isEmptyDay = dayDietlog.length === 0;
 
-  const getDayFood = async () => {
+  const getDaySummary = async () => {
     const data = { ids: dayDietlog };
     try {
       const response = await axios.post(`${API_URL}/dietlog/food`, data, {
         withCredentials: true,
       });
-      const dayFood = response.data;
+      const day = response.data;
       setDaySummary({
-        calories: dayFood.calories,
-        protien: dayFood.protien,
-        fat: dayFood.fat,
-        saturated_fat: dayFood.saturated_fat,
-        trans_fat: dayFood.trans_fat,
-        carb: dayFood.carb,
-        sugar: dayFood.sugar,
-        sodium: dayFood.sodium,
+        calories: day.calories,
+        protien: day.protien,
+        fat: day.fat,
+        saturated_fat: day.saturated_fat,
+        trans_fat: day.trans_fat,
+        carb: day.carb,
+        sugar: day.sugar,
+        sodium: day.sodium,
       });
     } catch (error) {
       console.log(error);
@@ -66,7 +68,8 @@ function LogList(props) {
 
   useEffect(() => {
     if (!isEmptyDay) {
-      getDayFood();
+      getDaySummary();
+      // getMealSummary();
     }
   }, [dayDietlog]);
 
@@ -95,7 +98,11 @@ function LogList(props) {
           </>
         );
       } else if (tab === 2) {
-        return <h3>統計</h3>;
+        return (
+          <>
+            <Statistics daySummary={daySummary} mealDietlog={mealDietlog} />
+          </>
+        );
       }
     } else {
       return <h3>這天沒有任何日誌</h3>;

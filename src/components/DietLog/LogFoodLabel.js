@@ -14,47 +14,55 @@ function LogFoodLabel(props) {
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               熱量
+              <br />
+              (卡)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               蛋白質
+              <br />
+              (克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               脂肪
+              <br />
+              (克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               飽和
               <br />
-              脂肪
+              脂肪(克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               反式
               <br />
-              脂肪
+              脂肪(克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
               碳水
               <br />
-              化合物
+              化合物(克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
-              糖
+              糖<br />
+              (克)
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">
-              鈉
+              鈉<br />
+              (毫克)
             </span>
           </div>
         </div>

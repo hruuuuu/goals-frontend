@@ -17,6 +17,8 @@ function DietLog() {
   const [foodFields, setFoodFields] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [dayDietlog, setDayDietlog] = useState([]);
+  const [mealDietlog, setMealDietlog] = useState([]);
+  const [meal, setMeal] = useState([]);
 
   const getDietlogData = async () => {
     try {
@@ -28,6 +30,7 @@ function DietLog() {
       );
       const dietData = response.data;
       setDietlogData([...dietData]);
+      setMealDietlog([...dietData]);
       const dayDietId = dietData.map((diet) => diet.id);
       setDayDietlog([...dayDietId]);
     } catch (error) {
@@ -60,6 +63,7 @@ function DietLog() {
                 editMode={editMode}
                 setEditMode={setEditMode}
                 dayDietlog={dayDietlog}
+                mealDietlog={mealDietlog}
               />
             </div>
           </div>

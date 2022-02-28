@@ -23,8 +23,8 @@ function LogItem(props) {
     setFoodFields,
     editMode,
     setEditMode,
-    dayFood,
-    setDayFood,
+    mealSummary,
+    setMealSummary,
   } = props;
   const { id, title, description, datetime, edited_at, category_id } = dietlog;
   const { dietlogCategoryData } = useDietlog();
@@ -304,7 +304,6 @@ function LogItem(props) {
         return { ...food, flag: i };
       });
       setFoodFields([...foodFieldsWithFlag]);
-      // setDayFood([...dayFood, { date: datetime, foods: dietlogFood }]);
     }
   }, [dietlogFood]);
 

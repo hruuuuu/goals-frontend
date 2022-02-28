@@ -558,6 +558,10 @@ h6 {
       background: $color--active;
       box-shadow: none;
     }
+    &.active {
+      background: $color--primary;
+      color: $color--light;
+    }
   }
   &--cancel {
     border: none;

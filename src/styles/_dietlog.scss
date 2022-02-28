@@ -171,7 +171,7 @@
       background: $color__bg--error;
     }
     &--dinner {
-      background: $color__bg--info;
+      background: $color__bg--hover;
     }
     &--others {
       background: $color__bg--analogous1;
@@ -284,6 +284,7 @@
     &--name {
       height: $height__input;
       justify-content: flex-start;
+      text-align: start;
       &:not(#{$_}--start) {
         @include text--small-bold;
         color: $color--primary;
