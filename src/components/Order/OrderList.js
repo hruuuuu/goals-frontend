@@ -66,9 +66,7 @@ const OrderList = () => {
                     <td className="order_td__order_status">
                       {order.order_status}
                     </td>
-                    <td className="order_td__total">
-                      {order.price * order.amount}
-                    </td>
+                    <td className="order_td__total">{order.total}</td>
                     <td className="p-0">
                       <button onClick={handleShow} className="detail rounded-3">
                         <i className="fas fa-eye p-1 icon_grn"></i>
