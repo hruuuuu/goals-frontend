@@ -144,6 +144,7 @@ function LogModal(props) {
     setShowModal({ ...showModal, out: true });
     setTimeout(() => {
       setShowModal({ ...showModal, in: false, out: false });
+      setEditMode(false);
     }, 500);
   };
 
@@ -153,10 +154,6 @@ function LogModal(props) {
       setAddFields({ ...addFields, datetime: datetime });
     }
   }, [canlendarDate]);
-
-  useEffect(() => {
-    setEditMode(true);
-  }, []);
 
   return (
     <>

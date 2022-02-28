@@ -40,6 +40,7 @@ function LogSidebar(props) {
   /* 控制modal顯示 */
   const handleShow = () => {
     setShowModal({ ...setShowModal, in: true });
+    setEditMode(true);
   };
   return (
     <>

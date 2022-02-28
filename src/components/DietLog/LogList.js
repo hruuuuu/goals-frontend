@@ -1,6 +1,9 @@
 import { React, useState, useEffect } from 'react';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
 import { useDietlog } from '../../context/dietlog';
+import { API_URL } from '../../utils/config';
 
 import LogItem from './LogItem';
 
@@ -14,18 +17,90 @@ function LogList(props) {
     setFoodFields,
     editMode,
     setEditMode,
+    dayDietlog,
   } = props;
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
   const [tab, setTab] = useState(1);
+  const [daySummary, setDaySummary] = useState({
+    calories: 0,
+    protien: 0,
+    fat: 0,
+    saturated_fat: 0,
+    trans_fat: 0,
+    carb: 0,
+    sugar: 0,
+    sodium: 0,
+  });
 
   const isEmptyDietlog = dietlogData.length === 0;
+  const isEmptyDay = dayDietlog.length === 0;
+
+  const getDayFood = async () => {
+    const data = { ids: dayDietlog };
+    try {
+      const response = await axios.post(`${API_URL}/dietlog/food`, data, {
+        withCredentials: true,
+      });
+      const dayFood = response.data;
+      setDaySummary({
+        calories: dayFood.calories,
+        protien: dayFood.protien,
+        fat: dayFood.fat,
+        saturated_fat: dayFood.saturated_fat,
+        trans_fat: dayFood.trans_fat,
+        carb: dayFood.carb,
+        sugar: dayFood.sugar,
+        sodium: dayFood.sodium,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (calendarDate) {
       getDietlogData();
     }
   }, [calendarDate]);
+
+  useEffect(() => {
+    if (!isEmptyDay) {
+      getDayFood();
+    }
+  }, [dayDietlog]);
+
+  const tabLayout = () => {
+    if (!isEmptyDietlog) {
+      if (tab === 1) {
+        return (
+          <>
+            {dietlogData.map((log) => {
+              const { id } = log;
+              return (
+                <LogItem
+                  key={id}
+                  dietlog={log}
+                  getDietlogData={getDietlogData}
+                  dietlogImg={dietlogImg}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                  foodFields={foodFields}
+                  setFoodFields={setFoodFields}
+                  editMode={editMode}
+                  setEditMode={setEditMode}
+                />
+              );
+            })}
+          </>
+        );
+      } else if (tab === 2) {
+        return <h3>統計</h3>;
+      }
+    } else {
+      return <h3>這天沒有任何日誌</h3>;
+    }
+  };
 
   return (
     <>
@@ -43,7 +118,7 @@ function LogList(props) {
         >
           飲食
         </button>
-        {/* <button
+        <button
           type="button"
           className={`c-tabs__btn c-tabs__btn--w100 ${
             tab === 2
@@ -55,32 +130,9 @@ function LogList(props) {
           }}
         >
           統計
-        </button> */}
+        </button>
       </div>
-      {!isEmptyDietlog ? (
-        <>
-          {dietlogData.map((log) => {
-            const { id } = log;
-            return (
-              <LogItem
-                key={id}
-                dietlog={log}
-                getDietlogData={getDietlogData}
-                dietlogImg={dietlogImg}
-                refresh={refresh}
-                setRefresh={setRefresh}
-                foodFields={foodFields}
-                setFoodFields={setFoodFields}
-                editMode={editMode}
-                setEditMode={setEditMode}
-              />
-            );
-          })}
-        </>
-      ) : (
-        <h3>這天沒有任何日誌</h3>
-      )}
-      {/* <LogAdd /> */}
+      {tabLayout()}
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 import { API_URL } from '../utils/config';
 import { useDietlog } from '../context/dietlog';
@@ -15,6 +16,7 @@ function DietLog() {
   const [refresh, setRefresh] = useState(false);
   const [foodFields, setFoodFields] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [dayDietlog, setDayDietlog] = useState([]);
 
   const getDietlogData = async () => {
     try {
@@ -26,10 +28,13 @@ function DietLog() {
       );
       const dietData = response.data;
       setDietlogData([...dietData]);
+      const dayDietId = dietData.map((diet) => diet.id);
+      setDayDietlog([...dayDietId]);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <>
       <Header />
@@ -54,6 +59,7 @@ function DietLog() {
                 setFoodFields={setFoodFields}
                 editMode={editMode}
                 setEditMode={setEditMode}
+                dayDietlog={dayDietlog}
               />
             </div>
           </div>

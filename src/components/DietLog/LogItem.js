@@ -23,6 +23,8 @@ function LogItem(props) {
     setFoodFields,
     editMode,
     setEditMode,
+    dayFood,
+    setDayFood,
   } = props;
   const { id, title, description, datetime, edited_at, category_id } = dietlog;
   const { dietlogCategoryData } = useDietlog();
@@ -302,6 +304,7 @@ function LogItem(props) {
         return { ...food, flag: i };
       });
       setFoodFields([...foodFieldsWithFlag]);
+      // setDayFood([...dayFood, { date: datetime, foods: dietlogFood }]);
     }
   }, [dietlogFood]);
 
@@ -336,7 +339,7 @@ function LogItem(props) {
                       總熱量{foodSummary.calories}卡
                     </div>
                     {!isEmptyImage && (
-                      <div className="l-dietlog__hint">
+                      <div className="l-dietlog__hint mb-1">
                         {dietlogImg.length}張照片
                       </div>
                     )}
