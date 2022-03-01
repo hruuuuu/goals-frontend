@@ -169,7 +169,7 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <RecGood calories={calories} setCalories={setCalories} />
+            <RecGood calories={calories} />
           </div>
         </section>
       </div>
