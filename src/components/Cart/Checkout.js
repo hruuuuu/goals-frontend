@@ -46,90 +46,59 @@ function Checkout(props) {
             className="form-control"
             id="firstName"
             name="name"
+            value={creditcard.name}
             placeholder="請輸入持卡人姓名"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
-          <div className="invalid-feedback">Valid first name is required.</div>
         </div>
 
-        <div className="mb-2">
-          <label htmlFor="address" className="form-label label_fs">
+        <div className="mb-2 card-number-group">
+          <label htmlFor="card-number" className="form-label label_fs">
             卡號
           </label>
           <input
-            type="text"
-            className="form-control"
+            type=""
+            className="form-control card-number"
             id="adddress"
             name="number"
-            placeholder="請輸入卡號"
+            value={creditcard.number}
+            placeholder="**** **** **** ****"
             onChange={handleInputChange}
             onFocus={handleInputFocus}
           />
-          <div className="invalid-feedback">Valid address is required.</div>
         </div>
-        {/* <div className="mb-2">
-          <label htmlFor="recipient" className="form-label label_fs">
-            卡別
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="recipient"
-            placeholder="請輸入卡別"
-            required
-          />
-          <div className="invalid-feedback">Valid recipient is required.</div>
-        </div> */}
         <div className="row g-2 mb-2">
-          <div className="col-6">
-            <label htmlFor="" className="form-label label_fs">
+          <div className="col-6 expiration-date-group">
+            <label htmlFor="expiration-date" className="form-label label_fs">
               有效日期
             </label>
             <input
               type=""
-              className="form-control"
+              className="form-control expiration-date"
               id=""
               name="expiry"
-              placeholder="月/ 年"
+              value={creditcard.expiry}
+              placeholder="MM / YY"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
             />
-            {/* <div className="d-flex align-items-center justify-content-between">
-              <input
-                type=""
-                className="form-control"
-                id=""
-                placeholder="月"
-                required
-              />
-              <div className="mx-1">/</div>
-              <input
-                type=""
-                className="form-control"
-                id=""
-                placeholder="年"
-                required
-              />
-            </div> */}
           </div>
 
-          <div className="col-6">
-            <label htmlFor="state" className="form-label label_fs">
+          <div className="col-6 cvc-group">
+            <label htmlFor="cvc" className="form-label label_fs">
               CVC
             </label>
             <input
               type=""
-              className="form-control"
-              id="tel"
+              className="form-control cvc"
+              id="cvc"
               name="cvc"
-              placeholder="請輸入..."
+              value={creditcard.cvc}
+              placeholder="安全碼"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
             />
-            <div className="invalid-feedback">
-              Please provide a valid state.
-            </div>
           </div>
         </div>
       </div>

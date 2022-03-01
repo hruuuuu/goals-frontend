@@ -41,7 +41,7 @@ function CartStepper(props) {
     member_id: userID.id,
     coupon_id: couponId,
   };
-  console.log(usedCouponData);
+  // console.log(usedCouponData);
 
   //order_items
   // ->準備好要傳回資料庫的product_id, amount
