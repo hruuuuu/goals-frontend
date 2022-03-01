@@ -32,68 +32,64 @@ function CartStepper(props) {
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
 
-  //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
-  // console.log(userID);
+  // //取得已登入會員的ID
+  // const userID = JSON.parse(localStorage.getItem('user'));
 
-  //coupon_receive
-  const usedCouponData = {
-    member_id: userID.id,
-    coupon_id: couponId,
-  };
-  // console.log(usedCouponData);
+  // //coupon_receive
+  // const usedCouponData = {
+  //   member_id: userID.id,
+  //   coupon_id: couponId,
+  // };
 
-  //order_items
-  // ->準備好要傳回資料庫的product_id, amount
-  const cartItems = { ...cartListData };
-  // console.log(cartItems);
+  // //order_items
+  // // ->準備好要傳回資料庫的product_id, amount
+  // const cartItems = { ...cartListData };
 
-  //order_details
-  // ->準備好要傳回資料庫的應付金額
-  const cartDetails = {
-    ...shippingData,
-    total: Number(orderTotal),
-    member_id: userID.id,
-  };
-  // console.log(cartDetails);
+  // //order_details
+  // // ->準備好要傳回資料庫的應付金額
+  // const cartDetails = {
+  //   ...shippingData,
+  //   total: Number(orderTotal),
+  //   member_id: userID.id,
+  // };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
 
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+  // const handleNext = () => {
+  //   let newSkipped = skipped;
+  //   if (isStepSkipped(activeStep)) {
+  //     newSkipped = new Set(newSkipped.values());
+  //     newSkipped.delete(activeStep);
+  //   }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
 
-  //送出訂單 ->傳回資料庫
-  async function handleSubmit(e) {
-    //orderDetails
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartDetails
-    );
-    //order_items
-    let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/orderItems`,
-      cartItems
-    );
+  // //送出訂單 ->傳回資料庫
+  // async function handleSubmit(e) {
+  //   //orderDetails
+  //   let orderDetailsResponse = await axios.post(
+  //     `${API_URL}/cart/orderDetails`,
+  //     cartDetails
+  //   );
+  //   //order_items
+  //   let orderItemsResponse = await axios.post(
+  //     `${API_URL}/cart/orderItems`,
+  //     cartItems
+  //   );
 
-    //coupon_receive
-    let couponReceiveResponse = await axios.post(
-      `${API_URL}/cart/orderItemsCoupon`,
-      usedCouponData
-    );
-  }
+  //   //coupon_receive
+  //   let couponReceiveResponse = await axios.post(
+  //     `${API_URL}/cart/orderItemsCoupon`,
+  //     usedCouponData
+  //   );
+  // }
   return (
     <>
       <Box className="box" sx={{ width: '100%' }}>
@@ -125,15 +121,26 @@ function CartStepper(props) {
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
               {activeStep === steps.length - 1 ? (
-                <Checkout />
+                <Checkout
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                  orderTotal={orderTotal}
+                  setOrderTotal={setOrderTotal}
+                  couponId={couponId}
+                  setCouponId={setCouponId}
+                />
               ) : (
                 <Shipping
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
                   shippingData={shippingData}
                   setShippingData={setShippingData}
                 />
               )}
             </div>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <div className="container mb-1">
                 <hr />
@@ -162,6 +169,7 @@ function CartStepper(props) {
                       {activeStep === steps.length - 1 ? (
                         <button
                           className="btn_outline btn_grn p-2"
+                          // disabled={disabled}
                           onClick={() => {
                             handleSubmit();
                             handleNext();
@@ -172,6 +180,10 @@ function CartStepper(props) {
                       ) : (
                         <button
                           className="btn_outline btn_grn p-2"
+                          name="nextButton"
+                          form="nextButton"
+                          // disabled={disabled}
+                          type="submit"
                           onClick={handleNext}
                         >
                           下一步
@@ -181,7 +193,7 @@ function CartStepper(props) {
                   </div>
                 </div>
               </div>
-            </Box>
+            </Box> */}
           </React.Fragment>
         )}
       </Box>

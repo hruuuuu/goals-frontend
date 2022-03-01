@@ -7,6 +7,7 @@ import { API_URL } from '../../utils/config';
 function Shipping(props) {
   const [delivery, setDelivery] = useState([]);
   const { shippingData, setShippingData } = props;
+  const { activeStep, setActiveStep } = props;
 
   //取得運送方式
   useEffect(() => {
@@ -40,32 +41,38 @@ function Shipping(props) {
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
   }
-  // console.log(shippingData);
+
+  //stepper
+  const handleNext = (e) => {
+    e.preventDefault();
+    setActiveStep(activeStep + 1);
+  };
 
   return (
     <>
       <div className="container">
-        <div className="my-3">
-          <h5>運送資訊</h5>
-        </div>
-        <div className="mb-2">
-          <label htmlFor="firstName" className="form-label label_fs">
-            訂購人姓名
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            placeholder="預設會員姓名"
-            name="name"
-            value={shippingData.name}
-            onChange={handleChange}
-            required
-          />
-          <div className="invalid-feedback">Valid first name is required.</div>
-        </div>
-        <div className="row g-3 mb-2 my-selector-c">
-          <div className="col-6">
+        <div className="row needs-validation my-selector-c" noValidate>
+          <div className="col-12 g-3">
+            <h5>運送資訊</h5>
+          </div>
+          <div className="col-12 g-3">
+            <label htmlFor="firstName" className="form-label label_fs">
+              訂購人姓名
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              placeholder="預設會員姓名"
+              name="name"
+              value={shippingData.name}
+              onChange={handleChange}
+              required
+            />
+            <div className="invalid-feedback">Valid name is required.</div>
+          </div>
+          {/* <div className="row g-3 mb-2 my-selector-c"> */}
+          <div className="col-6 g-3">
             <label htmlFor="country" className="form-label label_fs">
               縣市
             </label>
@@ -81,7 +88,7 @@ function Shipping(props) {
               Please select a valid country.
             </div>
           </div>
-          <div className="col-6">
+          <div className="col-6 g-3">
             <label htmlFor="district" className="form-label label_fs">
               鄉鎮市區
             </label>
@@ -92,49 +99,46 @@ function Shipping(props) {
               value={shippingData.district}
               onChange={handleChange}
               required
-            >
-              {/* <option className="option_font">請選擇</option>
-              <option className="option_font">中壢區</option> */}
-            </select>
+            ></select>
             <div className="invalid-feedback">
               Please provide a valid district.
             </div>
           </div>
-        </div>
-        <div className="mb-2">
-          <label htmlFor="address" className="form-label label_fs">
-            地址
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="adddress"
-            name="address"
-            placeholder="請輸入收件地址"
-            value={shippingData.address}
-            onChange={handleChange}
-            required
-          />
-          <div className="invalid-feedback">Valid address is required.</div>
-        </div>
-        <div className="mb-2">
-          <label htmlFor="recipient" className="form-label label_fs">
-            收件人
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="recipient"
-            name="recipient"
-            placeholder="請輸入收件人姓名"
-            value={shippingData.recipient}
-            onChange={handleChange}
-            required
-          />
-          <div className="invalid-feedback">Valid recipient is required.</div>
-        </div>
-        <div className="row g-3">
-          <div className="col-6">
+          {/* </div> */}
+          <div className="col-12 g-3">
+            <label htmlFor="address" className="form-label label_fs">
+              地址
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="adddress"
+              name="address"
+              placeholder="請輸入收件地址"
+              value={shippingData.address}
+              onChange={handleChange}
+              required
+            />
+            <div className="invalid-feedback">Valid address is required.</div>
+          </div>
+          <div className="col-12 g-3">
+            <label htmlFor="recipient" className="form-label label_fs">
+              收件人
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="recipient"
+              name="recipient"
+              placeholder="請輸入收件人姓名"
+              value={shippingData.recipient}
+              onChange={handleChange}
+              required
+            />
+            <div className="invalid-feedback">Valid recipient is required.</div>
+          </div>
+          {/* <div className="row g-3"> */}
+          <div className="col-6 g-3">
             <label htmlFor="tel" className="form-label label_fs">
               聯絡電話
             </label>
@@ -149,7 +153,7 @@ function Shipping(props) {
               required
             />
           </div>
-          <div className="col-6">
+          <div className="col-6 g-3">
             <label htmlFor="state" className="form-label label_fs">
               運送方式
             </label>
@@ -160,7 +164,7 @@ function Shipping(props) {
               onChange={handleChange}
               required
             >
-              <option className="option_font" value="">
+              <option className="option_font" value="" disabled>
                 請選擇
               </option>
               {delivery.map((method, i) => {
@@ -180,6 +184,30 @@ function Shipping(props) {
               Please provide a valid state.
             </div>
           </div>
+          {/* </div> */}
+          <hr className="mt-4" />
+          {/* <div className="row justify-content-between"> */}
+          {/* <div className="col-6 g-3"> */}
+          <div className="col-6 g-3 d-grid">
+            <button className="btn_outline p-2" onClick={props.handleClose}>
+              返回購物車
+            </button>
+          </div>
+          {/* </div> */}
+          {/* <div className="col-6 g-3"> */}
+          <div className="col-6 g-3 d-grid">
+            <button
+              className="btn_outline btn_grn p-2"
+              name="nextButton"
+              form="nextButton"
+              type="button"
+              onClick={handleNext}
+            >
+              下一步
+            </button>
+          </div>
+          {/* </div> */}
+          {/* </div> */}
         </div>
       </div>
     </>
