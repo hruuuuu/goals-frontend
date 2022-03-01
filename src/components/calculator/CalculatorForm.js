@@ -13,7 +13,10 @@ const CalculatorForm = () => {
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <FormControl>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
                   性別
                 </label>
                 <RadioGroup
@@ -30,7 +33,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 年齡
               </label>
               <input
@@ -43,7 +46,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 身高(公分)
               </label>
               <input
@@ -56,7 +59,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 體重(公斤)
               </label>
               <input
@@ -70,7 +73,10 @@ const CalculatorForm = () => {
           <div className="col-sm-12">
             <div className="form-group ">
               <FormControl>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
                   每週運動強度
                 </label>
                 <RadioGroup

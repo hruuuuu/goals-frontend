@@ -16,3 +16,15 @@
     align-items: center;
   }
 }
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  background-image: none;
+}
+
+.was-validated .form-select:valid:not([multiple]):not([size]),
+.was-validated .form-select:valid:not([multiple])[size='1'],
+.form-select.is-valid:not([multiple]):not([size]),
+.form-select.is-valid:not([multiple])[size='1'] {
+  background-image: url(http://localhost:3000/static/media/down.e999c5694753697c3469.svg);
+}

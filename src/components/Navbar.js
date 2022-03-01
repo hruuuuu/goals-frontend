@@ -1,59 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
 import { useLogin } from '../context/LoginStatus';
-import { GoogleLogout } from 'react-google-login';
-
+import { useCartList } from '../context/cart';
+import Swal from 'sweetalert2';
 import { API_URL } from '../utils/config';
 
 function Navbar() {
-  const { login, setLogin, loginOption, setLoginOption } = useLogin();
+  const { login, setLogin, isSocial, setIsSocial, setUser } = useLogin();
   const history = useNavigate();
+  const { cartListData, setCartListData } = useCartList();
+  const [cartIconLength, setCartIconLength] = useState();
+
+  useEffect(() => {
+    setCartIconLength(cartListData.length);
+  }, [cartListData]);
 
   const handleLogout = async () => {
-    localStorage.clear();
-    setLogin(false);
-    setLoginOption({
-      ...loginOption,
-      normal: false,
-    });
-    const logoutResult = await axios.post(`${API_URL}/auth/logout`, {
+    const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
       withCredentials: true,
     });
-    console.log(logoutResult);
-    if (logoutResult.status === 200) {
-      history('/');
+
+    if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
+      setLogin(false);
+      setUser({
+        id: '',
+        email: '',
+      });
+      if (isSocial) {
+        setIsSocial(false);
+      }
+      Swal.fire({
+        icon: 'success',
+        html: logoutResult.data.msg,
+      });
+      setTimeout(() => {
+        history('/');
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        html: logoutResult.data.msg,
+      });
+      setTimeout(() => {
+        history('/');
+      });
     }
   };
 
-  const deleteAllCookies = () => {
-    const cookies = document.cookie.split(';');
-    for (const cookie of cookies) {
-      const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-      document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
-    }
-  };
-
-  const handleGoogleLogout = async () => {
-    setLogin(false);
-    setLoginOption({
-      ...loginOption,
-      google: false,
-    });
-    const logoutResult = await axios.post(`${API_URL}/social/logout`, {
-      withCredentials: true,
-    });
-    console.log(logoutResult);
-    if (logoutResult.status === 200) {
-      sessionStorage.clear();
-      localStorage.clear();
-      deleteAllCookies();
-      history('/');
-    }
-  };
   const navLinks = [
     {
       id: 1,
@@ -88,15 +84,6 @@ function Navbar() {
       name: !login ? '註冊/登入' : '登出',
       iconMobile: !login ? (
         <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ) : login && !loginOption['normal'] ? (
-        <GoogleLogout
-          className="google-logout"
-          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-          buttonText={
-            <i className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-          }
-          onLogoutSuccess={handleGoogleLogout}
-        ></GoogleLogout>
       ) : (
         <i
           className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
@@ -105,13 +92,6 @@ function Navbar() {
       ),
       iconDesktop: !login ? (
         <i className="fas fa-user l-navbar__font"></i>
-      ) : login && !loginOption['normal'] ? (
-        <GoogleLogout
-          className="google-logout"
-          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-          buttonText={<i className="fas fa-sign-out-alt l-navbar__font"></i>}
-          onLogoutSuccess={handleGoogleLogout}
-        ></GoogleLogout>
       ) : (
         <i
           className="fas fa-sign-out-alt l-navbar__font"
@@ -119,13 +99,7 @@ function Navbar() {
         ></i>
       ),
       tagDesktop: ``,
-      route: `${
-        !login
-          ? '/login'
-          : login && !loginOption['normal']
-          ? '/social/logout'
-          : '/logout'
-      }`,
+      route: `${!login ? '/login' : '/logout'}`,
     },
     {
       id: 2,
@@ -144,7 +118,7 @@ function Navbar() {
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
       iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
-      tagDesktop: <div className="e-tag e-tag--corner">5</div>,
+      tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
       route: `/member/cart`,
     },
     // {

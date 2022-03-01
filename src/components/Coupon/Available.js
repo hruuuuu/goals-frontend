@@ -4,31 +4,40 @@ import axios from 'axios';
 import $ from 'jquery';
 
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
 
 const Available = () => {
   const [data, setData] = useState([]);
-  const userID = JSON.parse(localStorage.getItem('user'));
+  const { user } = useLogin();
   const isAvailableList = data.length === 0;
+  const [member, setMember] = useState({});
 
   //取得目前可領取的優惠券
 
   useEffect(() => {
     let couponValid = async () => {
-      let response = await axios.post(`${API_URL}/coupon/get/`, userID, {
+      let response = await axios.post(`${API_URL}/coupon/get/`, user, {
         withCredentials: true,
       });
       setData(response.data);
     };
     couponValid();
 
-    console.log(userID);
+    let getProfile = async () => {
+      let response = await axios.post(`${API_URL}/member/getprofile`, user, {
+        withCredentials: true,
+      });
+
+      setMember(response.data[0]);
+    };
+
+    getProfile();
   }, []);
 
   async function getcoupon(coupon, e) {
     // console.log(coupon.id);
 
-    const couponReceive = { coupon_id: coupon.id, member_id: userID.id };
-
+    const couponReceive = { coupon_id: coupon.id, member_id: member.id };
     let response = await axios.post(`${API_URL}/coupon/post`, couponReceive);
 
     $(e.target)

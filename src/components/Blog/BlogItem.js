@@ -16,18 +16,18 @@ const BlogItem = () => {
 
   // searchCurrent = 抓queryString的數字當作currentPage
   const searchCurrent = searchParams.get('page');
-  console.log(searchCurrent);
+  // console.log(searchCurrent);
   // /blog => searchCurrent 會是 null
   // /blog?page=1 => searchCurrent 會是 1
   const [page, setPage] = useState(parseInt(searchCurrent, 10) || 1);
-  console.log('currentPage', searchCurrent, page);
+  // console.log('currentPage', searchCurrent, page);
 
   useEffect(() => {
     let getBlog = async () => {
       // http://localhost:3002/api/blog
       let response = await axios.get(`${API_URL}/blog?page=${page}`);
       const data = response.data;
-      console.log(data);
+      // console.log(data);
       setData(data.dataCount);
       setLastPage(data.pagination.lastPage);
     };

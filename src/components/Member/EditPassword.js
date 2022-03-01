@@ -1,7 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
+import Swal from 'sweetalert2';
 
 const EditPassWord = () => {
   const [member, setMember] = useState({
@@ -10,39 +11,30 @@ const EditPassWord = () => {
     confirmpassword: '',
   });
 
+  const { user } = useLogin();
   const [data, setData] = useState([]);
 
   //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    let getProfile = async () => {
+      let response = await axios.post(`${API_URL}/member/getprofile`, user, {
+        withCredentials: true,
+      });
+
+      setData(response.data[0]);
+    };
+    getProfile();
+  }, [user]);
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    let getProfile = async () => {
-      let response = await axios.post(`${API_URL}/member/getprofile`, userID, {
-        withCredentials: true,
-      });
-      setData(response.data);
-    };
-    getProfile();
-  }, []);
-
   async function handleSubmit(e) {
     e.preventDefault();
+    var user = Object.assign(data, member);
 
-    var user = Object.assign(userID, member);
-
-    if (member.newpassword !== member.confirmpassword) {
-      alert('新密碼與確認密碼不一致，請確認');
-    } else if (member.oldpassword !== data[0].password) {
-      alert('舊密碼輸入錯誤，請確認');
-    } else {
-      let response = await axios.post(`${API_URL}/member/editpassword`, user);
-
-      alert('修改成功');
-    }
+    let response = await axios.post(`${API_URL}/member/editpassword`, user);
   }
 
   return (

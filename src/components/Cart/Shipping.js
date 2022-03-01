@@ -1,6 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import TwCitySelector from '../../../node_modules/tw-city-selector/dist/tw-city-selector';
+import axios from 'axios';
 
-function Shipping() {
+import { API_URL } from '../../utils/config';
+
+function Shipping(props) {
+  const [delivery, setDelivery] = useState([]);
+  const { shippingData, setShippingData } = props;
+
+  //取得運送方式
+  useEffect(() => {
+    let getDelivery = async () => {
+      let response = await axios.post(
+        `${API_URL}/cart/deliveryMethod`,
+
+        {
+          withCredentials: true,
+        }
+      );
+      setDelivery(response.data);
+    };
+    getDelivery();
+  }, []);
+
+  //取得縣市行政區API資料
+  useEffect(() => {
+    cityselect();
+  }, []);
+
+  function cityselect() {
+    new TwCitySelector({
+      el: '.my-selector-c',
+      elCounty: '.county', // 在 el 裡查找 dom
+      elDistrict: '.district', // 在 el 裡查找 dom
+      elZipcode: '.zipcode', // 在 el 裡查找 dom
+    });
+  }
+
+  function handleChange(e) {
+    setShippingData({ ...shippingData, [e.target.name]: e.target.value });
+  }
+  // console.log(shippingData);
+
   return (
     <>
       <div className="container">
@@ -16,35 +57,47 @@ function Shipping() {
             className="form-control"
             id="firstName"
             placeholder="預設會員姓名"
+            name="name"
+            value={shippingData.name}
+            onChange={handleChange}
             required
           />
           <div className="invalid-feedback">Valid first name is required.</div>
         </div>
-        <div className="row g-3 mb-2">
+        <div className="row g-3 mb-2 my-selector-c">
           <div className="col-6">
             <label htmlFor="country" className="form-label label_fs">
               縣市
             </label>
-            <select className="form-select styled-select" id="country" required>
-              <option className="option_font" value="">
-                請選擇
-              </option>
-              <option className="option_font">桃園市</option>
-            </select>
+            <select
+              className="form-select styled-select county"
+              id="country"
+              name="county"
+              value={shippingData.county}
+              onChange={handleChange}
+              required
+            ></select>
             <div className="invalid-feedback">
               Please select a valid country.
             </div>
           </div>
           <div className="col-6">
-            <label htmlFor="state" className="form-label label_fs">
+            <label htmlFor="district" className="form-label label_fs">
               鄉鎮市區
             </label>
-            <select className="form-select styled-select" id="state" required>
-              <option className="option_font">請選擇</option>
-              <option className="option_font">中壢區</option>
+            <select
+              className="form-select styled-select district"
+              id="state"
+              name="district"
+              value={shippingData.district}
+              onChange={handleChange}
+              required
+            >
+              {/* <option className="option_font">請選擇</option>
+              <option className="option_font">中壢區</option> */}
             </select>
             <div className="invalid-feedback">
-              Please provide a valid state.
+              Please provide a valid district.
             </div>
           </div>
         </div>
@@ -56,7 +109,10 @@ function Shipping() {
             type="text"
             className="form-control"
             id="adddress"
+            name="address"
             placeholder="請輸入收件地址"
+            value={shippingData.address}
+            onChange={handleChange}
             required
           />
           <div className="invalid-feedback">Valid address is required.</div>
@@ -69,7 +125,10 @@ function Shipping() {
             type="text"
             className="form-control"
             id="recipient"
+            name="recipient"
             placeholder="請輸入收件人姓名"
+            value={shippingData.recipient}
+            onChange={handleChange}
             required
           />
           <div className="invalid-feedback">Valid recipient is required.</div>
@@ -83,7 +142,10 @@ function Shipping() {
               type="tel"
               className="form-control"
               id="tel"
+              name="tel"
               placeholder="請輸入聯絡電話"
+              value={shippingData.tel}
+              onChange={handleChange}
               required
             />
           </div>
@@ -91,11 +153,28 @@ function Shipping() {
             <label htmlFor="state" className="form-label label_fs">
               運送方式
             </label>
-            <select className="form-select styled-select" id="state" required>
+            <select
+              className="form-select styled-select"
+              id="state"
+              name="delivery_id"
+              onChange={handleChange}
+              required
+            >
               <option className="option_font" value="">
                 請選擇
               </option>
-              <option className="option_font">宅配到府</option>
+              {delivery.map((method, i) => {
+                return (
+                  <option
+                    className="option_font"
+                    key={method.id}
+                    method={method}
+                    value={method.id}
+                  >
+                    {method.method}
+                  </option>
+                );
+              })}
             </select>
             <div className="invalid-feedback">
               Please provide a valid state.

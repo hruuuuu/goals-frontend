@@ -25,12 +25,11 @@ function App() {
     out: false,
   });
   const [login, setLogin] = useState(false);
-  const [loginOption, setLoginOption] = useState({
-    normal: false,
-    google: false,
-    facebook: false,
-    line: false,
+  const [isSocial, setIsSocial] = useState(false);
+  const [user, setUser] = useState({
+    userID: '',
   });
+  const [admin, setAdmin] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [cartListData, setCartListData] = useState([]);
@@ -49,8 +48,17 @@ function App() {
     (async () => {
       try {
         // api/login
-        const checkStatus = localStorage.getItem('login');
-        setLogin(checkStatus);
+        // 判斷用戶是否有登入，且是否為admin
+        const checkStatus = await axios.get(`${API_URL}/auth`, {
+          withCredentials: true,
+        });
+        const isLogin = checkStatus.data;
+        setLogin(isLogin.status);
+        setUser({
+          userID: isLogin.user,
+        });
+        setAdmin(isLogin.administrator);
+
         //api/product
         const productResponse = await axios.get(`${API_URL}/product`, {
           withCredentials: true,
@@ -108,12 +116,20 @@ function App() {
     } else {
       localStorage.setItem('fav', '');
     }
-  }, []);
+  }, [login]);
 
   return (
     <>
       <LoginContext.Provider
-        value={{ login, setLogin, loginOption, setLoginOption }}
+        value={{
+          login,
+          setLogin,
+          isSocial,
+          setIsSocial,
+          user,
+          setUser,
+          admin,
+        }}
       >
         <AdminContext.Provider value={{ adminOnline, setAdminOnline }}>
           <DietlogContext.Provider
