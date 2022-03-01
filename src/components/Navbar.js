@@ -78,28 +78,16 @@ function Navbar() {
     },
   ];
 
-  const navActions = [
+  const navActions1 = [
     {
       id: 1,
-      name: !login ? '註冊/登入' : '登出',
-      iconMobile: !login ? (
-        <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ) : (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
-          onClick={handleLogout}
-        ></i>
+      name: '註冊/登入',
+      iconMobile: (
+        <i className="fas fa-sign-in-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
-      iconDesktop: !login ? (
-        <i className="fas fa-user l-navbar__font"></i>
-      ) : (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font"
-          onClick={handleLogout}
-        ></i>
-      ),
+      iconDesktop: <i className="fas fa-sign-in-alt l-navbar__font"></i>,
       tagDesktop: ``,
-      route: `${!login ? '/login' : '/logout'}`,
+      route: '/login',
     },
     {
       id: 2,
@@ -121,8 +109,59 @@ function Navbar() {
       tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
       route: `/member/cart`,
     },
+  ];
+
+  const navActions2 = [
+    {
+      id: 1,
+      name: '登出',
+      iconMobile: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
+          onClick={handleLogout}
+        ></i>
+      ),
+      iconDesktop: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font"
+          onClick={handleLogout}
+        ></i>
+      ),
+      tagDesktop: ``,
+      route: '/logout',
+    },
+    {
+      id: 2,
+      name: '會員',
+      iconMobile: (
+        <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-user l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/`,
+    },
+    {
+      id: 3,
+      name: '收藏清單',
+      iconMobile: (
+        <i className="fas fa-heart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-heart l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/fav`,
+    },
+    {
+      id: 4,
+      name: '購物車',
+      iconMobile: (
+        <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
+      tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
+      route: `/member/cart`,
+    },
     // {
-    //   id: 4,
+    //   id: 5,
     //   name: '優惠券',
     //   iconMobile: (
     //     <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -132,7 +171,7 @@ function Navbar() {
     //   route: `/member/coupon`,
     // },
     // {
-    //   id: 5,
+    //   id: 6,
     //   name: '搜索',
     //   iconMobile: (
     //     <i className="fas fa-search l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -147,8 +186,14 @@ function Navbar() {
       <header className="l-navbar sticky-top">
         <div className="container h-100">
           <nav className="l-navbar__wrapper justify-content-center justify-content-lg-between">
-            <NavbarDesktop navLinks={navLinks} navActions={navActions} />
-            <NavbarMobile navLinks={navLinks} navActions={navActions} />
+            <NavbarDesktop
+              navLinks={navLinks}
+              navActions={!login ? navActions1 : navActions2}
+            />
+            <NavbarMobile
+              navLinks={navLinks}
+              navActions={!login ? navActions1 : navActions2}
+            />
           </nav>
         </div>
       </header>

@@ -1,5 +1,6 @@
 .c-product-filter {
   $_: &;
+
   &--desktop {
     width: 100%;
     height: max-content;
@@ -9,23 +10,29 @@
     position: sticky;
     top: $top--sticky;
   }
+
   &__title {
     margin-bottom: 1rem;
     display: flex;
   }
+
   &__search,
   &__price {
     margin-bottom: 1rem;
   }
+
   &__checkbox {
     margin-bottom: 1rem;
+
     &:last-of-type {
       margin-bottom: 0;
     }
   }
+
   &__action {
     width: 100%;
   }
+
   &__wrapper {
     margin-bottom: 1.5rem;
     height: max-content;
@@ -34,6 +41,7 @@
     overflow-y: auto;
     @include scrollbar;
   }
+
   &--mobile {
     height: 100%;
     padding: $height__navbar + 4.75rem 1rem 1rem 1rem;
@@ -43,6 +51,7 @@
     transition: $transition__navbar-menu;
     opacity: 0;
     transform: translate3d(0, -10%, 0);
+
     #{$_}__wrapper {
       height: calc(100vh - $height__floating-filter - 5.25rem);
       max-height: none;
@@ -81,6 +90,7 @@
     top: calc(-100% + $height__floating-filter);
     left: 0;
   }
+
   &__toggle {
     width: calc(100% - 2rem);
     height: $height__btn--meduim;
@@ -99,6 +109,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     &::after {
       content: "";
       width: calc(100% + 2rem);
@@ -111,6 +122,7 @@
       transform: translateX(-50%);
       z-index: -1;
     }
+
     &::before {
       @include icon--absolute("\f078");
       color: $color--primary;
@@ -119,11 +131,13 @@
       right: 0.625rem;
     }
   }
+
   &__text {
     width: max-content;
     @include text--small;
     color: $color--gray3;
   }
+
   &__icon {
     font-size: 1.25rem;
 
@@ -131,18 +145,20 @@
     align-items: center;
     justify-content: center;
   }
+
   &__check {
     &:checked {
-      & ~ #{$_}__menu {
+      &~#{$_}__menu {
         top: 0;
         border-radius: 0;
       }
-      & ~ #{$_}__menu .c-product-filter--mobile {
+
+      &~#{$_}__menu .c-product-filter--mobile {
         opacity: 1;
         transform: translate3d(0, 0, 0);
       }
-      & ~ #{$_}__toggle #{$_}__icon--expand {
-      }
+
+      &~#{$_}__toggle #{$_}__icon--expand {}
     }
   }
 }
@@ -152,8 +168,10 @@
     margin-bottom: 1rem;
     @include text--normal;
   }
+
   &__wrapper {
     position: relative;
+
     &::after {
       @include icon--absolute("\f002");
       color: $color--primary;
@@ -170,45 +188,58 @@
   &__text {
     margin: 0 1rem;
   }
+
   .css-1domaf0 {
     width: 100%;
   }
+
   .css-187mznn-MuiSlider-root {
     color: $color--primary;
   }
+
   .css-14pt78w-MuiSlider-rail {
     color: $color--gray6;
   }
+
   .css-eg0mwd-MuiSlider-thumb {
     width: 1rem;
     height: 1rem;
     border: 0.0625rem solid $color--primary;
     background: $color--light;
+
     &::before {
       box-shadow: none;
     }
+
     &:hover,
     &.Mui-focusVisible {
       box-shadow: 0 0 0 8px $color--opacity;
     }
+
     &.Mui-active {
       box-shadow: 0 0 0 16px $color--opacity;
     }
   }
+
   .css-1kz0hui-MuiSlider-valueLabel {
     background: $color--primary;
     border-radius: $border-radius__input;
   }
+
   .css-a88p61-MuiInputBase-root-MuiInput-root {
     height: $height__input;
+
     &:before {
       display: none;
     }
+
     &:after {
       display: none;
     }
+
     input {
       @include text--small;
+
       &::placeholder {
         @include text--small;
         color: $color--gray4;
@@ -232,6 +263,7 @@
     border-radius: $border-radius__block;
     overflow: hidden;
   }
+
   &__btn {
     width: 100%;
     height: 100%;
@@ -240,11 +272,13 @@
     background: transparent;
     border: none;
   }
+
   &__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   &__action {
     height: $height__btn--meduim;
 
@@ -258,26 +292,32 @@
 
 .c-product-item-detail {
   margin: 0.5rem 0;
+
   &__row {
     margin-bottom: 0.125rem;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
     &:last-of-type {
       margin-bottom: 0;
     }
   }
+
   &__heading {
     @include text--medium-bold;
   }
+
   &__price {
     @include text--medium-bold;
     color: $color--primary;
   }
+
   &__cal {
     @include text--small;
     color: $color--error;
   }
+
   &__o-price {
     @include text--small;
     color: $color--gray5;
@@ -287,21 +327,27 @@
 
 .c-product-detail {
   $_: &;
+
   &__backdrop {
     background-color: $color--modal-bg;
   }
+
   &__modal {
     max-width: 60%;
+
     @media screen and (max-width: $xl) {
       max-width: 80%;
     }
+
     @media screen and (max-width: $lg) {
       max-width: 90%;
     }
+
     @media screen and (max-width: $md) {
       max-width: none;
     }
   }
+
   &__wrapper {
     width: 100%;
     height: 100%;
@@ -312,35 +358,45 @@
     border: none;
     box-shadow: $box-shadow__modal;
     border-radius: $border-radius__modal;
-    @media screen and (min-width: $md) and (max-width: $lg) {
-      padding: $padding__modal--md;
-    }
+
+    /*** 臨時調整區開始 ***/
+    // @media screen and (min-width: $md) and (max-width: $lg) {
+    //   padding: $padding__modal--md;
+    // }
+    /*** 臨時調整區結束 ***/
+
     @media screen and (max-width: $md) {
       padding: 0;
     }
   }
+
   &__close {
     position: fixed;
     top: 0.5rem;
     right: 0.5rem;
+
     @media screen and (min-width: $md) {
       display: none;
     }
   }
+
   &__cover {
     width: 100%;
-    height: 100%;
+    height: 368px;
     border-radius: $border-radius__block;
     overflow: hidden;
+
     @media screen and (max-width: $md) {
       border-radius: 0;
     }
   }
+
   &__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+
   &__nutrition {
     width: 100%;
     height: max-content;
@@ -350,69 +406,116 @@
     background: $color--info;
     border-radius: $border-radius__small-block;
   }
+
   &__list {
     display: flex;
     flex-direction: column;
   }
+
   &__item {
     margin-bottom: 0.5rem;
 
     @include text--small;
     color: $color--light;
+
     &:last-of-type {
       margin-bottom: 0;
     }
   }
+
+  /*** 臨時調整區開始 ***/
   &__detail {
     height: max-content;
-    max-height: 11rem;
+    max-height: 22rem;
+    padding-right: .5rem;
     overflow-y: auto;
     @include scrollbar;
+
     @media screen and (max-width: $lg) {
-      max-height: 14rem;
+      // max-height: 22rem;
     }
+
     @media screen and (max-width: $md) {
       max-height: 17.5rem;
     }
   }
+
+  /*** 臨時調整區結束 ***/
   &__subtitle {
     margin-bottom: 0.5rem;
     display: flex;
   }
+
   &__icon {
     color: $color--info;
   }
+
   &__heading {
     color: $color--info;
   }
+
   &__description {
     margin-bottom: 1rem;
   }
+
   &__text {
     @include text--small;
   }
+
+  /*** 臨時調整區開始 ***/
+  &__comment-title {
+    @include text--extra-small-bold;
+    margin-bottom: .3rem;
+    color: $color--primary;
+  }
+
+  &__comment-subTitle {
+    @include text--extra-small;
+    // color: $color--gray4;
+    float: right;
+  }
+
+  &__comment-text {
+    @include text--small;
+    margin-bottom: .3rem;
+  }
+
+  &__comment-background {
+    padding: 0;
+    background-color: $color--gray6;
+    margin-top: 0.5rem;
+    padding: $padding__chat-msg;
+    border-radius: $border-radius__block;
+  }
+
+  /*** 臨時調整區結束 ***/
+
   &__o-price {
     color: $color--gray4;
     text-decoration: line-through;
   }
+
   &__price {
     color: $color--secondary;
+
     &--top {
       margin-top: 1.125rem;
     }
   }
+
   &__scroll {
     padding-bottom: 6rem;
   }
+
   &__footer {
     width: 100%;
     height: 10rem;
-
     background: $color--gradient;
-
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 2;
+
     @media screen and (min-width: $md) {
       padding: 0;
       position: static;
@@ -420,6 +523,7 @@
       left: auto;
     }
   }
+
   &__footer-wrapper {
     width: 100%;
     padding: $padding__modal--md;
@@ -427,6 +531,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+
     @media screen and (min-width: $md) {
       padding: 0;
       position: static;
@@ -434,10 +539,12 @@
       left: auto;
     }
   }
+
   &--fav {
     margin-bottom: 3.75rem;
 
     position: relative;
+
     #{$_}__btn {
       width: 100%;
       height: 10.5rem;
@@ -447,10 +554,12 @@
       border: none;
 
       overflow: hidden;
+
       @media screen and (max-width: $md) {
         height: 13rem;
       }
     }
+
     #{$_}__text {
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
@@ -458,10 +567,43 @@
       overflow: hidden;
     }
   }
+
+  /*** 臨時調整區開始 ***/
+  .comment-text-icon {
+    display: none;
+  }
+
+  .product-info {
+    background-color: $color--light;
+  }
+
+  @media screen and (max-width: $md) {
+    .mobile-counter {
+      width: 100% !important;
+    }
+  }
+
+
+  @media screen and (max-width: $sm) {
+    .comment-text {
+      display: none;
+    }
+
+    .comment-text-icon {
+      display: block;
+      padding: 0 0.5rem;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  /*** 臨時調整區結束 ***/
+
   .css-1slz293-MuiSkeleton-root {
     @include placeholder__rec(0 0 0.5rem 0);
     height: 32.5rem;
   }
+
   .css-1dk1h2u-MuiSkeleton-root {
     @include placeholder__text;
   }
@@ -472,6 +614,7 @@
     @include placeholder__rec(0 0 0.5rem 0);
     height: 12.5rem;
   }
+
   .css-1dk1h2u-MuiSkeleton-root {
     @include placeholder__text;
   }
@@ -482,6 +625,7 @@
     @include placeholder__rec(0);
     height: 10rem;
   }
+
   .css-1dk1h2u-MuiSkeleton-root {
     @include placeholder__text;
   }
