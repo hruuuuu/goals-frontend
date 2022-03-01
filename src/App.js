@@ -23,6 +23,7 @@ function App() {
   });
   const [login, setLogin] = useState(false);
   const [isSocial, setIsSocial] = useState(false);
+  const [commentStatus, setCommentStatus] = useState(false);
   const [user, setUser] = useState({
     userID: '',
   });
@@ -113,6 +114,8 @@ function App() {
           user,
           setUser,
           admin,
+          commentStatus,
+          setCommentStatus,
         }}
       >
         <AdminContext.Provider value={{ adminOnline, setAdminOnline }}>
