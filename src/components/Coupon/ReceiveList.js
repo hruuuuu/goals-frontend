@@ -19,8 +19,6 @@ function ReceiveList() {
       setData(response.data);
     };
     getcoupon();
-
-    console.log(user);
   }, []);
   return (
     <>

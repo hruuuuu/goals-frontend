@@ -184,6 +184,13 @@ h6 {
   font-size: 0.75rem;
 }
 
+@mixin clear__btn {
+  background: transparent;
+  border: none;
+
+  @include cursor(pointer);
+}
+
 @mixin interaction__link {
   transition: $transition;
   &:hover {
@@ -192,6 +199,44 @@ h6 {
   &:focus,
   &:active {
     color: $color--active;
+  }
+}
+
+@mixin interaction__btn {
+  transition: $transition;
+  &:hover {
+    color: $color--light;
+    background: $color--hover;
+    i {
+      color: $color--light;
+    }
+  }
+  &:focus,
+  &:active {
+    color: $color--light;
+    background: $color--active;
+    i {
+      color: $color--light;
+    }
+  }
+}
+
+@mixin interaction__tab {
+  transition: $transition;
+  &:hover {
+    color: $color--primary;
+    background: $color--opacity;
+    i {
+      color: $color--primary;
+    }
+  }
+  &:focus,
+  &:active {
+    color: $color--primary;
+    background: $color--opacity;
+    i {
+      color: $color--primary;
+    }
   }
 }
 
@@ -257,6 +302,24 @@ h6 {
   width: 100%;
   height: 1.5rem;
 }
+@mixin text--truncate($line) {
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+@mixin clear__number-arrow {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
 
 .c-alert {
   &__overlay {
@@ -311,6 +374,30 @@ h6 {
       border: $border__input--focus;
       box-shadow: none;
     }
+    &--textarea {
+      min-height: $height__input;
+      padding: 0.7rem;
+      resize: none;
+    }
+    &[type="file"] {
+      width: 100%;
+      padding: 0.75rem 0 0.75rem 2.5rem;
+
+      @include cursor(pointer);
+
+      position: relative;
+      &::-webkit-file-upload-button {
+        display: none;
+      }
+      &::after {
+        @include icon--absolute("\2b");
+        color: $color--gray4;
+
+        top: 45%;
+        left: 0.75rem;
+        transform: translateY(-50%);
+      }
+    }
   }
   &__label {
     margin-bottom: 0.5rem;
@@ -321,13 +408,55 @@ h6 {
     height: $height__input;
 
     @include text--small;
+    border: $border__input;
     border-radius: $border-radius__input;
     background-image: url("../img/common/icon/down.svg");
+
+    @include cursor(pointer);
     &:focus {
       border: $border__input--focus;
       box-shadow: none;
     }
   }
+  // &__file {
+  //   width: $height__input--file;
+  //   height: $height__input--file;
+
+  //   @include clear__btn;
+  //   border-radius: $border-radius__input;
+  //   border: $border__input;
+
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  //   position: relative;
+  //   span {
+  //   }
+  //   &::after {
+  //     @include icon--absolute("\2b");
+  //     color: $color--gray4;
+
+  //     top: 45%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //   }
+  //   &::-webkit-file-upload-button {
+  //     width: $height__input--file;
+  //     height: $height__input--file;
+  //     padding: 0;
+  //     margin: 0;
+
+  //     @include clear__btn;
+  //     opacity: 0;
+
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+
+  //     @include cursor(pointer);
+  //   }
+  // }
   &--disabled {
     #{$_}__input {
       color: $color--disabled;
@@ -378,6 +507,12 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      background: transparent;
+    }
+  }
   &--primary {
     border: none;
     background: $color--primary;
@@ -422,6 +557,10 @@ h6 {
       color: $color--light;
       background: $color--active;
       box-shadow: none;
+    }
+    &.active {
+      background: $color--primary;
+      color: $color--light;
     }
   }
   &--cancel {
@@ -468,6 +607,8 @@ h6 {
 
     background: transparent;
     border: none;
+    border-radius: $border-radius__btn;
+    @include interaction__tab;
   }
   &--mobile {
     @include cursor(pointer);
@@ -487,6 +628,15 @@ h6 {
       }
     }
   }
+  &--secondary {
+    @include text--normal;
+    background: $color--gray6;
+  }
+  &--outline {
+    border: $border__input;
+    border-radius: $border-radius__input;
+    @include interaction__tab;
+  }
 }
 
 .ellipsis {
@@ -501,5 +651,71 @@ h6 {
     -webkit-box-orient: vertical;
     white-space: normal;
     overflow: hidden;
+  }
+}
+
+.e-img {
+  &--cover {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+  &--contain {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+}
+
+.c-tabs {
+  display: flex;
+  &__btn {
+    padding: 0.625rem 1.25rem;
+    @include clear__btn;
+    @include text--normal-bold;
+    color: $color--gray4;
+
+    border-radius: $border-radius__tabs;
+    border-bottom: $border__tabs;
+
+    transition: $transition;
+    &:hover {
+      background: $color--opacity;
+    }
+    &.active {
+      color: $color--primary;
+      border-bottom: $border__tabs--active;
+    }
+    &--w100 {
+      width: 100%;
+    }
+  }
+}
+
+.c-modal {
+  &__backdrop {
+    background-color: $color--modal-bg;
+  }
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 37.5rem;
+    padding: $padding__modal;
+
+    background: $color--light;
+    border: none;
+    box-shadow: $box-shadow__modal;
+    border-radius: $border-radius__modal;
+
+    @include scrollbar;
+    overflow-y: auto;
+    @media screen and (min-width: $md) and (max-width: $lg) {
+      padding: $padding__modal--md;
+    }
+    @media screen and (max-width: $md) {
+      padding: 0;
+    }
   }
 }

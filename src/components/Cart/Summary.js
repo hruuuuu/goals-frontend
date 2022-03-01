@@ -5,24 +5,36 @@ import { useCartList } from '../../context/cart';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { number } from 'prop-types';
+import { useLogin } from '../../context/LoginStatus';
 
 function Summary(props) {
+  const { user } = useLogin();
   const [total, setTotal] = useState();
   const [discountTotal, setDiscountTotal] = useState(0);
   // const [couponDiscountTotal, setCouponDiscountTotal] = useState(0);
+  const [member, setMember] = useState({});
   const [couponId, setCouponId] = useState(0);
   const [couponDiscount, setCouponDiscount] = useState(0);
   const [orderTotal, setOrderTotal] = useState();
   const { cartListData, setCartListData } = useCartList();
   const [data, setData] = useState([]);
-  const userID = JSON.parse(localStorage.getItem('user'));
 
   const isReceiveList = data.length === 0;
 
-  //coupon資料
+  //取得用戶、coupon資料
   useEffect(() => {
+    let getProfile = async () => {
+      let response = await axios.post(`${API_URL}/member/getprofile`, user, {
+        withCredentials: true,
+      });
+
+      setMember(response.data[0]);
+    };
+
+    getProfile();
+
     let getcoupon = async () => {
-      let response = await axios.post(`${API_URL}/coupon/receive`, userID, {
+      let response = await axios.post(`${API_URL}/coupon/receive`, user, {
         withCredentials: true,
       });
       setData(response.data);
@@ -130,6 +142,8 @@ function Summary(props) {
             <CheckoutModal
               orderTotal={orderTotal}
               setOrderTotal={setOrderTotal}
+              member={member}
+              setMember={setMember}
               couponId={couponId}
               setCouponId={setCouponId}
             />

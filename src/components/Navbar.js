@@ -71,6 +71,11 @@ function Navbar() {
       name: '健康新知',
       route: `/blog`,
     },
+    {
+      id: 5,
+      name: '飲食日誌',
+      route: `/dietlog`,
+    },
   ];
 
   const navActions1 = [

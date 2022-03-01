@@ -8,6 +8,7 @@ function CheckoutModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { orderTotal, setOrderTotal } = props;
+  const { member, setMember } = props;
   const { couponId, setCouponId } = props;
 
   return (
@@ -34,6 +35,8 @@ function CheckoutModal(props) {
             handleClose={handleClose}
             orderTotal={orderTotal}
             setOrderTotal={setOrderTotal}
+            member={member}
+            setMember={setMember}
             couponId={couponId}
             setCouponId={setCouponId}
           />

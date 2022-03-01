@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header';
-import CalculatorForm from './CalculatorForm';
+import Bmr from './Bmr.js';
 import RecGood from './RecGood';
 
 import desImg from '../../img/calculator/description.jpg';
 import logoOriginal from '../../img/common/logo--original.svg';
 
 const MainContent = () => {
+  const [calories, setCalories] = useState('');
+
   return (
     <>
       <div className="main-content">
@@ -121,7 +123,8 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <CalculatorForm />
+            {/* <CalculatorForm /> */}
+            <Bmr calories={calories} setCalories={setCalories} />
           </div>
           <div className="explan">
             <div className="container">
@@ -166,7 +169,7 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <RecGood />
+            <RecGood calories={calories} />
           </div>
         </section>
       </div>

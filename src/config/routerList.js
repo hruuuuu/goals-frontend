@@ -19,6 +19,7 @@ import ResetPassword from '../pages/ResetPassword';
 import BlogArticle from '../components/Blog/BlogArticle';
 
 import AdminChat from '../pages/AdminChat';
+import DietLog from '../pages/DietLog';
 
 import imgFood from '../img/common/illustration/food.svg';
 
@@ -153,6 +154,13 @@ const routerList = [
     element: <AdminChat />,
     breadcrumbName: '客服系統',
     header: '客服系統',
+    headerImg: imgFood,
+  },
+  {
+    path: `dietlog`,
+    element: <DietLog />,
+    breadcrumbName: '飲食日誌',
+    header: '飲食日誌',
     headerImg: imgFood,
   },
   {
