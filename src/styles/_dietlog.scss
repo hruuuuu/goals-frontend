@@ -2,7 +2,7 @@
   $_: &;
   width: 100%;
   height: max-content;
-  min-height: $height__content;
+  min-height: 90vh;
   &__sidebar {
     position: sticky;
     top: $height__navbar + 2.5rem;
@@ -14,7 +14,7 @@
     $_: &;
     &__tile {
       height: $height__calendar;
-      padding: 2rem 0;
+      padding: 2.5rem 0;
 
       @include clear__btn;
 

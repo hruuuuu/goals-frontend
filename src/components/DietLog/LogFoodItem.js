@@ -32,6 +32,7 @@ function LogFoodItem(props) {
       return { ...food, flag: i };
     });
     setFields([...foodFieldsWithFlag]);
+    console.log('test');
   };
   return (
     <>

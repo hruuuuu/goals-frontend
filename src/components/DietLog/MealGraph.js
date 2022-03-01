@@ -94,7 +94,7 @@ function MealGraph(props) {
     title: {
       text: title,
       subtext: `總熱量${calories}卡`,
-      top: '4%',
+      top: '6%',
       left: '50%',
       textAlign: 'center',
       textStyle: {
@@ -165,7 +165,7 @@ function MealGraph(props) {
         option={option}
         notMerge={true}
         lazyUpdate={true}
-        opts={{ renderer: 'svg', height: '420' }}
+        opts={{ renderer: 'svg', height: '510' }}
       />
     </>
   );

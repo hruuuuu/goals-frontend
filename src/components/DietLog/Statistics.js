@@ -241,7 +241,7 @@ function Statistics(props) {
     title: [
       {
         text: '本日總攝取營養比例',
-        top: '4%',
+        top: '6%',
         left: '24.5%',
         textAlign: 'center',
         textStyle: {
@@ -252,7 +252,7 @@ function Statistics(props) {
       },
       {
         text: '本日各餐攝取熱量比例',
-        top: '4%',
+        top: '6%',
         left: '74.5%',
         textAlign: 'center',
         textStyle: {
@@ -313,7 +313,7 @@ function Statistics(props) {
               option={option}
               notMerge={true}
               lazyUpdate={true}
-              opts={{ renderer: 'svg', height: '420' }}
+              opts={{ renderer: 'svg', height: '510' }}
             />
           </>
         );

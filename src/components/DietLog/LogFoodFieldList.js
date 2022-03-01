@@ -31,8 +31,21 @@ function LogFoodFieldList(props) {
                 />
               );
             }))}
-        {!isEmptyFields &&
+        {!isEmptyFood &&
+          !editMode &&
           dietlogFood.map((food) => {
+            return (
+              <LogFoodItem
+                key={uuidv4()}
+                data={food}
+                editMode={editMode}
+                fields={foodFields}
+                setFields={setFoodFields}
+              />
+            );
+          })}
+        {editMode &&
+          foodFields.map((food) => {
             return (
               <LogFoodItem
                 key={uuidv4()}
