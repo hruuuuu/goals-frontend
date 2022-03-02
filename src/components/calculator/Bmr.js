@@ -55,6 +55,16 @@ class BMR extends Component {
     this.setState({ unit: event.target.value });
     this.setState({ bmr: '' });
     this.setState({ calories: '' });
+    // let unit = this.state.unit;
+
+    // if (unit == '0') {
+    //   this.setState({ error: '請選擇量測單位' });
+    //   return;
+    // }
+    // if (unit == '1' || unit == '2') {
+    //   this.setState();
+    //   return;
+    // }
   };
   calculateBMR() {
     let age = this.state.age;
@@ -68,6 +78,7 @@ class BMR extends Component {
 
     var bmrCalc = '';
     let height = heightFeet * 30.48 + heightInches * 2.54;
+
     if (unit == '1') {
       if (
         age == '' ||
@@ -130,13 +141,23 @@ class BMR extends Component {
     let unit = this.state.unit;
     let resultbmr;
     if (this.state.bmr) {
-      resultbmr = <div className="result">{this.state.bmr}</div>;
+      resultbmr = (
+        <div className="result">
+          {this.state.bmr}
+          <span>卡</span>
+        </div>
+      );
       document.getElementById('workout').style.display = 'block';
     }
     let resultcal;
 
     if (this.state.calories) {
-      resultcal = <div className="result">{this.state.calories}</div>;
+      resultcal = (
+        <div className="result">
+          {this.state.calories}
+          <span>卡</span>
+        </div>
+      );
     }
     var imperial = document.getElementsByClassName('imperial');
     var metric = document.getElementsByClassName('metric');
@@ -170,7 +191,7 @@ class BMR extends Component {
                   value={this.state.unit}
                   onChange={this.handleunitChange}
                 >
-                  <option value="">請選擇</option>
+                  <option value="0">請選擇</option>
                   <option value="1">英制</option>
                   <option value="2">公制</option>
                 </select>

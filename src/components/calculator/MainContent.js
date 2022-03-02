@@ -161,16 +161,7 @@ const MainContent = () => {
           </div>
         </section>
         <section className="l-recommenedGood">
-          <div className="model__head model__head--sec">
-            <div className="model__head--deco-text">RECOMMENED GOODS</div>
-            <div className="model__head--title">果實推薦三餐組合</div>
-            <div className="model__head--subtitle">
-              依照您的TDEE計算結果量身打造的餐食組合
-            </div>
-          </div>
-          <div className="container">
-            <RecGood calories={calories} />
-          </div>
+          <RecGood calories={calories} />
         </section>
       </div>
     </>
