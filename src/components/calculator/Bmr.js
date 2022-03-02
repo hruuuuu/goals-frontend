@@ -141,13 +141,23 @@ class BMR extends Component {
     let unit = this.state.unit;
     let resultbmr;
     if (this.state.bmr) {
-      resultbmr = <div className="result">{this.state.bmr}</div>;
+      resultbmr = (
+        <div className="result">
+          {this.state.bmr}
+          <span>卡</span>
+        </div>
+      );
       document.getElementById('workout').style.display = 'block';
     }
     let resultcal;
 
     if (this.state.calories) {
-      resultcal = <div className="result">{this.state.calories}</div>;
+      resultcal = (
+        <div className="result">
+          {this.state.calories}
+          <span>卡</span>
+        </div>
+      );
     }
     var imperial = document.getElementsByClassName('imperial');
     var metric = document.getElementsByClassName('metric');
