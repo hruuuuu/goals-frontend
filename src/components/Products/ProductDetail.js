@@ -130,9 +130,8 @@ function ProductDetail(props) {
   }, [productId, user.userID]);
 
   useEffect(() => {
-    // 用戶提交評論後無法(即時)顯示
     getComments();
-  }, [productId]);
+  }, [productId, showComment]);
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -259,16 +258,26 @@ function ProductDetail(props) {
       Swal.fire({
         icon: 'error',
         html: commentPost.data.msg,
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          setShowComment(false);
+          history('/');
+        }
       });
-      setShowComment(false);
-      history('/');
     } else {
       Swal.fire({
         icon: 'success',
         html: commentPost.data.msg,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setShowComment(false);
+          history(`/product/${productId}`);
+        }
       });
-      setShowComment(false);
-      history('/');
     }
   };
 
@@ -326,7 +335,7 @@ function ProductDetail(props) {
                   <div className="c-product-detail__footer-wrapper">
                     <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
                     <div className="row gx-2">
-                      <div className="col-5 col-md-12 col-xxl-6 d-flex justify-content-between align-items-end mb-0 mb-md-3">
+                      <div className="col-5 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
                         <Counter
                           show={show}
                           number={number}
@@ -347,7 +356,7 @@ function ProductDetail(props) {
                           </h2>
                         </div>
                       </div>
-                      <div className="col-7 col-md-12 col-xxl-6">
+                      <div className="col-7 col-md-12">
                         {!login || !commentStatus ? (
                           <button
                             className="e-btn e-btn--primary e-btn--w100 e-btn--large"

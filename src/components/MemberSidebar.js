@@ -61,7 +61,6 @@ function MemberSidebar() {
       name: '登出',
       router: `/`,
       icon: <i className="fas fa-sign-out-alt Sidebarfont__icon"></i>,
-
       line: '',
     },
   ];

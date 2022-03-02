@@ -11,11 +11,9 @@ import { Navigate } from 'react-router-dom';
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
   const { login } = useLogin();
-  useEffect(() => {
-    if (!login) {
-      return <Navigate to="/" />;
-    }
-  }, [login]);
+  if (!login) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
