@@ -24,10 +24,12 @@ function RecGood(props) {
   // const dinnerCal = parseInt((tdeeInt * 3) / 10);
 
   const { productsData } = useProducts();
+  // console.log(calories);
   const isFetching = productsData.length === 0;
 
+  const isFetchingCalories = calories === undefined || calories === '';
   useEffect(() => {
-    if (calories !== undefined) {
+    if (!isFetchingCalories) {
       // console.log(calories);
       setTdeeCal(parseInt(calories));
     }
@@ -70,77 +72,92 @@ function RecGood(props) {
 
   return (
     <>
-      {!isFetching && (
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-4 col-lg-12">
-              <div className="rec_box__head">
-                <h4 className="rec_box__head--title">您的每日建議攝取熱量為</h4>
-                <div className="tdee_props">
-                  <h5>{tdeeCal}</h5>
-                  <span>卡</span>
-                </div>
-                <p>
-                  果實建議您：
-                  <br />
-                  早餐可攝取約 {foodCal.breakfastCal} 卡的熱量
-                  <br />
-                  午晚餐可參考我們的推薦商品
-                </p>
-              </div>
+      {!isFetching && !isFetchingCalories && (
+        <>
+          <div className="model__head model__head--sec">
+            <div className="model__head--deco-text">RECOMMENED GOODS</div>
+            <div className="model__head--title">果實推薦三餐組合</div>
+            <div className="model__head--subtitle">
+              依照您的TDEE計算結果量身打造的餐食組合
             </div>
-            <div className="col-xl-4 col-lg-6 col-md-12">
-              <div className="rec_box">
-                <div className="rec_box__cal">午餐{foodCal.lunchCal}卡</div>
-                <div className="rec_box__group">
-                  {lunchProduct.map((lunch) => {
-                    return (
-                      <div className="rec_box__item" key={lunch.id}>
-                        <Link to={`/product`} title={lunch.name}>
-                          <div className="rec_box__item--img">
-                            <img
-                              src={`${IMG_URL}/products/${lunch.image}`}
-                              className="img-responsive"
-                              alt="lunchItem"
-                            />
-                          </div>
-                          <div className="rec_box__itme--product">
-                            {lunch.name}
-                          </div>
-                        </Link>
-                      </div>
-                    );
-                  })}
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-4 col-lg-12">
+                <div className="rec_box__head">
+                  <h4 className="rec_box__head--title">
+                    您的每日建議攝取熱量為
+                  </h4>
+                  <div className="tdee_props">
+                    <h5>{tdeeCal}</h5>
+                    <span>卡</span>
+                  </div>
+                  <p>
+                    果實建議您：
+                    <br />
+                    早餐可攝取約 {foodCal.breakfastCal} 卡的熱量
+                    <br />
+                    午晚餐可參考我們的推薦商品
+                  </p>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-4 col-lg-6 col-md-12">
-              <div className="rec_box">
-                <div className="rec_box__cal">晚餐{foodCal.dinnerCal}卡</div>
+              <div className="col-xl-4 col-lg-6 col-md-12">
+                <div className="rec_box">
+                  <div className="rec_box__cal">午餐{foodCal.lunchCal}卡</div>
+                  <div className="rec_box__group">
+                    {lunchProduct.map((lunch) => {
+                      return (
+                        <div className="rec_box__item" key={lunch.id}>
+                          <Link to={`/product`} title={lunch.name}>
+                            <div className="rec_box__item--img">
+                              <img
+                                src={`${IMG_URL}/products/${lunch.image}`}
+                                className="img-rec_box"
+                                alt="lunchItem"
+                              />
+                            </div>
+                            <div className="rec_box__item--product">
+                              {lunch.name}
+                            </div>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-              <div className="rec_box__group">
-                {dinnerProduct.map((dinner) => {
-                  return (
-                    <div className="rec_box__item" key={dinner.id}>
-                      <Link to={`/product/${dinner.id}`} title={dinner.name}>
-                        <div className="rec_box__item--img">
-                          <img
-                            src={`${IMG_URL}/products/${dinner.image}`}
-                            className="img-responsive"
-                            alt="dinnerItem"
-                          />
+              <div className="col-xl-4 col-lg-6 col-md-12">
+                <div className="rec_box">
+                  <div className="rec_box__cal">晚餐{foodCal.dinnerCal}卡</div>
+
+                  <div className="rec_box__group">
+                    {dinnerProduct.map((dinner) => {
+                      return (
+                        <div className="rec_box__item" key={dinner.id}>
+                          <Link
+                            to={`/product/${dinner.id}`}
+                            title={dinner.name}
+                          >
+                            <div className="rec_box__item--img">
+                              <img
+                                src={`${IMG_URL}/products/${dinner.image}`}
+                                className="img-rec_box"
+                                alt="dinnerItem"
+                              />
+                            </div>
+                            <div className="rec_box__item--product">
+                              {dinner.name}
+                            </div>
+                          </Link>
                         </div>
-                        <div className="rec_box__itme--product">
-                          {dinner.name}
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })}
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

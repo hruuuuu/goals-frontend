@@ -448,6 +448,72 @@
   padding: 100px 0;
   background: $color--light;
   border-top: 1px solid $color--gray6;
+  .rec_box {
+    border-radius: 50px;
+    padding: 50px 30px;
+    background: #ecf0e5;
+    &__cal {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.25rem;
+      color: $color--primary;
+      font-weight: bold;
+    }
+    &__group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    &__head {
+      &--title {
+        font-weight: 500;
+        font-size: 1.375rem;
+        line-height: 2.25rem;
+        letter-spacing: 3px;
+        color: $color--gray2;
+      }
+      .tdee_props {
+        margin: 15px 0;
+        h5 {
+          display: inline;
+          color: $color--secondary;
+          font-size: 2.25rem;
+        }
+        span {
+          display: inline;
+        }
+      }
+      p {
+        line-height: 2;
+        letter-spacing: 1.5px;
+        color: $color--gray3;
+        font-weight: 300;
+      }
+    }
+    &__item {
+      &--img {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 168px;
+        width: 168px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img.img-rec_box {
+          height: 100%;
+        }
+      }
+      &--product {
+        font-size: 15px;
+        letter-spacing: 1.5px;
+        line-height: 1.6rem;
+        color: #555555;
+        margin-top: 10px;
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+  }
 }
 
 br.model_br {
