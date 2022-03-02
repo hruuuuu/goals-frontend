@@ -29,6 +29,14 @@ function CartStepper(props) {
     recipient: '',
     tel: '',
   });
+  const [creditcard, setCreditcard] = React.useState({
+    cvc: '',
+    expiry: '',
+    focus: '',
+    name: '',
+    number: '',
+  });
+  const { handleShow } = props;
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
 
@@ -61,15 +69,19 @@ function CartStepper(props) {
     return skipped.has(step);
   };
 
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+  // const handleNext = (e) => {
+  //   e.stopPropagation();
+  //   e.nativeEvent.stopImmediatePropagation();
+  //   handleShow();
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  //   let newSkipped = skipped;
+  //   if (isStepSkipped(activeStep)) {
+  //     newSkipped = new Set(newSkipped.values());
+  //     newSkipped.delete(activeStep);
+  //   }
+
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -77,6 +89,8 @@ function CartStepper(props) {
 
   //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
+    e.preventDefault();
+
     //orderDetails
     let orderDetailsResponse = await axios.post(
       `${API_URL}/cart/orderDetails`,
@@ -94,6 +108,7 @@ function CartStepper(props) {
       usedCouponData
     );
   }
+
   return (
     <>
       <Box className="box" sx={{ width: '100%' }}>
@@ -125,11 +140,18 @@ function CartStepper(props) {
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
               {activeStep === steps.length - 1 ? (
-                <Checkout />
+                <Checkout
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
+                  creditcard={creditcard}
+                  setCreditcard={setCreditcard}
+                />
               ) : (
                 <Shipping
                   shippingData={shippingData}
                   setShippingData={setShippingData}
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
                 />
               )}
             </div>
@@ -161,18 +183,22 @@ function CartStepper(props) {
                     <div className="d-grid">
                       {activeStep === steps.length - 1 ? (
                         <button
+                          type="submit"
                           className="btn_outline btn_grn p-2"
                           onClick={() => {
                             handleSubmit();
-                            handleNext();
+                            // handleNext();
                           }}
+                          form="payButton"
                         >
                           確認付款
                         </button>
                       ) : (
                         <button
                           className="btn_outline btn_grn p-2"
-                          onClick={handleNext}
+                          // onClick={handleNext}
+                          type="submit"
+                          form="nextButton"
                         >
                           下一步
                         </button>
