@@ -259,16 +259,26 @@ function ProductDetail(props) {
       Swal.fire({
         icon: 'error',
         html: commentPost.data.msg,
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          setShowComment(false);
+          history('/');
+        }
       });
-      setShowComment(false);
-      history('/');
     } else {
       Swal.fire({
         icon: 'success',
         html: commentPost.data.msg,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setShowComment(false);
+          history('/');
+        }
       });
-      setShowComment(false);
-      history('/');
     }
   };
 

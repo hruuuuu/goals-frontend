@@ -45,17 +45,23 @@ const Signup = () => {
         Swal.fire({
           icon: 'success',
           html: forgetEmail.data.msg,
-        });
-        setTimeout(() => {
-          history('/');
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            history('/');
+          }
         });
       } else {
         Swal.fire({
           icon: 'error',
           html: forgetEmail.data.msg,
-        });
-        setTimeout(() => {
-          history('/');
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (!result.isConfirmed) {
+            history('/');
+          }
         });
       }
     } else {
@@ -68,17 +74,23 @@ const Signup = () => {
         Swal.fire({
           icon: 'success',
           html: reVerifyEmail.data.msg,
-        });
-        setTimeout(() => {
-          history('/');
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            history('/');
+          }
         });
       } else {
         Swal.fire({
           icon: 'error',
           html: reVerifyEmail.data.msg,
-        });
-        setTimeout(() => {
-          history('/');
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (!result.isConfirmed) {
+            history('/');
+          }
         });
       }
     }
@@ -94,22 +106,28 @@ const Signup = () => {
       }
     );
     if (loginResult.status === 200 && loginResult.data.code < 30000) {
-      setLogin(true);
-      setIsSocial(true);
       Swal.fire({
         icon: 'success',
         html: loginResult.data.msg,
-      });
-      setTimeout(() => {
-        history('/');
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setLogin(true);
+          setIsSocial(true);
+          history('/');
+        }
       });
     } else {
       Swal.fire({
         icon: 'error',
         html: loginResult.data.msg,
-      });
-      setTimeout(() => {
-        history('/');
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          history('/');
+        }
       });
     }
   };
