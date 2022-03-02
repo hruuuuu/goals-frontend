@@ -2,9 +2,9 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
-
 import { API_URL } from '../../utils/config';
 import { useLogin } from '../../context/LoginStatus';
+import Swal from 'sweetalert2';
 
 const Available = () => {
   const [data, setData] = useState([]);
@@ -57,7 +57,12 @@ const Available = () => {
       .children()
       .html(coupon.amount - 1);
 
-    alert('領取成功');
+    Swal.fire({
+      icon: 'success',
+      text: '領取成功',
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
 
   return (
