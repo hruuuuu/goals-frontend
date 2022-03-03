@@ -1028,3 +1028,28 @@
     bottom: 0;
   }
 }
+
+/*scrollTop Button*/
+.MuiButton-root.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  font-size: 30px;
+  color: #f8bc5d;
+  position: fixed;
+  right: 15px;
+  z-index: 93;
+  bottom: 5rem;
+  background: #fff;
+  border-radius: 99rem;
+  padding: 0;
+  min-width: initial;
+  svg {
+    background-color: #fff;
+    border-radius: 99rem;
+  }
+}
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: transparent !important;
+}
+
+.transition-btn {
+  transition: 0.5s ease all;
+}

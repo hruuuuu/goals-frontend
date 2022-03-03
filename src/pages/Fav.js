@@ -7,6 +7,7 @@ import MemberSidebar from '../components/MemberSidebar';
 import FavList from '../components/Fav/FavList';
 import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -29,6 +30,7 @@ function Fav() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }
