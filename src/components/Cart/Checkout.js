@@ -3,9 +3,19 @@ import Cards from 'react-credit-cards';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
 
+//stripe
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from './CheckoutForm';
+
 import { useCartList } from '../../context/cart';
 
 import 'react-credit-cards/lib/styles.scss';
+
+//使用Stripe 可發布 API 密鑰調用以配置 Stripe 庫
+const stripePromise = loadStripe(
+  'pk_test_51KYlXkGyrXHwttrEikt5K1JD2Rlckrde2rpOcPiPrWgFx4ka5JtiJy2H7K6xF4YXkCnQtXH8DFCSQNZklXDFNCh100Tbs0roPY'
+);
 
 function Checkout(props) {
   const { shippingData, setShippingData } = props;
@@ -13,32 +23,13 @@ function Checkout(props) {
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
   const { cartListData, setCartListData } = useCartList();
-  const [creditcard, setCreditcard] = useState({
-    cvc: '',
-    expiry: '',
-    focus: '',
-    name: '',
-    number: '',
-  });
-
-  // useEffect(() => {
-  //   const script = document.createElement('script');
-
-  //   script.src = 'https://js.tappaysdk.com/tpdirect/v5.8.0';
-  //   script.async = true;
-
-  //   TPDirect.setupSDK(
-  //     123568,
-  //     app_SJt1kIRl8dAuuyaFG2xT3hIm9GTi0weRElq2C8kPSPkMDgzI40mMXeTN7oTz,
-  //     'sandbox'
-  //   );
-
-  //   document.body.appendChild(script);
-
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
+  // const [creditcard, setCreditcard] = useState({
+  //   cvc: '',
+  //   expiry: '',
+  //   focus: '',
+  //   name: '',
+  //   number: '',
+  // });
 
   //取得已登入會員的ID
   const userID = JSON.parse(localStorage.getItem('user'));
@@ -53,7 +44,7 @@ function Checkout(props) {
   // ->準備好要傳回資料庫的product_id, amount
   const cartItems = { ...cartListData };
 
-   //order_details
+  //order_details
   // ->準備好要傳回資料庫的應付金額
   const cartDetails = {
     ...shippingData,
@@ -61,53 +52,82 @@ function Checkout(props) {
     member_id: userID.id,
   };
 
-  const handleInputFocus = (e) => {
-    setCreditcard({ ...creditcard, focus: e.target.name });
-    // console.log(e.target.name);
+  // const handleInputFocus = (e) => {
+  //   setCreditcard({ ...creditcard, focus: e.target.name });
+  //   // console.log(e.target.name);
+  // };
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   setCreditcard({ ...creditcard, [name]: value });
+  // };
+
+  // //stepper
+  // const handleBack = () => {
+  //   setActiveStep(activeStep - 1);
+  // };
+
+  // const handleNext = () => {
+  //   setActiveStep(2);
+  // };
+
+  // //送出訂單 ->傳回資料庫
+  // async function handleSubmit(e) {
+  //   //orderDetails
+  //   let orderDetailsResponse = await axios.post(
+  //     `${API_URL}/cart/orderDetails`,
+  //     cartDetails
+  //   );
+  //   //order_items
+  //   let orderItemsResponse = await axios.post(
+  //     `${API_URL}/cart/orderItems`,
+  //     cartItems
+  //   );
+
+  //   //coupon_receive
+  //   let couponReceiveResponse = await axios.post(
+  //     `${API_URL}/cart/orderItemsCoupon`,
+  //     usedCouponData
+  //   );
+  // }
+
+  //stripe
+  const [clientSecret, setClientSecret] = useState('');
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+    fetch('/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: Number(orderTotal),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
+
+  const appearance = {
+    theme: 'stripe',
   };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setCreditcard({ ...creditcard, [name]: value });
+  const options = {
+    clientSecret,
+    appearance,
   };
-
-  //stepper
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
-
-  const handleNext = () => {
-    setActiveStep(2);
-  };
-
-  //送出訂單 ->傳回資料庫
-  async function handleSubmit(e) {
-    //orderDetails
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartDetails
-    );
-    //order_items
-    let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/orderItems`,
-      cartItems
-    );
-
-    //coupon_receive
-    let couponReceiveResponse = await axios.post(
-      `${API_URL}/cart/orderItemsCoupon`,
-      usedCouponData
-    );
-  }
 
   return (
     <>
       <div className="container checkoutBox" id="PaymentForm">
-        <div className="my-3">
+        {/* <div className="my-3">
           <h5>付款資訊</h5>
+        </div> */}
+        <div>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
         </div>
-        <div className="mb-2">
+        {/* <div className="mb-2">
           <Cards
             cvc={creditcard.cvc}
             expiry={creditcard.expiry}
@@ -130,6 +150,7 @@ function Checkout(props) {
               placeholder="請輸入持卡人姓名"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              required
             />
           </div>
 
@@ -146,6 +167,7 @@ function Checkout(props) {
               placeholder="**** **** **** ****"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              required
             />
           </div>
           <div className="row g-2 mb-2">
@@ -205,7 +227,7 @@ function Checkout(props) {
               </div>
             </div>
           </div>
-        </form>
+        </form> */}
       </div>
     </>
   );

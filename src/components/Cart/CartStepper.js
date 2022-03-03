@@ -29,6 +29,7 @@ function CartStepper(props) {
     recipient: '',
     tel: '',
   });
+  const { handleShow } = props;
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
 
@@ -120,80 +121,25 @@ function CartStepper(props) {
         ) : (
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
-              {activeStep === steps.length - 1 ? (
-                <Checkout
-                  activeStep={activeStep}
-                  setActiveStep={setActiveStep}
-                  shippingData={shippingData}
-                  setShippingData={setShippingData}
-                  orderTotal={orderTotal}
-                  setOrderTotal={setOrderTotal}
-                  couponId={couponId}
-                  setCouponId={setCouponId}
-                />
+              <Checkout
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                shippingData={shippingData}
+                setShippingData={setShippingData}
+                orderTotal={orderTotal}
+                setOrderTotal={setOrderTotal}
+                couponId={couponId}
+                setCouponId={setCouponId}
+              />
               ) : (
-                <Shipping
-                  activeStep={activeStep}
-                  setActiveStep={setActiveStep}
-                  shippingData={shippingData}
-                  setShippingData={setShippingData}
-                />
+              <Shipping
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+                shippingData={shippingData}
+                setShippingData={setShippingData}
+              />
               )}
             </div>
-            {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <div className="container mb-1">
-                <hr />
-                <div className="row justify-content-between">
-                  <div className="col-6 mt-2">
-                    <div className="d-grid">
-                      {activeStep === steps.length - 1 ? (
-                        <button
-                          className="btn_outline p-2"
-                          onClick={handleBack}
-                        >
-                          上一步
-                        </button>
-                      ) : (
-                        <button
-                          className="btn_outline p-2"
-                          onClick={props.handleClose}
-                        >
-                          返回購物車
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-6 mt-2">
-                    <div className="d-grid">
-                      {activeStep === steps.length - 1 ? (
-                        <button
-                          className="btn_outline btn_grn p-2"
-                          // disabled={disabled}
-                          onClick={() => {
-                            handleSubmit();
-                            handleNext();
-                          }}
-                        >
-                          確認付款
-                        </button>
-                      ) : (
-                        <button
-                          className="btn_outline btn_grn p-2"
-                          name="nextButton"
-                          form="nextButton"
-                          // disabled={disabled}
-                          type="submit"
-                          onClick={handleNext}
-                        >
-                          下一步
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Box> */}
           </React.Fragment>
         )}
       </Box>

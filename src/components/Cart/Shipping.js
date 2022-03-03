@@ -8,6 +8,8 @@ function Shipping(props) {
   const [delivery, setDelivery] = useState([]);
   const { shippingData, setShippingData } = props;
   const { activeStep, setActiveStep } = props;
+  const { orderTotal, setOrderTotal } = props;
+  const { couponId, setCouponId } = props;
 
   //取得運送方式
   useEffect(() => {
@@ -51,7 +53,11 @@ function Shipping(props) {
   return (
     <>
       <div className="container">
-        <div className="row needs-validation my-selector-c" noValidate>
+        <form
+          id="shippingForm"
+          className="row needs-validation my-selector-c"
+          onSubmit={handleNext}
+        >
           <div className="col-12 g-3">
             <h5>運送資訊</h5>
           </div>
@@ -69,9 +75,7 @@ function Shipping(props) {
               onChange={handleChange}
               required
             />
-            <div className="invalid-feedback">Valid name is required.</div>
           </div>
-          {/* <div className="row g-3 mb-2 my-selector-c"> */}
           <div className="col-6 g-3">
             <label htmlFor="country" className="form-label label_fs">
               縣市
@@ -84,9 +88,6 @@ function Shipping(props) {
               onChange={handleChange}
               required
             ></select>
-            <div className="invalid-feedback">
-              Please select a valid country.
-            </div>
           </div>
           <div className="col-6 g-3">
             <label htmlFor="district" className="form-label label_fs">
@@ -119,7 +120,6 @@ function Shipping(props) {
               onChange={handleChange}
               required
             />
-            <div className="invalid-feedback">Valid address is required.</div>
           </div>
           <div className="col-12 g-3">
             <label htmlFor="recipient" className="form-label label_fs">
@@ -135,7 +135,6 @@ function Shipping(props) {
               onChange={handleChange}
               required
             />
-            <div className="invalid-feedback">Valid recipient is required.</div>
           </div>
           {/* <div className="row g-3"> */}
           <div className="col-6 g-3">
@@ -180,35 +179,24 @@ function Shipping(props) {
                 );
               })}
             </select>
-            <div className="invalid-feedback">
-              Please provide a valid state.
-            </div>
           </div>
-          {/* </div> */}
           <hr className="mt-4" />
-          {/* <div className="row justify-content-between"> */}
-          {/* <div className="col-6 g-3"> */}
           <div className="col-6 g-3 d-grid">
             <button className="btn_outline p-2" onClick={props.handleClose}>
               返回購物車
             </button>
           </div>
-          {/* </div> */}
-          {/* <div className="col-6 g-3"> */}
           <div className="col-6 g-3 d-grid">
             <button
               className="btn_outline btn_grn p-2"
-              name="nextButton"
-              form="nextButton"
-              type="button"
-              onClick={handleNext}
+              form="shippingForm"
+              type="submit"
+              // onClick={handleNext}
             >
               下一步
             </button>
           </div>
-          {/* </div> */}
-          {/* </div> */}
-        </div>
+        </form>
       </div>
     </>
   );

@@ -104,7 +104,12 @@ function App() {
           <ProductsContext.Provider value={{ productsData, setProductsData }}>
             <CartListContext.Provider value={{ cartListData, setCartListData }}>
               <FavContext.Provider
-                value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
+                value={{
+                  favData,
+                  setFavData,
+                  favItemsArr,
+                  setFavItemsArr,
+                }}
               >
                 <ActivityContext.Provider
                   value={{ activityData, setActivityData }}
