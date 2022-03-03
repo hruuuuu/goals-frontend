@@ -169,6 +169,7 @@
 
   @include text--extra-small;
   color: $color--light;
+  white-space: nowrap;
 
   display: flex;
   justify-content: center;
@@ -203,6 +204,18 @@
       left: 80%;
     }
   }
+  &--breakfast {
+    background: $color--secondary;
+  }
+  &--lunch {
+    background: $color--error;
+  }
+  &--dinner {
+    background: $color--hover;
+  }
+  &--others {
+    background: $color--analogous1;
+  }
 }
 
 .e-hr {
@@ -234,7 +247,7 @@
 
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -275,7 +288,7 @@
 
     position: relative;
     &::before {
-      @include icon--absolute("\f0dc");
+      @include icon--absolute('\f0dc');
       color: $color--secondary;
       font-size: 1.2rem;
 
@@ -304,7 +317,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -321,7 +334,7 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute("\f105");
+      @include icon--absolute('\f105');
       color: $color--gray4;
       font-size: 1rem;
 
@@ -343,7 +356,7 @@
   height: 1rem;
   font-size: 1rem;
   &--left {
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
   }
   &--left-large {
     margin-right: 0.5rem;
@@ -365,71 +378,12 @@
   }
 }
 
-.l-footer {
-  width: 100%;
-  height: max-content;
-  padding: 1.5rem 0;
-  margin-top: 2.5rem;
-
-  background: $color--primary;
-  border-radius: 8rem 8rem 0 0;
-  @media screen and (max-width: $lg) {
-    border-radius: $border-radius__footer;
-  }
-  &__item {
-    padding: 0.5rem 0;
-
-    @include h6;
-    color: $color--light;
-    font-size: 0.875rem;
-
-    z-index: 0;
-    &--muted {
-      opacity: 0.7;
-    }
-  }
-  &__link {
-    @include h6;
-    color: $color--light;
-    transition: $transition;
-    font-size: 0.875rem;
-    &:hover {
-      color: $color--secondary;
-    }
-  }
-  &__logo {
-    width: max-content;
-    height: 4rem;
-    @media screen and (max-width: $lg) {
-      height: 2.5rem;
-    }
-  }
-  &__btn {
-    width: max-content;
-    height: max-content;
-    margin-right: 0.75rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-  &__icon {
-    width: max-content;
-    height: max-content;
-
-    color: $color--light;
-    font-size: 2.5rem;
-  }
-}
 .img-responsive {
   display: block;
   max-width: 100%;
   height: auto;
 }
+
 .model {
   position: relative;
   &__head {
@@ -487,7 +441,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: "";
+        content: '';
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -496,7 +450,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: "";
+        content: '';
         width: 5px;
         height: 30px;
         position: absolute;
@@ -508,13 +462,15 @@
     }
   }
 }
+
 .l-footer {
   width: 100%;
   height: max-content;
   padding: 1.5rem 0;
+  margin-top: 2.5rem;
 
   background: $color--primary;
-  border-radius: 8rem 8rem 0 0;
+  border-radius: $border-radius__footer--lg;
   @media screen and (max-width: $lg) {
     border-radius: $border-radius__footer;
   }
@@ -681,6 +637,8 @@
       border-top-left-radius: $border-radius__btn;
       border-bottom-left-radius: $border-radius__btn;
       border-top-right-radius: 0;
+
+      z-index: 20;
 
       position: fixed;
       top: 50%;
@@ -995,7 +953,7 @@
       padding: $padding__chat;
     }
     #{$_}__msg {
-      &[from="client"] {
+      &[from='client'] {
         color: $color--light;
         background: $color--info;
 
@@ -1004,7 +962,7 @@
           left: -3rem;
         }
       }
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1026,7 +984,7 @@
       margin-bottom: $padding__chat;
     }
     #{$_}__msg {
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--light;
         background: $color--info;
 
@@ -1035,7 +993,7 @@
           left: -3rem;
         }
       }
-      &[from="client"] {
+      &[from='client'] {
         color: $color--font;
         background: $color--gray6;
 

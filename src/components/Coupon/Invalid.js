@@ -2,15 +2,16 @@ import { React, useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
+import { useLogin } from '../../context/LoginStatus';
 
 function Invalid() {
   const [data, setData] = useState([]);
-  const userID = JSON.parse(localStorage.getItem('user'));
+  const { user } = useLogin();
   const isInvalidList = data.length === 0;
 
   useEffect(() => {
     let getcoupon = async () => {
-      let response = await axios.post(`${API_URL}/coupon/invalid`, userID, {
+      let response = await axios.post(`${API_URL}/coupon/invalid`, user, {
         withCredentials: true,
       });
       setData(response.data);

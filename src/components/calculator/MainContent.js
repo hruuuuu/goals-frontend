@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header';
-import CalculatorForm from './CalculatorForm';
+import Bmr from './Bmr.js';
 import RecGood from './RecGood';
 
 import desImg from '../../img/calculator/description.jpg';
 import logoOriginal from '../../img/common/logo--original.svg';
 
 const MainContent = () => {
+  const [calories, setCalories] = useState('');
+
   return (
     <>
       <div className="main-content">
@@ -121,7 +123,8 @@ const MainContent = () => {
             </div>
           </div>
           <div className="container">
-            <CalculatorForm />
+            {/* <CalculatorForm /> */}
+            <Bmr calories={calories} setCalories={setCalories} />
           </div>
           <div className="explan">
             <div className="container">
@@ -158,16 +161,7 @@ const MainContent = () => {
           </div>
         </section>
         <section className="l-recommenedGood">
-          <div className="model__head model__head--sec">
-            <div className="model__head--deco-text">RECOMMENED GOODS</div>
-            <div className="model__head--title">果實推薦三餐組合</div>
-            <div className="model__head--subtitle">
-              依照您的TDEE計算結果量身打造的餐食組合
-            </div>
-          </div>
-          <div className="container">
-            <RecGood />
-          </div>
+          <RecGood calories={calories} />
         </section>
       </div>
     </>

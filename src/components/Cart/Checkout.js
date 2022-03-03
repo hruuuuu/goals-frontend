@@ -13,6 +13,8 @@ function Checkout(props) {
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
   const { shippingData, setShippingData } = props;
+  const { member, setMember } = props;
+
   const { cartListData, setCartListData } = useCartList();
   const [creditcard, setCreditcard] = useState({
     cvc: '',
@@ -22,12 +24,9 @@ function Checkout(props) {
     number: '',
   });
 
-  //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
-
   //coupon_receive
   const usedCouponData = {
-    member_id: userID.id,
+    member_id: member.id,
     coupon_id: couponId,
   };
 
@@ -40,7 +39,7 @@ function Checkout(props) {
   const cartDetails = {
     ...shippingData,
     total: Number(orderTotal),
-    member_id: userID.id,
+    member_id: member.id,
   };
 
   // useEffect(() => {
@@ -178,7 +177,7 @@ function Checkout(props) {
           </div>
           <hr className="mt-4" />
           <div className="col-6 g-3 d-grid">
-            <button className="btn_outline p-2" onClick={props.handleBack}>
+            <button className="btn_outline p-2" onClick={handleBack}>
               上一步
             </button>
           </div>

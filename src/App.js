@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
@@ -11,23 +12,25 @@ import { FavContext } from './context/fav';
 import { ActivityContext } from './context/activity';
 import { AdminContext } from './context/admin';
 import { LoginContext } from './context/LoginStatus';
+import { DietlogContext } from './context/dietlog';
 
 import routerList from './config/routerList';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 function App() {
+  const date = dayjs(new Date()).format('YYYY-MM-DD');
   const [show, setShow] = useState({
     in: false,
     out: false,
   });
   const [login, setLogin] = useState(false);
-  const [loginOption, setLoginOption] = useState({
-    normal: false,
-    google: false,
-    facebook: false,
-    line: false,
+  const [isSocial, setIsSocial] = useState(false);
+  const [commentStatus, setCommentStatus] = useState(false);
+  const [user, setUser] = useState({
+    userID: '',
   });
+  const [admin, setAdmin] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [cartListData, setCartListData] = useState([]);
@@ -36,6 +39,9 @@ function App() {
   const [favItemsArr, setFavItemsArr] = useState([]);
   const [favData, setFavData] = useState([]);
   const [adminOnline, setAdminOnline] = useState(false);
+  const [calendarDate, setCalendarDate] = useState(date);
+  const [dietlogData, setDietlogData] = useState([]);
+  const [dietlogCategoryData, setDietlogCategoryData] = useState([]);
 
   const hasLocalStorage = localStorage.getItem('fav');
 
@@ -43,8 +49,16 @@ function App() {
     (async () => {
       try {
         // api/login
-        const checkStatus = localStorage.getItem('login');
-        setLogin(checkStatus);
+        // 判斷用戶是否有登入，且是否為admin
+        const checkStatus = await axios.get(`${API_URL}/auth`, {
+          withCredentials: true,
+        });
+        const isLogin = checkStatus.data;
+        setLogin(isLogin.status);
+        setUser({
+          userID: isLogin.user,
+        });
+        setAdmin(isLogin.administrator);
 
         //api/product
         const productResponse = await axios.get(`${API_URL}/product`, {
@@ -70,6 +84,16 @@ function App() {
         const activities = activityResponse.data;
         setActivityData([...activities]);
 
+        //api/dietlog/category
+        const dietlogCategoryResponse = await axios.get(
+          `${API_URL}/dietlog/category`,
+          {
+            withCredentials: true,
+          }
+        );
+        const dietlogCategories = dietlogCategoryResponse.data;
+        setDietlogCategoryData([...dietlogCategories]);
+
         //初始化localStorage購物車
         const cartList = localStorage.getItem('cartList');
         if (cartList) {
@@ -93,40 +117,58 @@ function App() {
     } else {
       localStorage.setItem('fav', '');
     }
-  }, []);
+  }, [login]);
 
   return (
     <>
       <LoginContext.Provider
-        value={{ login, setLogin, loginOption, setLoginOption }}
+        value={{
+          login,
+          setLogin,
+          isSocial,
+          setIsSocial,
+          user,
+          setUser,
+          admin,
+          commentStatus,
+          setCommentStatus,
+        }}
       >
         <AdminContext.Provider value={{ adminOnline, setAdminOnline }}>
-          <ProductsContext.Provider value={{ productsData, setProductsData }}>
-            <CartListContext.Provider value={{ cartListData, setCartListData }}>
-              <FavContext.Provider
-                value={{
-                  favData,
-                  setFavData,
-                  favItemsArr,
-                  setFavItemsArr,
-                }}
+          <DietlogContext.Provider
+            value={{
+              calendarDate,
+              setCalendarDate,
+              dietlogData,
+              setDietlogData,
+              dietlogCategoryData,
+              setDietlogCategoryData,
+            }}
+          >
+            <ProductsContext.Provider value={{ productsData, setProductsData }}>
+              <CartListContext.Provider
+                value={{ cartListData, setCartListData }}
               >
-                <ActivityContext.Provider
-                  value={{ activityData, setActivityData }}
+                <FavContext.Provider
+                  value={{ favData, setFavData, favItemsArr, setFavItemsArr }}
                 >
-                  <CategoryContext.Provider
-                    value={{ categoryData, setCategoryData }}
+                  <ActivityContext.Provider
+                    value={{ activityData, setActivityData }}
                   >
-                    <ShowContext.Provider value={{ show, setShow }}>
-                      <Navbar />
-                      {useRoutes(routerList)}
-                      <Footer />
-                    </ShowContext.Provider>
-                  </CategoryContext.Provider>
-                </ActivityContext.Provider>
-              </FavContext.Provider>
-            </CartListContext.Provider>
-          </ProductsContext.Provider>
+                    <CategoryContext.Provider
+                      value={{ categoryData, setCategoryData }}
+                    >
+                      <ShowContext.Provider value={{ show, setShow }}>
+                        <Navbar />
+                        {useRoutes(routerList)}
+                        <Footer />
+                      </ShowContext.Provider>
+                    </CategoryContext.Provider>
+                  </ActivityContext.Provider>
+                </FavContext.Provider>
+              </CartListContext.Provider>
+            </ProductsContext.Provider>
+          </DietlogContext.Provider>
         </AdminContext.Provider>
       </LoginContext.Provider>
     </>

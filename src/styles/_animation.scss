@@ -115,4 +115,13 @@
       animation-name: fadeOut;
     }
   }
+  &__tabs {
+    animation-duration: 0.3s;
+    &--in {
+      animation-name: fadeIn;
+    }
+    &--out {
+      animation-name: fadeOut;
+    }
+  }
 }

@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-const CalculatorForm = () => {
+function CalculatorForm() {
+  const [data, setData] = useState({
+    gender: 1,
+    weightInPounds: '',
+    heightInFeet: '',
+    heightInInches: '',
+    age: '',
+    activity: '',
+    calBmr: '',
+    calCalorie: '',
+    error: false,
+    isBmrCalculated: false,
+    isCalorieCalculated: false,
+    isMetric: false,
+  });
+
+  const handleChange = (e) => {
+    // 1. 從原本的狀態物件上拷貝出一個新物件
+    // 2. 在拷貝的新物件上處理
+
+    // "合併"原有物件值的語法
+    // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names
+    const newData = { ...data, [e.target.name]: e.target.value };
+
+    // 3. 設定回狀態
+    setData(newData);
+  };
+
   return (
     <>
       <form className="calculator__form">
@@ -13,7 +40,10 @@ const CalculatorForm = () => {
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
               <FormControl>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
                   性別
                 </label>
                 <RadioGroup
@@ -30,7 +60,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 年齡
               </label>
               <input
@@ -43,7 +73,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 身高(公分)
               </label>
               <input
@@ -56,7 +86,7 @@ const CalculatorForm = () => {
           </div>
           <div className="col-xl-6 col-md-12">
             <div className="form-group ">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label htmlFor="exampleFormControlInput1" className="form-label">
                 體重(公斤)
               </label>
               <input
@@ -70,7 +100,10 @@ const CalculatorForm = () => {
           <div className="col-sm-12">
             <div className="form-group ">
               <FormControl>
-                <label for="exampleFormControlInput1" className="form-label">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
                   每週運動強度
                 </label>
                 <RadioGroup
@@ -116,6 +149,6 @@ const CalculatorForm = () => {
       </form>
     </>
   );
-};
+}
 
 export default CalculatorForm;

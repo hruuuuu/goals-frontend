@@ -27,7 +27,7 @@ function ProductItem(props) {
   const isFetchingCategory = categoryData.length === 0;
   const isFetchingActivity = activityData.length === 0;
   /* 控制modal顯示 */
-  const handleShow = (product) => {
+  const handleShow = () => {
     setShow({ ...setShow, in: true });
   };
 

@@ -31,28 +31,28 @@ function CartStepper(props) {
   });
   const { handleShow } = props;
   const { orderTotal, setOrderTotal } = props;
+  const { member, setMember } = props;
   const { couponId, setCouponId } = props;
 
-  // //取得已登入會員的ID
-  // const userID = JSON.parse(localStorage.getItem('user'));
 
-  // //coupon_receive
-  // const usedCouponData = {
-  //   member_id: userID.id,
-  //   coupon_id: couponId,
-  // };
+  //coupon_receive
+  const usedCouponData = {
+    member_id: member.id,
+    coupon_id: couponId,
+  };
 
   // //order_items
-  // // ->準備好要傳回資料庫的product_id, amount
-  // const cartItems = { ...cartListData };
+  // ->準備好要傳回資料庫的product_id, amount
+  const cartItems = { ...cartListData };
 
-  // //order_details
-  // // ->準備好要傳回資料庫的應付金額
-  // const cartDetails = {
-  //   ...shippingData,
-  //   total: Number(orderTotal),
-  //   member_id: userID.id,
-  // };
+  //order_details
+  // ->準備好要傳回資料庫的應付金額
+  const cartDetails = {
+    ...shippingData,
+    total: Number(orderTotal),
+    member_id: member.id,
+  };
+  // console.log(cartDetails);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -71,6 +71,29 @@ function CartStepper(props) {
   // const handleBack = () => {
   //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
   // };
+
+  // //送出訂單 ->傳回資料庫
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   //orderDetails
+  //   let orderDetailsResponse = await axios.post(
+  //     `${API_URL}/cart/orderDetails`,
+  //     cartDetails,
+  //     usedCouponData
+  //   );
+  //   //order_items
+  //   let orderItemsResponse = await axios.post(
+  //     `${API_URL}/cart/orderItems`,
+  //     cartItems
+  //   );
+
+  //   //coupon_receive
+  //   let couponReceiveResponse = await axios.post(
+  //     `${API_URL}/cart/orderItemsCoupon`,
+  //     usedCouponData
+  //   );
+  // }
 
   // //送出訂單 ->傳回資料庫
   // async function handleSubmit(e) {
@@ -131,6 +154,8 @@ function CartStepper(props) {
                   setOrderTotal={setOrderTotal}
                   couponId={couponId}
                   setCouponId={setCouponId}
+                  member={member}
+                  setMember={setMember}
                 />
               ) : (
                 <Shipping
