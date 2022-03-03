@@ -1,0 +1,116 @@
+.c-swiper {
+  $_: &;
+  &--kv {
+    width: 100%;
+    position: relative;
+    .swiper {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+
+      z-index: 0;
+    }
+    .swiper-slide {
+      width: calc(100% - 3.75rem);
+
+      text-align: center;
+      font-size: 18px;
+      background: $color--light;
+      border-radius: $border-radius__key-vision;
+      overflow: hidden;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      &.swiper-slide-duplicate-active,
+      &.swiper-slide.swiper-slide-active {
+        img {
+          transform: scale(1.3);
+        }
+      }
+      img {
+        transform: scale(1);
+        transition: transform 8s ease-out;
+      }
+    }
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-pagination-vertical.swiper-pagination-bullets,
+    .swiper-vertical > .swiper-pagination-bullets {
+      right: 1.5rem;
+    }
+    .swiper-pagination-bullet {
+      width: $height__page-indicator;
+      height: $height__page-indicator;
+
+      background: $color--gray5;
+      opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+      background: $color--primary;
+    }
+    .swiper-lazy-loading {
+      opacity: 0;
+    }
+  }
+  &--blog {
+    .swiper {
+      overflow: visible;
+    }
+    .swiper-slide {
+      z-index: 1;
+    }
+    .swiper-button {
+      &-prev {
+        width: $size__icon-btn--large;
+        height: $size__icon-btn--large;
+
+        background: $color--secondary;
+        box-shadow: $box-shadow__block;
+        border-radius: 50%;
+
+        @include interaction__btn;
+
+        left: -1rem;
+        z-index: 20;
+        &::after {
+          @include icon--absolute("\f053");
+          color: $color--light;
+          font-size: 1rem;
+        }
+      }
+      &-next {
+        width: $size__icon-btn--large;
+        height: $size__icon-btn--large;
+
+        background: $color--secondary;
+        box-shadow: $box-shadow__block;
+        border-radius: 50%;
+
+        @include interaction__btn;
+
+        right: -1rem;
+        z-index: 20;
+        &::after {
+          @include icon--absolute("\f054");
+          color: $color--light;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

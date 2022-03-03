@@ -54,73 +54,73 @@ button {
 
 h1 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 3.75rem;
 }
 
 h2 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2.5rem;
 }
 
 h3 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2rem;
 }
 
 h4 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 
 h5 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
 h6 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1rem;
 }
 
 @mixin h1 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 3.75rem;
 }
 
 @mixin h2 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2.5rem;
 }
 
 @mixin h3 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 2rem;
 }
 
 @mixin h4 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 
 @mixin h5 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1.25rem;
 }
 
 @mixin h6 {
   @include heading;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 1rem;
 }
 

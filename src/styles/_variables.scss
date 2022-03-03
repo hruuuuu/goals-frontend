@@ -29,6 +29,8 @@ $color__bg--info: rgba(86, 135, 155, 0.3);
 $color__bg--analogous1: rgba(116, 176, 141, 0.3);
 $color__bg--analogous2: rgba(149, 176, 107, 0.3);
 $color__bg--hover: rgb(118, 184, 211, 0.3);
+$color__bg--light: rgba(255, 255, 255, 0.9);
+$color__deco: rgba(107, 156, 102, 0.2);
 
 $color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
 
@@ -58,6 +60,10 @@ $border-radius__block: 1.25rem;
 $border-radius__modal: 1.25rem;
 $border-radius__small-block: $border-radius__input;
 $border-radius__floating-filter: 0 0 1.875rem 1.875rem;
+$border-radius__key-vision: 0 0 18.75rem;
+$border-radius__home-small-block: 5rem 0 5rem 0;
+$border-radius__home-block--right: 12.5rem 0 0 0;
+$border-radius__home-block--left: 0 0 12.5rem 0;
 
 /* border */
 $border__input: 0.0625rem solid $color__input-border;
@@ -77,6 +83,8 @@ $transition__navbar-menu: all 0.6s ease-in-out;
 /* width */
 $width__btn--square: 2.75rem;
 $width__floating-menu: 22.5rem;
+$width__block-both: 45vw;
+$width__block-single: 60vw;
 
 /* height */
 $height__navbar: 5rem;
@@ -91,6 +99,11 @@ $height__chat-block: 3.75rem;
 $height__calendar: 2.75rem;
 $height__content: calc(100vh - $height__navbar - 14.125rem);
 $height__input--file: 5rem;
+$height__page-indicator: 0.5rem;
+$height__product-intro: 28rem;
+$height__product-list: 34rem;
+$height__diet-intro: 27.25rem;
+$height__list-num: 4rem;
 
 /* padding */
 $padding__modal: 2.5rem;
@@ -112,6 +125,7 @@ $top--floating-filter: $height__navbar + 1rem;
 $size__icon--small: 1rem;
 $size__icon: 1.5rem;
 $size__icon-btn: 2.75rem;
+$size__icon-btn--large: 3.75rem;
 
 /* font */
 $letter-spacing: 0.125rem;

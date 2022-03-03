@@ -19,7 +19,7 @@ function MemberSidebar() {
     },
     {
       id: 3,
-      name: '折價券',
+      name: '優惠券',
       router: `/member/coupon`,
       icon: <i className="fas fa-ticket-alt Sidebarfont__icon"></i>,
       line: '',

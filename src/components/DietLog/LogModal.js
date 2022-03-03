@@ -87,7 +87,6 @@ function LogModal(props) {
       } else {
         addData.append('datetime', addFields.datetime);
       }
-
       const foodData = [...foods];
       try {
         const responseData = await axios.post(
@@ -207,7 +206,6 @@ function LogModal(props) {
                   value={addFields.title}
                   onChange={handleFieldChange}
                   placeholder="請輸入標題..."
-                  required
                 />
               </div>
               <div className="c-dietlog-modal__fieldset">
