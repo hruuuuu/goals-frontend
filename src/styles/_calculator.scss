@@ -516,6 +516,9 @@
       }
     }
     &__item {
+      &a {
+        pointer-events: none;
+      }
       &--img {
         border-radius: 10px;
         overflow: hidden;
