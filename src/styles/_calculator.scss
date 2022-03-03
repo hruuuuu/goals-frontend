@@ -311,6 +311,13 @@
     border-radius: 80px;
     width: 80%;
     margin: auto;
+    .activity.c-form__input.form-control {
+      -webkit-appearance: auto;
+      appearance: auto;
+    }
+    .tdee-block {
+      margin: 50px auto;
+    }
     .result {
       padding: 30px 0;
       text-align: center;
