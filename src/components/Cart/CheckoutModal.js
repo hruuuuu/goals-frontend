@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import CartStepper from './CartStepper';
+import Swal from 'sweetalert2';
+import { useLogin } from '../../context/LoginStatus';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutModal(props) {
   const [show, setShow] = useState(false);

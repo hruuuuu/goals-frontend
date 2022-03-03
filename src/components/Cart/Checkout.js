@@ -1,35 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards';
-import axios from 'axios';
-import { API_URL } from '../../utils/config';
+import 'react-credit-cards/lib/styles.scss';
 
-//stripe
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './CheckoutForm';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
 
 import { useCartList } from '../../context/cart';
 
-import 'react-credit-cards/lib/styles.scss';
-
-//使用Stripe 可發布 API 密鑰調用以配置 Stripe 庫
-const stripePromise = loadStripe(
-  'pk_test_51KYlXkGyrXHwttrEikt5K1JD2Rlckrde2rpOcPiPrWgFx4ka5JtiJy2H7K6xF4YXkCnQtXH8DFCSQNZklXDFNCh100Tbs0roPY'
-);
-
 function Checkout(props) {
-  const { shippingData, setShippingData } = props;
   const { activeStep, setActiveStep } = props;
   const { orderTotal, setOrderTotal } = props;
   const { couponId, setCouponId } = props;
+  const { shippingData, setShippingData } = props;
   const { cartListData, setCartListData } = useCartList();
-  // const [creditcard, setCreditcard] = useState({
-  //   cvc: '',
-  //   expiry: '',
-  //   focus: '',
-  //   name: '',
-  //   number: '',
-  // });
+  const [creditcard, setCreditcard] = useState({
+    cvc: '',
+    expiry: '',
+    focus: '',
+    name: '',
+    number: '',
+  });
 
   //取得已登入會員的ID
   const userID = JSON.parse(localStorage.getItem('user'));
@@ -52,82 +43,67 @@ function Checkout(props) {
     member_id: userID.id,
   };
 
-  // const handleInputFocus = (e) => {
-  //   setCreditcard({ ...creditcard, focus: e.target.name });
-  //   // console.log(e.target.name);
-  // };
+  // useEffect(() => {
+  //   const script = document.createElement('script');
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
+  //   script.src = 'https://js.tappaysdk.com/tpdirect/v5.8.0';
+  //   script.async = true;
 
-  //   setCreditcard({ ...creditcard, [name]: value });
-  // };
-
-  // //stepper
-  // const handleBack = () => {
-  //   setActiveStep(activeStep - 1);
-  // };
-
-  // const handleNext = () => {
-  //   setActiveStep(2);
-  // };
-
-  // //送出訂單 ->傳回資料庫
-  // async function handleSubmit(e) {
-  //   //orderDetails
-  //   let orderDetailsResponse = await axios.post(
-  //     `${API_URL}/cart/orderDetails`,
-  //     cartDetails
-  //   );
-  //   //order_items
-  //   let orderItemsResponse = await axios.post(
-  //     `${API_URL}/cart/orderItems`,
-  //     cartItems
+  //   TPDirect.setupSDK(
+  //     123568,
+  //     'app_SJt1kIRl8dAuuyaFG2xT3hIm9GTi0weRElq2C8kPSPkMDgzI40mMXeTN7oTz',
+  //     'sandbox'
   //   );
 
-  //   //coupon_receive
-  //   let couponReceiveResponse = await axios.post(
-  //     `${API_URL}/cart/orderItemsCoupon`,
-  //     usedCouponData
-  //   );
-  // }
+  //   document.body.appendChild(script);
 
-  //stripe
-  const [clientSecret, setClientSecret] = useState('');
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch('/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: Number(orderTotal),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
-
-  const appearance = {
-    theme: 'stripe',
+  const handleInputFocus = (e) => {
+    setCreditcard({ ...creditcard, focus: e.target.name });
+    // console.log(e.target.name);
   };
-  const options = {
-    clientSecret,
-    appearance,
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setCreditcard({ ...creditcard, [name]: value });
   };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  //送出訂單 ->傳回資料庫
+  async function handleSubmit(e) {
+    //orderDetails
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails
+    );
+    //order_items
+    let orderItemsResponse = await axios.post(
+      `${API_URL}/cart/orderItems`,
+      cartItems
+    );
+
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
+  }
 
   return (
     <>
       <div className="container checkoutBox" id="PaymentForm">
-        {/* <div className="my-3">
+        <div className="my-3">
           <h5>付款資訊</h5>
-        </div> */}
-        <div>
-          {clientSecret && (
-            <Elements options={options} stripe={stripePromise}>
-              <CheckoutForm />
-            </Elements>
-          )}
         </div>
-        {/* <div className="mb-2">
+        <div className="">
           <Cards
             cvc={creditcard.cvc}
             expiry={creditcard.expiry}
@@ -136,8 +112,8 @@ function Checkout(props) {
             number={creditcard.number}
           />
         </div>
-        <form>
-          <div className="mb-2">
+        <form className="row" id="checkoutForm">
+          <div className="col-12 g-3">
             <label htmlFor="firstName" className="form-label label_fs">
               持卡人
             </label>
@@ -150,11 +126,10 @@ function Checkout(props) {
               placeholder="請輸入持卡人姓名"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              required
             />
           </div>
 
-          <div className="mb-2 card-number-group">
+          <div className="col-12 g-3 card-number-group">
             <label htmlFor="card-number" className="form-label label_fs">
               卡號
             </label>
@@ -167,67 +142,57 @@ function Checkout(props) {
               placeholder="**** **** **** ****"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
-              required
             />
           </div>
-          <div className="row g-2 mb-2">
-            <div className="col-6 expiration-date-group">
-              <label htmlFor="expiration-date" className="form-label label_fs">
-                有效日期
-              </label>
-              <input
-                type=""
-                className="form-control expiration-date"
-                id=""
-                name="expiry"
-                value={creditcard.expiry}
-                placeholder="MM / YY"
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
-              />
-            </div>
 
-            <div className="col-6 cvc-group">
-              <label htmlFor="cvc" className="form-label label_fs">
-                CVC
-              </label>
-              <input
-                type=""
-                className="form-control cvc"
-                id="cvc"
-                name="cvc"
-                value={creditcard.cvc}
-                placeholder="安全碼"
-                onChange={handleInputChange}
-                onFocus={handleInputFocus}
-              />
-            </div>
+          <div className="col-6 g-3 expiration-date-group">
+            <label htmlFor="expiration-date" className="form-label label_fs">
+              有效日期
+            </label>
+            <input
+              type=""
+              className="form-control expiration-date"
+              id=""
+              name="expiry"
+              value={creditcard.expiry}
+              placeholder="MM / YY"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+            />
           </div>
-          <hr />
-          <div className="row justify-content-between">
-            <div className="col-6 mt-2">
-              <div className="d-grid">
-                <button className="btn_outline p-2" onClick={handleBack}>
-                  上一步
-                </button>
-              </div>
-            </div>
-            <div className="col-6 mt-2">
-              <div className="d-grid">
-                <button
-                  className="btn_outline btn_grn p-2"
-                  // disabled={disabled}
-                  onClick={() => {
-                    handleSubmit();
-                    handleNext();
-                  }}
-                >
-                  確認付款
-                </button>
-              </div>
-            </div>
+
+          <div className="col-6 g-3 cvc-group">
+            <label htmlFor="cvc" className="form-label label_fs">
+              CVC
+            </label>
+            <input
+              type=""
+              className="form-control cvc"
+              id="cvc"
+              name="cvc"
+              value={creditcard.cvc}
+              placeholder="安全碼"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+            />
           </div>
-        </form> */}
+          <hr className="mt-4" />
+          <div className="col-6 g-3 d-grid">
+            <button className="btn_outline p-2" onClick={props.handleBack}>
+              上一步
+            </button>
+          </div>
+          <div className="col-6 g-3 d-grid">
+            <button
+              className="btn_outline btn_grn p-2"
+              form="checkoutForm"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              完成付款
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

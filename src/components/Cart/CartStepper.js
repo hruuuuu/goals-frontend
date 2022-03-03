@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import axios from 'axios';
+// import axios from 'axios';
 
-import { API_URL } from '../../utils/config';
+// import { API_URL } from '../../utils/config';
 
 import Shipping from './Shipping';
 import Checkout from './Checkout';
@@ -121,23 +121,24 @@ function CartStepper(props) {
         ) : (
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
-              <Checkout
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                shippingData={shippingData}
-                setShippingData={setShippingData}
-                orderTotal={orderTotal}
-                setOrderTotal={setOrderTotal}
-                couponId={couponId}
-                setCouponId={setCouponId}
-              />
+              {activeStep === steps.length - 1 ? (
+                <Checkout
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                  orderTotal={orderTotal}
+                  setOrderTotal={setOrderTotal}
+                  couponId={couponId}
+                  setCouponId={setCouponId}
+                />
               ) : (
-              <Shipping
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-                shippingData={shippingData}
-                setShippingData={setShippingData}
-              />
+                <Shipping
+                  activeStep={activeStep}
+                  setActiveStep={setActiveStep}
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
+                />
               )}
             </div>
           </React.Fragment>
