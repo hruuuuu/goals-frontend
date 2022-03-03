@@ -19,7 +19,6 @@
       border-radius: $border-radius__key-vision;
       overflow: hidden;
 
-      /* Center slide text vertically */
       display: -webkit-box;
       display: -ms-flexbox;
       display: -webkit-flex;
@@ -32,6 +31,11 @@
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
+      @media screen and(max-width: $md) {
+        width: 100%;
+
+        border-radius: 0;
+      }
       &.swiper-slide-duplicate-active,
       &.swiper-slide.swiper-slide-active {
         img {
@@ -59,9 +63,16 @@
 
       background: $color--gray5;
       opacity: 1;
+      @media screen and(max-width: $md) {
+        background: $color--light;
+      }
     }
     .swiper-pagination-bullet-active {
       background: $color--primary;
+    }
+    .swiper-pagination-vertical.swiper-pagination-bullets .swiper-pagination-bullet,
+    .swiper-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+      margin: var(--swiper-pagination-bullet-vertical-gap, 4px) 0;
     }
     .swiper-lazy-loading {
       opacity: 0;

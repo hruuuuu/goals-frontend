@@ -87,6 +87,18 @@
   }
 }
 
+@keyframes translateX {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(1rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .animation {
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;

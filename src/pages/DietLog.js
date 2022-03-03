@@ -43,8 +43,8 @@ function DietLog() {
       <Header />
       <div className="l-dietlog">
         <div className="container">
-          <div className="row gx-5">
-            <div className="col-5">
+          <div className="row gx-5 gy-5 gy-xl-0">
+            <div className="col-12 col-xl-5">
               <LogSidebar
                 getDietlogData={getDietlogData}
                 refresh={refresh}
@@ -53,7 +53,7 @@ function DietLog() {
                 setEditMode={setEditMode}
               />
             </div>
-            <div className="col-7">
+            <div className="col-12 col-xl-7">
               <LogList
                 getDietlogData={getDietlogData}
                 refresh={refresh}

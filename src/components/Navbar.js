@@ -187,6 +187,7 @@ function Navbar() {
               navLinks={navLinks}
               navActions={navActions}
               isHome={isHome}
+              isTop={isTop}
             />
           </nav>
         </div>

@@ -62,6 +62,7 @@ $border-radius__small-block: $border-radius__input;
 $border-radius__floating-filter: 0 0 1.875rem 1.875rem;
 $border-radius__key-vision: 0 0 18.75rem;
 $border-radius__home-small-block: 5rem 0 5rem 0;
+$border-radius__home-small-block--mobile: 3.125rem 0 3.125rem 0;
 $border-radius__home-block--right: 12.5rem 0 0 0;
 $border-radius__home-block--left: 0 0 12.5rem 0;
 
@@ -104,6 +105,7 @@ $height__product-intro: 28rem;
 $height__product-list: 34rem;
 $height__diet-intro: 27.25rem;
 $height__list-num: 4rem;
+$height__block--mobile: 28rem;
 
 /* padding */
 $padding__modal: 2.5rem;
@@ -139,6 +141,8 @@ $md: 767px;
 $lg: 991px;
 $xl: 1199px;
 $xxl: 1399px;
+
+$img__home-bg: url("../img/home/pic/bg.png");
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";

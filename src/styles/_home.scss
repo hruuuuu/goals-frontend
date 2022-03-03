@@ -1,14 +1,18 @@
 .l-home {
   height: max-content;
-  background-image: url("../img/home/pic/bg.png");
+  background-image: $img__home-bg;
   background-attachment: fixed;
+
+  @media screen and (max-width: $md) {
+    background-image: none;
+  }
   &__main {
     padding: 3.75rem 0;
     overflow: hidden;
   }
   &__key-vision {
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - $height__navbar);
 
     position: relative;
 
@@ -37,8 +41,10 @@
   bottom: 15%;
 
   transition: $transition;
+  @include interaction__link;
 
   transform: rotate(90deg);
+
   &::after {
     content: "";
     height: 0.0625rem;
@@ -52,10 +58,25 @@
     left: 90%;
     top: 50%;
     transform: translateY(-50%);
+
+    animation: translateX 2s ease-in-out infinite;
   }
   &:hover {
     &::after {
       transform: translate(10%, -50%);
+    }
+  }
+  @media screen and (max-width: $md) {
+    width: max-content;
+
+    color: $color--light;
+
+    left: 50%;
+    bottom: 15%;
+    transform: translateX(-50%) rotate(90deg);
+    &::after {
+      background: $color--light;
+      animation: translateX 2s ease-in-out infinite;
     }
   }
 }
@@ -74,6 +95,9 @@
   }
   &--start {
     align-items: flex-start;
+    @media screen and(max-width: $lg) {
+      align-items: center;
+    }
   }
   &__icon {
     width: 2.75rem;
@@ -83,32 +107,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @media screen and (max-width: $lg) {
+      margin-bottom: 0.5rem;
+    }
   }
   &__title {
     margin-bottom: 1rem;
     color: $color--primary;
     font-weight: bold;
     letter-spacing: 0.1875rem;
+    text-align: center;
+    @media screen and (max-width: $lg) {
+      margin-bottom: 0.5rem;
+      @include h5;
+      color: $color--primary;
+      font-weight: bold;
+      letter-spacing: 0.1875rem;
+    }
   }
   &__subtitle {
     @include text--medium-bold;
     color: $color--gray3;
+    @media screen and (max-width: $lg) {
+      text-align: center;
+    }
   }
   &__text {
     margin-bottom: 0.75rem;
     @include text--medium-bold;
+    text-align: center;
     &:last-of-type {
       margin-bottom: 0;
     }
   }
   &__hr {
     margin: 2rem 0 2.5rem 0;
+    @media screen and(max-width: $lg) {
+      margin: 1.5rem 0 1.5rem 0;
+    }
   }
   &__heading {
     margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media screen and(max-width: $lg) {
+      @include h6;
+    }
   }
   &__context {
     margin-bottom: 1rem;
@@ -149,10 +194,19 @@
     overflow: hidden;
 
     border-radius: $border-radius__home-small-block;
+    @media screen and (max-width: $lg) {
+      height: 8.75rem;
+      margin-bottom: 1rem;
+
+      border-radius: $border-radius__home-small-block--mobile;
+    }
   }
   &__heading {
     margin-bottom: 1rem;
     @include text--medium-bold;
+    @media screen and (max-width: $lg) {
+      margin-bottom: 0;
+    }
   }
   &__description {
     @include text--normal;
@@ -163,10 +217,13 @@
 }
 
 .c-section {
+  margin-bottom: 5rem;
+
   z-index: 0;
-  &:not(.l-home__diet-intro) {
-    margin-bottom: 5rem;
+  @media screen and (max-width: $lg) {
+    margin-bottom: 2.5rem;
   }
+
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -179,6 +236,9 @@
     font-weight: 300;
     &::last-of-type {
       margin-bottom: 0;
+    }
+    @media screen and (max-width: $lg) {
+      text-align: center;
     }
   }
   &__block {
@@ -193,6 +253,10 @@
       border-radius: $border-radius__home-block--right;
 
       left: 0;
+      @media screen and (max-width: $lg) {
+        width: 100vw;
+        left: auto;
+      }
     }
     &--left {
       width: $width__block-single;
@@ -203,6 +267,16 @@
 
       right: 0;
       z-index: -1;
+      @media screen and (max-width: $lg) {
+        width: 90vw;
+        height: $height__block--mobile;
+        left: 0;
+        right: auto;
+        &[section="log"] {
+          width: 100vw;
+          left: auto;
+        }
+      }
     }
     &--both-left {
       width: $width__block-both;
@@ -210,7 +284,12 @@
 
       border-radius: $border-radius__home-block--left;
 
-      right: 3.75rem;
+      right: 2rem;
+      @media screen and (max-width: $xl) {
+        border-radius: $border-radius__block;
+
+        right: 0;
+      }
     }
     &--both-right {
       width: $width__block-both;
@@ -218,7 +297,12 @@
 
       border-radius: $border-radius__home-block--right;
 
-      left: 3.75rem;
+      left: 2rem;
+      @media screen and (max-width: $xl) {
+        border-radius: $border-radius__block;
+
+        left: 0;
+      }
     }
   }
   &__row {
@@ -227,6 +311,9 @@
     }
     &[section="product-list"] {
       height: $height__product-list;
+    }
+    @media screen and (max-width: $lg) {
+      height: max-content !important;
     }
   }
   &__title {
@@ -252,6 +339,11 @@
   }
   &__wrapper {
     padding: 4.75rem 0 0 0;
+    @media screen and (max-width: $lg) {
+      &[section="list"] {
+        padding: 0;
+      }
+    }
   }
   &__item {
     margin-bottom: 1.5rem;
@@ -283,6 +375,9 @@
     @include text--normal;
     font-weight: 300;
     color: $color--gray3;
+  }
+  &__container {
+    height: $height__block--mobile;
   }
 }
 

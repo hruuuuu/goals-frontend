@@ -533,6 +533,26 @@ h6 {
       box-shadow: none;
     }
   }
+  &--light {
+    border: none;
+    background: $color--light;
+    border-radius: $border-radius__btn;
+    color: $color--primary;
+    box-shadow: $box-shadow__element;
+
+    transition: $transition;
+    &:hover {
+      color: $color--light;
+      background: $color--hover;
+      box-shadow: none;
+    }
+    &:focus,
+    &:active {
+      color: $color--light;
+      background: $color--active;
+      box-shadow: none;
+    }
+  }
   &--plain {
     border: none;
     background: $color--primary;
