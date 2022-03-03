@@ -1,13 +1,19 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import MemberSidebar from '../components/MemberSidebar';
 import EditProfile from '../components/Member/EditProfile';
 import EditPassWord from '../components/Member/EditPassword';
 import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
+import { useLogin } from '../context/LoginStatus';
+import { Navigate } from 'react-router-dom';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
+  const { login } = useLogin();
+  if (!login) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>

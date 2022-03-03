@@ -172,7 +172,7 @@
         padding: 1.5rem 0 1.5rem 0;
         margin-top: 1rem;
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1rem;
 
         .another-login_title {
             color: $color--gray3;
@@ -188,41 +188,13 @@
             box-shadow: none;
         }
 
-        .another-login_button {
-            background-color: $color--light;
-            padding: 0.5rem 1rem;
-            font-size: 2rem;
-            line-height: 1.5;
-            border: 1px solid $color--active;
-            border-radius: 0.25rem;
+        button {
+            border-radius: 0.625rem !important;
         }
 
-        // .google {
-        //     color: $color--info;
-
-        //     :hover {
-        //         color: $color--info;
-        //     }
-        // }
         .kep-login-facebook {
             text-transform: capitalize;
-        }
-
-        .line {
-            color: #00B900;
-
-            :hover {
-                color: #00B900;
-            }
-        }
-
-        .facebook {
-            color: #3b5998;
-
-            :hover {
-                color: #3b5998;
-            }
-
+            box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px;
         }
     }
 
@@ -273,6 +245,11 @@
     }
 }
 
+/*** Alert Button***/
+.swal2-styled.swal2-confirm {
+    background-color: $color--primary !important;
+}
+
 /*** Tablet Mode ***/
 @media screen and (max-width: 1023px) {
     .signup-page {
@@ -291,17 +268,7 @@
         width: 80%;
 
         .another-login_title-wrapper {
-            font-size: 1rem;
-        }
-
-        .another-login_buttons {
-
-            // .google,
-            .facebook,
-            .line {
-                padding: .3rem .8rem;
-                font-size: 1.5rem;
-            }
+            font-size: .9rem;
         }
     }
 }
@@ -346,14 +313,6 @@
             font-size: 1rem;
         }
 
-        .another-login_buttons {
-
-            // .google,
-            .facebook,
-            .line {
-                padding: .2rem .5rem;
-            }
-        }
     }
 }
 

@@ -38,15 +38,16 @@ function CartStepper(props) {
   });
   const { handleShow } = props;
   const { orderTotal, setOrderTotal } = props;
+  const { member, setMember } = props;
   const { couponId, setCouponId } = props;
 
   //取得已登入會員的ID
-  const userID = JSON.parse(localStorage.getItem('user'));
+  // const userID = JSON.parse(localStorage.getItem('user'));
   // console.log(userID);
 
   //coupon_receive
   const usedCouponData = {
-    member_id: userID.id,
+    member_id: member.id,
     coupon_id: couponId,
   };
   // console.log(usedCouponData);
@@ -61,7 +62,7 @@ function CartStepper(props) {
   const cartDetails = {
     ...shippingData,
     total: Number(orderTotal),
-    member_id: userID.id,
+    member_id: member.id,
   };
   // console.log(cartDetails);
 
@@ -94,7 +95,8 @@ function CartStepper(props) {
     //orderDetails
     let orderDetailsResponse = await axios.post(
       `${API_URL}/cart/orderDetails`,
-      cartDetails
+      cartDetails,
+      usedCouponData
     );
     //order_items
     let orderItemsResponse = await axios.post(

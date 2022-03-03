@@ -12,6 +12,7 @@ function Footer() {
     [
       { id: 3, path: `/blog`, name: '健康新知' },
       { id: 4, path: `/calculator`, name: '計算機' },
+      { id: 5, path: `/dietlog`, name: '飲食日誌' },
     ],
   ];
   const footerSocialMedias = [

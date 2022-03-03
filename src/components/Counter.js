@@ -1,15 +1,15 @@
 import { React, useState } from 'react';
 
 function Counter(props) {
-  const { number, setNumber } = props;
+  const { number, setNumber, show } = props;
   return (
     <>
-      <div className="c-counter">
+      <div className={show ? 'c-counter w-50 mobile-counter' : 'c-counter'}>
         <button
           type="button"
           className="c-counter__btn"
           onClick={() => {
-            setNumber(number - 1);
+            number <= 1 ? setNumber(1) : setNumber(number - 1);
           }}
         >
           <i className="fas fa-minus e-icon c-counter__icon"></i>
