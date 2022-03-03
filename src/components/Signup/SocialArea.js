@@ -14,9 +14,14 @@ const SocialArea = ({ handleGoogleLogIn, setLogin, setIsSocial }) => {
       Swal.fire({
         icon: 'error',
         html: '授權失敗',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          history('/');
+          return;
+        }
       });
-      history('/');
-      return;
     }
     const sendFBData = await axios.post(
       `${API_URL}/social/facebook`,
@@ -26,14 +31,17 @@ const SocialArea = ({ handleGoogleLogIn, setLogin, setIsSocial }) => {
       }
     );
     if (sendFBData.status === 200 && sendFBData.data.code < 30000) {
-      setLogin(true);
-      setIsSocial(true);
       Swal.fire({
         icon: 'success',
         html: sendFBData.data.msg,
-      });
-      setTimeout(() => {
-        history('/');
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setLogin(true);
+          setIsSocial(true);
+          history('/');
+        }
       });
     }
   };

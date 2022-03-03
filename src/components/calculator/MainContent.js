@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header';
-import CalculatorForm from './CalculatorForm';
+import Bmr from './Bmr.js';
 import RecGood from './RecGood';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import desImg from '../../img/calculator/description.jpg';
 import logoOriginal from '../../img/common/logo--original.svg';
 
 const MainContent = () => {
+  const [calories, setCalories] = useState('');
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
   return (
     <>
       <div className="main-content">
         <Header />
-        <section className="l-guide">
+        <section className="l-guide" data-aos="fade-up">
           <div className="container">
             <div className="right_cont model">
               <div className="right_cont__pic">
@@ -46,7 +56,7 @@ const MainContent = () => {
         <section className="l-description">
           <div className="container">
             <div className="des-left">
-              <div className="des-left__top model">
+              <div className="des-left__top model" data-aos="fade-right">
                 <div className="model__head">
                   <div className="model__head--title">
                     TDEE、BMR與減脂的關係
@@ -63,7 +73,7 @@ const MainContent = () => {
                   </p>
                 </div>
               </div>
-              <div className="des-left__bottom model">
+              <div className="des-left__bottom model" data-aos="fade-right">
                 <div className="text-box">
                   <div className="model__head">
                     <div className="model__head--title">基礎代謝率 BMR</div>
@@ -102,7 +112,7 @@ const MainContent = () => {
                 </div>
               </div>
             </div>
-            <div className="des-right">
+            <div className="des-right" data-aos="fade-up-left">
               <div className="des-right__deco">
                 <img className="img-responsive" src={logoOriginal} alt="logo" />
               </div>
@@ -113,15 +123,16 @@ const MainContent = () => {
           </div>
         </section>
         <section className="l-calculator">
-          <div className="model__head model__head--sec">
+          <div className="model__head model__head--sec" data-aos="fade-up">
             <div className="model__head--deco-text">GOALS CALCULATOR</div>
             <div className="model__head--title">TDEE/ BMR 計算機</div>
             <div className="model__head--subtitle">
               果實帶您了解TDEE與BMR的不同
             </div>
           </div>
-          <div className="container">
-            <CalculatorForm />
+          <div className="container" data-aos="fade-up">
+            {/* <CalculatorForm /> */}
+            <Bmr calories={calories} setCalories={setCalories} />
           </div>
           <div className="explan">
             <div className="container">
@@ -158,16 +169,7 @@ const MainContent = () => {
           </div>
         </section>
         <section className="l-recommenedGood">
-          <div className="model__head model__head--sec">
-            <div className="model__head--deco-text">RECOMMENED GOODS</div>
-            <div className="model__head--title">果實推薦三餐組合</div>
-            <div className="model__head--subtitle">
-              依照您的TDEE計算結果量身打造的餐食組合
-            </div>
-          </div>
-          <div className="container">
-            <RecGood />
-          </div>
+          <RecGood calories={calories} />
         </section>
       </div>
     </>

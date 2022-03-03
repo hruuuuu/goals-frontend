@@ -12,11 +12,23 @@ import { useShow } from '../../context/showProductDetail';
 import { useCategory } from '../../context/products';
 import { useActivity } from '../../context/activity';
 import { useCartList } from '../../context/cart';
+import { useLogin } from '../../context/LoginStatus';
 
 import ProductDetailFavIcon from './ProductDetailFavIcon';
 import Counter from '../Counter';
+import dayjs from 'dayjs';
 
 function ProductDetail(props) {
+  const history = useNavigate();
+  const [showComment, setShowComment] = useState(false);
+  const [commentDetail, setCommentDetail] = useState([]);
+  const [newComment, setNewComment] = useState({
+    product_id: '',
+    comment: '',
+    date: '',
+    user_id: '',
+  });
+  const { user, login, commentStatus, setCommentStatus } = useLogin();
   const [number, setNumber] = useState(1);
   const { show, setShow } = useShow();
   const navigate = useNavigate();
@@ -69,6 +81,30 @@ function ProductDetail(props) {
     }
   };
 
+  const getComments = async () => {
+    if (productId) {
+      const commentsData = await axios.post(
+        `${API_URL}/comment`,
+        { product_id: productId },
+        {
+          withCredentials: true,
+        }
+      );
+      const comments = commentsData.data.data;
+      setCommentDetail([...comments]);
+    }
+  };
+
+  // 檢查用戶是否合資格留下評論
+  const checkUserEligible = async () => {
+    const checkUserCommentEligible = await axios.post(
+      `${API_URL}/comment/check`,
+      { product_id: productId, user_id: user.userID },
+      { withCredentials: true }
+    );
+    setCommentStatus(checkUserCommentEligible.data.status);
+  };
+
   /* 設定url一進入/:productId就開啟modal*/
   useEffect(() => {
     if (productId) {
@@ -87,8 +123,15 @@ function ProductDetail(props) {
       });
       getDetail();
       setShow({ ...show, in: true });
+      if (login) {
+        checkUserEligible();
+      }
     }
-  }, [productId]);
+  }, [productId, user.userID]);
+
+  useEffect(() => {
+    getComments();
+  }, [productId, showComment]);
 
   /* 拿到CategoryContext的資料後跟product的category_id關聯 */
   useEffect(() => {
@@ -190,6 +233,74 @@ function ProductDetail(props) {
     }
   };
 
+  const handleCommentOpen = () => {
+    setShowComment(true);
+  };
+
+  const handleCommentClose = () => {
+    setShowComment(false);
+  };
+
+  const handleCommentChange = (e) => {
+    setNewComment({
+      product_id: productId,
+      newComment: e.target.value,
+      date: dayjs().format('YYYY-MM-DD'),
+      user_id: user.userID,
+    });
+  };
+
+  const handleCommentAdd = async () => {
+    const commentPost = await axios.post(`${API_URL}/comment/new`, newComment, {
+      withCredentials: true,
+    });
+    if (commentPost.data.code < 30020) {
+      Swal.fire({
+        icon: 'error',
+        html: commentPost.data.msg,
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          setShowComment(false);
+          history('/');
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'success',
+        html: commentPost.data.msg,
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setShowComment(false);
+          history(`/product/${productId}`);
+        }
+      });
+    }
+  };
+
+  const handleHideUserInfo = (email) => {
+    const getUserAccount = email.split('@')[0];
+    const getUserAccountDomain = email.split(getUserAccount)[1];
+    let replaceStr = '';
+    // 要被取代的字串 ex: test -> es要被取代
+    const replacedStr = getUserAccount.slice(1, getUserAccount.length - 1);
+    // 要被取代的字串長度
+    const replacedStrLength = getUserAccount.slice(
+      1,
+      getUserAccount.length - 1
+    ).length;
+
+    for (let i = 0; i < replacedStrLength; i++) {
+      replaceStr += '*';
+    }
+    return getUserAccount
+      .replace(replacedStr, replaceStr)
+      .concat(getUserAccountDomain);
+  };
+
   return (
     <>
       <Modal
@@ -211,7 +322,7 @@ function ProductDetail(props) {
               <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
             </button>
             <div className="row">
-              <div className="col-12 col-md-7">
+              <div className="col-12 col-md-6 d-flex flex-column justify-content-between">
                 <div className="c-product-detail__cover">
                   <img
                     className="c-product-detail__img"
@@ -219,9 +330,70 @@ function ProductDetail(props) {
                     alt="product"
                   />
                 </div>
+                {/* 臨時調整區開始 */}
+                <div className="c-product-detail__footer">
+                  <div className="c-product-detail__footer-wrapper">
+                    <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
+                    <div className="row gx-2">
+                      <div className="col-5 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
+                        <Counter
+                          show={show}
+                          number={number}
+                          setNumber={setNumber}
+                        />
+                        <div className="d-none d-md-flex flex-column align-items-end ps-5">
+                          {!isNoActivity && (
+                            <h6 className="c-product-detail__o-price">
+                              ${price}
+                            </h6>
+                          )}
+                          <h2
+                            className={`c-product-detail__price ${
+                              isNoActivity ? 'c-product-detail__price--top' : ''
+                            }`}
+                          >
+                            ${discountPrice}
+                          </h2>
+                        </div>
+                      </div>
+                      <div className="col-7 col-md-12">
+                        {!login || !commentStatus ? (
+                          <button
+                            className="e-btn e-btn--primary e-btn--w100 e-btn--large"
+                            onClick={addCart}
+                          >
+                            加入購物車
+                          </button>
+                        ) : (
+                          <div className="d-flex justify-content-between">
+                            <button
+                              className="e-btn e-btn--primary e-btn--w100 e-btn--large me-2"
+                              onClick={addCart}
+                            >
+                              加入購物車
+                            </button>
+                            <button
+                              className="e-btn e-btn--primary e-btn--w100 e-btn--large comment-text"
+                              onClick={handleCommentOpen}
+                            >
+                              撰寫評論
+                            </button>
+                            <button
+                              className="e-btn e-btn--primary e-btn--w50 e-btn--large comment-text-icon"
+                              onClick={handleCommentOpen}
+                            >
+                              <i className="fas fa-comments"></i>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* 臨時調整區結束 */}
               </div>
-              <div className="col-12 col-md-5">
-                <div className="d-flex flex-column justify-content-between p-3 p-md-0">
+              <div className="col-12 col-md-6">
+                <div className="d-flex flex-column justify-content-between p-3 p-md-0 product-info">
                   <div className="c-product-detail__scroll p-md-0">
                     <div className="position-relative">
                       <div className="e-tag e-tag--normal">{category.name}</div>
@@ -275,40 +447,85 @@ function ProductDetail(props) {
                         </div>
                         <p className="c-product-detail__text">{ingredients}</p>
                       </div>
-                    </div>
-                  </div>
-                  <div className="c-product-detail__footer">
-                    <div className="c-product-detail__footer-wrapper">
-                      <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
-                      <div className="row">
-                        <div className="col-6 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
-                          <Counter number={number} setNumber={setNumber} />
-                          <div className="d-none d-md-flex flex-column align-items-end ps-5">
-                            {!isNoActivity && (
-                              <h6 className="c-product-detail__o-price">
-                                ${price}
+                      {/* 臨時調整區開始 */}
+                      <div className="c-product-detail__description">
+                        <Modal
+                          show={showComment}
+                          onHide={handleCommentClose}
+                          animation={false}
+                          fullscreen="md-down"
+                          centered
+                        >
+                          <div className="p-5">
+                            <div className="comment-form">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="comment-title"
+                                  className="form-label"
+                                >
+                                  商品名稱
+                                </label>
+                                <input
+                                  type="text"
+                                  id="comment-title"
+                                  value={name}
+                                  className="form-control"
+                                  disabled
+                                />
+                              </div>
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="comment-content"
+                                  className="form-label"
+                                >
+                                  評論
+                                </label>
+                                <textarea
+                                  id="comment-content"
+                                  rows="3"
+                                  placeholder="請留下您對此商品之評論"
+                                  className="form-control"
+                                  onChange={handleCommentChange}
+                                ></textarea>
+                              </div>
+                              <button
+                                type="submit"
+                                className="e-btn e-btn--primary e-btn--w50 e-btn--medium float-end"
+                                onClick={() => handleCommentAdd()}
+                              >
+                                提交評論
+                              </button>
+                            </div>
+                          </div>
+                        </Modal>
+                        <div className="c-product-detail__comments">
+                          <div className="card border-0">
+                            <div className="c-product-detail__subtitle">
+                              <i className="fas fa-comments e-icon e-icon--left c-product-detail__icon"></i>
+                              <h6 className="c-product-detail__heading">
+                                商品評論
                               </h6>
-                            )}
-                            <h2
-                              className={`c-product-detail__price ${
-                                isNoActivity
-                                  ? 'c-product-detail__price--top'
-                                  : ''
-                              }`}
-                            >
-                              ${discountPrice}
-                            </h2>
+                            </div>
+                            {commentDetail.map((comment, i) => (
+                              <div
+                                className="card-body c-product-detail__comment-background"
+                                key={i}
+                              >
+                                <h6 className="c-product-detail__comment-title">
+                                  {handleHideUserInfo(comment.member_email)}
+                                </h6>
+                                <p className="c-product-detail__comment-text">
+                                  {comment.comment}
+                                </p>
+                                <p className="c-product-detail__comment-subTitle">
+                                  - {comment.create_at}
+                                </p>
+                              </div>
+                            ))}
                           </div>
                         </div>
-                        <div className="col-6 col-md-12">
-                          <button
-                            className="e-btn e-btn--primary e-btn--w100 e-btn--large"
-                            onClick={addCart}
-                          >
-                            加入購物車
-                          </button>
-                        </div>
                       </div>
+                      {/* 臨時調整區結束 */}
                     </div>
                   </div>
                 </div>

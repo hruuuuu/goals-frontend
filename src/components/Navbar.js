@@ -49,7 +49,6 @@ function Navbar() {
     });
 
     if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
-      setLogin(false);
       setUser({
         id: '',
         email: '',
@@ -58,19 +57,30 @@ function Navbar() {
         setIsSocial(false);
       }
       Swal.fire({
-        icon: 'success',
-        html: logoutResult.data.msg,
-      });
-      setTimeout(() => {
-        history('/');
+        title: '確定要登出嗎？',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '登出',
+        cancelButtonText: '返回',
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history('/login');
+          setLogin(false);
+        }
       });
     } else {
       Swal.fire({
         icon: 'error',
         html: logoutResult.data.msg,
-      });
-      setTimeout(() => {
-        history('/');
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (!result.isConfirmed) {
+          history('/');
+        }
       });
     }
   };
@@ -103,28 +113,16 @@ function Navbar() {
     },
   ];
 
-  const navActions = [
+  const navActions1 = [
     {
       id: 1,
-      name: !login ? '註冊/登入' : '登出',
-      iconMobile: !login ? (
-        <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ) : (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
-          onClick={handleLogout}
-        ></i>
+      name: '註冊/登入',
+      iconMobile: (
+        <i className="fas fa-sign-in-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
-      iconDesktop: !login ? (
-        <i className="fas fa-user l-navbar__font"></i>
-      ) : (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font"
-          onClick={handleLogout}
-        ></i>
-      ),
+      iconDesktop: <i className="fas fa-sign-in-alt l-navbar__font"></i>,
       tagDesktop: ``,
-      route: `${!login ? '/login' : '/logout'}`,
+      route: '/login',
     },
     {
       id: 2,
@@ -146,18 +144,69 @@ function Navbar() {
       tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
       route: `/member/cart`,
     },
+  ];
+
+  const navActions2 = [
+    {
+      id: 1,
+      name: '登出',
+      iconMobile: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
+          onClick={handleLogout}
+        ></i>
+      ),
+      iconDesktop: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font"
+          onClick={handleLogout}
+        ></i>
+      ),
+      tagDesktop: ``,
+      route: '/logout',
+    },
+    {
+      id: 2,
+      name: '會員',
+      iconMobile: (
+        <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-user l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/`,
+    },
+    {
+      id: 3,
+      name: '收藏清單',
+      iconMobile: (
+        <i className="fas fa-heart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-heart l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/fav`,
+    },
+    {
+      id: 4,
+      name: '購物車',
+      iconMobile: (
+        <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-shopping-cart l-navbar__font"></i>,
+      tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
+      route: `/member/cart`,
+    },
+    {
+      id: 5,
+      name: '優惠券',
+      iconMobile: (
+        <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/coupon`,
+    },
     // {
-    //   id: 4,
-    //   name: '優惠券',
-    //   iconMobile: (
-    //     <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-    //   ),
-    //   iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
-    //   tagDesktop: ``,
-    //   route: `/member/coupon`,
-    // },
-    // {
-    //   id: 5,
+    //   id: 6,
     //   name: '搜索',
     //   iconMobile: (
     //     <i className="fas fa-search l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -179,13 +228,13 @@ function Navbar() {
           <nav className="l-navbar__wrapper justify-content-center justify-content-lg-between">
             <NavbarDesktop
               navLinks={navLinks}
-              navActions={navActions}
+              navActions={!login ? navActions1 : navActions2}
               isHome={isHome}
               isTop={isTop}
             />
             <NavbarMobile
               navLinks={navLinks}
-              navActions={navActions}
+              navActions={!login ? navActions1 : navActions2}
               isHome={isHome}
               isTop={isTop}
             />

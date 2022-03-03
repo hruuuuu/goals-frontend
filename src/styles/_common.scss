@@ -406,7 +406,7 @@
 
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -447,7 +447,7 @@
 
     position: relative;
     &::before {
-      @include icon--absolute("\f0dc");
+      @include icon--absolute('\f0dc');
       color: $color--secondary;
       font-size: 1.2rem;
 
@@ -476,7 +476,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -493,7 +493,7 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute("\f105");
+      @include icon--absolute('\f105');
       color: $color--gray4;
       font-size: 1rem;
 
@@ -600,7 +600,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: "";
+        content: '';
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -609,7 +609,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: "";
+        content: '';
         width: 5px;
         height: 30px;
         position: absolute;
@@ -795,6 +795,8 @@
       border-top-left-radius: $border-radius__btn;
       border-bottom-left-radius: $border-radius__btn;
       border-top-right-radius: 0;
+
+      z-index: 20;
 
       position: fixed;
       top: 50%;
@@ -1109,7 +1111,7 @@
       padding: $padding__chat;
     }
     #{$_}__msg {
-      &[from="client"] {
+      &[from='client'] {
         color: $color--light;
         background: $color--info;
 
@@ -1118,7 +1120,7 @@
           left: -3rem;
         }
       }
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1140,7 +1142,7 @@
       margin-bottom: $padding__chat;
     }
     #{$_}__msg {
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--light;
         background: $color--info;
 
@@ -1149,7 +1151,7 @@
           left: -3rem;
         }
       }
-      &[from="client"] {
+      &[from='client'] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1183,4 +1185,29 @@
     position: absolute;
     bottom: 0;
   }
+}
+
+/*scrollTop Button*/
+.MuiButton-root.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  font-size: 30px;
+  color: #f8bc5d;
+  position: fixed;
+  right: 15px;
+  z-index: 93;
+  bottom: 5rem;
+  background: #fff;
+  border-radius: 99rem;
+  padding: 0;
+  min-width: initial;
+  svg {
+    background-color: #fff;
+    border-radius: 99rem;
+  }
+}
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: transparent !important;
+}
+
+.transition-btn {
+  transition: 0.5s ease all;
 }

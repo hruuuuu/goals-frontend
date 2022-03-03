@@ -7,15 +7,10 @@ import MemberSidebar from '../components/MemberSidebar';
 import FavList from '../components/Fav/FavList';
 import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
-import { useLogin } from '../context/LoginStatus';
-import { Navigate } from 'react-router-dom';
+import ScrollButton from '../components/ScrollButton';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);
-  const { login } = useLogin();
-  if (!login) {
-    return <Navigate to="/" />;
-  }
 
   return (
     <>
@@ -35,6 +30,7 @@ function Fav() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }

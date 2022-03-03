@@ -17,6 +17,7 @@ import { IMG_URL } from '../utils/config';
 import { API_URL } from '../utils/config';
 
 import BlogPost from '../components/Home/BlogPost';
+import ScrollButton from '../components/ScrollButton';
 
 import picSwiper1 from '../img/home/pic/swiper__1.jpg';
 import logoSlogan from '../img/common/illustration/logo--slogan.svg';
@@ -519,6 +520,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <ScrollButton />
     </>
   );
 }

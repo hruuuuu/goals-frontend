@@ -37,18 +37,24 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
           Swal.fire({
             icon: 'success',
             html: userProfile.msg,
-          });
-          setLogin(true);
-          setTimeout(() => {
-            history('/');
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              setLogin(true);
+              history('/');
+            }
           });
         } else {
           Swal.fire({
             icon: 'error',
             html: userProfile.msg,
-          });
-          setTimeout(() => {
-            history('/');
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+          }).then((result) => {
+            if (!result.isConfirmed) {
+              history('/');
+            }
           });
         }
       } else {
@@ -60,17 +66,23 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
           Swal.fire({
             icon: 'success',
             html: userProfile.msg,
-          });
-          setTimeout(() => {
-            history('/');
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history('/');
+            }
           });
         } else {
           Swal.fire({
             icon: 'error',
             html: userProfile.msg,
-          });
-          setTimeout(() => {
-            history('/');
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+          }).then((result) => {
+            if (!result.isConfirmed) {
+              history('/');
+            }
           });
         }
       }
