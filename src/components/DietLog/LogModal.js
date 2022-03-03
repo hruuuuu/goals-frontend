@@ -161,7 +161,7 @@ function LogModal(props) {
         onHide={handleClose}
         dialogClassName={`c-dietlog-modal c-modal c-modal__modal ${handleIn} ${handleOut}`}
         backdropClassName={`c-modal__backdrop ${handleIn} ${handleOut}`}
-        contentClassName="c-modal__wrapper"
+        contentClassName="c-modal__wrapper c-dietlog-modal__wrapper"
         centered
         animation={false}
         fullscreen="md-down"

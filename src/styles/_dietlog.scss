@@ -3,6 +3,11 @@
   width: 100%;
   height: max-content;
   min-height: 90vh;
+  margin-bottom: 2.5rem;
+  &__list {
+    height: max-content;
+    min-height: 50vh;
+  }
   &__sidebar {
     position: sticky;
     top: $height__navbar + 2.5rem;
@@ -237,6 +242,11 @@
     height: 10rem;
     @include placeholder__rec(0 0 0.5rem 0);
   }
+  &__btn {
+    @media screen and (max-width: $sm) {
+      padding: 0 0.5rem;
+    }
+  }
 }
 
 .c-dietlog-modal {
@@ -252,6 +262,9 @@
   }
   &__textarea {
     height: 6.25rem;
+  }
+  &__wrapper {
+    overflow: hidden;
   }
 }
 
