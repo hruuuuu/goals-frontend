@@ -9,6 +9,7 @@ import Header from '../components/Header';
 import LogList from '../components/DietLog/LogList';
 import LogSidebar from '../components/DietLog/LogSidebar';
 import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
 
 function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
@@ -70,6 +71,7 @@ function DietLog() {
         </div>
       </div>
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }
