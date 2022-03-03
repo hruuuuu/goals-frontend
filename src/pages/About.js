@@ -1,6 +1,7 @@
 import React from 'react';
 import PageBanner from '../components/PageBanner';
 import Header from '../components/Header';
+import ScrollButton from '../components/ScrollButton';
 
 import FloatingChat from '../components/FloatingChat';
 
@@ -48,6 +49,7 @@ function About() {
           </div>
         </div>
         <FloatingChat />
+        <ScrollButton />
       </div>
     </>
   );

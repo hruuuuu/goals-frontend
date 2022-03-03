@@ -6,6 +6,7 @@ import CouponList from '../components/Coupon/CouponList';
 import FloatingChat from '../components/FloatingChat';
 import { useLogin } from '../context/LoginStatus';
 import { Navigate } from 'react-router-dom';
+import ScrollButton from '../components/ScrollButton';
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -29,6 +30,7 @@ function Coupon() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }

@@ -4,6 +4,7 @@ import MemberSidebar from '../components/MemberSidebar';
 import OrderList from '../components/Order/OrderList';
 import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
 
 function Order() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -23,6 +24,7 @@ function Order() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }

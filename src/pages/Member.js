@@ -7,6 +7,7 @@ import FloatingMember from '../components/FloatingMember';
 import FloatingChat from '../components/FloatingChat';
 import { useLogin } from '../context/LoginStatus';
 import { Navigate } from 'react-router-dom';
+import ScrollButton from '../components/ScrollButton';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -34,6 +35,7 @@ function Member() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }
