@@ -44,11 +44,14 @@ function RangeInputSlider(props) {
     }
   };
 
-  const handleBlur = () => {
-    if (value[0] < 0) {
-      setValue([0, value[1]]);
-    } else if (value[1] > MAX_PRODUCT_PRICE) {
-      setValue([value[0], MAX_PRODUCT_PRICE]);
+  const handleMinBlur = () => {
+    if (value.minPrice <= MIN_PRODUCT_PRICE) {
+      setValue({ minPrice: MIN_PRODUCT_PRICE, maxPrice: value.maxPrice });
+    }
+  };
+  const handleMaxBlur = () => {
+    if (value.maxPrice >= MAX_PRODUCT_PRICE) {
+      setValue({ minPrice: value.minPrice, maxPrice: MAX_PRODUCT_PRICE });
     }
   };
   return (
@@ -73,7 +76,7 @@ function RangeInputSlider(props) {
             pattern="[0-9]*"
             size="small"
             onChange={handleInputChange}
-            onBlur={handleBlur}
+            onBlur={handleMinBlur}
             autoComplete="off"
             inputProps={{
               min: MIN_PRODUCT_PRICE,
@@ -93,7 +96,7 @@ function RangeInputSlider(props) {
             pattern="[0-9]*"
             size="small"
             onChange={handleInputChange}
-            onBlur={handleBlur}
+            onBlur={handleMaxBlur}
             autoComplete="off"
             inputProps={{
               min: MIN_PRODUCT_PRICE,
