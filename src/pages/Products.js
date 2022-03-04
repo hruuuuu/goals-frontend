@@ -10,6 +10,7 @@ import FilterMobile from '../components/Products/FilterMobile';
 import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
 import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
 
 function Products() {
   /* 控制floatingMenu */
@@ -48,6 +49,7 @@ function Products() {
       <FilterMobile />
       <ProductDetail category={category} setCategory={setCategory} />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }

@@ -4,28 +4,30 @@
 @import "./styles/_global.scss";
 @import "./styles/_common.scss";
 @import "./styles/_animation.scss";
+@import "./styles/_swiper.scss";
 
 // 靜態頁面
 @import "./styles/_about.scss";
 @import "./styles/_blog.scss";
 @import "./styles/_calculator.scss";
+@import "./styles/_home.scss";
 
 // 商品
 @import "./styles/_products.scss";
 @import "./styles/_summary.scss";
 
 // 購物車
-@import './styles/_cart.scss';
-@import './styles/_cartItem.scss';
-@import './styles/_cartList.scss';
-@import './styles/_order.scss';
-@import './styles/_coupon.scss';
-@import './styles/_floatingmenu.scss';
-@import './styles/_cartStepper.scss';
-@import './styles/_checkoutModal.scss';
-@import './styles/_cartMobileItem.scss';
-@import './styles/_checkout.scss';
-@import './styles/_summary.scss';
+@import "./styles/_cart.scss";
+@import "./styles/_cartItem.scss";
+@import "./styles/_cartList.scss";
+@import "./styles/_order.scss";
+@import "./styles/_coupon.scss";
+@import "./styles/_floatingmenu.scss";
+@import "./styles/_cartStepper.scss";
+@import "./styles/_checkoutModal.scss";
+@import "./styles/_cartMobileItem.scss";
+@import "./styles/_checkout.scss";
+@import "./styles/_summary.scss";
 
 // 會員
 @import "./styles/_sidebar.scss";

@@ -4,7 +4,16 @@ import { useProducts } from '../../context/products';
 
 import { IMG_URL } from '../../utils/config';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 function RecGood(props) {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
+
   const { calories } = props;
   const [tdeeCal, setTdeeCal] = useState(0);
 
@@ -74,14 +83,14 @@ function RecGood(props) {
     <>
       {!isFetching && !isFetchingCalories && (
         <>
-          <div className="model__head model__head--sec">
+          <div className="model__head model__head--sec" data-aos="fade-up">
             <div className="model__head--deco-text">RECOMMENED GOODS</div>
             <div className="model__head--title">果實推薦三餐組合</div>
             <div className="model__head--subtitle">
               依照您的TDEE計算結果量身打造的餐食組合
             </div>
           </div>
-          <div className="container">
+          <div className="container" data-aos="fade-up">
             <div className="row">
               <div className="col-xl-4 col-lg-12">
                 <div className="rec_box__head">

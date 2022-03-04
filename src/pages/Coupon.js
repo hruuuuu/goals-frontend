@@ -6,6 +6,7 @@ import CouponList from '../components/Coupon/CouponList';
 import FloatingChat from '../components/FloatingChat';
 import { useLogin } from '../context/LoginStatus';
 import { Navigate } from 'react-router-dom';
+import ScrollButton from '../components/ScrollButton';
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -21,7 +22,7 @@ function Coupon() {
           <div className="col-lg-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">
+          <div className="col col-lg-9 mb-4">
             <CouponList />
           </div>
         </div>
@@ -29,6 +30,7 @@ function Coupon() {
       {/* 浮動視窗 */}
       <FloatingMember />
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 }

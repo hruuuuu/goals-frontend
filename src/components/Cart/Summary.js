@@ -101,7 +101,7 @@ function Summary(props) {
                 onChange={handleChange}
               >
                 <option className="option_font" value="0" disabled>
-                  請選擇
+                  請選擇優惠券
                 </option>
                 {data.map((coupon, i) => {
                   return (
@@ -126,7 +126,7 @@ function Summary(props) {
                 className="form-select styled-select disabled"
                 id="coupon"
               >
-                <option className="option_font" value="">
+                <option className="option_font" value="" disabled>
                   目前沒有可用的折價券
                 </option>
               </select>

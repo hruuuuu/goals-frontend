@@ -28,81 +28,101 @@ const EditPassWord = () => {
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
+    console.log(data.password);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     var user = Object.assign(data, member);
 
-    let response = await axios.post(`${API_URL}/member/editpassword`, user);
+    try {
+      let response = await axios.post(`${API_URL}/member/editpassword`, user);
+
+      Swal.fire('', response.data, 'success');
+    } catch (err) {
+      Swal.fire({
+        icon: 'error',
+        text: err.response.data,
+      });
+    }
   }
 
   return (
     <>
-      <form className="c-member-info">
-        <div className="container">
-          <div className="row gx-5 gy-4">
-            <div className="c-member-info__title">修改密碼</div>
-            <div className="col-12">
-              <label htmlFor="OldPassword" className="form-label c-form__label">
-                舊密碼
-              </label>
-              <input
-                type="password"
-                className="form-control password__input__input c-form__input"
-                id="OldPassword"
-                placeholder="請輸入..."
-                autoComplete="on"
-                name="oldpassword"
-                value={member.oldpassword}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="col-12">
-              <label htmlFor="NewPassword" className="form-label c-form__label">
-                新密碼
-              </label>
-              <input
-                type="password"
-                className="form-control password__input__input c-form__input"
-                id="NewPassword"
-                placeholder="請輸入..."
-                autoComplete="on"
-                name="newpassword"
-                value={member.newpassword}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="col-12">
-              <label
-                htmlFor="ConfirmPassword"
-                className="form-label c-form__label"
-              >
-                確認密碼
-              </label>
-              <input
-                type="password"
-                className="form-control password__input__input c-form__input"
-                id="ConfirmPassword"
-                placeholder="請輸入..."
-                autoComplete="on"
-                name="confirmpassword"
-                value={member.confirmpassword}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="c-product-filter__action e-btn--primary e-btn--medium col-12"
-                onClick={handleSubmit}
-              >
-                儲存變更
-              </button>
+      {data.password !== 'socialMedia' ? (
+        <form className="c-member-info">
+          <div className="container">
+            <div className="row gx-5 gy-4">
+              <div className="c-member-info__title">修改密碼</div>
+              <div className="col-12">
+                <label
+                  htmlFor="OldPassword"
+                  className="form-label c-form__label"
+                >
+                  舊密碼
+                </label>
+                <input
+                  type="password"
+                  className="form-control password__input__input c-form__input"
+                  id="OldPassword"
+                  placeholder="請輸入..."
+                  autoComplete="on"
+                  name="oldpassword"
+                  value={member.oldpassword}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-12">
+                <label
+                  htmlFor="NewPassword"
+                  className="form-label c-form__label"
+                >
+                  新密碼
+                </label>
+                <input
+                  type="password"
+                  className="form-control password__input__input c-form__input"
+                  id="NewPassword"
+                  placeholder="請輸入..."
+                  autoComplete="on"
+                  name="newpassword"
+                  value={member.newpassword}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-12">
+                <label
+                  htmlFor="ConfirmPassword"
+                  className="form-label c-form__label"
+                >
+                  確認密碼
+                </label>
+                <input
+                  type="password"
+                  className="form-control password__input__input c-form__input"
+                  id="ConfirmPassword"
+                  placeholder="請輸入..."
+                  autoComplete="on"
+                  name="confirmpassword"
+                  value={member.confirmpassword}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  className="c-product-filter__action e-btn--primary e-btn--medium col-12"
+                  onClick={handleSubmit}
+                >
+                  儲存變更
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

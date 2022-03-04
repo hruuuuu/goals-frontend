@@ -177,7 +177,7 @@ function Statistics(props) {
     name: '成分',
     type: 'pie',
     center: ['25%', '50%'],
-    radius: ['40%', '60%'],
+    radius: ['30%', '50%'],
     avoidLabelOverlap: false,
     itemStyle: {
       borderRadius: 10,
@@ -199,12 +199,6 @@ function Statistics(props) {
     labelLine: {
       show: false,
     },
-    legend: {
-      bottom: '0',
-      left: '0',
-      orient: 'horizontal',
-      width: '50%',
-    },
     data: dayData,
   };
 
@@ -212,7 +206,7 @@ function Statistics(props) {
     name: '成分',
     type: 'pie',
     center: ['75%', '50%'],
-    radius: ['40%', '60%'],
+    radius: ['30%', '50%'],
     avoidLabelOverlap: false,
     itemStyle: {
       borderRadius: 10,
@@ -241,8 +235,8 @@ function Statistics(props) {
     title: [
       {
         text: '本日總攝取營養比例',
-        top: '6%',
-        left: '24.5%',
+        top: '10%',
+        left: '24%',
         textAlign: 'center',
         textStyle: {
           fontSize: 16,
@@ -252,8 +246,8 @@ function Statistics(props) {
       },
       {
         text: '本日各餐攝取熱量比例',
-        top: '6%',
-        left: '74.5%',
+        top: '10%',
+        left: '74%',
         textAlign: 'center',
         textStyle: {
           fontSize: 16,
@@ -280,7 +274,7 @@ function Statistics(props) {
         left: '3.5%',
         orient: 'horizontal',
         icon: 'circle',
-        width: '50%',
+        width: '45%',
         data: dayData,
       },
       {
@@ -288,7 +282,7 @@ function Statistics(props) {
         left: '58%',
         orient: 'horizontal',
         icon: 'circle',
-        width: '50%',
+        width: '45%',
         data: mealData,
       },
     ],
@@ -398,7 +392,7 @@ function Statistics(props) {
             <button
               key={id}
               type="button"
-              className={`e-btn e-btn--plain e-btn--secondary e-btn--medium me-2 ${
+              className={`e-btn e-btn--plain e-btn--secondary e-btn--medium l-dietlog__btn me-2 ${
                 tab === id ? 'active' : ''
               }`}
               onClick={() => {

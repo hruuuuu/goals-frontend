@@ -33,6 +33,18 @@
   border-top: solid #e0e0e0 2px;
 }
 
+.detailContent {
+  text-align: center;
+  vertical-align: middle !important;
+  line-height: 2em;
+}
+
+.orderDetail {
+  width: 10rem;
+  height: 6.25rem;
+  object-fit: cover;
+}
+
 .order_td {
   @include text--small;
 

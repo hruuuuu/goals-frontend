@@ -1,15 +1,26 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import logo from '../../img/common/logo--light.svg';
-import { useLogin } from '../../context/LoginStatus';
-import { API_URL } from '../../utils/config';
+import { React, useEffect, useState } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+import logoLight from '../../img/common/logo--light.svg';
+import logoPrimary from '../../img/common/logo--primary.svg';
+
+import { useLogin } from '../../context/LoginStatus';
+import { API_URL } from '../../utils/config';
+
 function NavbarMobile(props) {
-  const history = useNavigate();
-  const { navLinks, navActions } = props;
+  const { navLinks, navActions, isHome, isTop } = props;
   const { login, setLogin, isSocial, setIsSocial, setUser } = useLogin();
+  const [check, setCheck] = useState(false);
+  const location = useLocation().pathname;
+  const history = useNavigate();
+
+  useEffect(() => {
+    if (location !== '/') {
+      setCheck(!check);
+    }
+  }, [location]);
 
   const handleLogout = async () => {
     const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
@@ -50,15 +61,31 @@ function NavbarMobile(props) {
   };
 
   return (
-    <div className="l-navbar--mobile d-flex d-lg-none">
-      <input type="checkbox" id="menuToggle" className="l-navbar__check" />
+    <div className={`l-navbar--mobile d-flex d-lg-none`}>
+      <input
+        type="checkbox"
+        id="menuToggle"
+        className="l-navbar__check"
+        checked={check}
+        onChange={() => {
+          setCheck(!check);
+        }}
+      />
       <label htmlFor="menuToggle" className="l-navbar__toggle">
         <i className="fas fa-bars l-navbar__icon"></i>
       </label>
       <NavLink to="/" className="l-navbar__font l-navbar__logo">
-        <img src={logo} alt="logo" />
+        {isHome && isTop ? (
+          <img src={logoPrimary} alt="logo" />
+        ) : (
+          <img src={logoLight} alt="logo" />
+        )}
       </NavLink>
-      <div className="l-navbar__menu">
+      <div
+        className={`l-navbar__menu ${isHome ? 'l-navbar--home' : ''} ${
+          !isTop ? 'l-navbar--scroll' : ''
+        }`}
+      >
         <ul className="l-navbar__list">
           {navLinks.map((link) => {
             return (

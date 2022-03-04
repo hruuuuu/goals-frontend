@@ -35,6 +35,7 @@ function Sidebar(props) {
         }
       });
     }
+    localStorage.removeItem('cartList');
   };
 
   return (
