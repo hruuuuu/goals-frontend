@@ -16,7 +16,7 @@ function Order() {
           <div className="col-md-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">
+          <div className="col col-lg-9 mb-4">
             <OrderList />
           </div>
         </div>
