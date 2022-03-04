@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useMatch } from 'react-router-dom';
 import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
@@ -13,6 +13,31 @@ function Navbar() {
   const history = useNavigate();
   const { cartListData, setCartListData } = useCartList();
   const [cartIconLength, setCartIconLength] = useState();
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isTop, setIsTop] = useState(false);
+  const matchHome = useMatch('/');
+
+  const isHome = matchHome !== null;
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollPosition <= 700) {
+      setIsTop(true);
+    } else {
+      setIsTop(false);
+    }
+  }, [scrollPosition]);
 
   useEffect(() => {
     setCartIconLength(cartListData.length);
@@ -191,18 +216,27 @@ function Navbar() {
     //   route: `/`,
     // },
   ];
+
   return (
     <>
-      <header className="l-navbar sticky-top">
+      <header
+        className={`l-navbar sticky-top ${isHome ? 'l-navbar--home' : ''} ${
+          !isTop ? 'l-navbar--scroll' : ''
+        }`}
+      >
         <div className="container h-100">
           <nav className="l-navbar__wrapper justify-content-center justify-content-lg-between">
             <NavbarDesktop
               navLinks={navLinks}
               navActions={!login ? navActions1 : navActions2}
+              isHome={isHome}
+              isTop={isTop}
             />
             <NavbarMobile
               navLinks={navLinks}
               navActions={!login ? navActions1 : navActions2}
+              isHome={isHome}
+              isTop={isTop}
             />
           </nav>
         </div>

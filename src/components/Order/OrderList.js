@@ -28,8 +28,6 @@ const OrderList = () => {
         withCredentials: true,
       });
       setData(response.data);
-
-      console.log(response.data);
     };
 
     getOrder();
@@ -163,37 +161,37 @@ const OrderList = () => {
           <table className="table table-borderless orderlist_table">
             <thead>
               <tr>
-                <th className="order_td__order_id">品名</th>
-                <th>商品</th>
-                <th>份數</th>
+                <th className="detailContent">品名</th>
+                <th className="detailContent">商品</th>
+                <th className="detailContent" style={{ width: '20%' }}>
+                  份數
+                </th>
               </tr>
             </thead>
             {orderdata.map((orderdata) => {
               return (
-                <tbody key={orderdata.index}>
+                <tbody key={orderdata.product_id}>
                   <tr>
-                    <td className="order_td__order_id">{orderdata.name}</td>
-                    <td>
+                    <td className="detailContent">{orderdata.name}</td>
+                    <td className="detailContent">
                       <img
-                        className="cartItem__img"
+                        className="orderDetail detailContent"
                         src={`${IMG_URL}/products/${orderdata.image}`}
                         alt="thumbnail"
                       />
                     </td>
-                    <td className="order_td__order_status">
-                      {orderdata.amount}
-                    </td>
+                    <td className="detailContent">{orderdata.amount}</td>
                   </tr>
                 </tbody>
               );
             })}
           </table>
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

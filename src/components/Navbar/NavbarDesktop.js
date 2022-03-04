@@ -1,15 +1,22 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../img/common/logo--light.svg';
+
+import logoLight from '../../img/common/logo--light.svg';
+import logoPrimary from '../../img/common/logo--primary.svg';
 
 function NavbarDesktop(props) {
-  const { navLinks, navActions } = props;
+  const { navLinks, navActions, isHome, isTop } = props;
+
   return (
     <div className="l-navbar--desktop d-none d-lg-flex">
       <ul className="l-navbar__items">
         <li className="l-navbar__item">
           <NavLink to="/" className="l-navbar__font l-navbar__logo">
-            <img src={logo} alt="logo" />
+            {isHome && isTop ? (
+              <img src={logoPrimary} alt="logo" />
+            ) : (
+              <img src={logoLight} alt="logo" />
+            )}
           </NavLink>
         </li>
         {navLinks.map((link) => {

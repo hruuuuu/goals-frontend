@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap");
 
 .blogList {
   display: grid;
@@ -12,6 +12,7 @@
     }
     &--Txt {
       padding: 45px 30px 35px;
+      background: $color--light;
       .listHead {
         display: flex;
         margin-bottom: 10px;
@@ -24,7 +25,7 @@
           color: $color--gray3;
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
-          font-family: 'Oswald', sans-serif;
+          font-family: "Oswald", sans-serif;
         }
         .dateBox {
           margin: 0px 0 13px;
@@ -35,7 +36,7 @@
           width: 100%;
           position: relative;
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             bottom: -15px;
@@ -46,7 +47,7 @@
           .date {
             font-size: 14px;
             font-weight: 300;
-            font-family: 'Oswald', sans-serif;
+            font-family: "Oswald", sans-serif;
             color: $color--gray3;
             text-transform: uppercase;
           }
@@ -57,7 +58,7 @@
             margin-left: 5px;
             font-size: 14px;
             font-weight: 300;
-            font-family: 'Noto Sans TC', '微軟正黑體', sans-serif;
+            font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
             color: $color--gray3;
           }
         }
