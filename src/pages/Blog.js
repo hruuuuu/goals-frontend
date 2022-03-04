@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import BlogItem from '../components/Blog/BlogItem';
 import BlogPagination from '../components/Blog/BlogPagination';
 import FloatingChat from '../components/FloatingChat';
+import ScrollButton from '../components/ScrollButton';
 
 const Blog = () => {
   return (
@@ -14,6 +15,7 @@ const Blog = () => {
         <BlogItem />
       </div>
       <FloatingChat />
+      <ScrollButton />
     </>
   );
 };

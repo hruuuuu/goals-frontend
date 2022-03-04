@@ -45,7 +45,7 @@ function MealGraph(props) {
     name: '成分',
     type: 'pie',
     center: ['25%', '50%'],
-    radius: ['40%', '60%'],
+    radius: ['30%', '50%'],
     avoidLabelOverlap: false,
     itemStyle: {
       borderRadius: 10,
@@ -66,12 +66,6 @@ function MealGraph(props) {
     },
     labelLine: {
       show: false,
-    },
-    legend: {
-      bottom: '0',
-      left: '0',
-      orient: 'horizontal',
-      width: '50%',
     },
     data: data,
   };
@@ -94,7 +88,7 @@ function MealGraph(props) {
     title: {
       text: title,
       subtext: `總熱量${calories}卡`,
-      top: '6%',
+      top: '10%',
       left: '50%',
       textAlign: 'center',
       textStyle: {
@@ -116,7 +110,7 @@ function MealGraph(props) {
       trigger: 'item',
     },
     grid: {
-      top: '20%',
+      top: '25%',
       right: '3.5%',
       bottom: '20%',
       left: '58%',
@@ -128,7 +122,7 @@ function MealGraph(props) {
         left: '3.5%',
         orient: 'horizontal',
         icon: 'circle',
-        width: '50%',
+        width: '45%',
         data: data,
       },
       {
@@ -136,7 +130,7 @@ function MealGraph(props) {
         left: '58%',
         orient: 'horizontal',
         icon: 'circle',
-        width: '50%',
+        width: '45%',
         data: data,
       },
     ],

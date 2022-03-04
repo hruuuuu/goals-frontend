@@ -1,21 +1,22 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Table } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
-
 import { API_URL } from '../../utils/config';
 import { useLogin } from '../../context/LoginStatus';
+import { IMG_URL } from '../../utils/config';
 
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [error, setError] = useState(null);
-  // const [error, setError] = useState(null);
+  const handleClose = () => {
+    setShow(false);
+    setOrderData([]);
+  };
   const [data, setData] = useState([]);
+  const [orderdata, setOrderData] = useState([]);
+
   const isOrderList = data.length === 0;
 
   //取得已登入會員的ID
@@ -23,18 +24,31 @@ const OrderList = () => {
 
   useEffect(() => {
     let getOrder = async () => {
+      let response = await axios.post(`${API_URL}/order`, user, {
+        withCredentials: true,
+      });
+      setData(response.data);
+    };
+
+    getOrder();
+  }, []);
+
+  const handleShow = (order) => {
+    setShow(true);
+
+    let getOrderdetail = async () => {
       let response = await axios.post(
-        `${API_URL}/order`,
-        user,
+        `${API_URL}/order/orderdetail`,
+        order,
 
         {
           withCredentials: true,
         }
       );
-      setData(response.data);
+      setOrderData([...response.data]);
     };
-    getOrder();
-  }, []);
+    getOrderdetail();
+  };
 
   return (
     <>
@@ -68,7 +82,12 @@ const OrderList = () => {
                     </td>
                     <td className="order_td__total">{order.total}</td>
                     <td className="p-0">
-                      <button onClick={handleShow} className="detail rounded-3">
+                      <button
+                        onClick={() => {
+                          handleShow(order);
+                        }}
+                        className="detail rounded-3"
+                      >
                         <i className="fas fa-eye p-1 icon_grn"></i>
                       </button>
                     </td>
@@ -91,7 +110,12 @@ const OrderList = () => {
               key={order.id}
             >
               <div className="card cardorder ">
-                <div onClick={handleShow} className="card-body ">
+                <div
+                  onClick={() => {
+                    handleShow(order);
+                  }}
+                  className="card-body "
+                >
                   <h5 className="card-title order_td__order_id">{order.id}</h5>
                   <div className="card-text">
                     <div className="my-3 d-flex justify-content-between">
@@ -133,12 +157,41 @@ const OrderList = () => {
         <Modal.Header>
           <Modal.Title>您的訂單詳情</Modal.Title>
         </Modal.Header>
-        <Modal.Body>OrderDetail</Modal.Body>
-        <Modal.Footer>
+        <Modal.Body>
+          <table className="table table-borderless orderlist_table">
+            <thead>
+              <tr>
+                <th className="detailContent">品名</th>
+                <th className="detailContent">商品</th>
+                <th className="detailContent" style={{ width: '20%' }}>
+                  份數
+                </th>
+              </tr>
+            </thead>
+            {orderdata.map((orderdata) => {
+              return (
+                <tbody key={orderdata.product_id}>
+                  <tr>
+                    <td className="detailContent">{orderdata.name}</td>
+                    <td className="detailContent">
+                      <img
+                        className="orderDetail detailContent"
+                        src={`${IMG_URL}/products/${orderdata.image}`}
+                        alt="thumbnail"
+                      />
+                    </td>
+                    <td className="detailContent">{orderdata.amount}</td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </Modal.Body>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

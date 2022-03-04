@@ -87,7 +87,6 @@ function LogModal(props) {
       } else {
         addData.append('datetime', addFields.datetime);
       }
-
       const foodData = [...foods];
       try {
         const responseData = await axios.post(
@@ -162,7 +161,7 @@ function LogModal(props) {
         onHide={handleClose}
         dialogClassName={`c-dietlog-modal c-modal c-modal__modal ${handleIn} ${handleOut}`}
         backdropClassName={`c-modal__backdrop ${handleIn} ${handleOut}`}
-        contentClassName="c-modal__wrapper"
+        contentClassName="c-modal__wrapper c-dietlog-modal__wrapper"
         centered
         animation={false}
         fullscreen="md-down"
@@ -207,7 +206,6 @@ function LogModal(props) {
                   value={addFields.title}
                   onChange={handleFieldChange}
                   placeholder="請輸入標題..."
-                  required
                 />
               </div>
               <div className="c-dietlog-modal__fieldset">

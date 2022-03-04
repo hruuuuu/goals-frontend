@@ -181,12 +181,12 @@ class BMR extends Component {
       <div id="bmrcalc" className="calculator__form">
         <div className="form row">
           {error}
-          <div className="col-xl-12 col-md-12">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group">
               <div className="inputwrap">
-                <label className="label">量測單位</label>
+                <label className="form-label">量測單位</label>
                 <select
-                  className="activity"
+                  className="activity c-form__input form-control"
                   name="activity"
                   value={this.state.unit}
                   onChange={this.handleunitChange}
@@ -198,7 +198,7 @@ class BMR extends Component {
               </div>
             </div>
           </div>
-          <div className="col-xl-12 col-md-12">
+          <div className="col-xl-6 col-md-12">
             <div className="form-group">
               <FormControl>
                 <label className="form-label">性別</label>
@@ -318,10 +318,10 @@ class BMR extends Component {
           </div>
           {resultbmr}
           <div id="workout">
-            <div className="form-group">
+            <div className="form-group tdee-block">
               <label className="form-label">每週運動強度</label>
               <select
-                className="activity"
+                className="activity c-form__input form-control"
                 name="activity"
                 value={this.state.activity}
                 onChange={this.handleactivityChange}
