@@ -58,6 +58,7 @@ function Navbar() {
         }
       });
     }
+    localStorage.removeItem('cartList');
   };
 
   const navLinks = [
