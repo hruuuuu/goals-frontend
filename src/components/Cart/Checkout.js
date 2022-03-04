@@ -96,6 +96,32 @@ function Checkout(props) {
     );
   }
 
+  //tappay
+  const handleCardChange = (e) => {
+    if (update.canGetPrime) {
+      submitButton.removeAttribute('disabled');
+    } else {
+      submitButton.setAttribute('disabled', true);
+    }
+
+    var message = document.querySelector('#message');
+
+    message.innerHTML = `
+      canGetPrime: ${update.canGetPrime} \n
+      cardNumberStatus: ${statusTable[update.status.number]} \n
+      cardExpiryStatus: ${statusTable[update.status.expiry]} \n
+      cvcStatus: ${statusTable[update.status.cvc]}
+  `.replace(/ {4}/g, '');
+
+    if (update.hasError) {
+      message.classList.add('error');
+      message.classList.remove('info');
+    } else {
+      message.classList.remove('error');
+      message.classList.add('info');
+    }
+  };
+
   return (
     <>
       <div className="container checkoutBox" id="PaymentForm">
@@ -111,87 +137,94 @@ function Checkout(props) {
             number={creditcard.number}
           />
         </div>
-        <form className="row" id="checkoutForm">
-          <div className="col-12 g-3">
-            <label htmlFor="firstName" className="form-label label_fs">
-              持卡人
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="firstName"
-              name="name"
-              value={creditcard.name}
-              placeholder="請輸入持卡人姓名"
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            />
-          </div>
+        <div>
+          <div id="tappay-iframe" onChange={handleCardChange}>
+            <form className="row" id="checkoutForm">
+              <div className="col-12 g-3">
+                <label htmlFor="firstName" className="form-label label_fs">
+                  持卡人
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="firstName"
+                  name="name"
+                  value={creditcard.name}
+                  placeholder="請輸入持卡人姓名"
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
 
-          <div className="col-12 g-3 card-number-group">
-            <label htmlFor="card-number" className="form-label label_fs">
-              卡號
-            </label>
-            <input
-              type=""
-              className="form-control card-number"
-              id="adddress"
-              name="number"
-              value={creditcard.number}
-              placeholder="**** **** **** ****"
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            />
-          </div>
+              <div className="col-12 g-3 card-number-group">
+                <label htmlFor="card-number" className="form-label label_fs">
+                  卡號
+                </label>
+                <input
+                  type=""
+                  className="form-control card-number"
+                  id="adddress"
+                  name="number"
+                  value={creditcard.number}
+                  placeholder="**** **** **** ****"
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
 
-          <div className="col-6 g-3 expiration-date-group">
-            <label htmlFor="expiration-date" className="form-label label_fs">
-              有效日期
-            </label>
-            <input
-              type=""
-              className="form-control expiration-date"
-              id=""
-              name="expiry"
-              value={creditcard.expiry}
-              placeholder="MM / YY"
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            />
-          </div>
+              <div className="col-6 g-3 expiration-date-group">
+                <label
+                  htmlFor="expiration-date"
+                  className="form-label label_fs"
+                >
+                  有效日期
+                </label>
+                <input
+                  type=""
+                  className="form-control expiration-date"
+                  id=""
+                  name="expiry"
+                  value={creditcard.expiry}
+                  placeholder="MM / YY"
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
 
-          <div className="col-6 g-3 cvc-group">
-            <label htmlFor="cvc" className="form-label label_fs">
-              CVC
-            </label>
-            <input
-              type=""
-              className="form-control cvc"
-              id="cvc"
-              name="cvc"
-              value={creditcard.cvc}
-              placeholder="安全碼"
-              onChange={handleInputChange}
-              onFocus={handleInputFocus}
-            />
+              <div className="col-6 g-3 cvc-group">
+                <label htmlFor="cvc" className="form-label label_fs">
+                  CVC
+                </label>
+                <input
+                  type=""
+                  className="form-control cvc"
+                  id="cvc"
+                  name="cvc"
+                  value={creditcard.cvc}
+                  placeholder="安全碼"
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
+              <hr className="mt-4" />
+              <div className="col-6 g-3 d-grid">
+                <button className="btn_outline p-2" onClick={handleBack}>
+                  上一步
+                </button>
+              </div>
+              <div className="col-6 g-3 d-grid">
+                <button
+                  className="btn_outline btn_grn p-2"
+                  form="checkoutForm"
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  完成付款
+                </button>
+              </div>
+            </form>
           </div>
-          <hr className="mt-4" />
-          <div className="col-6 g-3 d-grid">
-            <button className="btn_outline p-2" onClick={handleBack}>
-              上一步
-            </button>
-          </div>
-          <div className="col-6 g-3 d-grid">
-            <button
-              className="btn_outline btn_grn p-2"
-              form="checkoutForm"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              完成付款
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </>
   );
