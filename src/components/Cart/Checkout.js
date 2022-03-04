@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/lib/styles.scss';
 

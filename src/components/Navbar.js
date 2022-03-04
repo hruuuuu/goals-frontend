@@ -18,46 +18,36 @@ function Navbar() {
     setCartIconLength(cartListData.length);
   }, [cartListData]);
 
-  const handleLogout = async () => {
-    const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
-      withCredentials: true,
-    });
-
-    if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
-      setUser({
-        id: '',
-        email: '',
-      });
-      if (isSocial) {
-        setIsSocial(false);
-      }
-      Swal.fire({
-        title: '確定要登出嗎？',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '登出',
-        cancelButtonText: '返回',
-        reverseButtons: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history('/login');
+  const handleLogout = () => {
+    Swal.fire({
+      title: '確定要登出嗎？',
+      icon: 'warning',
+      showDenyButton: true,
+      confirmButtonColor: '#3085d6',
+      denyButtonColor: '#d33',
+      confirmButtonText: '登出',
+      denyButtonText: '返回',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isDenied) {
+        history(-1);
+      } else {
+        const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
+          withCredentials: true,
+        });
+        if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
+          setUser({
+            id: '',
+            email: '',
+          });
+          if (isSocial) {
+            setIsSocial(false);
+          }
           setLogin(false);
+          history('/login');
         }
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        html: logoutResult.data.msg,
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          history('/');
-        }
-      });
-    }
+      }
+    });
   };
 
   const navLinks = [
@@ -180,16 +170,6 @@ function Navbar() {
       tagDesktop: ``,
       route: `/member/coupon`,
     },
-    // {
-    //   id: 6,
-    //   name: '搜索',
-    //   iconMobile: (
-    //     <i className="fas fa-search l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-    //   ),
-    //   iconDesktop: <i className="fas fa-search l-navbar__font"></i>,
-    //   tagDesktop: ``,
-    //   route: `/`,
-    // },
   ];
   return (
     <>

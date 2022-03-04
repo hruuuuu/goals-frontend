@@ -34,17 +34,6 @@ function Sidebar(props) {
           history('/');
         }
       });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        html: logoutResult.data.msg,
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          history('/');
-        }
-      });
     }
   };
 
