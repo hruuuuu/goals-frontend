@@ -87,6 +87,7 @@ function Checkout(props) {
       usedCouponData
     );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+     
   }
 
   return (
