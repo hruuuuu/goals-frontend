@@ -36,7 +36,7 @@ function CartStepper(props) {
     name: '',
     number: '',
   });
-  const { handleShow } = props;
+  // const { handleShow } = props;
   const { orderTotal, setOrderTotal } = props;
   const { member, setMember } = props;
   const { couponId, setCouponId } = props;
@@ -84,9 +84,9 @@ function CartStepper(props) {
   //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
   // };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
 
   //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
@@ -147,6 +147,14 @@ function CartStepper(props) {
                   setActiveStep={setActiveStep}
                   creditcard={creditcard}
                   setCreditcard={setCreditcard}
+                  member={member}
+                  setMember={setMember}
+                  couponId={couponId}
+                  set={setCouponId}
+                  orderTotal={orderTotal}
+                  setOrderTotal={setOrderTotal}
+                  shippingData={shippingData}
+                  setShippingData={setShippingData}
                 />
               ) : (
                 <Shipping
@@ -157,7 +165,7 @@ function CartStepper(props) {
                 />
               )}
             </div>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <div className="container mb-1">
                 <hr />
@@ -209,7 +217,7 @@ function CartStepper(props) {
                   </div>
                 </div>
               </div>
-            </Box>
+            </Box> */}
           </React.Fragment>
         )}
       </Box>
