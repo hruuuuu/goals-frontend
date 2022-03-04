@@ -95,9 +95,13 @@ function CartStepper(props) {
     //orderDetails
     let orderDetailsResponse = await axios.post(
       `${API_URL}/cart/orderDetails`,
-      cartDetails,
-      usedCouponData
+      cartListData,
+      usedCouponData,
+      { withCredentials: true }
     );
+    // let stripeURL = orderDetailsResponse.data.url;
+    // window.location.href = stripeURL;
+
     //order_items
     let orderItemsResponse = await axios.post(
       `${API_URL}/cart/orderItems`,

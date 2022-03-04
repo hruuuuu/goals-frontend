@@ -52,17 +52,6 @@ const Signup = () => {
             history('/');
           }
         });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          html: forgetEmail.data.msg,
-          showCancelButton: true,
-          cancelButtonColor: '#d33',
-        }).then((result) => {
-          if (!result.isConfirmed) {
-            history('/');
-          }
-        });
       }
     } else {
       console.log(data);
@@ -78,17 +67,6 @@ const Signup = () => {
           confirmButtonText: 'OK',
         }).then((result) => {
           if (result.isConfirmed) {
-            history('/');
-          }
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          html: reVerifyEmail.data.msg,
-          showCancelButton: true,
-          cancelButtonColor: '#d33',
-        }).then((result) => {
-          if (!result.isConfirmed) {
             history('/');
           }
         });
@@ -115,17 +93,6 @@ const Signup = () => {
         if (result.isConfirmed) {
           setLogin(true);
           setIsSocial(true);
-          history('/');
-        }
-      });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        html: loginResult.data.msg,
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
           history('/');
         }
       });
