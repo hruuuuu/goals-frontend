@@ -54,7 +54,7 @@ function Shipping(props) {
       <div className="container">
         <form
           className="row my-selector-c"
-          id="nextButton"
+          id="shippingForm"
           onSubmit={handleNext}
         >
           <div className="col-12 g-3">
@@ -173,6 +173,25 @@ function Shipping(props) {
                 );
               })}
             </select>
+          </div>
+          <hr className="mt-4" />
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button className="btn_outline p-2" onClick={props.handleClose}>
+                返回購物車
+              </button>
+            </div>
+          </div>
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button
+                className="btn_outline btn_grn p-2"
+                type="submit"
+                form="shippingForm"
+              >
+                下一步
+              </button>
+            </div>
           </div>
         </form>
       </div>
