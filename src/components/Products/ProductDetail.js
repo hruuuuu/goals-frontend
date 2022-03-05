@@ -330,7 +330,7 @@ function ProductDetail(props) {
                     alt="product"
                   />
                 </div>
-                {/* 臨時調整區開始 */}
+
                 <div className="c-product-detail__footer">
                   <div className="c-product-detail__footer-wrapper">
                     <div className="row gx-2">
@@ -389,7 +389,6 @@ function ProductDetail(props) {
                     </div>
                   </div>
                 </div>
-                {/* 臨時調整區結束 */}
               </div>
               <div className="col-12 col-md-6">
                 <div className="d-flex flex-column justify-content-between p-3 p-md-0 product-info">
@@ -446,13 +445,12 @@ function ProductDetail(props) {
                         </div>
                         <p className="c-product-detail__text">{ingredients}</p>
                       </div>
-                      {/* 臨時調整區開始 */}
+
                       <div className="c-product-detail__description">
                         <Modal
                           show={showComment}
                           onHide={handleCommentClose}
                           animation={false}
-                          fullscreen="md-down"
                           centered
                         >
                           <div className="p-5">
@@ -524,7 +522,6 @@ function ProductDetail(props) {
                           </div>
                         </div>
                       </div>
-                      {/* 臨時調整區結束 */}
                     </div>
                   </div>
                 </div>

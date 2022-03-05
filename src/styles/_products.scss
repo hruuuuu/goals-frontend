@@ -148,18 +148,17 @@
 
   &__check {
     &:checked {
-      & ~ #{$_}__menu {
+      &~#{$_}__menu {
         top: 0;
         border-radius: 0;
       }
 
-      & ~ #{$_}__menu .c-product-filter--mobile {
+      &~#{$_}__menu .c-product-filter--mobile {
         opacity: 1;
         transform: translate3d(0, 0, 0);
       }
 
-      & ~ #{$_}__toggle #{$_}__icon--expand {
-      }
+      &~#{$_}__toggle #{$_}__icon--expand {}
     }
   }
 }
@@ -360,12 +359,6 @@
     box-shadow: $box-shadow__modal;
     border-radius: $border-radius__modal;
 
-    /*** 臨時調整區開始 ***/
-    // @media screen and (min-width: $md) and (max-width: $lg) {
-    //   padding: $padding__modal--md;
-    // }
-    /*** 臨時調整區結束 ***/
-
     @media screen and (max-width: $md) {
       padding: 0;
     }
@@ -424,20 +417,14 @@
     }
   }
 
-  /*** 臨時調整區開始 ***/
   &__detail {
     height: max-content;
     max-height: 22.5rem;
     padding-right: 0.5rem;
     overflow-y: auto;
     @include scrollbar;
-
-    @media screen and (max-width: $lg) {
-      max-height: none;
-    }
   }
 
-  /*** 臨時調整區結束 ***/
   &__subtitle {
     margin-bottom: 0.5rem;
     display: flex;
@@ -453,6 +440,7 @@
 
   &__description {
     margin-bottom: 1rem;
+
     &:last-of-type {
       margin-bottom: 0;
     }
@@ -462,7 +450,6 @@
     @include text--small;
   }
 
-  /*** 臨時調整區開始 ***/
   &__comment-title {
     @include text--extra-small-bold;
     margin-bottom: 0.3rem;
@@ -471,7 +458,6 @@
 
   &__comment-subTitle {
     @include text--extra-small;
-    // color: $color--gray4;
     float: right;
   }
 
@@ -486,12 +472,11 @@
     margin-top: 0.75rem;
     padding: $padding__chat-msg;
     border-radius: $border-radius__btn;
+
     &:nth-of-type(2) {
       margin-top: 0;
     }
   }
-
-  /*** 臨時調整區結束 ***/
 
   &__o-price {
     color: $color--gray4;
@@ -575,7 +560,6 @@
     }
   }
 
-  /*** 臨時調整區開始 ***/
   .comment-text-icon {
     display: none;
   }
@@ -602,8 +586,6 @@
       height: 44px;
     }
   }
-
-  /*** 臨時調整區結束 ***/
 
   .css-1slz293-MuiSkeleton-root {
     @include placeholder__rec(0 0 0.5rem 0);

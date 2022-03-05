@@ -48,15 +48,12 @@ function Navbar() {
       title: '確定要登出嗎？',
       icon: 'warning',
       showDenyButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#330856',
       denyButtonColor: '#d33',
-      confirmButtonText: '登出',
-      denyButtonText: '返回',
-      reverseButtons: true,
+      denyButtonText: '登出',
+      confirmButtonText: '返回',
     }).then(async (result) => {
       if (result.isDenied) {
-        history(-1);
-      } else {
         const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
           withCredentials: true,
         });
@@ -139,24 +136,6 @@ function Navbar() {
   const navActions2 = [
     {
       id: 1,
-      name: '登出',
-      iconMobile: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
-          onClick={handleLogout}
-        ></i>
-      ),
-      iconDesktop: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font"
-          onClick={handleLogout}
-        ></i>
-      ),
-      tagDesktop: ``,
-      route: '/logout',
-    },
-    {
-      id: 2,
       name: '會員',
       iconMobile: (
         <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -166,7 +145,7 @@ function Navbar() {
       route: `/member/`,
     },
     {
-      id: 3,
+      id: 2,
       name: '收藏清單',
       iconMobile: (
         <i className="fas fa-heart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -176,7 +155,7 @@ function Navbar() {
       route: `/member/fav`,
     },
     {
-      id: 4,
+      id: 3,
       name: '購物車',
       iconMobile: (
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -186,7 +165,7 @@ function Navbar() {
       route: `/member/cart`,
     },
     {
-      id: 5,
+      id: 4,
       name: '優惠券',
       iconMobile: (
         <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -211,12 +190,15 @@ function Navbar() {
               navActions={!login ? navActions1 : navActions2}
               isHome={isHome}
               isTop={isTop}
+              handleLogout={handleLogout}
+              login={login}
             />
             <NavbarMobile
               navLinks={navLinks}
               navActions={!login ? navActions1 : navActions2}
               isHome={isHome}
               isTop={isTop}
+              handleLogout={handleLogout}
             />
           </nav>
         </div>
