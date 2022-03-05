@@ -5,14 +5,20 @@ import logoLight from '../../img/common/logo--light.svg';
 import logoPrimary from '../../img/common/logo--primary.svg';
 
 function NavbarDesktop(props) {
-  const { navLinks, navActions, isHome, isTop } = props;
+  const { navLinks, navActions, isTop, isActive, setIsActive } = props;
 
   return (
     <div className="l-navbar--desktop d-none d-lg-flex">
       <ul className="l-navbar__items">
         <li className="l-navbar__item">
-          <NavLink to="/" className="l-navbar__font l-navbar__logo">
-            {isHome && isTop ? (
+          <NavLink
+            to="/"
+            className="l-navbar__font l-navbar__logo"
+            onClick={() => {
+              setIsActive(0);
+            }}
+          >
+            {isTop ? (
               <img src={logoPrimary} alt="logo" />
             ) : (
               <img src={logoLight} alt="logo" />
@@ -20,10 +26,16 @@ function NavbarDesktop(props) {
           </NavLink>
         </li>
         {navLinks.map((link) => {
+          const { id, name, route } = link;
           return (
-            <li className="l-navbar__item" key={link.id}>
-              <NavLink to={link.route} className="l-navbar__font">
-                {link.name}
+            <li
+              className={`l-navbar__item l-navbar__link ${
+                isActive === id ? 'active' : ''
+              }`}
+              key={id}
+            >
+              <NavLink to={route} className="l-navbar__font">
+                {name}
               </NavLink>
             </li>
           );

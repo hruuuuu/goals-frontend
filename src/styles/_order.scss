@@ -12,19 +12,8 @@
   }
 }
 
-.detail {
-  background-color: $color--light;
-  border: 1px solid $color--gray4;
-  width: $width__btn--square;
-  height: $height__btn--meduim;
-  border-radius: $border-radius__btn;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .cardorder {
-  width: 80vw;
+  width: 100%;
   border-radius: $border-radius__btn;
   box-shadow: $box-shadow__block;
 }

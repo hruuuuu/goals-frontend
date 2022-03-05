@@ -6,13 +6,17 @@ import BlogPagination from '../components/Blog/BlogPagination';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 
+import picBanner from '../img/home/pic/swiper__1.jpg';
+
 const Blog = () => {
   return (
     <>
-      <PageBanner />
+      <PageBanner img={picBanner} />
       <Header />
-      <div className="container">
-        <BlogItem />
+      <div className="u-margin u-margin--page-bottom">
+        <div className="container">
+          <BlogItem />
+        </div>
       </div>
       <FloatingChat />
       <ScrollButton />

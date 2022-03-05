@@ -19,15 +19,13 @@ function FloatingMenu(props) {
         }`}
       >
         <div className={`c-floating-menu__content`}>
-          <div className="container">
-            {isMember ? (
-              <>
-                <MemberSidebar />
-              </>
-            ) : (
-              <CartMobile />
-            )}
-          </div>
+          {isMember ? (
+            <>
+              <MemberSidebar />
+            </>
+          ) : (
+            <CartMobile />
+          )}
         </div>
         <div
           className="c-floating-menu__bg"

@@ -1,7 +1,7 @@
 import React from 'react';
-import background from '../img/page_banner/page_banner1.jpg';
 
-const PageBanner = () => {
+const PageBanner = (props) => {
+  const { img } = props;
   return (
     <>
       <section className="c-pageBanner">
@@ -12,11 +12,7 @@ const PageBanner = () => {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img
-                src={background}
-                className="d-block w-100"
-                alt="background"
-              />
+              <img src={img} className="d-block w-100" alt="background" />
             </div>
           </div>
         </div>

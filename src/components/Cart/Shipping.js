@@ -61,12 +61,12 @@ function Shipping(props) {
             <h5>運送資訊</h5>
           </div>
           <div className="col-12 g-3">
-            <label htmlFor="firstName" className="form-label label_fs">
+            <label htmlFor="firstName" className="form-label c-form__label">
               訂購人姓名
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control c-form__input"
               id="firstName"
               placeholder="預設會員姓名"
               name="name"
@@ -76,11 +76,11 @@ function Shipping(props) {
             />
           </div>
           <div className="col-6 g-3">
-            <label htmlFor="country" className="form-label label_fs">
+            <label htmlFor="country" className="form-label c-form__label">
               縣市
             </label>
             <select
-              className="form-select styled-select county"
+              className="form-select styled-select county c-form__select"
               id="country"
               name="county"
               value={shippingData.county}
@@ -89,11 +89,11 @@ function Shipping(props) {
             ></select>
           </div>
           <div className="col-6 g-3">
-            <label htmlFor="district" className="form-label label_fs">
+            <label htmlFor="district" className="form-label c-form__label">
               鄉鎮市區
             </label>
             <select
-              className="form-select styled-select district"
+              className="form-select styled-select district c-form__select"
               id="state"
               name="district"
               value={shippingData.district}
@@ -102,12 +102,12 @@ function Shipping(props) {
             ></select>
           </div>
           <div className="col-12 g-3">
-            <label htmlFor="address" className="form-label label_fs">
+            <label htmlFor="address" className="form-label c-form__label">
               地址
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control c-form__input"
               id="adddress"
               name="address"
               placeholder="請輸入收件地址"
@@ -117,12 +117,12 @@ function Shipping(props) {
             />
           </div>
           <div className="col-12 g-3">
-            <label htmlFor="recipient" className="form-label label_fs">
+            <label htmlFor="recipient" className="form-label c-form__label">
               收件人
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control c-form__input"
               id="recipient"
               name="recipient"
               placeholder="請輸入收件人姓名"
@@ -132,12 +132,12 @@ function Shipping(props) {
             />
           </div>
           <div className="col-6 g-3">
-            <label htmlFor="tel" className="form-label label_fs">
+            <label htmlFor="tel" className="form-label c-form__label">
               聯絡電話
             </label>
             <input
               type="tel"
-              className="form-control"
+              className="form-control c-form__input"
               id="tel"
               name="tel"
               placeholder="請輸入聯絡電話"
@@ -147,11 +147,11 @@ function Shipping(props) {
             />
           </div>
           <div className="col-6 g-3">
-            <label htmlFor="state" className="form-label label_fs">
+            <label htmlFor="state" className="form-label c-form__label">
               運送方式
             </label>
             <select
-              className="form-select styled-select"
+              className="form-select styled-select c-form__select"
               id="state"
               name="delivery_id"
               onChange={handleChange}
@@ -177,7 +177,10 @@ function Shipping(props) {
           <hr className="mt-4" />
           <div className="col-6 g-3">
             <div className="d-grid">
-              <button className="btn_outline p-2" onClick={props.handleClose}>
+              <button
+                className="e-btn e-btn--plain e-btn--secondary e-btn--w100 e-btn--medium"
+                onClick={props.handleClose}
+              >
                 返回購物車
               </button>
             </div>
@@ -185,7 +188,7 @@ function Shipping(props) {
           <div className="col-6 g-3">
             <div className="d-grid">
               <button
-                className="btn_outline btn_grn p-2"
+                className="e-btn e-btn--primary e-btn--w100 e-btn--medium"
                 type="submit"
                 form="shippingForm"
               >

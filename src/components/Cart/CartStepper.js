@@ -137,7 +137,10 @@ function CartStepper(props) {
             <p sx={{ mt: 2, mb: 1 }}>已下單</p>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <button className="btn_outline p-2" onClick={props.handleClose}>
+              <button
+                className="e-btn e-btn--plain e-btn--secondary e-btn--w100 e-btn--medium"
+                onClick={props.handleClose}
+              >
                 返回
               </button>
             </Box>

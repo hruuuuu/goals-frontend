@@ -10,6 +10,9 @@ import LogList from '../components/DietLog/LogList';
 import LogSidebar from '../components/DietLog/LogSidebar';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
+import PageBanner from '../components/PageBanner';
+
+import picBanner from '../img/home/pic/swiper__1.jpg';
 
 function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
@@ -41,6 +44,7 @@ function DietLog() {
 
   return (
     <>
+      <PageBanner img={picBanner} />
       <Header />
       <div className="l-dietlog">
         <div className="container">

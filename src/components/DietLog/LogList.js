@@ -115,9 +115,7 @@ function LogList(props) {
         <button
           type="button"
           className={`c-tabs__btn c-tabs__btn--w100 ${
-            tab === 1
-              ? 'active animation animation__tabs animation__tabs--in'
-              : ''
+            tab === 1 ? 'active' : ''
           }`}
           onClick={() => {
             setTab(1);
@@ -128,9 +126,7 @@ function LogList(props) {
         <button
           type="button"
           className={`c-tabs__btn c-tabs__btn--w100 ${
-            tab === 2
-              ? 'active animation animation__tabs animation__tabs--in'
-              : ''
+            tab === 2 ? 'active' : ''
           }`}
           onClick={() => {
             setTab(2);

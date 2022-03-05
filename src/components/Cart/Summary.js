@@ -95,7 +95,7 @@ function Summary(props) {
           <div className="pt-2 couponItem">
             {!isReceiveList ? (
               <select
-                className="form-select styled-select"
+                className="form-select styled-select c-form__select"
                 id="coupon"
                 name="coupon"
                 onChange={handleChange}
@@ -123,7 +123,7 @@ function Summary(props) {
               </select>
             ) : (
               <select
-                className="form-select styled-select disabled"
+                className="form-select styled-select disabled c-form__select"
                 id="coupon"
               >
                 <option className="option_font" value="" disabled>

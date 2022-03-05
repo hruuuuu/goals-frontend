@@ -19,14 +19,16 @@ function Member() {
   return (
     <>
       <Header />
-      <div className="container">
-        <div className="row gx-4">
-          <div className="col-md-3 d-none d-lg-block">
-            <MemberSidebar />
-          </div>
-          <div className="col col-lg-9 mb-4">
-            <EditProfile />
-            <EditPassWord />
+      <div className="u-margin u-margin--page-bottom">
+        <div className="container">
+          <div className="row gx-4">
+            <div className="col-md-3 d-none d-lg-block">
+              <MemberSidebar />
+            </div>
+            <div className="col col-lg-9">
+              <EditProfile />
+              <EditPassWord />
+            </div>
           </div>
         </div>
       </div>

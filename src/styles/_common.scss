@@ -11,28 +11,27 @@
   align-items: center;
 
   transition: $transition;
-  &:not(.l-navbar--home) {
-    &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
 
-      background: $color--primary;
-      box-shadow: $box-shadow__navbar;
-      border-radius: $border-radius__navbar;
-      transition: $transition;
+    background: $color--light;
+    border-radius: 0;
+    transition: $transition;
 
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
   }
+
   &__wrapper {
     height: 100%;
     display: flex;
     align-items: center;
   }
+
   &--desktop {
     width: 100%;
     display: flex;
@@ -57,6 +56,51 @@
         }
       }
     }
+    #{$_}__link {
+      position: relative;
+      &::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+
+        background: $color--secondary;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 110%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        transition: $transition;
+        opacity: 0;
+      }
+      &:hover {
+        &::after {
+          opacity: 1;
+          top: 90%;
+        }
+      }
+      &.active {
+        &::after {
+          content: "";
+          width: 0.5rem;
+          height: 0.5rem;
+
+          background: $color--secondary;
+          border-radius: 50%;
+
+          position: absolute;
+          top: 90%;
+          left: 50%;
+          transform: translateX(-50%);
+
+          opacity: 1;
+        }
+        #{$_}__font {
+          color: $color--secondary;
+        }
+      }
+    }
   }
   #{$_}__logo {
     width: max-content;
@@ -75,7 +119,7 @@
     }
   }
   &__font {
-    color: $color--light;
+    color: $color--primary;
 
     display: inline-block;
     transition: $transition;
@@ -89,7 +133,7 @@
     padding: 0.625rem;
     margin-right: 0.5rem;
 
-    color: $color--light;
+    color: $color--primary;
     font-size: 1.3rem;
 
     position: relative;
@@ -124,21 +168,57 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      &:not(.l-navbar--home) {
+      &::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+
+        background: $color--light;
+        border-radius: 0;
+        transition: $transition;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      #{$_}__link {
+        position: relative;
         &::after {
           content: "";
-          width: 100%;
-          height: 100%;
+          width: 0.5rem;
+          height: 0.5rem;
 
-          background: $color--primary;
-          box-shadow: $box-shadow__navbar;
-          border-radius: $border-radius__navbar;
-          transition: $transition;
+          background: $color--secondary;
+          border-radius: 50%;
 
           position: absolute;
-          top: 0;
-          left: 0;
-          z-index: -1;
+          top: 50%;
+          right: 100%;
+          transform: translateY(-50%);
+
+          transition: $transition;
+          opacity: 0;
+        }
+        &.active {
+          &::after {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+
+            background: $color--secondary;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            transform: translateY(-50%);
+
+            opacity: 1;
+          }
+          #{$_}__font {
+            color: $color--secondary;
+          }
         }
       }
     }
@@ -196,27 +276,6 @@
           opacity: 1;
           transform: translate3d(0, 0, 0);
         }
-        & ~ #{$_}--home {
-          &::before {
-            content: "";
-            width: 100%;
-            height: 100%;
-            background-image: $img__home-bg;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            opacity: 1;
-            transition: $transition;
-          }
-          &::after {
-            border-radius: 0;
-            background: $color--light;
-
-            transition: $transition;
-          }
-        }
         & ~ #{$_}--scroll {
           &::after {
             border-radius: 0;
@@ -224,51 +283,6 @@
 
             transition: $transition;
           }
-        }
-      }
-    }
-  }
-  &--home {
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    &::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      background-image: none;
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-
-      opacity: 0;
-      transition: $transition__navbar-menu;
-    }
-    &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-
-      background: $color--light;
-      box-shadow: none;
-      border-radius: 0;
-      transition: $transition;
-
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    #{$_}__font {
-      color: $color--primary;
-    }
-    #{$_}__icon {
-      color: $color--primary;
-      @media screen and (max-width: $lg) {
-        &:not(.l-navbar__icon--inline) {
-          color: $color--gray4;
         }
       }
     }
@@ -294,9 +308,9 @@
       width: 100%;
       height: 100%;
 
-      background: $color--primary;
-      box-shadow: $box-shadow__navbar;
-      border-radius: $border-radius__navbar;
+      background: $color--primary !important;
+      box-shadow: $box-shadow__navbar !important;
+      border-radius: $border-radius__navbar !important;
 
       position: absolute;
       top: 0;
@@ -406,7 +420,7 @@
 
     position: relative;
     &::before {
-      content: '';
+      content: "";
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -447,7 +461,7 @@
 
     position: relative;
     &::before {
-      @include icon--absolute('\f0dc');
+      @include icon--absolute("\f0dc");
       color: $color--secondary;
       font-size: 1.2rem;
 
@@ -476,7 +490,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: '';
+        content: "";
         display: none;
       }
     }
@@ -493,7 +507,7 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute('\f105');
+      @include icon--absolute("\f105");
       color: $color--gray4;
       font-size: 1rem;
 
@@ -600,7 +614,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: '';
+        content: "";
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -609,7 +623,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: '';
+        content: "";
         width: 5px;
         height: 30px;
         position: absolute;
@@ -681,6 +695,11 @@
 }
 
 .c-pageBanner {
+  height: 20rem;
+  overflow: hidden;
+  @media screen and (max-width: $md) {
+    height: auto;
+  }
   .carousel-item.active {
     animation: move 2s ease-in-out alternate;
     transform: scale(1);
@@ -1111,7 +1130,7 @@
       padding: $padding__chat;
     }
     #{$_}__msg {
-      &[from='client'] {
+      &[from="client"] {
         color: $color--light;
         background: $color--info;
 
@@ -1120,7 +1139,7 @@
           left: -3rem;
         }
       }
-      &[from='admin'] {
+      &[from="admin"] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1142,7 +1161,7 @@
       margin-bottom: $padding__chat;
     }
     #{$_}__msg {
-      &[from='admin'] {
+      &[from="admin"] {
         color: $color--light;
         background: $color--info;
 
@@ -1151,7 +1170,7 @@
           left: -3rem;
         }
       }
-      &[from='client'] {
+      &[from="client"] {
         color: $color--font;
         background: $color--gray6;
 
