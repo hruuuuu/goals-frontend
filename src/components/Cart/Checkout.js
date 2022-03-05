@@ -1,15 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/lib/styles.scss';
+import axios from 'axios';
+
+import { API_URL } from '../../utils/config';
+
+import { useCartList } from '../../context/cart';
 
 function Checkout(props) {
-  const [creditcard, setCreditcard] = useState({
-    cvc: '',
-    expiry: '',
-    focus: '',
-    name: '',
-    number: '',
-  });
+  const { activeStep, setActiveStep } = props;
+  const { creditcard, setCreditcard } = props;
+  const { orderTotal, setOrderTotal } = props;
+  const { member, setMember } = props;
+  const { couponId, setCouponId } = props;
+  const { shippingData, setShippingData } = props;
+  const { cartListData, setCartListData } = useCartList();
+  // const [creditcard, setCreditcard] = useState({
+  //   cvc: '',
+  //   expiry: '',
+  //   focus: '',
+  //   name: '',
+  //   number: '',
+  // });
+
+  //coupon_receive
+  const usedCouponData = {
+    member_id: member.id,
+    coupon_id: couponId,
+  };
+  // console.log(usedCouponData);
+
+  //order_items
+  // ->準備好要傳回資料庫的product_id, amount
+  const cartItems = { ...cartListData };
+  // console.log(cartItems);
+
+  //order_details
+  // ->準備好要傳回資料庫的應付金額
+  const cartDetails = {
+    ...shippingData,
+    total: Number(orderTotal),
+    member_id: member.id,
+  };
+  // console.log(cartDetails);
 
   const handleInputFocus = (e) => {
     setCreditcard({ ...creditcard, focus: e.target.name });
@@ -22,116 +55,147 @@ function Checkout(props) {
     setCreditcard({ ...creditcard, [name]: value });
   };
 
+  // const handleNext = (e) => {
+  //   e.preventDefault();
+
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  //送出訂單 ->傳回資料庫
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    //orderDetails
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails,
+      usedCouponData
+    );
+    //order_items
+    let orderItemsResponse = await axios.post(
+      `${API_URL}/cart/orderItems`,
+      cartItems
+    );
+
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+     
+  }
+
   return (
     <>
-      <div className="container checkoutBox" id="PaymentForm">
-        <div className="my-3">
-          <h5>付款資訊</h5>
-        </div>
-        <div className="mb-2">
-          <Cards
-            cvc={creditcard.cvc}
-            expiry={creditcard.expiry}
-            focused={creditcard.focus}
-            name={creditcard.name}
-            number={creditcard.number}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="firstName" className="form-label label_fs">
-            持卡人
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            name="name"
-            placeholder="請輸入持卡人姓名"
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <div className="invalid-feedback">Valid first name is required.</div>
-        </div>
+      <div className="container checkoutBox">
+        <form className="row" onSubmit={handleSubmit} id="checkoutForm">
+          <div className="col-12 g-3">
+            <h5>付款資訊</h5>
+          </div>
+          <div className="col-12 g-3">
+            <Cards
+              cvc={creditcard.cvc}
+              expiry={creditcard.expiry}
+              focused={creditcard.focus}
+              name={creditcard.name}
+              number={creditcard.number}
+            />
+          </div>
+          <div className="col-12 g-3">
+            <label htmlFor="firstName" className="form-label label_fs">
+              持卡人
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              name="name"
+              value={creditcard.name}
+              placeholder="請輸入持卡人姓名"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              required
+            />
+          </div>
 
-        <div className="mb-2">
-          <label htmlFor="address" className="form-label label_fs">
-            卡號
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="adddress"
-            name="number"
-            placeholder="請輸入卡號"
-            onChange={handleInputChange}
-            onFocus={handleInputFocus}
-          />
-          <div className="invalid-feedback">Valid address is required.</div>
-        </div>
-        {/* <div className="mb-2">
-          <label htmlFor="recipient" className="form-label label_fs">
-            卡別
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="recipient"
-            placeholder="請輸入卡別"
-            required
-          />
-          <div className="invalid-feedback">Valid recipient is required.</div>
-        </div> */}
-        <div className="row g-2 mb-2">
-          <div className="col-6">
-            <label htmlFor="" className="form-label label_fs">
+          <div className="col-12 g-3 card-number-group">
+            <label htmlFor="card-number" className="form-label label_fs">
+              卡號
+            </label>
+            <input
+              type=""
+              className="form-control card-number"
+              id="adddress"
+              name="number"
+              value={creditcard.number}
+              placeholder="**** **** **** ****"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              required
+            />
+          </div>
+          <div className="col-6 g-3 expiration-date-group">
+            <label htmlFor="expiration-date" className="form-label label_fs">
               有效日期
             </label>
             <input
               type=""
-              className="form-control"
+              className="form-control expiration-date"
               id=""
               name="expiry"
-              placeholder="月/ 年"
+              value={creditcard.expiry}
+              placeholder="MM / YY"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              required
             />
-            {/* <div className="d-flex align-items-center justify-content-between">
-              <input
-                type=""
-                className="form-control"
-                id=""
-                placeholder="月"
-                required
-              />
-              <div className="mx-1">/</div>
-              <input
-                type=""
-                className="form-control"
-                id=""
-                placeholder="年"
-                required
-              />
-            </div> */}
           </div>
 
-          <div className="col-6">
-            <label htmlFor="state" className="form-label label_fs">
+          <div className="col-6 g-3 cvc-group">
+            <label htmlFor="cvc" className="form-label label_fs">
               CVC
             </label>
             <input
               type=""
-              className="form-control"
-              id="tel"
+              className="form-control cvc"
+              id="cvc"
               name="cvc"
-              placeholder="請輸入..."
+              value={creditcard.cvc}
+              placeholder="安全碼"
               onChange={handleInputChange}
               onFocus={handleInputFocus}
+              required
             />
-            <div className="invalid-feedback">
-              Please provide a valid state.
+          </div>
+          <hr className="mt-4" />
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button className="btn_outline p-2" onClick={handleBack}>
+                上一步
+              </button>
             </div>
           </div>
-        </div>
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button
+                type="submit"
+                className="btn_outline btn_grn p-2"
+                // onClick={() => {
+                //   handleSubmit();
+                //   handleNext();
+                // }}
+                form="checkoutForm"
+              >
+                確認付款
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </>
   );

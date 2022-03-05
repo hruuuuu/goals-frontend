@@ -12,7 +12,7 @@ import RangeInputSlider from './RangeInputSlider';
 function Filter(props) {
   const { device } = props;
   const MIN_PRODUCT_PRICE = 50;
-  const MAX_PRODUCT_PRICE = 300;
+  const MAX_PRODUCT_PRICE = 600;
   const { categoryData } = useCategory();
   const { activityData } = useActivity();
   const { productsData, setProductsData } = useProducts();

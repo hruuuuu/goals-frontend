@@ -22,7 +22,7 @@ function Coupon() {
           <div className="col-lg-3 d-none d-lg-block">
             <MemberSidebar />
           </div>
-          <div className="col col-lg-9">
+          <div className="col col-lg-9 mb-4">
             <CouponList />
           </div>
         </div>

@@ -63,6 +63,7 @@ function CheckoutModal(props) {
         <div className="container mb-4 px-5">
           <CartStepper
             handleClose={handleClose}
+            handleShow={handleShow}
             orderTotal={orderTotal}
             setOrderTotal={setOrderTotal}
             member={member}

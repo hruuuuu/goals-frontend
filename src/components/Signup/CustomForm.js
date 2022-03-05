@@ -45,17 +45,6 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
               history('/');
             }
           });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            html: userProfile.msg,
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-          }).then((result) => {
-            if (!result.isConfirmed) {
-              history('/');
-            }
-          });
         }
       } else {
         const signupData = await axios.post(`${API_URL}/auth/signup`, values, {
@@ -73,17 +62,6 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
               history('/');
             }
           });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            html: userProfile.msg,
-            showCancelButton: true,
-            cancelButtonColor: '#d33',
-          }).then((result) => {
-            if (!result.isConfirmed) {
-              history('/');
-            }
-          });
         }
       }
     } catch (err) {
@@ -95,6 +73,7 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
   const loginInitValue = {
     email: '',
     password: '',
+    confirmPassword: '',
   };
 
   // 註冊初值

@@ -28,8 +28,8 @@ const ScrollButton = () => {
   return (
     <Button>
       <FaArrowCircleUp
-        onClick={scrollToTop}
         style={{ opacity: visible ? '1' : '0' }}
+        onClick={scrollToTop}
         className="transition-btn"
       />
     </Button>

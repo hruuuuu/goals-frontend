@@ -333,7 +333,6 @@ function ProductDetail(props) {
                 {/* 臨時調整區開始 */}
                 <div className="c-product-detail__footer">
                   <div className="c-product-detail__footer-wrapper">
-                    <hr className="e-hr e-hr--divider my-2 d-none d-md-block" />
                     <div className="row gx-2">
                       <div className="col-5 col-md-12 d-flex justify-content-between align-items-end mb-0 mb-md-3">
                         <Counter
