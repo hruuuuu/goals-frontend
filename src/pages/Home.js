@@ -198,7 +198,7 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-10 col-md-8 col-lg-10">
+              <div className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8">
                 <div className="c-overview__list">
                   <div className="row gx-3 gx-md-5 gx-lg-3 gx-xl-5 gy-4 gy-lg-0">
                     {overviewItems.map((item) => {
@@ -228,7 +228,7 @@ function Home() {
           </div>
           <div className="l-home__product c-section">
             <div className="row justify-content-center g-0">
-              <div className="col-12 col-lg-10">
+              <div className="col-12 col-lg-10 col-xl-9 col-xxl-8">
                 <div
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
@@ -383,7 +383,7 @@ function Home() {
               </div>
               <div className="l-home__diet-list c-section">
                 <div className="row justify-content-center">
-                  <div className="col-12 col-xl-10">
+                  <div className="col-12 col-xl-10 col-xl-9 col-xxl-8">
                     <div className="row justify-content-center gx-lg-5 gx-xl-0">
                       <div className="col-3 position-relative d-none d-lg-flex">
                         <div className="c-section__block c-section__block--both-left">
@@ -464,7 +464,7 @@ function Home() {
                   <hr className="e-hr e-hr--primary c-title__hr" />
                 </div>
               </div>
-              <div className="col-10">
+              <div className="col-10 col-xl-9 col-xxl-8">
                 <div className="c-swiper c-swiper--blog">
                   {!isFetchBlog && (
                     <Swiper
