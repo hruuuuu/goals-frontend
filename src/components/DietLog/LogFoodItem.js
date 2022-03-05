@@ -5,7 +5,7 @@ function LogFoodItem(props) {
   const {
     name,
     calories,
-    protien,
+    protein,
     fat,
     saturated_fat,
     trans_fat,
@@ -17,7 +17,7 @@ function LogFoodItem(props) {
   const [foodField, setFoodField] = useState({
     name: name,
     calories: calories,
-    protien: protien,
+    protein: protein,
     fat: fat,
     saturatedFat: saturated_fat,
     transFat: trans_fat,
@@ -32,7 +32,6 @@ function LogFoodItem(props) {
       return { ...food, flag: i };
     });
     setFields([...foodFieldsWithFlag]);
-    console.log('test');
   };
   return (
     <>
@@ -50,7 +49,7 @@ function LogFoodItem(props) {
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label">
-              {protien}
+              {protein}
             </span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>

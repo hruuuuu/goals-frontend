@@ -6,7 +6,7 @@ function MealGraph(props) {
   const { statics, graphRightSeries, mealData, title } = props;
   const {
     calories,
-    protien,
+    protein,
     fat,
     saturated_fat,
     trans_fat,
@@ -16,7 +16,7 @@ function MealGraph(props) {
   } = statics;
 
   const data = [
-    { value: protien, name: '蛋白質', itemStyle: { color: '#76b8d3' } },
+    { value: protein, name: '蛋白質', itemStyle: { color: '#76b8d3' } },
     { value: fat, name: '脂肪', itemStyle: { color: '#f8bc5d' } },
     {
       value: saturated_fat,
@@ -71,7 +71,7 @@ function MealGraph(props) {
   };
 
   const rightSeries = {
-    data: [protien, fat, saturated_fat, trans_fat, carb, sugar, sodium],
+    data: [protein, fat, saturated_fat, trans_fat, carb, sugar, sodium],
     type: 'bar',
     colorBy: data,
     showBackground: true,

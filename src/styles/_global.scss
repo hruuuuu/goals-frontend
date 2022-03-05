@@ -36,6 +36,10 @@ button {
   letter-spacing: $letter-spacing;
 }
 
+[list]::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;

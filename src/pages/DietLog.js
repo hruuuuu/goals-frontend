@@ -18,7 +18,6 @@ function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
   const [refresh, setRefresh] = useState(false);
-  const [foodFields, setFoodFields] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [dayDietlog, setDayDietlog] = useState([]);
   const [mealDietlog, setMealDietlog] = useState([]);
@@ -54,8 +53,6 @@ function DietLog() {
                 getDietlogData={getDietlogData}
                 refresh={refresh}
                 setRefresh={setRefresh}
-                editMode={editMode}
-                setEditMode={setEditMode}
               />
             </div>
             <div className="col-12 col-lg-7 mb-5 mb-lg-0">
@@ -64,8 +61,6 @@ function DietLog() {
                   getDietlogData={getDietlogData}
                   refresh={refresh}
                   setRefresh={setRefresh}
-                  foodFields={foodFields}
-                  setFoodFields={setFoodFields}
                   editMode={editMode}
                   setEditMode={setEditMode}
                   dayDietlog={dayDietlog}

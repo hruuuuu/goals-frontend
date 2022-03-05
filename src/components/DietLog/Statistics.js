@@ -19,7 +19,7 @@ function Statistics(props) {
   const { daySummary, mealDietlog } = props;
   const {
     calories,
-    protien,
+    protein,
     fat,
     saturated_fat,
     trans_fat,
@@ -31,7 +31,7 @@ function Statistics(props) {
   const [tab, setTab] = useState(1);
   const [breakfast, setBreakfast] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
     saturated_fat: 0,
     trans_fat: 0,
@@ -41,7 +41,7 @@ function Statistics(props) {
   });
   const [lunch, setLunch] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
     saturated_fat: 0,
     trans_fat: 0,
@@ -51,7 +51,7 @@ function Statistics(props) {
   });
   const [dinner, setDinner] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
     saturated_fat: 0,
     trans_fat: 0,
@@ -61,7 +61,7 @@ function Statistics(props) {
   });
   const [others, setOthers] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
     saturated_fat: 0,
     trans_fat: 0,
@@ -96,7 +96,7 @@ function Statistics(props) {
           setBreakfast({
             ...breakfast,
             calories: handleSumMeal(foods, 'calories'),
-            protien: handleSumMeal(foods, 'protien'),
+            protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
             saturated_fat: handleSumMeal(foods, 'saturated_fat'),
             trans_fat: handleSumMeal(foods, 'trans_fat'),
@@ -109,7 +109,7 @@ function Statistics(props) {
           setLunch({
             ...lunch,
             calories: handleSumMeal(foods, 'calories'),
-            protien: handleSumMeal(foods, 'protien'),
+            protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
             saturated_fat: handleSumMeal(foods, 'saturated_fat'),
             trans_fat: handleSumMeal(foods, 'trans_fat'),
@@ -122,7 +122,7 @@ function Statistics(props) {
           setDinner({
             ...dinner,
             calories: handleSumMeal(foods, 'calories'),
-            protien: handleSumMeal(foods, 'protien'),
+            protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
             saturated_fat: handleSumMeal(foods, 'saturated_fat'),
             trans_fat: handleSumMeal(foods, 'trans_fat'),
@@ -135,7 +135,7 @@ function Statistics(props) {
           setOthers({
             ...others,
             calories: handleSumMeal(foods, 'calories'),
-            protien: handleSumMeal(foods, 'protien'),
+            protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
             saturated_fat: handleSumMeal(foods, 'saturated_fat'),
             trans_fat: handleSumMeal(foods, 'trans_fat'),
@@ -153,7 +153,7 @@ function Statistics(props) {
   };
 
   const dayData = [
-    { value: protien, name: '蛋白質' },
+    { value: protein, name: '蛋白質' },
     { value: fat, name: '脂肪' },
     { value: saturated_fat, name: '飽和脂肪' },
     { value: trans_fat, name: '反式脂肪' },

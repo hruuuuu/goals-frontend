@@ -211,7 +211,6 @@ function Navbar() {
     navLinks.forEach((nav) => {
       const matched = nav.route === locationPath;
       if (matched) {
-        console.log(nav.route);
         setIsActive(nav.id);
       }
     });

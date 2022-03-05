@@ -6,10 +6,13 @@ function LogFoodLabel(props) {
     <>
       <div className="c-dietlog-fields__heading">
         <div className="row gx-1">
-          <div className="col-3">
+          <div className="col-2">
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--name c-dietlog-fields__label--start">
-              名稱/成分(每份)
+              名稱/成分
             </span>
+          </div>
+          <div className={`${editMode ? 'col-1' : 'col'}`}>
+            <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start"></span>
           </div>
           <div className={`${editMode ? 'col-1' : 'col'}`}>
             <span className="c-form__label c-dietlog-fields__label c-dietlog-fields__label--start">

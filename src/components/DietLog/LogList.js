@@ -14,8 +14,6 @@ function LogList(props) {
     dietlogImg,
     refresh,
     setRefresh,
-    foodFields,
-    setFoodFields,
     editMode,
     setEditMode,
     dayDietlog,
@@ -26,7 +24,7 @@ function LogList(props) {
   const [tab, setTab] = useState(1);
   const [daySummary, setDaySummary] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
     saturated_fat: 0,
     trans_fat: 0,
@@ -47,7 +45,7 @@ function LogList(props) {
       const day = response.data;
       setDaySummary({
         calories: day.calories,
-        protien: day.protien,
+        protein: day.protein,
         fat: day.fat,
         saturated_fat: day.saturated_fat,
         trans_fat: day.trans_fat,
@@ -88,8 +86,6 @@ function LogList(props) {
                   dietlogImg={dietlogImg}
                   refresh={refresh}
                   setRefresh={setRefresh}
-                  foodFields={foodFields}
-                  setFoodFields={setFoodFields}
                   editMode={editMode}
                   setEditMode={setEditMode}
                 />
