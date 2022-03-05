@@ -22,6 +22,7 @@
     align-items: center;
 
     @include cursor(pointer);
+    transition: $transition;
     &__icon {
       color: $color--analogous1;
       font-size: 1.25rem;
@@ -52,6 +53,8 @@
     &.active {
       .Sidebarfont__icon,
       .Sidebarfont__text {
+        transition: $transition;
+
         color: $color--active;
       }
     }

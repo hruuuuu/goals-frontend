@@ -22,31 +22,40 @@ function Invalid() {
     <>
       {!isInvalidList ? (
         <div className="coupons">
-          <div className="row">
+          <div className="row gx-3 gy-4">
             {data.map((coupon) => {
               return (
-                <div
-                  className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                  key={coupon.id}
-                >
-                  <div className="couponWrapper mt-3">
+                <div className="col-lg-6 col-md-6 col-sm-12" key={coupon.id}>
+                  <div className="couponWrapper">
                     <div className="coupon">
-                      <div className="coupon-detail">
-                        <h2 className="coupon-amount">
-                          {/* <i className="fas fa-dollar-sign"></i> */}
-                          <p>{coupon.title}</p>
-                        </h2>
-                        <div className="sperate-line"></div>
-                        <div className="coupon-statement">
-                          <h5 className="coupon-title">{coupon.discription}</h5>
-                          <p className="coupon-period">
-                            使用期間: {coupon.start_time} 至 {coupon.end_time}{' '}
-                            有效
-                          </p>
+                      <div className="coupon-detail pt-4 mb-3">
+                        <div className="row gx-1">
+                          <div className="col-3 d-flex align-items-center">
+                            <h4 className="coupon-amount">
+                              {/* <i className="fas fa-dollar-sign"></i> */}
+                              {coupon.title}
+                            </h4>
+                          </div>
+                          <div className="col-1">
+                            <div className="sperate-line"></div>
+                          </div>
+                          <div className="col-8">
+                            <div className="coupon-statement">
+                              <h6 className="coupon-title">
+                                {coupon.discription}
+                              </h6>
+                              <p className="coupon-period">
+                                使用期限:
+                                <br />
+                                {coupon.start_time}至<br />
+                                {coupon.end_time}
+                              </p>
+                            </div>
+                          </div>
                         </div>
+                        {/* <button className="couponBtn">已領取</button> */}
+                        {/* <div className="remain-coupon">剩餘{order.amount}張</div> */}
                       </div>
-                      {/* <button className="couponBtn">已領取</button> */}
-                      {/* <div className="remain-coupon">剩餘{order.amount}張</div> */}
                     </div>
                   </div>
                 </div>
@@ -55,7 +64,9 @@ function Invalid() {
           </div>
         </div>
       ) : (
-        <h1>沒有失效的優惠券</h1>
+        <div className="coupons">
+          <h1>沒有失效的優惠券</h1>
+        </div>
       )}
     </>
   );

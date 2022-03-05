@@ -11,6 +11,8 @@ import FloatingIcon from '../components/FloatingIcon';
 import FloatingMenu from '../components/FloatingMenu';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
+import PageBanner from '../components/PageBanner';
+import picBanner from '../img/home/pic/swiper__1.jpg';
 
 function Products() {
   /* 控制floatingMenu */
@@ -25,31 +27,34 @@ function Products() {
 
   return (
     <>
-      <Header isLower={isLower} />
-      <div className="container">
-        <div className="row gx-lg-5">
-          <div className="col-lg-4 col-xl-3 d-none d-lg-block">
-            <Filter device="desktop" />
-          </div>
-          <div className="col-12 col-lg-8 col-xl-9">
-            <div className="l-product">
-              <ProductList category={category} setCategory={setCategory} />
+      <div className={isLower ? 'u-padding--product-top' : ''}>
+        <PageBanner img={picBanner} />
+        <Header isLower={isLower} />
+        <div className="container">
+          <div className="row gx-lg-5">
+            <div className="col-lg-4 col-xl-3 d-none d-lg-block">
+              <Filter device="desktop" />
+            </div>
+            <div className="col-12 col-lg-8 col-xl-9">
+              <div className="l-product">
+                <ProductList category={category} setCategory={setCategory} />
+              </div>
             </div>
           </div>
+          <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
+          {isDisplay && (
+            <FloatingMenu
+              isDisplay={isDisplay}
+              setIsDisplay={setIsDisplay}
+              page="product"
+            />
+          )}
         </div>
-        <FloatingIcon setIsDisplay={setIsDisplay} page="product" />
-        {isDisplay && (
-          <FloatingMenu
-            isDisplay={isDisplay}
-            setIsDisplay={setIsDisplay}
-            page="product"
-          />
-        )}
+        <FilterMobile />
+        <ProductDetail category={category} setCategory={setCategory} />
+        <FloatingChat />
+        <ScrollButton />
       </div>
-      <FilterMobile />
-      <ProductDetail category={category} setCategory={setCategory} />
-      <FloatingChat />
-      <ScrollButton />
     </>
   );
 }

@@ -7,6 +7,9 @@ import FloatingChat from '../components/FloatingChat';
 import { useLogin } from '../context/LoginStatus';
 import { Navigate } from 'react-router-dom';
 import ScrollButton from '../components/ScrollButton';
+import PageBanner from '../components/PageBanner';
+
+import picBanner from '../img/home/pic/swiper__1.jpg';
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -16,14 +19,17 @@ function Coupon() {
   }
   return (
     <>
+      <PageBanner img={picBanner} />
       <Header />
-      <div className="container">
-        <div className="row gx-4">
-          <div className="col-lg-3 d-none d-lg-block">
-            <MemberSidebar />
-          </div>
-          <div className="col col-lg-9 mb-4">
-            <CouponList />
+      <div className="u-margin u-margin--page-bottom">
+        <div className="container">
+          <div className="row gx-4">
+            <div className="col-lg-3 d-none d-lg-block">
+              <MemberSidebar />
+            </div>
+            <div className="col col-lg-9">
+              <CouponList />
+            </div>
           </div>
         </div>
       </div>

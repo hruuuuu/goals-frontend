@@ -9,7 +9,7 @@
   color: $color--gray3;
 }
 .txt_bolder {
-  font-weight: bolder;
+  font-weight: 500;
 }
 .txt_error {
   color: $color--error;
@@ -68,6 +68,15 @@
   }
 }
 
-.mainContent {
-  height: 70vh;
+.c-floating-cart {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__title {
+    @include text--normal;
+    color: $color--gray3;
+    margin-bottom: 0.5rem;
+  }
 }

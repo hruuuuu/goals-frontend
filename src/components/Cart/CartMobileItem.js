@@ -154,8 +154,11 @@ function CartMobileItem(props) {
         </div>
         <div className="mobileCartItem__total txt_org">${subtotal}</div>
         <div className="mobileCartItem__del_btn">
-          <button className="del_btn py-1" onClick={removeItemFromCart}>
-            <i className="fas fa-trash-alt p-1 icon_grn"></i>
+          <button
+            className="e-btn e-btn--icon e-btn--outline"
+            onClick={removeItemFromCart}
+          >
+            <i className="fas fa-trash-alt icon_grn e-icon"></i>
           </button>
         </div>
       </div>

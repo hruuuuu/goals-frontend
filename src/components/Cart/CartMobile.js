@@ -29,21 +29,21 @@ function CartMoblie(props) {
 
   return (
     <>
-      <div className="floatingCart">
-        <div className="mt-2">
-          <h3>購物車</h3>
+      <div className="floatingCart c-floating-cart">
+        <div className="c-floating-cart__top">
+          <h3 className="c-floating-cart__title">購物車</h3>
+
+          <div className="floatingCartItem">
+            {cartListData.map((product, i) => {
+              return <CartMobileItem key={product.id} product={product} />;
+            })}
+          </div>
         </div>
-        <hr className="mt-1 mb-2" />
-        <div className="floatingCartItem">
-          {cartListData.map((product, i) => {
-            return <CartMobileItem key={product.id} product={product} />;
-          })}
-        </div>
-        <hr />
         <div className="floatingCartSummary">
+          <hr />
           <div className="d-flex justify-content-between mb-2">
             <p>活動折扣</p>
-            <p className="txt_bolder txt_error">-$ {discountTotal}</p>
+            <p className="txt_bolder txt_error">-${discountTotal}</p>
           </div>
           <div className="d-flex justify-content-between align-items-center mb-2">
             <p className="font_larger txt_bolder">總計</p>
@@ -51,7 +51,10 @@ function CartMoblie(props) {
           </div>
           <Link to={`/member/cart`}>
             <div className="d-grid gap-2">
-              <button className="btn btn_grn rounded-3 py-2" type="button">
+              <button
+                className="e-btn e-btn--primary e-btn--w100 e-btn--medium"
+                type="button"
+              >
                 前往結帳
               </button>
             </div>

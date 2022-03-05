@@ -79,7 +79,7 @@
 
         .sperate-line {
           width: 1px;
-          height: 7vw;
+          height: 100%;
           background-color: $color--light;
         }
 
@@ -96,7 +96,8 @@
           }
 
           .coupon-period {
-            font-size: 0.8rem;
+            @include text--extra-small;
+            color: $color--gray5;
             margin-bottom: 0;
           }
         }
@@ -119,7 +120,7 @@
     width: 100%;
     background-color: $color--info;
     border-radius: 0.625rem;
-    padding: 1rem 0 2rem 0;
+    padding: 1.5rem 0;
     position: relative;
 
     .coupon {
@@ -128,67 +129,65 @@
       text-align: center;
 
       .remain-coupon {
+        @include text--extra-small;
         position: absolute;
-        top: 5%;
-        left: 85%;
-        transform: translate(-50%, -50%);
+        top: -5%;
+        right: 0.5rem;
         width: 5.93rem;
         height: 2.5rem;
         background-color: $color--secondary;
         color: $color--light;
-        padding: 0.75rem 0.3rem;
         border-radius: 0.3125rem;
-        font-size: 0.9rem;
         box-shadow: $box-shadow__icon;
       }
 
-      .coupon-detail {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0.5rem 0;
+      .coupon-amount {
+        @include h4;
+        color: $color--light;
 
-        .coupon-amount {
-          display: flex;
-          color: $color--light;
-          padding-right: 0.5rem;
-
-          i {
-            align-self: center;
-            padding: 0 0.25rem;
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
-
-          p {
-            margin: 0;
-            font-weight: 700;
-            font-size: 1.5rem;
-          }
+        i {
+          align-self: center;
+          padding: 0 0.25rem;
+          font-weight: 700;
+          font-size: 1.5rem;
         }
 
-        .sperate-line {
-          width: 1px;
-          height: 7vw;
-          background-color: $color--light;
+        p {
+          margin: 0;
+          font-weight: 700;
+          font-size: 1.5rem;
+        }
+        @media screen and (max-width: $lg) {
+          @include h5;
+          color: $color--light;
+        }
+        @media screen and (max-width: $md) {
+          @include h4;
+          color: $color--light;
+        }
+      }
+
+      .sperate-line {
+        width: 1px;
+        height: 100%;
+        background-color: $color--light;
+      }
+
+      .coupon-statement {
+        text-align: start;
+        color: $color--light;
+        line-height: 1.5;
+
+        .coupon-title {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: $color--light;
         }
 
-        .coupon-statement {
-          text-align: start;
-          color: $color--light;
-          line-height: 1.5;
-          padding-left: 0.5rem;
-
-          .coupon-title {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: $color--light;
-          }
-
-          .coupon-period {
-            font-size: 0.8rem;
-            margin-bottom: 0;
-          }
+        .coupon-period {
+          @include text--extra-small;
+          color: $color--gray5;
+          margin-bottom: 0;
         }
       }
 
@@ -201,6 +200,7 @@
         line-height: 2;
         border: 1px solid transparent;
         border-radius: 0.625rem;
+        @include interaction__btn;
       }
     }
   }
@@ -213,45 +213,22 @@
   }
 
   .coupons {
-    padding: 0.5rem 0;
+    .couponWrapper {
+      height: 100%;
 
-    .col-lg-6 {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-
-      .couponWrapper {
-        height: 100%;
-
-        .coupon {
-          .coupon-detail {
-            display: block;
-
-            .coupon-amount {
-              margin-bottom: 0.8rem;
-            }
-
-            .sperate-line {
-              display: none;
-            }
-          }
+      .coupon {
+        .coupon-detail {
+          display: block;
         }
       }
+    }
 
-      .couponWrapper1 {
-        height: 100%;
+    .couponWrapper1 {
+      height: 100%;
 
-        .coupon {
-          .coupon-detail {
-            display: block;
-
-            .coupon-amount {
-              margin-bottom: 0.8rem;
-            }
-
-            .sperate-line {
-              display: none;
-            }
-          }
+      .coupon {
+        .coupon-detail {
+          display: block;
         }
       }
     }

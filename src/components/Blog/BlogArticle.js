@@ -39,27 +39,29 @@ function BlogArticle() {
       <PageBanner />
       <div className="blog__article">
         <Header />
-        <div className="container">
-          <div className="row">
-            <div className="col-xl-6 col-lg-12">
-              <div className="blog__article--img_block">
-                <div className="l-header__title">
-                  <img src={img} alt="food" />
-                  <h3 className="l-header__text">{data.title}</h3>
+        <div className="u-margin u-margin--page-bottom">
+          <div className="container">
+            <div className="row">
+              <div className="col-xl-6 col-lg-12">
+                <div className="blog__article--img_block">
+                  <div className="l-header__title">
+                    <img src={img} alt="food" />
+                    <h3 className="l-header__text">{data.title}</h3>
+                  </div>
+                  <img className="img-responsive" src={data.image} alt="blog" />
                 </div>
-                <img className="img-responsive" src={data.image} alt="blog" />
               </div>
-            </div>
-            <div className="col-xl-6 col-lg-12">
-              <div className="blog__article--text">
-                <p style={{ whiteSpace: 'pre-wrap' }}>{data.context}</p>
-                <button
-                  className="e-btn--primary e-btn--medium"
-                  type="button"
-                  onClick={() => navigate(-1)}
-                >
-                  回上頁
-                </button>
+              <div className="col-xl-6 col-lg-12">
+                <div className="blog__article--text">
+                  <p style={{ whiteSpace: 'pre-wrap' }}>{data.context}</p>
+                  <button
+                    className="e-btn--primary e-btn--medium"
+                    type="button"
+                    onClick={() => navigate(-1)}
+                  >
+                    回上頁
+                  </button>
+                </div>
               </div>
             </div>
           </div>

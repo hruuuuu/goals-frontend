@@ -31,7 +31,9 @@ function ProductList(props) {
           })
         ) : (
           <>
-            <h1>沒有符合條件的商品</h1>
+            <div className="u-height u-height--empty-page">
+              <h1>沒有符合條件的商品</h1>
+            </div>
           </>
         )}
       </div>
