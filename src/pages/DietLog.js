@@ -24,13 +24,11 @@ function DietLog() {
   const [meal, setMeal] = useState([]);
 
   const getDietlogData = async () => {
+    const data = { date: calendarDate };
     try {
-      const response = await axios.get(
-        `${API_URL}/dietlog?date=${calendarDate}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${API_URL}/dietlog`, data, {
+        withCredentials: true,
+      });
       const dietData = response.data;
       setDietlogData([...dietData]);
       setMealDietlog([...dietData]);
