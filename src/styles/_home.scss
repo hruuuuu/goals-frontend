@@ -11,8 +11,10 @@
     overflow: hidden;
   }
   &__key-vision {
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - $height__navbar);
+
+    overflow: hidden;
 
     position: relative;
 
@@ -46,7 +48,7 @@
   transform: rotate(90deg);
 
   &::after {
-    content: "";
+    content: '';
     height: 0.0625rem;
     width: 6rem;
 
@@ -272,7 +274,7 @@
         height: $height__block--mobile;
         left: 0;
         right: auto;
-        &[section="log"] {
+        &[section='log'] {
           width: 100vw;
           left: auto;
         }
@@ -306,10 +308,10 @@
     }
   }
   &__row {
-    &[section="product-intro"] {
+    &[section='product-intro'] {
       height: $height__product-intro;
     }
-    &[section="product-list"] {
+    &[section='product-list'] {
       height: $height__product-list;
     }
     @media screen and (max-width: $lg) {
@@ -340,7 +342,7 @@
   &__wrapper {
     padding: 4.75rem 0 0 0;
     @media screen and (max-width: $lg) {
-      &[section="list"] {
+      &[section='list'] {
         padding: 0;
       }
     }
@@ -403,5 +405,58 @@
     margin-bottom: 2.5rem !important;
     text-align: center;
     color: $color--primary;
+  }
+}
+
+/*l-home__calculator*/
+.l-home__calculator {
+  padding-bottom: 3rem;
+  .c-textbox {
+    padding-top: 5rem;
+    padding-left: 6.25rem;
+    @media screen and (max-width: $xxl) {
+      padding-left: 3rem;
+    }
+    @media screen and (max-width: $xl) {
+      padding-left: 0rem;
+    }
+    @media screen and (max-width: $lg) {
+      padding-top: 0;
+    }
+    @media screen and (max-width: $md) {
+      .c-title__deco {
+        display: none;
+      }
+    }
+  }
+  .des-right__deco {
+    width: 200px;
+    transform: translate(65%, -50%);
+    top: 50%;
+    right: 0;
+    z-index: -1;
+    @media screen and (max-width: $xl) {
+      width: 150px;
+    }
+    @media screen and (max-width: $lg) {
+      top: 18%;
+    }
+    @media screen and (max-width: $md) {
+      width: 100px;
+      top: 10%;
+      right: 10%;
+    }
+    &::before {
+      width: 400px;
+      height: 400px;
+      @media screen and (max-width: $xl) {
+        width: 300px;
+        height: 300px;
+      }
+      @media screen and (max-width: $md) {
+        width: 200px;
+        height: 200px;
+      }
+    }
   }
 }
