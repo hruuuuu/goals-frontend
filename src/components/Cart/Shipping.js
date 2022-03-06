@@ -191,6 +191,7 @@ function Shipping(props) {
                 className="e-btn e-btn--primary e-btn--w100 e-btn--medium"
                 type="submit"
                 form="shippingForm"
+                onClick={() => handleNext}
               >
                 下一步
               </button>

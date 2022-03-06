@@ -13,7 +13,7 @@ function CheckoutModal(props) {
   const handleShow = () => {
     if (!login) {
       Swal.fire({
-        title: '您尚未登入，無法購買商品',
+        title: '購買前請先登入',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

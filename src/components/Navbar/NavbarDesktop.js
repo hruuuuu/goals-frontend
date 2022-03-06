@@ -5,7 +5,15 @@ import logoLight from '../../img/common/logo--light.svg';
 import logoPrimary from '../../img/common/logo--primary.svg';
 
 function NavbarDesktop(props) {
-  const { navLinks, navActions, isTop, isActive, setIsActive } = props;
+  const {
+    navLinks,
+    navActions,
+    isTop,
+    handleLogout,
+    login,
+    isActive,
+    setIsActive,
+  } = props;
 
   return (
     <div className="l-navbar--desktop d-none d-lg-flex">
@@ -55,6 +63,14 @@ function NavbarDesktop(props) {
               </li>
             );
           })}
+        {!login ? null : (
+          <li className="l-navbar__icon">
+            <i
+              className="fas fa-sign-out-alt l-navbar__font"
+              onClick={handleLogout}
+            ></i>
+          </li>
+        )}
       </ul>
     </div>
   );

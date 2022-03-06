@@ -44,17 +44,6 @@ function NavbarMobile(props) {
           history('/');
         }
       });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        html: logoutResult.data.msg,
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          history('/');
-        }
-      });
     }
   };
 
@@ -84,15 +73,9 @@ function NavbarMobile(props) {
           {navLinks.map((link) => {
             const { id, name, route } = link;
             return (
-              <li
-                className={`l-navbar__item l-navbar__link ${
-                  isActive === id ? 'active' : ''
-                }`}
-                key={id}
-                onClick={name === '登出' && login ? () => handleLogout() : null}
-              >
-                <NavLink to={route}>
-                  <h4 className="l-navbar__font">{name}</h4>
+              <li className="l-navbar__item" key={link.id}>
+                <NavLink to={link.route}>
+                  <h4 className="l-navbar__font">{link.name}</h4>
                 </NavLink>
               </li>
             );
@@ -100,15 +83,15 @@ function NavbarMobile(props) {
           <li className="l-navbar__item">
             <hr className="e-hr e-hr--navbar" />
           </li>
+          {!login ? null : (
+            <li className="l-navbar__item d-flex" onClick={handleLogout}>
+              <h4 className="l-navbar__font">登出</h4>
+              <i className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+            </li>
+          )}
           {navActions.map((action) => {
             return (
-              <li
-                className="l-navbar__item"
-                key={action.id}
-                onClick={
-                  action.name === '登出' && login ? () => handleLogout() : null
-                }
-              >
+              <li className="l-navbar__item" key={action.id}>
                 <NavLink to={action.route} className="l-navbar__btn">
                   <h4 className="l-navbar__font">{action.name}</h4>
                   {action.iconMobile}

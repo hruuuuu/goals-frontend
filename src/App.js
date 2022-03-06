@@ -31,6 +31,7 @@ function App() {
     userID: '',
   });
   const [admin, setAdmin] = useState(false);
+  const [message, setMessage] = useState(null);
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [cartListData, setCartListData] = useState([]);
@@ -140,6 +141,8 @@ function App() {
           admin,
           commentStatus,
           setCommentStatus,
+          message,
+          setMessage,
         }}
       >
         <AdminContext.Provider value={{ adminOnline, setAdminOnline }}>
