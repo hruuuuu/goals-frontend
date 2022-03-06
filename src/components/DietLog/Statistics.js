@@ -16,58 +16,33 @@ import { API_URL } from '../../utils/config';
 import MealGraph from './MealGraph';
 
 function Statistics(props) {
-  const { daySummary, mealDietlog } = props;
-  const {
-    calories,
-    protein,
-    fat,
-    saturated_fat,
-    trans_fat,
-    carb,
-    sugar,
-    sodium,
-  } = daySummary;
+  const { daySummary, mealDietlog, setMainTab } = props;
+  const { calories, protein, fat, carb } = daySummary;
 
   const [tab, setTab] = useState(1);
   const [breakfast, setBreakfast] = useState({
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
   const [lunch, setLunch] = useState({
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
   const [dinner, setDinner] = useState({
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
   const [others, setOthers] = useState({
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
 
   const isFetchingMealDietlog = mealDietlog.length === 0;
@@ -98,11 +73,7 @@ function Statistics(props) {
             calories: handleSumMeal(foods, 'calories'),
             protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
-            saturated_fat: handleSumMeal(foods, 'saturated_fat'),
-            trans_fat: handleSumMeal(foods, 'trans_fat'),
             carb: handleSumMeal(foods, 'carb'),
-            sugar: handleSumMeal(foods, 'sugar'),
-            sodium: handleSumMeal(foods, 'sodium') / 1000,
           });
           break;
         case 'lunch':
@@ -111,11 +82,7 @@ function Statistics(props) {
             calories: handleSumMeal(foods, 'calories'),
             protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
-            saturated_fat: handleSumMeal(foods, 'saturated_fat'),
-            trans_fat: handleSumMeal(foods, 'trans_fat'),
             carb: handleSumMeal(foods, 'carb'),
-            sugar: handleSumMeal(foods, 'sugar'),
-            sodium: handleSumMeal(foods, 'sodium') / 1000,
           });
           break;
         case 'dinner':
@@ -124,11 +91,7 @@ function Statistics(props) {
             calories: handleSumMeal(foods, 'calories'),
             protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
-            saturated_fat: handleSumMeal(foods, 'saturated_fat'),
-            trans_fat: handleSumMeal(foods, 'trans_fat'),
             carb: handleSumMeal(foods, 'carb'),
-            sugar: handleSumMeal(foods, 'sugar'),
-            sodium: handleSumMeal(foods, 'sodium') / 1000,
           });
           break;
         case 'others':
@@ -137,11 +100,7 @@ function Statistics(props) {
             calories: handleSumMeal(foods, 'calories'),
             protein: handleSumMeal(foods, 'protein'),
             fat: handleSumMeal(foods, 'fat'),
-            saturated_fat: handleSumMeal(foods, 'saturated_fat'),
-            trans_fat: handleSumMeal(foods, 'trans_fat'),
             carb: handleSumMeal(foods, 'carb'),
-            sugar: handleSumMeal(foods, 'sugar'),
-            sodium: handleSumMeal(foods, 'sodium') / 1000,
           });
           break;
         default:
@@ -155,11 +114,7 @@ function Statistics(props) {
   const dayData = [
     { value: protein, name: '蛋白質' },
     { value: fat, name: '脂肪' },
-    { value: saturated_fat, name: '飽和脂肪' },
-    { value: trans_fat, name: '反式脂肪' },
     { value: carb, name: '碳水化合物' },
-    { value: sugar, name: '糖' },
-    { value: sodium / 1000, name: '鈉' },
   ];
 
   const mealData = [
@@ -256,15 +211,7 @@ function Statistics(props) {
         },
       },
     ],
-    color: [
-      '#76b8d3',
-      '#f8bc5d',
-      '#95b06b',
-      '#3aa1cb',
-      '#ef8b90',
-      '#74b08d',
-      '#bdbdbd',
-    ],
+    color: ['#76b8d3', '#f8bc5d', '#ef8b90'],
     tooltip: {
       trigger: 'item',
     },
@@ -319,6 +266,7 @@ function Statistics(props) {
               rightSeries={rightSeries}
               mealData={mealData}
               title="早餐攝取營養比例"
+              setMainTab={setMainTab}
             />
           </>
         );
@@ -330,6 +278,7 @@ function Statistics(props) {
               rightSeries={rightSeries}
               mealData={mealData}
               title="午餐攝取營養比例"
+              setMainTab={setMainTab}
             />
           </>
         );
@@ -341,6 +290,7 @@ function Statistics(props) {
               rightSeries={rightSeries}
               mealData={mealData}
               title="晚餐攝取營養比例"
+              setMainTab={setMainTab}
             />
           </>
         );
@@ -352,6 +302,7 @@ function Statistics(props) {
               rightSeries={rightSeries}
               mealData={mealData}
               title="其他攝取營養比例"
+              setMainTab={setMainTab}
             />
           </>
         );

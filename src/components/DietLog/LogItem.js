@@ -39,11 +39,7 @@ function LogItem(props) {
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
 
   const isFetchingCategory = dietlogCategoryData.length === 0;
@@ -272,11 +268,7 @@ function LogItem(props) {
       calories: sum('calories'),
       protein: sum('protein'),
       fat: sum('fat'),
-      saturated_fat: sum('saturated_fat'),
-      trans_fat: sum('trans_fat'),
       carb: sum('carb'),
-      sugar: sum('sugar'),
-      sodium: sum('sodium'),
     });
   };
 

@@ -21,16 +21,12 @@ function LogList(props) {
   } = props;
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
     useDietlog();
-  const [tab, setTab] = useState(1);
+  const [mainTab, setMainTab] = useState(1);
   const [daySummary, setDaySummary] = useState({
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
 
   const isEmptyDietlog = dietlogData.length === 0;
@@ -47,11 +43,7 @@ function LogList(props) {
         calories: day.calories,
         protein: day.protein,
         fat: day.fat,
-        saturated_fat: day.saturated_fat,
-        trans_fat: day.trans_fat,
         carb: day.carb,
-        sugar: day.sugar,
-        sodium: day.sodium,
       });
     } catch (error) {
       console.log(error);
@@ -73,7 +65,7 @@ function LogList(props) {
 
   const tabLayout = () => {
     if (!isEmptyDietlog) {
-      if (tab === 1) {
+      if (mainTab === 1) {
         return (
           <>
             {dietlogData.map((log) => {
@@ -93,10 +85,14 @@ function LogList(props) {
             })}
           </>
         );
-      } else if (tab === 2) {
+      } else if (mainTab === 2) {
         return (
           <>
-            <Statistics daySummary={daySummary} mealDietlog={mealDietlog} />
+            <Statistics
+              daySummary={daySummary}
+              mealDietlog={mealDietlog}
+              setMainTab={setMainTab}
+            />
           </>
         );
       }
@@ -111,10 +107,10 @@ function LogList(props) {
         <button
           type="button"
           className={`c-tabs__btn c-tabs__btn--w100 ${
-            tab === 1 ? 'active' : ''
+            mainTab === 1 ? 'active' : ''
           }`}
           onClick={() => {
-            setTab(1);
+            setMainTab(1);
           }}
         >
           飲食
@@ -122,10 +118,10 @@ function LogList(props) {
         <button
           type="button"
           className={`c-tabs__btn c-tabs__btn--w100 ${
-            tab === 2 ? 'active' : ''
+            mainTab === 2 ? 'active' : ''
           }`}
           onClick={() => {
-            setTab(2);
+            setMainTab(2);
           }}
         >
           統計

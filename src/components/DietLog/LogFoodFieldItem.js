@@ -11,11 +11,7 @@ function LogFoodFieldItem(props) {
     calories: 0,
     protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
     flag: -1,
   });
   const [food, setFood] = useState([]);
@@ -133,7 +129,7 @@ function LogFoodFieldItem(props) {
               份
             </span>
           </div>
-          <div className="col-1">
+          <div className="col-2">
             <input
               type="number"
               className="form-control c-form__input c-dietlog-fields__input"
@@ -146,7 +142,7 @@ function LogFoodFieldItem(props) {
               }}
             />
           </div>
-          <div className="col-1">
+          <div className="col-2">
             <input
               type="number"
               className="form-control c-form__input c-dietlog-fields__input"
@@ -159,7 +155,7 @@ function LogFoodFieldItem(props) {
               }}
             />
           </div>
-          <div className="col-1">
+          <div className="col-2">
             <input
               type="number"
               className="form-control c-form__input c-dietlog-fields__input"
@@ -172,65 +168,13 @@ function LogFoodFieldItem(props) {
               }}
             />
           </div>
-          <div className="col-1">
-            <input
-              type="number"
-              className="form-control c-form__input c-dietlog-fields__input"
-              name="saturated_fat"
-              id="saturatedFat"
-              value={foodField.saturated_fat}
-              onChange={handleFieldChange}
-              onFocus={(e) => {
-                e.target.value = '';
-              }}
-            />
-          </div>
-          <div className="col-1">
-            <input
-              type="number"
-              className="form-control c-form__input c-dietlog-fields__input"
-              name="trans_fat"
-              id="transFat"
-              value={foodField.trans_fat}
-              onChange={handleFieldChange}
-              onFocus={(e) => {
-                e.target.value = '';
-              }}
-            />
-          </div>
-          <div className="col-1">
+          <div className="col-2">
             <input
               type="number"
               className="form-control c-form__input c-dietlog-fields__input"
               name="carb"
               id="carb"
               value={foodField.carb}
-              onChange={handleFieldChange}
-              onFocus={(e) => {
-                e.target.value = '';
-              }}
-            />
-          </div>
-          <div className="col-1">
-            <input
-              type="number"
-              className="form-control c-form__input c-dietlog-fields__input"
-              name="sugar"
-              id="sugar"
-              value={foodField.sugar}
-              onChange={handleFieldChange}
-              onFocus={(e) => {
-                e.target.value = '';
-              }}
-            />
-          </div>
-          <div className="col-1">
-            <input
-              type="number"
-              className="form-control c-form__input c-dietlog-fields__input"
-              name="sodium"
-              id="sodium"
-              value={foodField.sodium}
               onChange={handleFieldChange}
               onFocus={(e) => {
                 e.target.value = '';

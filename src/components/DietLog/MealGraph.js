@@ -3,41 +3,18 @@ import React from 'react';
 import ReactECharts from 'echarts-for-react';
 
 function MealGraph(props) {
-  const { statics, graphRightSeries, mealData, title } = props;
-  const {
-    calories,
-    protein,
-    fat,
-    saturated_fat,
-    trans_fat,
-    carb,
-    sugar,
-    sodium,
-  } = statics;
+  const { statics, graphRightSeries, mealData, title, setMainTab } = props;
+  const { calories, protein, fat, carb } = statics;
+
+  const isEmptyStatistics = statics.calories === 0;
 
   const data = [
     { value: protein, name: '蛋白質', itemStyle: { color: '#76b8d3' } },
     { value: fat, name: '脂肪', itemStyle: { color: '#f8bc5d' } },
     {
-      value: saturated_fat,
-      name: '飽和脂肪',
-      itemStyle: { color: '#95b06b' },
-    },
-    {
-      value: trans_fat,
-      name: '反式脂肪',
-      itemStyle: { color: '#3aa1cb' },
-    },
-    {
       value: carb,
       name: '碳水化合物',
       itemStyle: { color: '#ef8b90' },
-    },
-    { value: sugar, name: '糖', itemStyle: { color: '#74b08d' } },
-    {
-      value: sodium / 1000,
-      name: '鈉',
-      itemStyle: { color: '#56879b' },
     },
   ];
 
@@ -71,7 +48,7 @@ function MealGraph(props) {
   };
 
   const rightSeries = {
-    data: [protein, fat, saturated_fat, trans_fat, carb, sugar, sodium],
+    data: [protein, fat, carb],
     type: 'bar',
     colorBy: data,
     showBackground: true,
@@ -97,15 +74,7 @@ function MealGraph(props) {
         color: '#6b9c66',
       },
     },
-    color: [
-      '#76b8d3',
-      '#f8bc5d',
-      '#95b06b',
-      '#3aa1cb',
-      '#ef8b90',
-      '#74b08d',
-      '#bdbdbd',
-    ],
+    color: ['#76b8d3', '#f8bc5d', '#ef8b90'],
     tooltip: {
       trigger: 'item',
     },
@@ -137,15 +106,7 @@ function MealGraph(props) {
     xAxis: {
       type: 'category',
       show: false,
-      data: [
-        '蛋白質',
-        '脂肪',
-        '飽和脂肪',
-        '反式脂肪',
-        '碳水化合物',
-        '糖',
-        '鈉',
-      ],
+      data: ['蛋白質', '脂肪', '碳水化合物'],
     },
     yAxis: {
       type: 'value',
@@ -155,12 +116,27 @@ function MealGraph(props) {
 
   return (
     <>
-      <ReactECharts
-        option={option}
-        notMerge={true}
-        lazyUpdate={true}
-        opts={{ renderer: 'svg', height: '510' }}
-      />
+      <div className="position-relative">
+        {isEmptyStatistics && (
+          <div className="c-cover">
+            <h3>添加日誌以獲得數據</h3>
+            <button
+              className="e-btn e-btn--primary e-btn--medium c-cover__action"
+              onClick={() => {
+                setMainTab(1);
+              }}
+            >
+              添加日誌
+            </button>
+          </div>
+        )}
+        <ReactECharts
+          option={option}
+          notMerge={true}
+          lazyUpdate={true}
+          opts={{ renderer: 'svg', height: '510' }}
+        />
+      </div>
     </>
   );
 }
