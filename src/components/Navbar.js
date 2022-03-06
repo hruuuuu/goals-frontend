@@ -145,24 +145,6 @@ function Navbar() {
 
   const navActionsLogin = [
     {
-      id: 6,
-      name: '登出',
-      iconMobile: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
-          onClick={handleLogout}
-        ></i>
-      ),
-      iconDesktop: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font"
-          onClick={handleLogout}
-        ></i>
-      ),
-      tagDesktop: ``,
-      route: '/logout',
-    },
-    {
       id: 7,
       name: '會員',
       iconMobile: (

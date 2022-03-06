@@ -22,6 +22,7 @@ function ProductDetail(props) {
   const history = useNavigate();
   const [showComment, setShowComment] = useState(false);
   const [commentDetail, setCommentDetail] = useState([]);
+  const [commentEmpty, setCommentEmpty] = useState('目前還沒有評論唷~');
   const [newComment, setNewComment] = useState({
     product_id: '',
     comment: '',
@@ -503,22 +504,28 @@ function ProductDetail(props) {
                                 商品評論
                               </h6>
                             </div>
-                            {commentDetail.map((comment, i) => (
-                              <div
-                                className="card-body c-product-detail__comment-background"
-                                key={i}
-                              >
-                                <h6 className="c-product-detail__comment-title">
-                                  {handleHideUserInfo(comment.member_email)}
-                                </h6>
-                                <p className="c-product-detail__comment-text">
-                                  {comment.comment}
-                                </p>
-                                <p className="c-product-detail__comment-subTitle">
-                                  - {comment.create_at}
-                                </p>
-                              </div>
-                            ))}
+                            {commentDetail.length > 0 ? (
+                              commentDetail.map((comment, i) => (
+                                <div
+                                  className="card-body c-product-detail__comment-background"
+                                  key={i}
+                                >
+                                  <h6 className="c-product-detail__comment-title">
+                                    {handleHideUserInfo(comment.member_email)}
+                                  </h6>
+                                  <p className="c-product-detail__comment-text">
+                                    {comment.comment}
+                                  </p>
+                                  <p className="c-product-detail__comment-subTitle">
+                                    - {comment.create_at}
+                                  </p>
+                                </div>
+                              ))
+                            ) : (
+                              <p className="c-product-detail__comment-text">
+                                {commentEmpty}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
