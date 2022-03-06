@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/lib/styles.scss';
 import axios from 'axios';
-
 import { API_URL } from '../../utils/config';
-
 import { useCartList } from '../../context/cart';
+import Swal from 'sweetalert2';
+
+import {
+  PaymentElement,
+  useStripe,
+  useElements,
+} from '@stripe/react-stripe-js';
 
 function Checkout(props) {
   const { activeStep, setActiveStep } = props;
@@ -15,6 +20,45 @@ function Checkout(props) {
   const { couponId, setCouponId } = props;
   const { shippingData, setShippingData } = props;
   const { cartListData, setCartListData } = useCartList();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  // const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      'payment_intent_client_secret'
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    // stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    //   console.log(paymentIntent);
+    //   switch (paymentIntent.status) {
+    //     case 'succeeded':
+    //       setMessage('Payment succeeded!');
+    //       break;
+    //     case 'processing':
+    //       setMessage('Your payment is processing.');
+    //       break;
+    //     case 'requires_payment_method':
+    //       setMessage('Your payment was not successful, please try again.');
+    //       break;
+    //     default:
+    //       setMessage('Something went wrong.');
+    //       break;
+    //   }
+    // });
+  }, [stripe]);
+
   // const [creditcard, setCreditcard] = useState({
   //   cvc: '',
   //   expiry: '',
@@ -68,14 +112,41 @@ function Checkout(props) {
   //送出訂單 ->傳回資料庫
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    }
 
-    //orderDetails
+    setIsLoading(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // 付款成功會回到此頁面，並顯示payment_intent 跟 payment_intent_client_secret 以及 redirect_status
+        return_url: 'http://localhost:3000/member/cart',
+      },
+    });
+    if (error.type === 'card_error' || error.type === 'validation_error') {
+      Swal.fire({
+        icon: 'error',
+        text: error.message,
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        text: 'An unexpected error occured.',
+      });
+    }
+
+    setIsLoading(false);
+
+    // orderDetails
     let orderDetailsResponse = await axios.post(
       `${API_URL}/cart/orderDetails`,
       cartDetails,
       usedCouponData
     );
-    //order_items
+
+    // order_items
     let orderItemsResponse = await axios.post(
       `${API_URL}/cart/orderItems`,
       cartItems
@@ -87,12 +158,28 @@ function Checkout(props) {
       usedCouponData
     );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-     
   }
 
   return (
     <>
-      <div className="container checkoutBox">
+      <form id="payment-form" onSubmit={handleSubmit} className="mt-3">
+        <PaymentElement id="payment-element" />
+        <button
+          className="btn_outline btn_grn text-light mt-3 p-3"
+          disabled={isLoading || !stripe || !elements}
+          id="submit"
+        >
+          <span id="button-text">
+            {/* {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : ( */}
+            Pay now
+            {/* )} */}
+          </span>
+        </button>
+        {/* {message && <div id="payment-message">{message}</div>} */}
+      </form>
+      {/* <div className="container checkoutBox">
         <form className="row" onSubmit={handleSubmit} id="checkoutForm">
           <div className="col-12 g-3">
             <h5>付款資訊</h5>
@@ -185,10 +272,7 @@ function Checkout(props) {
               <button
                 type="submit"
                 className="btn_outline btn_grn p-2"
-                // onClick={() => {
-                //   handleSubmit();
-                //   handleNext();
-                // }}
+                disabled={isLoading || !stripe || !elements}
                 form="checkoutForm"
               >
                 確認付款
@@ -196,7 +280,7 @@ function Checkout(props) {
             </div>
           </div>
         </form>
-      </div>
+      </div> */}
     </>
   );
 }

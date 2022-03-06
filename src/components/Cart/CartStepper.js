@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -10,6 +11,9 @@ import { API_URL } from '../../utils/config';
 import Shipping from './Shipping';
 import Checkout from './Checkout';
 import { useCartList } from '../../context/cart';
+
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 const steps = ['購物車', '運送資訊', '付款資訊'];
 
@@ -37,7 +41,7 @@ function CartStepper(props) {
     number: '',
   });
   // const { handleShow } = props;
-  const { orderTotal, setOrderTotal } = props;
+  const { orderTotal, setOrderTotal, handleClose } = props;
   const { member, setMember } = props;
   const { couponId, setCouponId } = props;
 
@@ -99,8 +103,6 @@ function CartStepper(props) {
       usedCouponData,
       { withCredentials: true }
     );
-    // let stripeURL = orderDetailsResponse.data.url;
-    // window.location.href = stripeURL;
 
     //order_items
     let orderItemsResponse = await axios.post(
@@ -114,6 +116,28 @@ function CartStepper(props) {
       usedCouponData
     );
   }
+
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+  const [clientSecret, setClientSecret] = useState('');
+
+  useEffect(() => {
+    const showStripe = async () => {
+      const firstRender = await axios.post(
+        'http://localhost:3002/api/cart/create-payment-intent',
+        cartListData
+      );
+      setClientSecret(firstRender.data.clientSecret);
+    };
+    showStripe();
+  }, []);
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
 
   return (
     <>
@@ -145,27 +169,30 @@ function CartStepper(props) {
         ) : (
           <React.Fragment>
             <div sx={{ mt: 3, mb: 1 }}>
-              {activeStep === steps.length - 1 ? (
-                <Checkout
-                  activeStep={activeStep}
-                  setActiveStep={setActiveStep}
-                  creditcard={creditcard}
-                  setCreditcard={setCreditcard}
-                  member={member}
-                  setMember={setMember}
-                  couponId={couponId}
-                  set={setCouponId}
-                  orderTotal={orderTotal}
-                  setOrderTotal={setOrderTotal}
-                  shippingData={shippingData}
-                  setShippingData={setShippingData}
-                />
+              {activeStep === steps.length - 1 && clientSecret ? (
+                <Elements options={options} stripe={stripePromise}>
+                  <Checkout
+                    activeStep={activeStep}
+                    setActiveStep={setActiveStep}
+                    creditcard={creditcard}
+                    setCreditcard={setCreditcard}
+                    member={member}
+                    setMember={setMember}
+                    couponId={couponId}
+                    set={setCouponId}
+                    orderTotal={orderTotal}
+                    setOrderTotal={setOrderTotal}
+                    shippingData={shippingData}
+                    setShippingData={setShippingData}
+                  />
+                </Elements>
               ) : (
                 <Shipping
                   shippingData={shippingData}
                   setShippingData={setShippingData}
                   activeStep={activeStep}
                   setActiveStep={setActiveStep}
+                  handleClose={handleClose}
                 />
               )}
             </div>

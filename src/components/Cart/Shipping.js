@@ -188,6 +188,7 @@ function Shipping(props) {
                 className="btn_outline btn_grn p-2"
                 type="submit"
                 form="shippingForm"
+                onClick={() => handleNext}
               >
                 下一步
               </button>
