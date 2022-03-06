@@ -127,6 +127,13 @@ function App() {
     }
   }, [login]);
 
+  useEffect(() => {
+    if (!login) {
+      localStorage.setItem('fav', '');
+      setFavItemsArr([]);
+    }
+  }, [login]);
+
   return (
     <>
       <LoginContext.Provider
