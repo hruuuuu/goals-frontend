@@ -10,12 +10,10 @@ import { IMG_URL } from '../../utils/config';
 const OrderList = () => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-    setOrderData([]);
-  };
   const [data, setData] = useState([]);
-  const [orderdata, setOrderData] = useState([]);
+  const [orderdata, setOrderData] = useState([
+    { recipient: '', image: '3.webp' },
+  ]);
 
   const isOrderList = data.length === 0;
 
@@ -47,7 +45,13 @@ const OrderList = () => {
       );
       setOrderData([...response.data]);
     };
+
     getOrderdetail();
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    // setOrderData([]);
   };
 
   return (
@@ -122,7 +126,7 @@ const OrderList = () => {
                     className="card-body "
                   >
                     <h5 className="card-title order_td__order_id">
-                      {order.id}
+                      訂單編號:{order.id}
                     </h5>
                     <div className="card-text">
                       <div className="my-3 d-flex justify-content-between">
@@ -166,6 +170,27 @@ const OrderList = () => {
           <Modal.Title>您的訂單詳情</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div className="pb-3">
+            <h6 className="c-product-detail__heading  d-inline">收件人 : </h6>
+            <h6 className="d-inline">{orderdata[0].recipient}</h6>
+          </div>
+          <div className="pb-3">
+            <h6 className="c-product-detail__heading  d-inline">付款方式 :</h6>
+            <h6 className="d-inline">{orderdata[0].provider}</h6>
+          </div>
+          <div className="pb-3">
+            <h6 className="c-product-detail__heading  d-inline">取貨方式 :</h6>
+            <h6 className="d-inline">{orderdata[0].method}</h6>
+          </div>
+          <div className="pb-3">
+            <h6 className="c-product-detail__heading  d-inline">配送地址 : </h6>
+            <h6 className="d-inline">
+              {orderdata[0].county}
+              {orderdata[0].district}
+              {orderdata[0].address}
+            </h6>
+          </div>
+
           <table className="table table-borderless orderlist_table">
             <thead>
               <tr>
@@ -178,7 +203,7 @@ const OrderList = () => {
             </thead>
             {orderdata.map((orderdata) => {
               return (
-                <tbody key={orderdata.product_id}>
+                <tbody key={orderdata.image}>
                   <tr>
                     <td className="detailContent">{orderdata.name}</td>
                     <td className="detailContent">
