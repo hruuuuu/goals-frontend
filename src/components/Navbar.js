@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useMatch } from 'react-router-dom';
+import {
+  useNavigate,
+  useMatch,
+  useLocation,
+  matchRoutes,
+} from 'react-router-dom';
 import axios from 'axios';
 import NavbarDesktop from './Navbar/NavbarDesktop';
 import NavbarMobile from './Navbar/NavbarMobile';
@@ -15,9 +20,12 @@ function Navbar() {
   const [cartIconLength, setCartIconLength] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isTop, setIsTop] = useState(false);
+  const [isHomeTop, setIsHomeTop] = useState(false);
+  const [isActive, setIsActive] = useState(0);
   const matchHome = useMatch('/');
 
   const isHome = matchHome !== null;
+  const locationPath = useLocation().pathname;
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -32,7 +40,9 @@ function Navbar() {
   }, []);
 
   useEffect(() => {
-    if (scrollPosition <= 700) {
+    if (!isHome && scrollPosition <= 300) {
+      setIsTop(true);
+    } else if (isHome && scrollPosition <= 700) {
       setIsTop(true);
     } else {
       setIsTop(false);
@@ -100,9 +110,9 @@ function Navbar() {
     },
   ];
 
-  const navActions1 = [
+  const navActionsVisitor = [
     {
-      id: 1,
+      id: 6,
       name: '註冊/登入',
       iconMobile: (
         <i className="fas fa-sign-in-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -112,7 +122,7 @@ function Navbar() {
       route: '/login',
     },
     {
-      id: 2,
+      id: 9,
       name: '收藏清單',
       iconMobile: (
         <i className="fas fa-heart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -122,7 +132,7 @@ function Navbar() {
       route: `/member/fav`,
     },
     {
-      id: 3,
+      id: 10,
       name: '購物車',
       iconMobile: (
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -133,9 +143,27 @@ function Navbar() {
     },
   ];
 
-  const navActions2 = [
+  const navActionsLogin = [
     {
-      id: 1,
+      id: 6,
+      name: '登出',
+      iconMobile: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
+          onClick={handleLogout}
+        ></i>
+      ),
+      iconDesktop: (
+        <i
+          className="fas fa-sign-out-alt l-navbar__font"
+          onClick={handleLogout}
+        ></i>
+      ),
+      tagDesktop: ``,
+      route: '/logout',
+    },
+    {
+      id: 7,
       name: '會員',
       iconMobile: (
         <i className="fas fa-user l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -145,7 +173,17 @@ function Navbar() {
       route: `/member/`,
     },
     {
-      id: 2,
+      id: 8,
+      name: '優惠券',
+      iconMobile: (
+        <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+      ),
+      iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
+      tagDesktop: ``,
+      route: `/member/coupon`,
+    },
+    {
+      id: 9,
       name: '收藏清單',
       iconMobile: (
         <i className="fas fa-heart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -155,7 +193,7 @@ function Navbar() {
       route: `/member/fav`,
     },
     {
-      id: 3,
+      id: 10,
       name: '購物車',
       iconMobile: (
         <i className="fas fa-shopping-cart l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
@@ -164,41 +202,52 @@ function Navbar() {
       tagDesktop: <div className="e-tag e-tag--corner">{cartIconLength}</div>,
       route: `/member/cart`,
     },
-    {
-      id: 4,
-      name: '優惠券',
-      iconMobile: (
-        <i className="fas fa-ticket-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
-      ),
-      iconDesktop: <i className="fas fa-ticket-alt l-navbar__font"></i>,
-      tagDesktop: ``,
-      route: `/member/coupon`,
-    },
   ];
+
+  useEffect(() => {
+    navLinks.forEach((nav) => {
+      const matched = nav.route === locationPath;
+      if (matched) {
+        console.log(nav.route);
+        setIsActive(nav.id);
+      }
+    });
+    navActionsVisitor.forEach((nav) => {
+      const matched = nav.route === locationPath;
+      if (matched) {
+        setIsActive(nav.id);
+      }
+    });
+    navActionsLogin.forEach((nav) => {
+      const matched = nav.route === locationPath;
+      if (matched) {
+        setIsActive(nav.id);
+      }
+    });
+  }, [locationPath]);
 
   return (
     <>
       <header
-        className={`l-navbar sticky-top ${isHome ? 'l-navbar--home' : ''} ${
-          !isTop ? 'l-navbar--scroll' : ''
-        }`}
+        className={`l-navbar sticky-top ${!isTop ? 'l-navbar--scroll' : ''}`}
       >
         <div className="container h-100">
           <nav className="l-navbar__wrapper justify-content-center justify-content-lg-between">
             <NavbarDesktop
               navLinks={navLinks}
-              navActions={!login ? navActions1 : navActions2}
-              isHome={isHome}
+              navActions={!login ? navActionsVisitor : navActionsLogin}
               isTop={isTop}
               handleLogout={handleLogout}
               login={login}
+              isActive={isActive}
+              setIsActive={setIsActive}
             />
             <NavbarMobile
               navLinks={navLinks}
-              navActions={!login ? navActions1 : navActions2}
-              isHome={isHome}
+              navActions={!login ? navActionsVisitor : navActionsLogin}
               isTop={isTop}
               handleLogout={handleLogout}
+              isActive={isActive}
             />
           </nav>
         </div>

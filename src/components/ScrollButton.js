@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { Button } from '@mui/material';
 
-const ScrollButton = () => {
+function ScrollButton() {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -18,22 +18,26 @@ const ScrollButton = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
-      /* you can also use 'auto' behaviour
-         in place of 'smooth' */
     });
   };
-
-  window.addEventListener('scroll', toggleVisible);
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisible);
+  }, [setVisible]);
 
   return (
-    <Button>
-      <FaArrowCircleUp
-        style={{ opacity: visible ? '1' : '0' }}
-        onClick={scrollToTop}
-        className="transition-btn"
-      />
-    </Button>
+    <>
+      <Button>
+        <FaArrowCircleUp
+          style={{
+            opacity: visible ? '1' : '0',
+            display: visible ? 'inline' : 'none',
+          }}
+          onClick={scrollToTop}
+          className="transition-btn"
+        />
+      </Button>
+    </>
   );
-};
+}
 
 export default ScrollButton;

@@ -194,12 +194,12 @@ function Checkout(props) {
             />
           </div>
           <div className="col-12 g-3">
-            <label htmlFor="firstName" className="form-label label_fs">
+            <label htmlFor="firstName" className="form-label c-form__label">
               持卡人
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control c-form__input"
               id="firstName"
               name="name"
               value={creditcard.name}
@@ -211,12 +211,12 @@ function Checkout(props) {
           </div>
 
           <div className="col-12 g-3 card-number-group">
-            <label htmlFor="card-number" className="form-label label_fs">
+            <label htmlFor="card-number" className="form-label c-form__label">
               卡號
             </label>
             <input
               type=""
-              className="form-control card-number"
+              className="form-control card-number c-form__input"
               id="adddress"
               name="number"
               value={creditcard.number}
@@ -227,12 +227,15 @@ function Checkout(props) {
             />
           </div>
           <div className="col-6 g-3 expiration-date-group">
-            <label htmlFor="expiration-date" className="form-label label_fs">
+            <label
+              htmlFor="expiration-date"
+              className="form-label c-form__label"
+            >
               有效日期
             </label>
             <input
               type=""
-              className="form-control expiration-date"
+              className="form-control expiration-date c-form__input"
               id=""
               name="expiry"
               value={creditcard.expiry}
@@ -244,12 +247,12 @@ function Checkout(props) {
           </div>
 
           <div className="col-6 g-3 cvc-group">
-            <label htmlFor="cvc" className="form-label label_fs">
+            <label htmlFor="cvc" className="form-label c-form__label">
               CVC
             </label>
             <input
               type=""
-              className="form-control cvc"
+              className="form-control cvc c-form__input"
               id="cvc"
               name="cvc"
               value={creditcard.cvc}
@@ -262,7 +265,10 @@ function Checkout(props) {
           <hr className="mt-4" />
           <div className="col-6 g-3">
             <div className="d-grid">
-              <button className="btn_outline p-2" onClick={handleBack}>
+              <button
+                className="e-btn e-btn--plain e-btn--secondary e-btn--w100 e-btn--medium"
+                onClick={handleBack}
+              >
                 上一步
               </button>
             </div>

@@ -55,10 +55,12 @@ function FavList() {
 
   return (
     <>
-      <div className="row g-3">
+      <div className="row gx-3">
         {isEmptyStorage ? (
           <>
-            <h1>Fav is empty</h1>
+            <div className="u-height u-height--empty-page">
+              <h1>Fav is empty</h1>
+            </div>
           </>
         ) : (
           favData.map((product) => {

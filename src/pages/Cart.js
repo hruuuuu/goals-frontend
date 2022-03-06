@@ -8,6 +8,9 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import PageBanner from '../components/PageBanner';
+
+import picBanner from '../img/home/pic/swiper__1.jpg';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -63,14 +66,17 @@ function Cart() {
 
   return (
     <>
+      <PageBanner img={picBanner} />
       <Header />
-      <div className="container mainContent">
-        <div className="row gx-4 h-100">
-          <div className="col-lg-3 col-xl-3 d-none d-lg-block">
-            <MemberSidebar />
-          </div>
-          <div className="col col-xl-9 col-lg-9 col-md-12 col-sm-12">
-            <CartList />
+      <div className="u-height u-height--page u-margin u-margin--page-bottom">
+        <div className="container">
+          <div className="row gx-4 h-100">
+            <div className="col-lg-3 col-xl-3 d-none d-lg-block">
+              <MemberSidebar />
+            </div>
+            <div className="col col-xl-9 col-lg-9 col-md-12 col-sm-12">
+              <CartList />
+            </div>
           </div>
         </div>
         {/* {message && <div id="payment-message">{message}</div>} */}

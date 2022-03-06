@@ -3,8 +3,7 @@ import Breadcrumb from './Header/Breadcrumb';
 import { useLocation, matchRoutes } from 'react-router-dom';
 import routerList from '../config/routerList';
 
-function Header(props) {
-  const { isLower } = props;
+function Header() {
   const locationPath = useLocation().pathname;
   const matchedRoutes = matchRoutes(routerList, locationPath);
   const lastLocationPath = matchedRoutes[matchedRoutes.length - 1];
@@ -13,7 +12,7 @@ function Header(props) {
 
   return (
     <>
-      <header className={`l-header ${isLower ? 'u-padding__product-top' : ''}`}>
+      <header className="l-header">
         <div className="container">
           <div className="l-header__wrapper">
             <Breadcrumb />

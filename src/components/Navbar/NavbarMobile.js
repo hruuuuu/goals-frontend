@@ -10,16 +10,14 @@ import { useLogin } from '../../context/LoginStatus';
 import { API_URL } from '../../utils/config';
 
 function NavbarMobile(props) {
-  const { navLinks, navActions, isHome, isTop } = props;
+  const { navLinks, navActions, isTop, isActive } = props;
   const { login, setLogin, isSocial, setIsSocial, setUser } = useLogin();
   const [check, setCheck] = useState(false);
   const location = useLocation().pathname;
   const history = useNavigate();
 
   useEffect(() => {
-    if (location !== '/') {
-      setCheck(!check);
-    }
+    setCheck(false);
   }, [location]);
 
   const handleLogout = async () => {
@@ -64,19 +62,16 @@ function NavbarMobile(props) {
         <i className="fas fa-bars l-navbar__icon"></i>
       </label>
       <NavLink to="/" className="l-navbar__font l-navbar__logo">
-        {isHome && isTop ? (
+        {isTop ? (
           <img src={logoPrimary} alt="logo" />
         ) : (
           <img src={logoLight} alt="logo" />
         )}
       </NavLink>
-      <div
-        className={`l-navbar__menu ${isHome ? 'l-navbar--home' : ''} ${
-          !isTop ? 'l-navbar--scroll' : ''
-        }`}
-      >
+      <div className={`l-navbar__menu ${!isTop ? 'l-navbar--scroll' : ''}`}>
         <ul className="l-navbar__list">
           {navLinks.map((link) => {
+            const { id, name, route } = link;
             return (
               <li className="l-navbar__item" key={link.id}>
                 <NavLink to={link.route}>

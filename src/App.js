@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, useLocation, useMatch } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
@@ -45,6 +45,14 @@ function App() {
   const [dietlogCategoryData, setDietlogCategoryData] = useState([]);
 
   const hasLocalStorage = localStorage.getItem('fav');
+
+  const location = useLocation();
+  const matchProduct = useMatch('/product/:productId');
+  useEffect(() => {
+    if (!matchProduct) {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   useEffect(() => {
     (async () => {

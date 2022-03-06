@@ -3,12 +3,13 @@ import PageBanner from '../components/PageBanner';
 import MainContent from '../components/Calculator/MainContent';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
+import picBanner from '../img/home/pic/swiper__1.jpg';
 
 const Caculator = () => {
   return (
     <>
       <FloatingChat />
-      <PageBanner />
+      <PageBanner img={picBanner} />
       <MainContent />
       <ScrollButton />
     </>
