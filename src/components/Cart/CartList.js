@@ -33,7 +33,18 @@ function CartList(props) {
           </div>
         </div>
       ) : (
-        <h1>您尚未選購任何商品</h1>
+        <>
+          <div className="empty_img">
+            <img
+              className="img-responsive"
+              src={
+                require('../../img/common/illustration/order-empty.svg').default
+              }
+              alt=""
+            />
+            <h5>您還沒有選購商品喔！趕快去下單吧！</h5>
+          </div>
+        </>
       )}
     </>
   );

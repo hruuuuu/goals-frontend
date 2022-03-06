@@ -105,7 +105,18 @@ function LogList(props) {
         );
       }
     } else {
-      return <h3>這天沒有任何日誌</h3>;
+      return (
+        <div className="empty_img">
+          <img
+            className="img-responsive"
+            src={
+              require('../../img/common/illustration/order-empty.svg').default
+            }
+            alt=""
+          />
+          <h5>這天還沒有新增日誌喔！</h5>
+        </div>
+      );
     }
   };
 

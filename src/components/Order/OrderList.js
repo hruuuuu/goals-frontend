@@ -105,7 +105,16 @@ const OrderList = () => {
         </div>
       ) : (
         <div className="u-height u-height--empty-page">
-          <h1>沒有過去訂單</h1>
+          <div className="empty_img">
+            <img
+              className="img-responsive"
+              src={
+                require('../../img/common/illustration/order-empty.svg').default
+              }
+              alt=""
+            />
+            <h5>沒有歷史訂單喔！趕快去下單吧！</h5>
+          </div>
         </div>
       )}
       {/* RWD */}
