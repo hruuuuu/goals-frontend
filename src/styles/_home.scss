@@ -23,6 +23,8 @@
     width: 100vw;
     height: calc(100vh - $height__navbar);
 
+    overflow: hidden;
+
     position: relative;
 
     display: flex;
@@ -443,5 +445,58 @@
     margin-bottom: 2.5rem !important;
     text-align: center;
     color: $color--primary;
+  }
+}
+
+/*l-home__calculator*/
+.l-home__calculator {
+  padding-bottom: 3rem;
+  .c-textbox {
+    padding-top: 5rem;
+    padding-left: 6.25rem;
+    @media screen and (max-width: $xxl) {
+      padding-left: 3rem;
+    }
+    @media screen and (max-width: $xl) {
+      padding-left: 0rem;
+    }
+    @media screen and (max-width: $lg) {
+      padding-top: 0;
+    }
+    @media screen and (max-width: $md) {
+      .c-title__deco {
+        display: none;
+      }
+    }
+  }
+  .des-right__deco {
+    width: 200px;
+    transform: translate(65%, -50%);
+    top: 50%;
+    right: 0;
+    z-index: -1;
+    @media screen and (max-width: $xl) {
+      width: 150px;
+    }
+    @media screen and (max-width: $lg) {
+      top: 18%;
+    }
+    @media screen and (max-width: $md) {
+      width: 100px;
+      top: 10%;
+      right: 10%;
+    }
+    &::before {
+      width: 400px;
+      height: 400px;
+      @media screen and (max-width: $xl) {
+        width: 300px;
+        height: 300px;
+      }
+      @media screen and (max-width: $md) {
+        width: 200px;
+        height: 200px;
+      }
+    }
   }
 }

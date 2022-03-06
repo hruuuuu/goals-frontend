@@ -8,7 +8,7 @@ import { number } from 'prop-types';
 import { useLogin } from '../../context/LoginStatus';
 
 function Summary(props) {
-  const { user } = useLogin();
+  const { user, login } = useLogin();
   const [total, setTotal] = useState();
   const [discountTotal, setDiscountTotal] = useState(0);
   // const [couponDiscountTotal, setCouponDiscountTotal] = useState(0);
@@ -39,7 +39,9 @@ function Summary(props) {
       });
       setData(response.data);
     };
-    getcoupon();
+    if (login) {
+      getcoupon();
+    }
   }, []);
   // console.log(data);
 

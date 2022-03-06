@@ -112,7 +112,11 @@ const MainContent = () => {
                 </div>
               </div>
             </div>
-            <div className="des-right" data-aos="fade-up-left">
+            <div
+              className="des-right"
+              data-aos="fade-up-left"
+              data-aos-offset="-180"
+            >
               <div className="des-right__deco">
                 <img className="img-responsive" src={logoOriginal} alt="logo" />
               </div>
@@ -134,7 +138,7 @@ const MainContent = () => {
             {/* <CalculatorForm /> */}
             <Bmr calories={calories} setCalories={setCalories} />
           </div>
-          <div className="explan">
+          <div className="explan" data-aos="fade-up">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6 col-lg-12">

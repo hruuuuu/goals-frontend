@@ -7,18 +7,19 @@ import axios from 'axios';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
-import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/lazy';
 
-import { IMG_URL } from '../utils/config';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import { API_URL } from '../utils/config';
 
 import BlogPost from '../components/Home/BlogPost';
 import ScrollButton from '../components/ScrollButton';
 import Loading from '../components/Loading';
 
+import logo from '../img/common/logo--original.svg';
 import iconDeco from '../img/common/icon/deco.svg';
 import picProduct from '../img/home/pic/product.jpeg';
 import picDiet1 from '../img/home/pic/diet__1.jpg';
@@ -26,6 +27,8 @@ import picDiet2 from '../img/home/pic/diet__2.jpg';
 import picOverviewProduct from '../img/home/pic/overview__product.webp';
 import picOverviewBlog from '../img/home/pic/overview__blog.jpg';
 import KeyVisual from '../components/Home/KeyVisual';
+import picCalculator from '../img/home/pic/calculator_home.jpg';
+import picCalculatorPh from '../img/home/pic/calculator-ph.png';
 
 function Home() {
   const [blogData, setBlogData] = useState([]);
@@ -33,6 +36,12 @@ function Home() {
   const [offsetY, setOffsetY] = useState(0);
 
   const isFetchBlog = blogData.length === 0;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
 
   const overviewItems = [
     {
@@ -45,7 +54,7 @@ function Home() {
       id: 2,
       heading: 'TDEE計算機',
       description: '讓你擁有更健康的身體與體態，提升自我。',
-      img: 'https://picsum.photos/1920/1080/?random=2',
+      img: picCalculator,
     },
     {
       id: 3,
@@ -133,7 +142,10 @@ function Home() {
           />
           <div className="l-home__overview c-overview">
             <div className="row justify-content-center">
-              <div className="col-10 col-md-8 col-lg-8 col-xl-6">
+              <div
+                className="col-10 col-md-8 col-lg-8 col-xl-6"
+                data-aos="fade-down"
+              >
                 <div className="c-title c-title--center">
                   <div className="c-title__icon">
                     <img
@@ -154,7 +166,10 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8">
+              <div
+                className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8"
+                data-aos="fade-up"
+              >
                 <div className="c-overview__list">
                   <div className="row gx-3 gx-md-5 gx-lg-3 gx-xl-5 gy-4 gy-lg-0">
                     {overviewItems.map((item) => {
@@ -188,6 +203,7 @@ function Home() {
                 <div
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
+                  data-aos="fade-up"
                 >
                   <div className="col-12 col-md-8 col-lg-5 order-2 order-lg-1">
                     <div className="row justify-content-center">
@@ -233,6 +249,7 @@ function Home() {
                 <div
                   className="row gy-5 g-lg-0 c-section__row mb-5 mb-lg-0"
                   section="product-list"
+                  data-aos="fade-up"
                 >
                   <div className="col-12 col-lg-6 position-relative c-section__container">
                     <div className="c-section__block c-section__block--left"></div>
@@ -292,6 +309,63 @@ function Home() {
               </div>
             </div>
           </div>
+          <div className="l-home__calculator">
+            <div className="row justify-content-center g-0">
+              <div className="col-12 col-lg-10">
+                <div className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0">
+                  <div
+                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
+                    data-aos="fade-up"
+                  >
+                    <div className="row justify-content-center">
+                      <div className="col-10 col-lg-12 c-textbox">
+                        <div className="c-title c-title--start">
+                          <div className="c-title__deco">GOALS CALCULATOR</div>
+                          <h3 className="c-title__title">TDEE/ BMR 計算機</h3>
+                          <h6 className="c-title__subtitle">
+                            果實帶您了解TDEE與BMR的不同
+                          </h6>
+                          <hr className="e-hr e-hr--primary c-title__hr" />
+                        </div>
+                        <p className="c-section__context">
+                          不管你是要增肌、減脂或是維持目前的體重，都可以透過BMR跟TDEE來了解你一天需要的熱量為多少！
+                        </p>
+                        <p className="c-section__context">
+                          我們提供了BMR/TDEE計算機，方便您了解每日該攝取約多少卡的熱量。
+                        </p>
+                        <p className="c-section__context">
+                          就讓果實一起來帶大家了解什麼是每日總熱量消耗(TDEE)、基礎代謝率(BMR)，以及如何提升代謝率。
+                        </p>
+                        <Link
+                          to="/calculator"
+                          role="button"
+                          className="e-btn e-btn--w100 e-btn--primary e-btn--large mt-5"
+                        >
+                          了解更多
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="d-none d-lg-flex col-1 order-lg-2"></div>
+                  <div
+                    className="col-10 col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8 position-relative order-1 order-lg-3"
+                    data-aos="fade-left"
+                  >
+                    <div className="cal-img">
+                      <div className="des-right__deco">
+                        <img className="img-responsive" src={logo} alt="" />
+                      </div>
+                      <img
+                        className="img-responsive"
+                        src={picCalculatorPh}
+                        alt="calculator"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="l-home__diet-intro c-section">
             <div className="row justify-content-center">
               <div className="col-12 d-flex d-lg-none position-relative c-section__container mb-5">
@@ -308,18 +382,22 @@ function Home() {
               </div>
               <div className="col-10 col-lg-8 col-xl-6">
                 <div className="c-title c-title--center">
-                  <div className="c-title__icon">
-                    <img
-                      className="e-img e-img--contain"
-                      src={iconDeco}
-                      alt="deco"
-                    />
+                  <div className="c-title c-title--center" data-aos="fade-down">
+                    <div className="c-title__icon">
+                      <img
+                        className="e-img e-img--contain"
+                        src={iconDeco}
+                        alt="deco"
+                      />
+                    </div>
+                    <div className="c-title__deco">DIET LOG</div>
+                    <h3 className="c-title__title">果實飲食日誌</h3>
+                    <h6 className="c-title__subtitle">
+                      為你打造專屬的飲食秘書
+                    </h6>
+                    <hr className="e-hr e-hr--primary c-title__hr" />
                   </div>
-                  <div className="c-title__deco">DIET LOG</div>
-                  <h3 className="c-title__title">果實飲食日誌</h3>
-                  <h6 className="c-title__subtitle">為你打造專屬的飲食秘書</h6>
-                  <hr className="e-hr e-hr--primary c-title__hr" />
-                  <div className="c-title__heading">
+                  <div className="c-title__heading" data-aos="fade-up">
                     <p className="c-title__context c-title__context--center">
                       你是不是常常不記得每天吃了什麼，也不知道如何追蹤飲食呢？
                     </p>
@@ -340,7 +418,7 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="l-home__diet-list c-section">
+              <div className="l-home__diet-list c-section" data-aos="fade-up">
                 <div className="row justify-content-center">
                   <div className="col-12 col-xl-10 col-xl-9 col-xxl-8">
                     <div className="row justify-content-center gx-lg-5 gx-xl-0">
@@ -413,7 +491,7 @@ function Home() {
           <div className="l-home__blog c-section">
             <div className="row justify-content-center">
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--start">
+                <div className="c-title c-title--start" data-aos="fade-up">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"
@@ -429,7 +507,7 @@ function Home() {
                   <hr className="e-hr e-hr--primary c-title__hr" />
                 </div>
               </div>
-              <div className="col-10 col-xl-9 col-xxl-8">
+              <div className="col-10 col-xl-9 col-xxl-8" data-aos="fade-up">
                 <div className="c-swiper c-swiper--blog">
                   {!isFetchBlog && (
                     <Swiper

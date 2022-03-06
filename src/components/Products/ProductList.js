@@ -32,7 +32,17 @@ function ProductList(props) {
         ) : (
           <>
             <div className="u-height u-height--empty-page">
-              <h1>沒有符合條件的商品</h1>
+              <div className="empty_img">
+                <img
+                  className="img-responsive"
+                  src={
+                    require('../../img/common/illustration/order-empty.svg')
+                      .default
+                  }
+                  alt=""
+                />
+                <h5>沒有符合條件的商品呢！</h5>
+              </div>
             </div>
           </>
         )}

@@ -58,15 +58,12 @@ function Navbar() {
       title: '確定要登出嗎？',
       icon: 'warning',
       showDenyButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#330856',
       denyButtonColor: '#d33',
-      confirmButtonText: '登出',
-      denyButtonText: '返回',
-      reverseButtons: true,
+      denyButtonText: '登出',
+      confirmButtonText: '返回',
     }).then(async (result) => {
       if (result.isDenied) {
-        history(-1);
-      } else {
         const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
           withCredentials: true,
         });
@@ -148,24 +145,6 @@ function Navbar() {
 
   const navActionsLogin = [
     {
-      id: 6,
-      name: '登出',
-      iconMobile: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"
-          onClick={handleLogout}
-        ></i>
-      ),
-      iconDesktop: (
-        <i
-          className="fas fa-sign-out-alt l-navbar__font"
-          onClick={handleLogout}
-        ></i>
-      ),
-      tagDesktop: ``,
-      route: '/logout',
-    },
-    {
       id: 7,
       name: '會員',
       iconMobile: (
@@ -239,6 +218,8 @@ function Navbar() {
               navLinks={navLinks}
               navActions={!login ? navActionsVisitor : navActionsLogin}
               isTop={isTop}
+              handleLogout={handleLogout}
+              login={login}
               isActive={isActive}
               setIsActive={setIsActive}
             />
@@ -246,6 +227,7 @@ function Navbar() {
               navLinks={navLinks}
               navActions={!login ? navActionsVisitor : navActionsLogin}
               isTop={isTop}
+              handleLogout={handleLogout}
               isActive={isActive}
             />
           </nav>

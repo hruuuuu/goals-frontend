@@ -3,6 +3,12 @@ import { HashLink } from 'react-router-hash-link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Pagination, Autoplay, Lazy } from 'swiper';
 
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
+import 'swiper/css/lazy';
+
 import picSwiper1 from '../../img/home/pic/swiper__1.jpg';
 import picSwiper2 from '../../img/home/pic/swiper__2.jpg';
 import picSwiper3 from '../../img/home/pic/swiper__3.jpg';

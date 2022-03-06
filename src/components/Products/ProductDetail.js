@@ -22,6 +22,7 @@ function ProductDetail(props) {
   const history = useNavigate();
   const [showComment, setShowComment] = useState(false);
   const [commentDetail, setCommentDetail] = useState([]);
+  const [commentEmpty, setCommentEmpty] = useState('目前還沒有評論唷~');
   const [newComment, setNewComment] = useState({
     product_id: '',
     comment: '',
@@ -330,7 +331,7 @@ function ProductDetail(props) {
                     alt="product"
                   />
                 </div>
-                {/* 臨時調整區開始 */}
+
                 <div className="c-product-detail__footer">
                   <div className="c-product-detail__footer-wrapper">
                     <div className="row gx-2">
@@ -389,7 +390,6 @@ function ProductDetail(props) {
                     </div>
                   </div>
                 </div>
-                {/* 臨時調整區結束 */}
               </div>
               <div className="col-12 col-md-6">
                 <div className="d-flex flex-column justify-content-between p-3 p-md-0 product-info">
@@ -446,13 +446,12 @@ function ProductDetail(props) {
                         </div>
                         <p className="c-product-detail__text">{ingredients}</p>
                       </div>
-                      {/* 臨時調整區開始 */}
+
                       <div className="c-product-detail__description">
                         <Modal
                           show={showComment}
                           onHide={handleCommentClose}
                           animation={false}
-                          fullscreen="md-down"
                           centered
                         >
                           <div className="p-5">
@@ -505,26 +504,31 @@ function ProductDetail(props) {
                                 商品評論
                               </h6>
                             </div>
-                            {commentDetail.map((comment, i) => (
-                              <div
-                                className="card-body c-product-detail__comment-background"
-                                key={i}
-                              >
-                                <h6 className="c-product-detail__comment-title">
-                                  {handleHideUserInfo(comment.member_email)}
-                                </h6>
-                                <p className="c-product-detail__comment-text">
-                                  {comment.comment}
-                                </p>
-                                <p className="c-product-detail__comment-subTitle">
-                                  - {comment.create_at}
-                                </p>
-                              </div>
-                            ))}
+                            {commentDetail.length > 0 ? (
+                              commentDetail.map((comment, i) => (
+                                <div
+                                  className="card-body c-product-detail__comment-background"
+                                  key={i}
+                                >
+                                  <h6 className="c-product-detail__comment-title">
+                                    {handleHideUserInfo(comment.member_email)}
+                                  </h6>
+                                  <p className="c-product-detail__comment-text">
+                                    {comment.comment}
+                                  </p>
+                                  <p className="c-product-detail__comment-subTitle">
+                                    - {comment.create_at}
+                                  </p>
+                                </div>
+                              ))
+                            ) : (
+                              <p className="c-product-detail__comment-text">
+                                {commentEmpty}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
-                      {/* 臨時調整區結束 */}
                     </div>
                   </div>
                 </div>

@@ -64,8 +64,15 @@ function Invalid() {
           </div>
         </div>
       ) : (
-        <div className="coupons">
-          <h1>沒有失效的優惠券</h1>
+        <div className="empty_img">
+          <img
+            className="img-responsive"
+            src={
+              require('../../img/common/illustration/order-empty.svg').default
+            }
+            alt=""
+          />
+          <h5>目前沒有失效的優惠券</h5>
         </div>
       )}
     </>

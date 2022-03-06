@@ -59,7 +59,17 @@ function FavList() {
         {isEmptyStorage ? (
           <>
             <div className="u-height u-height--empty-page">
-              <h1>Fav is empty</h1>
+              <div className="empty_img">
+                <img
+                  className="img-responsive"
+                  src={
+                    require('../../img/common/illustration/order-empty.svg')
+                      .default
+                  }
+                  alt=""
+                />
+                <h5>您的收藏清單空空如也！快去找喜愛的商品吧！</h5>
+              </div>
             </div>
           </>
         ) : (
