@@ -5,7 +5,7 @@ import ScrollButton from '../components/ScrollButton';
 
 import FloatingChat from '../components/FloatingChat';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/about.jpg';
 
 function About() {
   return (

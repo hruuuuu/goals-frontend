@@ -14,7 +14,7 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/dietlog.jpg';
 
 function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =

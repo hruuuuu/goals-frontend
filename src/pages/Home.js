@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Pagination, Autoplay, Navigation, Lazy } from 'swiper';
+import { Pagination, Navigation, Lazy } from 'swiper';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
@@ -18,27 +17,22 @@ import { API_URL } from '../utils/config';
 
 import BlogPost from '../components/Home/BlogPost';
 import ScrollButton from '../components/ScrollButton';
+import Loading from '../components/Loading';
 
-import picSwiper1 from '../img/home/pic/swiper__1.jpg';
-import logoSlogan from '../img/common/illustration/logo--slogan.svg';
 import iconDeco from '../img/common/icon/deco.svg';
 import picProduct from '../img/home/pic/product.jpeg';
 import picDiet1 from '../img/home/pic/diet__1.jpg';
 import picDiet2 from '../img/home/pic/diet__2.jpg';
 import picOverviewProduct from '../img/home/pic/overview__product.webp';
 import picOverviewBlog from '../img/home/pic/overview__blog.jpg';
+import KeyVisual from '../components/Home/KeyVisual';
 
 function Home() {
   const [blogData, setBlogData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [offsetY, setOffsetY] = useState(0);
 
   const isFetchBlog = blogData.length === 0;
-
-  const swiperImgs = [
-    picSwiper1,
-    'https://ufoods.co.jp/asset/img/index/pic_index05-pc.png',
-    'https://ufoods.co.jp/asset/img/index/pic_index04-pc.png',
-    'https://ufoods.co.jp/asset/img/index/pic_index03-pc.png',
-  ];
 
   const overviewItems = [
     {
@@ -106,75 +100,37 @@ function Home() {
     const blogs = response.data.dataCount;
     setBlogData([...blogs]);
   };
+
   useEffect(() => {
     getBlog();
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+  }, []);
+
+  const handleScroll = () => setOffsetY(window.pageYOffset);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
+      {loading && <Loading />}
       <div className="l-home">
-        <div className="l-home__key-vision">
-          <div className="c-swiper c-swiper--kv">
-            <Swiper
-              direction={'vertical'}
-              speed={2000}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
-              modules={[EffectFade, Pagination, Autoplay, Lazy]}
-              effect={'fade'}
-              fadeEffect={{
-                crossFade: false,
-              }}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              loop={true}
-              loopFillGroupWithBlank={true}
-              lazy={{
-                loadPrevNext: true,
-                loadPrevNextAmount: 1,
-                elementClass: 'swiper-lazy',
-                loadingClass: 'swiper-lazy-loading',
-                loadedClass: 'swiper-lazy-loaded',
-                preloaderClass: 'swiper-lazy-preloader',
-              }}
-              preloadImages={true}
-              slidesPerView={1}
-            >
-              {swiperImgs.map((img) => {
-                return (
-                  <SwiperSlide key={uuidv4()}>
-                    <img
-                      className="swiper-lazy animation animation__key-vision nimation__key-vision--in"
-                      src={img}
-                      alt="swiper-img"
-                    />
-                    <div className="swiper-lazy-preloader swiper-lazy-preloader-white swiper-lazy-loading"></div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-            <HashLink
-              smooth
-              to="#main"
-              role="button"
-              className="c-scroll-indicator"
-            >
-              SCROLL
-            </HashLink>
-            <div className="l-home__slogan">
-              <img
-                className="e-img e-img--contain"
-                src={logoSlogan}
-                alt="slogan"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="l-home__main" id="main">
+        <KeyVisual loading={loading} />
+        <div className="l-home__main">
+          <div
+            className="l-home__bg"
+            style={{
+              transform: `translateY(${offsetY * 0.3}px)`,
+            }}
+          />
           <div className="l-home__overview c-overview">
             <div className="row justify-content-center">
               <div className="col-10 col-md-8 col-lg-8 col-xl-6">
@@ -264,9 +220,12 @@ function Home() {
                   <div className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container">
                     <div className="c-section__block c-section__block--right">
                       <img
-                        className="e-img e-img--cover"
+                        className="e-img e-img--cover c-section__img"
                         src={picProduct}
                         alt="product"
+                        style={{
+                          transform: `translateY(-${offsetY * 0.05}px)`,
+                        }}
                       />
                     </div>
                   </div>
@@ -388,9 +347,12 @@ function Home() {
                       <div className="col-3 position-relative d-none d-lg-flex">
                         <div className="c-section__block c-section__block--both-left">
                           <img
-                            className="e-img e-img--cover"
+                            className="e-img e-img--cover c-section__img"
                             src={picDiet1}
                             alt="diet"
+                            style={{
+                              transform: `translateY(-${offsetY * 0.03}px)`,
+                            }}
                           />
                         </div>
                       </div>
@@ -421,9 +383,12 @@ function Home() {
                       <div className="col-3 position-relative d-none d-lg-flex">
                         <div className="c-section__block c-section__block--both-right">
                           <img
-                            className="e-img e-img--cover"
+                            className="e-img e-img--cover c-section__img"
                             src={picDiet2}
                             alt="diet"
+                            style={{
+                              transform: `translateY(-${offsetY * 0.03}px)`,
+                            }}
                           />
                         </div>
                       </div>

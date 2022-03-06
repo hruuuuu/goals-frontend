@@ -8,6 +8,9 @@ import FloatingChat from '../components/FloatingChat';
 import { useLogin } from '../context/LoginStatus';
 import { Navigate } from 'react-router-dom';
 import ScrollButton from '../components/ScrollButton';
+import PageBanner from '../components/PageBanner';
+
+import picBanner from '../img/page_banner/calculator.jpg';
 
 function Member() {
   const [isDisplay, setIsDisplay] = useState(false);
@@ -18,6 +21,7 @@ function Member() {
 
   return (
     <>
+      <PageBanner img={picBanner} />
       <Header />
       <div className="u-margin u-margin--page-bottom">
         <div className="container">

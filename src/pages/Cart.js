@@ -8,7 +8,7 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/calculator.jpg';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);

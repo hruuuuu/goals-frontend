@@ -1,19 +1,25 @@
 .l-home {
   height: max-content;
-  background-image: $img__home-bg;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center left;
-
-  @media screen and (max-width: $md) {
-    background-image: none;
-  }
   &__main {
     padding: 3.75rem 0;
     overflow: hidden;
+
+    position: relative;
   }
-  &__key-vision {
+  &__bg {
+    width: 100%;
+    height: calc(100% + 100vh);
+    background-image: url("../img/home/pic/bg.png");
+    background-repeat: repeat-Y;
+    background-size: contain;
+    background-size: 130%;
+
+    position: absolute;
+    top: -100vh;
+    left: 0;
+    z-index: -1;
+  }
+  &__key-visual {
     width: 100vw;
     height: calc(100vh - $height__navbar);
 
@@ -30,6 +36,32 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  &__title {
+    @include h2;
+    color: $color--light;
+    margin-bottom: 0.5rem;
+
+    text-align: center;
+
+    transition: 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-delay: 0.3s;
+    letter-spacing: -0.5rem;
+    opacity: 0;
+    &.active {
+      letter-spacing: 0.625rem;
+      opacity: 1;
+    }
+    &--cursive {
+      margin-bottom: 0;
+
+      font-family: "Style Script", cursive;
+      font-size: 7rem;
+      &.active {
+        letter-spacing: 0.0125rem;
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .c-scroll-indicator {
@@ -42,6 +74,7 @@
   position: absolute;
   right: -1.5rem;
   bottom: 15%;
+  z-index: 1000;
 
   transition: $transition;
   @include interaction__link;
@@ -307,6 +340,10 @@
         left: 0;
       }
     }
+  }
+  &__img {
+    width: 130%;
+    height: 130%;
   }
   &__row {
     &[section="product-intro"] {

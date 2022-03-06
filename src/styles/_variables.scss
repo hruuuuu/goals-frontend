@@ -33,6 +33,12 @@ $color__bg--light: rgba(255, 255, 255, 0.9);
 $color__deco: rgba(107, 156, 102, 0.2);
 
 $color--gradient: linear-gradient(180.06deg, rgba(255, 255, 255, 0) 0.05%, #ffffff 68.32%);
+$color--loading: linear-gradient(
+  300deg,
+  rgba(118, 184, 211, 1) 0%,
+  rgba(107, 156, 102, 1) 50%,
+  rgba(248, 188, 93, 1) 100%
+);
 
 $color__font: $color--gray2;
 $color__input-border: $color--gray4;
@@ -60,7 +66,7 @@ $border-radius__block: 1.25rem;
 $border-radius__modal: 1.25rem;
 $border-radius__small-block: $border-radius__input;
 $border-radius__floating-filter: 0 0 1.875rem 1.875rem;
-$border-radius__key-vision: 0 0 18.75rem;
+$border-radius__key-visual: 0 0 18.75rem;
 $border-radius__home-small-block: 5rem 0 5rem 0;
 $border-radius__home-small-block--mobile: 3.125rem 0 3.125rem 0;
 $border-radius__home-block--right: 12.5rem 0 0 0;
