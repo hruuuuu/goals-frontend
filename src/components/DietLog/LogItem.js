@@ -209,6 +209,10 @@ function LogItem(props) {
           Toast.fire({
             icon: 'success',
             title: '編輯成功',
+            customClass: {
+              popup: 'c-alert__toast',
+              title: 'c-alert__subtitle',
+            },
           });
         }
         getDietlogData();
@@ -223,12 +227,20 @@ function LogItem(props) {
         Toast.fire({
           icon: 'error',
           title: '有東西出錯了',
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
         });
       }
     } else {
       Toast.fire({
         icon: 'warning',
         title: '請至少新增一項食物',
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
     }
   };
@@ -247,6 +259,10 @@ function LogItem(props) {
         Toast.fire({
           icon: 'success',
           title: '刪除成功',
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
         });
       }
       getDietlogData();
@@ -255,6 +271,10 @@ function LogItem(props) {
       Toast.fire({
         icon: 'error',
         title: '有東西出錯了',
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
     }
   };
