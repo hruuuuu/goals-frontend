@@ -115,9 +115,9 @@ function Navbar() {
       id: 6,
       name: '註冊/登入',
       iconMobile: (
-        <i className="fas fa-sign-in-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
+        <i className="fas fa-user-circle l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
       ),
-      iconDesktop: <i className="fas fa-sign-in-alt l-navbar__font"></i>,
+      iconDesktop: <i className="fas user-circle l-navbar__font"></i>,
       tagDesktop: ``,
       route: '/login',
     },
