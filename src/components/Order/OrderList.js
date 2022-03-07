@@ -175,7 +175,7 @@ const OrderList = () => {
       )}
       {/* RWD */}
 
-      <div className="d-flex d-lg-none justify-content-center mb-3 pb-3">
+      <div className="d-flex d-lg-none justify-content-center mb-2 pb-3">
         <Form.Select
           className="form-select c-form__select"
           value={sort}
