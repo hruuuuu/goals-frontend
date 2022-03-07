@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
 const SignupModal = ({
@@ -8,14 +8,32 @@ const SignupModal = ({
   handleChange,
   handleSubmit,
 }) => {
+  const handleIn = show.in
+    ? 'animation animation__modal animation__modal--in'
+    : '';
+  const handleOut = show.out
+    ? 'animation animation__modal animation__modal--out'
+    : '';
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal
+      show={show.in}
+      onHide={handleClose}
+      dialogClassName={`c-modal c-modal__modal ${handleIn} ${handleOut}`}
+      backdropClassName={`c-modal__backdrop ${handleIn} ${handleOut}`}
+      contentClassName="c-modal__wrapper c-modal__wrapper--modal"
+      animation={false}
+      centered
+    >
       <div className="modal-wrapper">
-        <p className="modal_close-button" onClick={handleClose}>
-          <i className="fas fa-arrow-left"></i>
-        </p>
+        <button
+          type="button"
+          className="modal_close-button e-btn e-btn--icon"
+          onClick={handleClose}
+        >
+          <i className="fas fa-arrow-left e-icon e-icon--primary"></i>
+        </button>
         <h1 className="modal-title">{!page ? '忘記密碼' : '重寄驗證信'}</h1>
-        <p className="modal-statement">
+        <p className="modal-statement m-4">
           請輸入您註冊時所填寫的電子信箱，我們會立即發送
           {!page ? '密碼重新設定' : '新的驗證'}信到您的e-mail信箱。
         </p>

@@ -403,12 +403,12 @@ function Home() {
                 <div
                   className="c-section__block c-section__block--right"
                   section="diet"
+                  data-aos="fade-left"
                 >
                   <img
                     className="e-img e-img--cover"
                     src={picDiet2}
                     alt="diet"
-                    data-aos="fade-right"
                   />
                 </div>
               </div>
@@ -517,6 +517,7 @@ function Home() {
                 <div
                   className="c-section__block c-section__block--left"
                   section="log"
+                  data-aos="fade-right"
                 >
                   <img
                     className="e-img e-img--cover"

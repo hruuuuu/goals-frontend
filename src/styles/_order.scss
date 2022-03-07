@@ -3,12 +3,18 @@
   thead {
     line-height: 1.25rem;
     background: #fafafa;
-    th:first-child {
-      border-radius: 0.5rem 0 0 0.5rem;
+    th {
+      padding: 1rem 0.5rem;
+      &:first-child {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+      &:last-child {
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
     }
-    th:last-child {
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
+  }
+  td {
+    padding: 1rem 0.5rem;
   }
 }
 
@@ -26,6 +32,9 @@
   text-align: center;
   vertical-align: middle !important;
   line-height: 1.2rem;
+  &--name {
+    text-align: start;
+  }
 }
 
 .orderDetail {
@@ -56,6 +65,22 @@
   }
 
   &__total {
-    color: $color--warning;
+    color: $color--secondary;
+  }
+}
+
+.c-order-detail {
+  &__content {
+    margin-bottom: 1.5rem;
+  }
+  &__heading {
+    margin-bottom: 1rem;
+    @include text--normal;
+    color: $color--gray3;
+  }
+  &__text {
+    margin-left: 0.5rem;
+    @include text--normal;
+    color: $color--font;
   }
 }

@@ -20,7 +20,10 @@ import dayjs from 'dayjs';
 
 function ProductDetail(props) {
   const history = useNavigate();
-  const [showComment, setShowComment] = useState(false);
+  const [showComment, setShowComment] = useState({
+    in: false,
+    out: false,
+  });
   const [commentDetail, setCommentDetail] = useState([]);
   const [commentEmpty, setCommentEmpty] = useState('目前還沒有評論唷~');
   const [newComment, setNewComment] = useState({
@@ -171,6 +174,13 @@ function ProductDetail(props) {
     ? 'animation animation__modal animation__modal--out'
     : '';
 
+  const handleCommentIn = showComment.in
+    ? 'animation animation__modal animation__modal--in'
+    : '';
+  const handleCommentOut = showComment.out
+    ? 'animation animation__modal animation__modal--out'
+    : '';
+
   //加入購物車
   const addCart = () => {
     //加入購物車alert
@@ -239,11 +249,14 @@ function ProductDetail(props) {
   };
 
   const handleCommentOpen = () => {
-    setShowComment(true);
+    setShowComment({ ...setShow, in: true });
   };
 
   const handleCommentClose = () => {
-    setShowComment(false);
+    setShowComment({ ...show, out: true });
+    setTimeout(() => {
+      setShowComment({ ...show, in: false, out: false });
+    }, 500);
   };
 
   const handleCommentChange = (e) => {
@@ -383,7 +396,6 @@ function ProductDetail(props) {
                     alt="product"
                   />
                 </div>
-
                 <div className="c-product-detail__footer">
                   <div className="c-product-detail__footer-wrapper">
                     <div className="row gx-2">
@@ -501,51 +513,53 @@ function ProductDetail(props) {
 
                       <div className="c-product-detail__description">
                         <Modal
-                          show={showComment}
+                          show={showComment.in}
                           onHide={handleCommentClose}
+                          dialogClassName={`c-modal c-modal__modal c-comment ${handleCommentIn} ${handleCommentOut}`}
+                          backdropClassName={`c-modal__backdrop ${handleCommentIn} ${handleCommentOut}`}
+                          contentClassName="c-modal__wrapper c-modal__wrapper--full-page"
                           animation={false}
                           centered
+                          fullscreen="md-down"
                         >
-                          <div className="p-5">
-                            <div className="comment-form">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="comment-title"
-                                  className="form-label"
-                                >
-                                  商品名稱
-                                </label>
-                                <input
-                                  type="text"
-                                  id="comment-title"
-                                  value={name}
-                                  className="form-control"
-                                  disabled
-                                />
-                              </div>
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="comment-content"
-                                  className="form-label"
-                                >
-                                  評論
-                                </label>
-                                <textarea
-                                  id="comment-content"
-                                  rows="3"
-                                  placeholder="請留下您對此商品之評論"
-                                  className="form-control"
-                                  onChange={handleCommentChange}
-                                ></textarea>
-                              </div>
-                              <button
-                                type="submit"
-                                className="e-btn e-btn--primary e-btn--w50 e-btn--medium float-end"
-                                onClick={() => handleCommentAdd()}
+                          <div className="comment-form">
+                            <div className="mb-3">
+                              <label
+                                htmlFor="comment-title"
+                                className="form-label c-form__label"
                               >
-                                提交評論
-                              </button>
+                                商品名稱
+                              </label>
+                              <input
+                                type="text"
+                                id="comment-title"
+                                value={name}
+                                className="form-control c-form__input"
+                                disabled
+                              />
                             </div>
+                            <div className="mb-3">
+                              <label
+                                htmlFor="comment-content"
+                                className="form-label c-form__label"
+                              >
+                                評論
+                              </label>
+                              <textarea
+                                id="comment-content"
+                                rows="3"
+                                placeholder="請留下您對此商品之評論"
+                                className="form-control c-form__input c-comment__textarea"
+                                onChange={handleCommentChange}
+                              ></textarea>
+                            </div>
+                            <button
+                              type="submit"
+                              className="e-btn e-btn--primary e-btn--w50 e-btn--medium float-end"
+                              onClick={() => handleCommentAdd()}
+                            >
+                              提交評論
+                            </button>
                           </div>
                         </Modal>
                         <div className="c-product-detail__comments">

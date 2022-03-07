@@ -8,7 +8,10 @@ import { useLogin } from '../../context/LoginStatus';
 import { IMG_URL } from '../../utils/config';
 
 const OrderList = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState({
+    in: false,
+    out: false,
+  });
   const [data, setData] = useState([]);
   const [sortDate, setSortDate] = useState(false);
   const [sortTotal, setSortTotal] = useState(false);
@@ -18,6 +21,13 @@ const OrderList = () => {
   ]);
 
   const isOrderList = data.length === 0;
+
+  const handleIn = show.in
+    ? 'animation animation__modal animation__modal--in'
+    : '';
+  const handleOut = show.out
+    ? 'animation animation__modal animation__modal--out'
+    : '';
 
   //取得已登入會員的ID
   const { user } = useLogin();
@@ -62,7 +72,7 @@ const OrderList = () => {
   };
 
   const handleShow = (order) => {
-    setShow(true);
+    setShow({ ...setShow, in: true });
 
     let getOrderdetail = async () => {
       let response = await axios.post(`${API_URL}/order/orderdetail`, order, {
@@ -75,7 +85,10 @@ const OrderList = () => {
   };
 
   const handleClose = () => {
-    setShow(false);
+    setShow({ ...show, out: true });
+    setTimeout(() => {
+      setShow({ ...show, in: false, out: false });
+    }, 500);
     // setOrderData([]);
   };
 
@@ -104,19 +117,22 @@ const OrderList = () => {
                   </th>
                   <th scope="col">付款狀態</th>
                   <th scope="col">訂單狀態</th>
-                  <th
-                    scope="col"
-                    onClick={() => {
-                      sortObject('total');
-                      setSortTotal(!sortTotal);
-                    }}
-                  >
-                    總計 {''}
-                    <i
-                      className="fa fa-sort"
-                      aria-hidden="true"
-                      style={{ color: '#f8bc5d' }}
-                    ></i>
+                  <th scope="col" className="d-flex align-items-center">
+                    總計
+                    <button
+                      type="button"
+                      className="e-btn e-btn--icon e-btn--none"
+                      onClick={() => {
+                        sortObject('total');
+                        setSortTotal(!sortTotal);
+                      }}
+                    >
+                      <i
+                        className="fa fa-sort"
+                        aria-hidden="true"
+                        style={{ color: '#f8bc5d' }}
+                      />
+                    </button>
                   </th>
                   <th scope="col">查看</th>
                 </tr>
@@ -207,14 +223,12 @@ const OrderList = () => {
                             {order.payment_status}
                           </div>
                         </div>
-
                         <div className="my-3 d-flex justify-content-between">
                           <div>訂單狀態</div>
                           <div className="order_td__order_status">
                             {order.order_status}
                           </div>
                         </div>
-
                         <div className="my-3 d-flex justify-content-between">
                           <div>總計</div>
                           <div className="order_td__total">{order.total}</div>
@@ -241,66 +255,107 @@ const OrderList = () => {
           </div>
         </div>
       )}
-      <Modal centered show={show} onHide={handleClose} animation={false}>
-        <Modal.Header>
-          <Modal.Title>您的訂單詳情</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="pb-3">
-            <h6 className="c-product-detail__heading  d-inline">收件人 : </h6>
-            <h6 className="d-inline">{orderdata[0].recipient}</h6>
+      <Modal
+        centered
+        show={show.in}
+        onHide={handleClose}
+        animation={false}
+        dialogClassName={`c-modal c-modal__modal ${handleIn} ${handleOut}`}
+        backdropClassName={`c-modal__backdrop ${handleIn} ${handleOut}`}
+        contentClassName="c-modal__wrapper c-modal__wrapper--full-page"
+        fullscreen="md-down"
+        centered
+      >
+        <div className="c-order-detail">
+          <div className="l-header__title mb-4">
+            <div className="d-flex align-items-center">
+              {/* <img src={} alt="food" /> */}
+              <h3 className="l-header__text ms-0">訂單詳情</h3>
+            </div>
           </div>
-          <div className="pb-3">
-            <h6 className="c-product-detail__heading  d-inline">付款方式 :</h6>
-            <h6 className="d-inline">{orderdata[0].provider}</h6>
-          </div>
-          <div className="pb-3">
-            <h6 className="c-product-detail__heading  d-inline">取貨方式 :</h6>
-            <h6 className="d-inline">{orderdata[0].method}</h6>
-          </div>
-          <div className="pb-3">
-            <h6 className="c-product-detail__heading  d-inline">配送地址 : </h6>
-            <h6 className="d-inline">
-              {orderdata[0].county}
-              {orderdata[0].district}
-              {orderdata[0].address}
+          <button
+            onClick={handleClose}
+            className="c-modal__close e-btn e-btn--icon"
+          >
+            <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
+          </button>
+          <div className="c-order-detail__content">
+            <h6 className="c-order-detail__heading">
+              訂購人:
+              <span className="c-order-detail__text">...</span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              收件人:
+              <span className="c-order-detail__text">
+                {orderdata[0].recipient}
+              </span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              聯絡電話:
+              <span className="c-order-detail__text">{orderdata[0].tel}</span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              付款方式:
+              <span className="c-order-detail__text">
+                {orderdata[0].provider}
+              </span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              取貨方式:
+              <span className="c-order-detail__text">
+                {orderdata[0].method}
+              </span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              配送地址:
+              <span className="c-order-detail__text">
+                {orderdata[0].county}
+                {orderdata[0].district}
+                {orderdata[0].address}
+              </span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              使用折價券:
+              <span className="c-order-detail__text">...</span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              訂單金額:
+              <span className="c-order-detail__text">...</span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              成立時間:
+              <span className="c-order-detail__text">
+                {orderdata[0].create_at}
+              </span>
+            </h6>
+            <h6 className="c-order-detail__heading">
+              品項數量:
+              <span className="c-order-detail__text">{orderdata.length}</span>
             </h6>
           </div>
-
           <table className="table table-borderless orderlist_table">
             <thead>
               <tr>
-                <th className="detailContent">品名</th>
-                <th className="detailContent">商品</th>
-                <th className="detailContent" style={{ width: '20%' }}>
-                  份數
-                </th>
+                <th className="detailContent detailContent--name">品名</th>
+                <th className="detailContent">份數</th>
+                <th className="detailContent">小計</th>
               </tr>
             </thead>
             {orderdata.map((orderdata) => {
               return (
                 <tbody key={orderdata.image}>
                   <tr>
-                    <td className="detailContent">{orderdata.name}</td>
-                    <td className="detailContent">
-                      <img
-                        className="orderDetail detailContent"
-                        src={`${IMG_URL}/products/${orderdata.image}`}
-                        alt="thumbnail"
-                      />
+                    <td className="detailContent detailContent--name">
+                      {orderdata.name}
                     </td>
                     <td className="detailContent">{orderdata.amount}</td>
+                    <th className="detailContent">...</th>
                   </tr>
                 </tbody>
               );
             })}
           </table>
-        </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer> */}
+        </div>
       </Modal>
     </>
   );

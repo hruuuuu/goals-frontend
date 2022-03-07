@@ -179,8 +179,14 @@ function LogModal(props) {
         backdrop="static"
       >
         <div className="c-dietlog-modal__form">
+          <button
+            onClick={handleClose}
+            className="c-modal__close e-btn e-btn--icon"
+          >
+            <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
+          </button>
           <div className="row gx-5">
-            <div className="col-5">
+            <div className="col-12 col-xl-5">
               <div className="c-dietlog-modal__fieldset">
                 <label htmlFor="category" className="form-label c-form__label">
                   類別
@@ -266,25 +272,27 @@ function LogModal(props) {
                 />
               </div>
             </div>
-            <div className="col-7">
-              <div className="c-dietlog-modal__fieldset">
-                <LogFoodLabel editMode={editMode} isEmptyFields="false" />
-                {foods.map((food) => {
-                  return (
-                    <LogFoodItem
-                      key={uuidv4()}
-                      data={food}
-                      editMode={editMode}
-                      fields={foods}
-                      setFields={setFoods}
-                    />
-                  );
-                })}
-                <LogFoodFieldItem
-                  key={uuidv4()}
-                  fields={foods}
-                  setFields={setFoods}
-                />
+            <div className="col-12 col-xl-7">
+              <div className="c-dietlog-modal__responsive">
+                <div className="c-dietlog-modal__fieldset">
+                  <LogFoodLabel editMode={editMode} isEmptyFields="false" />
+                  {foods.map((food) => {
+                    return (
+                      <LogFoodItem
+                        key={uuidv4()}
+                        data={food}
+                        editMode={editMode}
+                        fields={foods}
+                        setFields={setFoods}
+                      />
+                    );
+                  })}
+                  <LogFoodFieldItem
+                    key={uuidv4()}
+                    fields={foods}
+                    setFields={setFoods}
+                  />
+                </div>
               </div>
             </div>
             <div className="col-12 d-flex justify-content-center align-items-center mt-3">
