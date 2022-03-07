@@ -57,11 +57,21 @@ const Available = () => {
       .children()
       .html(coupon.amount - 1);
 
-    Swal.fire({
-      icon: 'success',
-      text: '領取成功',
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
       showConfirmButton: false,
-      timer: 1500,
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '領取成功',
     });
   }
 

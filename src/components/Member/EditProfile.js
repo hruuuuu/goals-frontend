@@ -43,7 +43,22 @@ const EditProfile = () => {
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      Swal.fire('', '修改資料成功', 'success');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: '更改資料成功',
+      });
       let response = await axios.post(`${API_URL}/member/editprofile`, member);
     }
     setValidated(true);

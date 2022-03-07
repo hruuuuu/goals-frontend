@@ -9,8 +9,9 @@ import { IMG_URL } from '../../utils/config';
 
 const OrderList = () => {
   const [show, setShow] = useState(false);
-
   const [data, setData] = useState([]);
+  const [sortId, setSortId] = useState(false);
+  const [sortTotal, setSortTotal] = useState(false);
   const [orderdata, setOrderData] = useState([
     { recipient: '', image: '3.webp' },
   ]);
@@ -30,6 +31,22 @@ const OrderList = () => {
 
     getOrder();
   }, []);
+
+  const sortObject = (sortType) => {
+    if (sortType === 'id') {
+      if (sortId === false) {
+        return data.sort((a, b) => a.id - b.id);
+      } else {
+        return data.sort((a, b) => a.id - b.id).reverse();
+      }
+    } else {
+      if (sortTotal === false) {
+        return data.sort((a, b) => a.total - b.total);
+      } else {
+        return data.sort((a, b) => a.total - b.total).reverse();
+      }
+    }
+  };
 
   const handleShow = (order) => {
     setShow(true);
@@ -62,11 +79,37 @@ const OrderList = () => {
             <table className="table table-borderless orderlist_table">
               <thead>
                 <tr>
-                  <th scope="col">訂單編號</th>
+                  <th
+                    scope="col"
+                    onClick={() => {
+                      sortObject('id');
+                      setSortId(!sortId);
+                    }}
+                  >
+                    訂單編號 {''}
+                    <i
+                      className="fa fa-sort"
+                      aria-hidden="true"
+                      style={{ color: '#f8bc5d' }}
+                    ></i>
+                  </th>
                   <th scope="col">訂單日期</th>
                   <th scope="col">付款狀態</th>
                   <th scope="col">訂單狀態</th>
-                  <th scope="col">總計</th>
+                  <th
+                    scope="col"
+                    onClick={() => {
+                      sortObject('total');
+                      setSortTotal(!sortTotal);
+                    }}
+                  >
+                    總計 {''}
+                    <i
+                      className="fa fa-sort"
+                      aria-hidden="true"
+                      style={{ color: '#f8bc5d' }}
+                    ></i>
+                  </th>
                   <th scope="col">查看</th>
                 </tr>
               </thead>

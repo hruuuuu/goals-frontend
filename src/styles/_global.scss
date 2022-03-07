@@ -330,7 +330,6 @@ h6 {
 }
 
 @mixin clear__number-arrow {
-
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -346,23 +345,31 @@ h6 {
   &__overlay {
     background: $color--modal-bg !important;
   }
-
   &__modal {
     background-color: $color--light !important;
     border: none !important;
     border-radius: $border-radius__block !important;
     box-shadow: $box-shadow__modal !important;
   }
-
   &__title {
     color: $color__font !important;
     font-weight: 500 !important;
     font-size: 1.25rem !important;
   }
-
   &__text {
     color: $color__font !important;
     font-weight: normal !important;
+    font-size: 1rem !important;
+  }
+  &__toast {
+    background-color: $color--light !important;
+    border: none !important;
+    border-radius: $border-radius__btn !important;
+    box-shadow: $box-shadow__modal !important;
+  }
+  &__subtitle {
+    color: $color__font !important;
+    font-weight: 500 !important;
     font-size: 1rem !important;
   }
 }
@@ -897,5 +904,4 @@ h6 {
   &__action {
     animation: wobble 4s both infinite;
   }
-
 }
