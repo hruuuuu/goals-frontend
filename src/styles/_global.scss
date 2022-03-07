@@ -198,9 +198,11 @@ h6 {
 
 @mixin interaction__link {
   transition: $transition;
+
   &:hover {
     color: $color--hover;
   }
+
   &:focus,
   &:active {
     color: $color--active;
@@ -209,17 +211,21 @@ h6 {
 
 @mixin interaction__btn {
   transition: $transition;
+
   &:hover {
     color: $color--light;
     background: $color--hover;
+
     i {
       color: $color--light;
     }
   }
+
   &:focus,
   &:active {
     color: $color--light;
     background: $color--active;
+
     i {
       color: $color--light;
     }
@@ -228,17 +234,21 @@ h6 {
 
 @mixin interaction__tab {
   transition: $transition;
+
   &:hover {
     color: $color--primary;
     background: $color--opacity;
+
     i {
       color: $color--primary;
     }
   }
+
   &:focus,
   &:active {
     color: $color--primary;
     background: $color--opacity;
+
     i {
       color: $color--primary;
     }
@@ -259,6 +269,7 @@ h6 {
 
 @mixin cursor($cursor) {
   cursor: pointer;
+
   h1,
   h2,
   h3,
@@ -278,10 +289,12 @@ h6 {
   &::-webkit-scrollbar {
     width: 0.25rem;
   }
+
   &::-webkit-scrollbar-track {
     background: $color--gray5;
     border-radius: 10rem;
   }
+
   &::-webkit-scrollbar-thumb {
     background: $color--primary;
     border-radius: 10rem;
@@ -292,6 +305,7 @@ h6 {
 @mixin scrollbar--hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -307,6 +321,7 @@ h6 {
   width: 100%;
   height: 1.5rem;
 }
+
 @mixin text--truncate($line) {
   -webkit-line-clamp: $line;
   -webkit-box-orient: vertical;
@@ -315,6 +330,7 @@ h6 {
 }
 
 @mixin clear__number-arrow {
+
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -330,17 +346,20 @@ h6 {
   &__overlay {
     background: $color--modal-bg !important;
   }
+
   &__modal {
     background-color: $color--light !important;
     border: none !important;
     border-radius: $border-radius__block !important;
     box-shadow: $box-shadow__modal !important;
   }
+
   &__title {
     color: $color__font !important;
     font-weight: 500 !important;
     font-size: 1.25rem !important;
   }
+
   &__text {
     color: $color__font !important;
     font-weight: normal !important;
@@ -350,40 +369,49 @@ h6 {
 
 .c-form {
   $_: &;
+
   &__input {
     height: $height__input;
 
     border: $border__input;
     border-radius: $border-radius__input;
     @include text--small;
+
     &::placeholder {
       @include text--small;
       color: $color--gray4;
     }
+
     &[type="number"] {
       text-align: end;
     }
+
     &[type="checkbox"] {
       transition: $transition;
+
       &:focus {
         border: $border__input;
         box-shadow: none;
       }
+
       &:checked {
         border: $border__input--checked;
         background-color: $color--primary;
       }
     }
+
     &:focus,
     &:focus-visible {
       border: $border__input--focus;
       box-shadow: none;
     }
+
     &--textarea {
       min-height: $height__input;
       padding: 0.7rem;
       resize: none;
     }
+
     &[type="file"] {
       width: 100%;
       padding: 0.75rem 0 0.75rem 2.5rem;
@@ -391,9 +419,11 @@ h6 {
       @include cursor(pointer);
 
       position: relative;
+
       &::-webkit-file-upload-button {
         display: none;
       }
+
       &::after {
         @include icon--absolute("\2b");
         color: $color--gray4;
@@ -403,11 +433,13 @@ h6 {
         transform: translateY(-50%);
       }
     }
+
     &:-webkit-autofill {
       border: $border__input;
       -webkit-box-shadow: -100px 0 0 100px transparent inset;
       -webkit-text-fill-color: $color--font;
       transition: background-color 5000s ease-in-out 0s;
+
       &:hover,
       &:focus,
       &:active {
@@ -418,11 +450,13 @@ h6 {
       }
     }
   }
+
   &__label {
     margin-bottom: 0.5rem;
     @include text--small;
     color: $color--gray3;
   }
+
   &__select {
     height: $height__input;
 
@@ -432,11 +466,13 @@ h6 {
     background-image: url("../img/common/icon/down.svg");
 
     @include cursor(pointer);
+
     &:focus {
       border: $border__input--focus;
       box-shadow: none;
     }
   }
+
   // &__file {
   //   width: $height__input--file;
   //   height: $height__input--file;
@@ -482,14 +518,17 @@ h6 {
       border: $border__input--disabled;
     }
   }
+
   &--error {
     #{$_}__label {
       color: $border__input--error;
     }
+
     #{$_}__input {
       border: $border__input--error;
     }
   }
+
   &--success {
     #{$_}__input {
       border: $border__input--success;
@@ -504,9 +543,11 @@ h6 {
   align-items: center;
 
   @include cursor(pointer);
+
   &:last-of-type {
     margin-bottom: 0;
   }
+
   &__input {
     width: 1.5rem;
     height: 1.5rem;
@@ -526,12 +567,15 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:disabled {
     opacity: 0.5;
+
     &:hover {
       background: transparent;
     }
   }
+
   &--primary {
     border: none;
     background: $color--primary;
@@ -540,11 +584,13 @@ h6 {
     box-shadow: $box-shadow__element;
 
     transition: $transition;
+
     &:hover {
       color: $color--light;
       background: $color--hover;
       box-shadow: none;
     }
+
     &:focus,
     &:active {
       color: $color--light;
@@ -552,6 +598,7 @@ h6 {
       box-shadow: none;
     }
   }
+
   &--light {
     border: none;
     background: $color--light;
@@ -560,11 +607,13 @@ h6 {
     box-shadow: $box-shadow__element;
 
     transition: $transition;
+
     &:hover {
       color: $color--light;
       background: $color--hover;
       box-shadow: none;
     }
+
     &:focus,
     &:active {
       color: $color--light;
@@ -572,6 +621,7 @@ h6 {
       box-shadow: none;
     }
   }
+
   &--plain {
     border: none;
     background: $color--primary;
@@ -579,6 +629,7 @@ h6 {
     color: $color--light;
 
     transition: $transition;
+
     &:not([disabled]) {
       &:hover {
         color: $color--light;
@@ -586,28 +637,33 @@ h6 {
         box-shadow: none;
       }
     }
+
     &:hover {
       color: $color--light;
       background: $color--hover;
       box-shadow: none;
     }
+
     &:focus,
     &:active {
       color: $color--light;
       background: $color--active;
       box-shadow: none;
     }
+
     &.active {
       background: $color--primary;
       color: $color--light;
     }
   }
+
   &--cancel {
     border: none;
     background: $color--gray5;
     border-radius: $border-radius__input;
 
     transition: $transition;
+
     &:not([disabled]) {
       &:hover {
         color: $color--light;
@@ -615,11 +671,13 @@ h6 {
         box-shadow: none;
       }
     }
+
     &:hover {
       color: $color--light;
       background: $color--hover;
       box-shadow: none;
     }
+
     &:focus,
     &:active {
       color: $color--light;
@@ -627,18 +685,23 @@ h6 {
       box-shadow: none;
     }
   }
+
   &--w100 {
     width: 100%;
   }
+
   &--large {
     height: $height__btn--large;
+
     @media screen and (max-width: $md) {
       height: $height__btn--meduim;
     }
   }
+
   &--medium {
     height: $height__btn--meduim;
   }
+
   &--icon {
     width: $size__icon-btn;
     height: $size__icon-btn;
@@ -649,8 +712,10 @@ h6 {
     border-radius: $border-radius__btn;
     @include interaction__tab;
   }
+
   &--mobile {
     @include cursor(pointer);
+
     @media screen and (max-width: $md) {
       width: $width__btn--square;
       min-width: $width__btn--square;
@@ -658,19 +723,23 @@ h6 {
       background: $color--light;
       color: $color--primary;
       box-shadow: $box-shadow__block;
+
       &:hover {
         color: $color--light;
       }
+
       &:focus,
       &:active {
         color: $color--light;
       }
     }
   }
+
   &--secondary {
     @include text--normal;
     background: $color--gray6;
   }
+
   &--outline {
     border: $border__input;
     border-radius: $border-radius__input;
@@ -684,6 +753,7 @@ h6 {
   -webkit-box-orient: vertical;
   white-space: normal;
   overflow: hidden;
+
   &--3 {
     display: -webkit-box;
     -webkit-line-clamp: 3; //行數
@@ -700,6 +770,7 @@ h6 {
 
     object-fit: cover;
   }
+
   &--contain {
     width: 100%;
     height: 100%;
@@ -710,6 +781,7 @@ h6 {
 
 .c-tabs {
   display: flex;
+
   &__btn {
     padding: 0.625rem 1.25rem;
     @include clear__btn;
@@ -725,6 +797,7 @@ h6 {
     align-items: center;
 
     position: relative;
+
     &::after {
       content: "";
       width: 0;
@@ -740,12 +813,15 @@ h6 {
       transition: $transition;
       transform: translateX(-50%);
     }
+
     &:hover {
       color: $color--primary;
       background: $color--opacity;
     }
+
     &.active {
       color: $color--primary;
+
       &::after {
         content: "";
         width: 100%;
@@ -759,6 +835,7 @@ h6 {
         transform: translateX(-50%);
       }
     }
+
     &--w100 {
       width: 100%;
     }
@@ -769,6 +846,7 @@ h6 {
   &__backdrop {
     background-color: $color--modal-bg;
   }
+
   &__wrapper {
     width: 100%;
     height: 100%;
@@ -782,9 +860,11 @@ h6 {
 
     @include scrollbar;
     overflow-y: auto;
+
     @media screen and (min-width: $md) and (max-width: $lg) {
       padding: $padding__modal--md;
     }
+
     @media screen and (max-width: $md) {
       padding: 0;
     }
@@ -817,4 +897,5 @@ h6 {
   &__action {
     animation: wobble 4s both infinite;
   }
+
 }

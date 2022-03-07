@@ -86,6 +86,7 @@
                     background-color: transparent;
                     border-radius: 0;
                     box-shadow: none;
+                    border-bottom-color: $color--active;
                 }
 
                 .signup-form_label {
@@ -179,6 +180,7 @@
             color: $color--gray3;
 
             position: relative;
+
             &::before {
                 content: "";
                 width: 2rem;
@@ -190,6 +192,7 @@
                 left: -3rem;
                 transform: translateY(-50%);
             }
+
             &::after {
                 content: "";
                 width: 2rem;
@@ -317,6 +320,7 @@
 
             .signup-form {
                 .form-floating {
+
                     .fa-envelope,
                     .fa-lock {
                         left: 5%;
@@ -340,6 +344,7 @@
         .signup-form-wrapper {
             .signup-form {
                 .form-floating {
+
                     .fa-envelope,
                     .fa-lock {
                         left: 10%;

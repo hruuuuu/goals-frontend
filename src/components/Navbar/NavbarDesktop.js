@@ -64,7 +64,7 @@ function NavbarDesktop(props) {
             );
           })}
         {!login ? null : (
-          <li className="l-navbar__icon">
+          <li className="l-navbar__icon logout-icon">
             <i
               className="fas fa-sign-out-alt l-navbar__font"
               onClick={handleLogout}
