@@ -36,12 +36,21 @@ function NavbarMobile(props) {
       Swal.fire({
         icon: 'success',
         html: '登出成功',
-        confirmButtonColor: '#3085d6',
+        showConfirmButton: true,
         confirmButtonText: 'OK',
+        focusConfirm: false,
+        buttonsStyling: false,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium',
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           setLogin(false);
-          history('/');
+          history('/login');
         }
       });
     }

@@ -57,13 +57,24 @@ function Navbar() {
     Swal.fire({
       title: '確定要登出嗎？',
       icon: 'warning',
-      showDenyButton: true,
-      confirmButtonColor: '#330856',
-      denyButtonColor: '#d33',
-      denyButtonText: '登出',
-      confirmButtonText: '返回',
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: '登出',
+      cancelButtonText: '返回',
+      focusCancel: false,
+      focusConfirm: false,
+      buttonsStyling: false,
+      reverseButtons: true,
+      customClass: {
+        container: 'c-alert__overlay',
+        popup: 'c-alert__modal',
+        title: 'c-alert__title',
+        htmlContainer: 'c-alert__text',
+        confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+        cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      },
     }).then(async (result) => {
-      if (result.isDenied) {
+      if (result.isConfirmed) {
         const logoutResult = await axios.get(`${API_URL}/auth/logout`, {
           withCredentials: true,
         });

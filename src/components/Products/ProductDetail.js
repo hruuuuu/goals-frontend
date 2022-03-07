@@ -256,33 +256,81 @@ function ProductDetail(props) {
   };
 
   const handleCommentAdd = async () => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
     const commentPost = await axios.post(`${API_URL}/comment/new`, newComment, {
       withCredentials: true,
     });
     if (commentPost.data.code < 30020) {
-      Swal.fire({
+      Toast.fire({
         icon: 'error',
         html: commentPost.data.msg,
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          setShowComment(false);
-          history('/');
-        }
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
+      // Swal.fire({
+      //   icon: 'error',
+      //   html: commentPost.data.msg,
+      //   showCancelButton: true,
+      //   focusCancel: false,
+      //   cancelButtonText: 'Ok',
+      //   customClass: {
+      //     container: 'c-alert__overlay',
+      //     popup: 'c-alert__modal',
+      //     title: 'c-alert__title',
+      //     htmlContainer: 'c-alert__text',
+      //     confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+      //     cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      //   },
+      // }).then((result) => {
+      //   if (!result.isConfirmed) {
+      //     setShowComment(false);
+      //     history('/');
+      //   }
+      // });
     } else {
-      Swal.fire({
+      Toast.fire({
         icon: 'success',
         html: commentPost.data.msg,
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          setShowComment(false);
-          history(`/product/${productId}`);
-        }
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
+      setShowComment(false);
+      history(`/product/${productId}`);
+
+      // Swal.fire({
+      //   icon: 'success',
+      //   html: commentPost.data.msg,
+      //   showConfirmButton: true,
+      //   confirmButtonText: 'OK',
+      //   focusConfirm: false,
+      //   customClass: {
+      //     container: 'c-alert__overlay',
+      //     popup: 'c-alert__modal',
+      //     title: 'c-alert__title',
+      //     htmlContainer: 'c-alert__text',
+      //     confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+      //     cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      //   },
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     setShowComment(false);
+      //     history(`/product/${productId}`);
+      //   }
+      // });
     }
   };
 
