@@ -62,6 +62,14 @@ const Available = () => {
       text: '領取成功',
       showConfirmButton: false,
       timer: 1500,
+      customClass: {
+        container: 'c-alert__overlay',
+        popup: 'c-alert__modal',
+        title: 'c-alert__title',
+        htmlContainer: 'c-alert__text',
+        confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+        cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      },
     });
   }
 

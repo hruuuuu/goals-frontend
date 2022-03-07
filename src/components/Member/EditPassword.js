@@ -37,11 +37,30 @@ const EditPassWord = () => {
     try {
       let response = await axios.post(`${API_URL}/member/editpassword`, user);
 
-      Swal.fire('', response.data, 'success');
+      Swal.fire({
+        icon: 'success',
+        text: response.data,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+          cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+        },
+      });
     } catch (err) {
       Swal.fire({
         icon: 'error',
         text: err.response.data,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+          cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+        },
       });
     }
   }

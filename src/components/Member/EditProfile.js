@@ -43,7 +43,18 @@ const EditProfile = () => {
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      Swal.fire('', '修改資料成功', 'success');
+      Swal.fire({
+        icon: 'success',
+        text: '修改資料成功',
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+          cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+        },
+      });
       let response = await axios.post(`${API_URL}/member/editprofile`, member);
     }
     setValidated(true);
