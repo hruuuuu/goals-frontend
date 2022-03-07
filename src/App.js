@@ -77,6 +77,8 @@ function App() {
         if (!isLogin.status) {
           localStorage.setItem('fav', '');
           setFavItemsArr([]);
+          localStorage.setItem('cartList', '');
+          setCartListData([]);
         }
 
         //api/product

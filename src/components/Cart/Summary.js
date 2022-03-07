@@ -43,7 +43,6 @@ function Summary(props) {
       getcoupon();
     }
   }, []);
-  // console.log(data);
 
   useEffect(() => {
     //總計
@@ -53,7 +52,7 @@ function Summary(props) {
     }
     setTotal(allSubtotal);
 
-    //TODO:活動折扣
+    //活動折扣
     let allDiscountTotal = 0;
 
     for (let i = 0; i < cartListData.length; i++) {
@@ -61,26 +60,27 @@ function Summary(props) {
         cartListData[i].discountPrice * cartListData[i].amount;
     }
 
-    setDiscountTotal(allSubtotal - allDiscountTotal + couponDiscount);
+    setDiscountTotal(
+      Math.round(allSubtotal - allDiscountTotal + couponDiscount)
+    );
     //應付金額
-    setOrderTotal(allDiscountTotal - couponDiscount);
+    setOrderTotal(Math.round(allDiscountTotal - couponDiscount));
   }, [cartListData, couponDiscount]);
 
   //選定折價券後，回傳折扣內容，更新活動折扣跟應付金額
   const handleChange = (e) => {
     setCouponId(Number(e.target.value));
-    // console.log(data);
     const usedCoupon = data.find(
       (coupon) => coupon.id === Number(e.target.value)
     );
-    // console.log(usedCoupon);
     setCouponDiscount(
-      total -
-        (total * usedCoupon.discount_multiplication - usedCoupon.discount_minus)
+      Math.round(
+        total -
+          (total * usedCoupon.discount_multiplication -
+            usedCoupon.discount_minus)
+      )
     );
   };
-  // console.log(couponDiscount);
-  // console.log(couponId);
 
   return (
     <>
