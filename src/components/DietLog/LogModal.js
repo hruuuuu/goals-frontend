@@ -106,6 +106,10 @@ function LogModal(props) {
           Toast.fire({
             icon: 'success',
             title: '新增成功',
+            customClass: {
+              popup: 'c-alert__toast',
+              title: 'c-alert__subtitle',
+            },
           });
         }
         getDietlogData();
@@ -120,12 +124,20 @@ function LogModal(props) {
         Toast.fire({
           icon: 'error',
           title: '有東西出錯了',
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
         });
       }
     } else {
       Toast.fire({
         icon: 'warning',
         title: '請至少新增一項食物',
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
     }
   };

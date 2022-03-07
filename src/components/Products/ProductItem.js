@@ -69,6 +69,10 @@ function ProductItem(props) {
     Toast.fire({
       icon: 'success',
       title: '商品已加入購物車',
+      customClass: {
+        popup: 'c-alert__toast',
+        title: 'c-alert__subtitle',
+      },
     });
 
     const newItem = {
