@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { Modal, Button, Table } from 'react-bootstrap';
+import { Modal, Button, Table, Form } from 'react-bootstrap';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../utils/config';
@@ -10,8 +10,9 @@ import { IMG_URL } from '../../utils/config';
 const OrderList = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
-  const [sortId, setSortId] = useState(false);
+  const [sortDate, setSortDate] = useState(false);
   const [sortTotal, setSortTotal] = useState(false);
+  const [sort, setSort] = useState('default');
   const [orderdata, setOrderData] = useState([
     { recipient: '', image: '3.webp' },
   ]);
@@ -33,14 +34,14 @@ const OrderList = () => {
   }, []);
 
   const sortObject = (sortType) => {
-    if (sortType === 'id') {
-      if (sortId === false) {
+    if (sortType === 'create_at') {
+      if (sortDate === true) {
         return data.sort((a, b) => a.id - b.id);
       } else {
         return data.sort((a, b) => a.id - b.id).reverse();
       }
     } else {
-      if (sortTotal === false) {
+      if (sortTotal === true) {
         return data.sort((a, b) => a.total - b.total);
       } else {
         return data.sort((a, b) => a.total - b.total).reverse();
@@ -48,18 +49,25 @@ const OrderList = () => {
     }
   };
 
+  const changeSort = (sortType) => {
+    if (sortType === 'create_at') {
+      return data.sort((a, b) => {
+        var dateA = new Date(a.create_at);
+        var dateB = new Date(b.create_at);
+        return dateA - dateB;
+      });
+    } else {
+      return data.sort((a, b) => a.total - b.total);
+    }
+  };
+
   const handleShow = (order) => {
     setShow(true);
 
     let getOrderdetail = async () => {
-      let response = await axios.post(
-        `${API_URL}/order/orderdetail`,
-        order,
-
-        {
-          withCredentials: true,
-        }
-      );
+      let response = await axios.post(`${API_URL}/order/orderdetail`, order, {
+        withCredentials: true,
+      });
       setOrderData([...response.data]);
     };
 
@@ -79,21 +87,21 @@ const OrderList = () => {
             <table className="table table-borderless orderlist_table">
               <thead>
                 <tr>
+                  <th scope="col">訂單編號</th>
                   <th
                     scope="col"
                     onClick={() => {
-                      sortObject('id');
-                      setSortId(!sortId);
+                      sortObject('create_at');
+                      setSortDate(!sortDate);
                     }}
                   >
-                    訂單編號 {''}
+                    訂單日期 {''}
                     <i
                       className="fa fa-sort"
                       aria-hidden="true"
                       style={{ color: '#f8bc5d' }}
                     ></i>
                   </th>
-                  <th scope="col">訂單日期</th>
                   <th scope="col">付款狀態</th>
                   <th scope="col">訂單狀態</th>
                   <th
@@ -147,21 +155,26 @@ const OrderList = () => {
           </div>
         </div>
       ) : (
-        <div className="u-height u-height--empty-page">
-          <div className="empty_img">
-            <img
-              className="img-responsive"
-              src={
-                require('../../img/common/illustration/order-empty.svg').default
-              }
-              alt=""
-            />
-            <h5>沒有歷史訂單喔！趕快去下單吧！</h5>
-          </div>
-        </div>
+        <></>
       )}
       {/* RWD */}
 
+      <div className="d-flex d-lg-none justify-content-center mb-3 pb-3">
+        <Form.Select
+          className="form-select c-form__select"
+          value={sort}
+          onChange={(e) => {
+            setSort(e.target.value);
+            changeSort(e.target.value);
+          }}
+        >
+          <option value="default" disabled>
+            訂單排序依...
+          </option>
+          <option value="create_at">訂單日期</option>
+          <option value="total">總計價格</option>
+        </Form.Select>
+      </div>
       {!isOrderList ? (
         data.map((order) => {
           return (
@@ -215,7 +228,18 @@ const OrderList = () => {
           );
         })
       ) : (
-        <h1></h1>
+        <div className="u-height u-height--empty-page">
+          <div className="empty_img">
+            <img
+              className="img-responsive"
+              src={
+                require('../../img/common/illustration/order-empty.svg').default
+              }
+              alt=""
+            />
+            <h5>沒有歷史訂單喔！趕快去下單吧！</h5>
+          </div>
+        </div>
       )}
       <Modal centered show={show} onHide={handleClose} animation={false}>
         <Modal.Header>
