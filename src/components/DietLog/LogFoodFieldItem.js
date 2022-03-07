@@ -125,9 +125,9 @@ function LogFoodFieldItem(props) {
                 e.target.value = '';
               }}
             />
-            <span className="c-form__label c-dietlog-fields__label mb-0 ms-1">
+            {/* <span className="c-form__label c-dietlog-fields__label mb-0 ms-1">
               份
-            </span>
+            </span> */}
           </div>
           <div className="col-2">
             <input

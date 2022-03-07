@@ -17,9 +17,19 @@ const Signup = () => {
   const [page, setPage] = useState(false);
 
   // 設定modal畫面
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState({
+    in: false,
+    out: false,
+  });
+  const handleClose = () => {
+    setShow({ ...show, out: true });
+    setTimeout(() => {
+      setShow({ ...show, in: false, out: false });
+    }, 500);
+  };
+  const handleShow = () => {
+    setShow({ ...setShow, in: true });
+  };
 
   // 設定modal Email
   const [data, setData] = useState({

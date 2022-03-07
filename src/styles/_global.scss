@@ -41,6 +41,17 @@ button {
   display: none !important;
 }
 
+@for $i from 1 through 6 {
+  $zIndexBackdrop: #{1055 + (5 * $i)};
+  $zIndexContent: #{1055 + (5 * $i) + 2};
+  .modal-backdrop.show:nth-of-type(#{$i}) {
+    z-index: $zIndexBackdrop;
+  }
+  div[role="dialog"][aria-modal="true"]:nth-of-type(#{$i}) {
+    z-index: $zIndexContent;
+  }
+}
+
 @mixin heading {
   font-style: normal;
   font-family: "Inter", "Noto Sans TC", sans-serif;
@@ -456,6 +467,11 @@ h6 {
         transition: background-color 5000s ease-in-out 0s;
       }
     }
+
+    &:disabled {
+      background: transparent;
+      opacity: 0.6;
+    }
   }
 
   &__label {
@@ -752,6 +768,15 @@ h6 {
     border-radius: $border-radius__input;
     @include interaction__tab;
   }
+  &--none {
+    &:hover {
+      background: transparent;
+    }
+    &:focus,
+    &:active {
+      background: transparent;
+    }
+  }
 }
 
 .ellipsis {
@@ -857,7 +882,6 @@ h6 {
   &__wrapper {
     width: 100%;
     height: 100%;
-    min-height: 37.5rem;
     padding: $padding__modal;
 
     background: $color--light;
@@ -868,12 +892,26 @@ h6 {
     @include scrollbar;
     overflow-y: auto;
 
-    @media screen and (min-width: $md) and (max-width: $lg) {
-      padding: $padding__modal--md;
+    &--full-page {
+      @media screen and (min-width: $md) and (max-width: $lg) {
+        padding: $padding__modal--md;
+      }
     }
+    &--modal {
+      @media screen and (max-width: $md) {
+        width: 95%;
+        margin: 0 auto;
+      }
+    }
+  }
 
-    @media screen and (max-width: $md) {
-      padding: 0;
+  &__close {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    @media screen and (min-width: $md) {
+      display: none;
     }
   }
 }
