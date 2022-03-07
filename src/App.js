@@ -74,6 +74,11 @@ function App() {
         });
         setAdmin(isLogin.administrator);
 
+        if (!isLogin.status) {
+          localStorage.setItem('fav', '');
+          setFavItemsArr([]);
+        }
+
         //api/product
         const productResponse = await axios.get(`${API_URL}/product`, {
           withCredentials: true,
@@ -130,13 +135,6 @@ function App() {
       setFavItemsArr([...favItems]);
     } else {
       localStorage.setItem('fav', '');
-    }
-  }, [login]);
-
-  useEffect(() => {
-    if (!login) {
-      localStorage.setItem('fav', '');
-      setFavItemsArr([]);
     }
   }, [login]);
 

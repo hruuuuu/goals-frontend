@@ -80,25 +80,29 @@ function Home() {
       heading: '營養',
       description: '食譜是經由專業的營養師團隊以及飲食顧問精心規劃設計。',
       delay: 150,
+      offset: 150,
     },
     {
       id: 2,
       heading: '健康',
       description: '符合高纖、低脂、低GI、高蛋白的標準，皆附有成分與營養標示。',
-      delay: 300,
+      delay: 250,
+      offset: 150,
     },
     {
       id: 3,
       heading: '食材',
       description:
         '嚴選產地，在地當令採收不落地，選用新鮮、有機的食材烹調，讓你吃得健康又安心。',
-      delay: 450,
+      delay: 350,
+      offset: 50,
     },
     {
       id: 4,
       heading: '美味',
       description: '品項多樣，並且不斷在嘗試開發新口味，健康的料理也能很好吃。',
-      delay: 600,
+      delay: 450,
+      offset: 0,
     },
   ];
 
@@ -150,10 +154,7 @@ function Home() {
           />
           <div className="l-home__overview c-overview">
             <div className="row justify-content-center">
-              <div
-                className="col-10 col-md-8 col-lg-8 col-xl-6"
-                data-aos="fade-down"
-              >
+              <div className="col-10 col-md-8 col-lg-8 col-xl-6">
                 <div className="c-title c-title--center">
                   <div className="c-title__icon">
                     <img
@@ -214,10 +215,7 @@ function Home() {
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
                 >
-                  <div
-                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
-                    data-aos="fade-up"
-                  >
+                  <div className="col-12 col-md-8 col-lg-5 order-2 order-lg-1">
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
                         <div className="c-title c-title--start">
@@ -249,6 +247,7 @@ function Home() {
                     className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container"
                     data-aos="fade-left"
                     data-aos-delay="500"
+                    data-aos-offset="100"
                   >
                     <div className="c-section__block c-section__block--right">
                       <img
@@ -267,12 +266,12 @@ function Home() {
                   className="row gy-5 g-lg-0 c-section__row mb-5 mb-lg-0"
                   section="product-list"
                 >
-                  <div
-                    className="col-12 col-lg-6 position-relative c-section__container"
-                    data-aos="fade-right"
-                  >
+                  <div className="col-12 col-lg-6 position-relative c-section__container">
                     <div className="c-section__block c-section__block--left"></div>
-                    <div className="row justify-content-center">
+                    <div
+                      className="row justify-content-center"
+                      data-aos="fade-right"
+                    >
                       <div className="col-10 col-lg-12">
                         <div className="c-section__wrapper" section="title">
                           <h2 className="c-section__title">果實餐盒的</h2>
@@ -302,13 +301,20 @@ function Home() {
                         <div className="c-section__wrapper" section="list">
                           <ul className="c-section__list">
                             {productItems.map((item) => {
-                              const { id, heading, description, delay } = item;
+                              const {
+                                id,
+                                heading,
+                                description,
+                                delay,
+                                offset,
+                              } = item;
                               return (
                                 <li
                                   key={id}
                                   className="c-section__item"
                                   data-aos="fade-left"
                                   data-aos-delay={delay}
+                                  data-aos-offset={offset}
                                 >
                                   <div className="c-section__list-num">
                                     {id}
@@ -407,7 +413,7 @@ function Home() {
                 </div>
               </div>
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--center" data-aos="fade-down">
+                <div className="c-title c-title--center">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"
@@ -524,7 +530,7 @@ function Home() {
           <div className="l-home__blog c-section">
             <div className="row justify-content-center">
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--start" data-aos="fade-down">
+                <div className="c-title c-title--start">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"
