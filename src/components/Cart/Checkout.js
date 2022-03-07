@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../utils/config';
 import { useCartList } from '../../context/cart';
 import Swal from 'sweetalert2';
+import $ from 'jquery';
 
 import {
   PaymentElement,
@@ -26,6 +27,13 @@ function Checkout(props) {
 
   // const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const handleChange = (e) => {
+    if (!e.complete) {
+      $('.pay-btn').attr('disabled', 'disabled');
+    } else {
+      $('.pay-btn').removeAttr('disabled', 'disabled');
+    }
+  };
 
   useEffect(() => {
     if (!stripe) {
@@ -163,18 +171,18 @@ function Checkout(props) {
   return (
     <>
       <form id="payment-form" onSubmit={handleSubmit} className="mt-3">
-        <PaymentElement id="payment-element" />
+        <PaymentElement id="payment-element" onChange={handleChange} />
         <button
-          className="btn_outline btn_grn text-light mt-3 p-3"
+          className="btn_outline btn_grn text-light mt-3 p-3 pay-btn"
           disabled={isLoading || !stripe || !elements}
           id="submit"
         >
           <span id="button-text">
-            {isLoading ? (
+            {/* {isLoading ? (
               <div className="spinner" id="spinner"></div>
-            ) : (
-              'Pay now'
-            )}
+            ) : ( */}
+            Pay now
+            {/* )} */}
           </span>
         </button>
         {/* {message && <div id="payment-message">{message}</div>} */}
