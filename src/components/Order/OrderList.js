@@ -10,8 +10,8 @@ import { IMG_URL } from '../../utils/config';
 const OrderList = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
-  const [sortId, setsortId] = useState(false);
-  const [sortTotal, setsortTotal] = useState(false);
+  const [sortId, setSortId] = useState(false);
+  const [sortTotal, setSortTotal] = useState(false);
   const [orderdata, setOrderData] = useState([
     { recipient: '', image: '3.webp' },
   ]);
@@ -83,7 +83,7 @@ const OrderList = () => {
                     scope="col"
                     onClick={() => {
                       sortObject('id');
-                      setsortId(!sortId);
+                      setSortId(!sortId);
                     }}
                   >
                     訂單編號 {''}
@@ -100,7 +100,7 @@ const OrderList = () => {
                     scope="col"
                     onClick={() => {
                       sortObject('total');
-                      setsortTotal(!sortTotal);
+                      setSortTotal(!sortTotal);
                     }}
                   >
                     總計 {''}
