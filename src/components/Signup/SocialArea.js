@@ -8,20 +8,48 @@ import Swal from 'sweetalert2';
 
 const SocialArea = ({ handleGoogleLogIn, setLogin, setIsSocial }) => {
   const history = useNavigate();
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
   // Facebook登入
   const handleFacebookLogIn = async (response) => {
     if (response.status === 'unknown') {
-      Swal.fire({
+      Toast.fire({
         icon: 'error',
         html: '授權失敗',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          history('/');
-          return;
-        }
+        customClass: {
+          popup: 'c-alert__toast',
+          title: 'c-alert__subtitle',
+        },
       });
+      // Swal.fire({
+      //   icon: 'error',
+      //   html: '授權失敗',
+      //   showCancelButton: true,
+      //   cancelButtonText: 'OK',
+      //   focusConfirm: false,
+      //   buttonsStyling: false,
+      //   customClass: {
+      //     container: 'c-alert__overlay',
+      //     popup: 'c-alert__modal',
+      //     title: 'c-alert__title',
+      //     htmlContainer: 'c-alert__text',
+      //     cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      //   },
+      // }).then((result) => {
+      //   if (!result.isConfirmed) {
+      //     history('/');
+      //     return;
+      //   }
+      // });
     }
     const sendFBData = await axios.post(
       `${API_URL}/social/facebook`,
@@ -34,8 +62,17 @@ const SocialArea = ({ handleGoogleLogIn, setLogin, setIsSocial }) => {
       Swal.fire({
         icon: 'success',
         html: sendFBData.data.msg,
-        confirmButtonColor: '#3085d6',
+        focusConfirm: false,
+        buttonsStyling: false,
         confirmButtonText: 'OK',
+        showConfirmButton: true,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium',
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           setLogin(true);

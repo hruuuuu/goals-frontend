@@ -57,19 +57,21 @@ const Available = () => {
       .children()
       .html(coupon.amount - 1);
 
-    Swal.fire({
-      icon: 'success',
-      text: '領取成功',
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
       showConfirmButton: false,
-      timer: 1500,
-      customClass: {
-        container: 'c-alert__overlay',
-        popup: 'c-alert__modal',
-        title: 'c-alert__title',
-        htmlContainer: 'c-alert__text',
-        confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
-        cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+      timer: 2000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
       },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: '領取成功',
     });
   }
 

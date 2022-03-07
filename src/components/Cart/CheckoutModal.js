@@ -16,11 +16,21 @@ function CheckoutModal(props) {
         title: '購買前請先登入',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        showConfirmButton: true,
         confirmButtonText: '前往登入頁',
         cancelButtonText: '返回',
         reverseButtons: true,
+        buttonsStyling: false,
+        focusCancel: false,
+        focusConfirm: false,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
+          cancelButton: 'e-btn e-btn--cancel e-btn--medium',
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           history('/login');
