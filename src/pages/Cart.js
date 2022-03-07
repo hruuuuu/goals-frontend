@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/calculator.jpg';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);

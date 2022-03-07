@@ -9,15 +9,8 @@ import { useDietlog } from '../../context/dietlog';
 import LogModal from './LogModal';
 
 function LogSidebar(props) {
-  const {
-    getDietlogData,
-    refresh,
-    setRefresh,
-    foodFields,
-    setFoodFields,
-    editMode,
-    setEditMode,
-  } = props;
+  const { getDietlogData, refresh, setRefresh, foodFields, setFoodFields } =
+    props;
   const [showModal, setShowModal] = useState({
     in: false,
     out: false,
@@ -40,7 +33,6 @@ function LogSidebar(props) {
   /* 控制modal顯示 */
   const handleShow = () => {
     setShowModal({ ...setShowModal, in: true });
-    setEditMode(true);
   };
   return (
     <>
@@ -81,8 +73,6 @@ function LogSidebar(props) {
             setRefresh={setRefresh}
             foodFields={foodFields}
             setFoodFields={setFoodFields}
-            editMode={editMode}
-            setEditMode={setEditMode}
           />
         )}
       </div>

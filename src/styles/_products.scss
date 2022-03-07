@@ -306,6 +306,7 @@
 
   &__heading {
     @include text--medium-bold;
+    @include text--truncate(1);
   }
 
   &__price {

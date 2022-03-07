@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
 
 * {
   box-sizing: border-box;
@@ -34,6 +35,10 @@ div {
 
 button {
   letter-spacing: $letter-spacing;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none !important;
 }
 
 @mixin heading {
@@ -396,6 +401,20 @@ h6 {
         top: 45%;
         left: 0.75rem;
         transform: translateY(-50%);
+      }
+    }
+    &:-webkit-autofill {
+      border: $border__input;
+      -webkit-box-shadow: -100px 0 0 100px transparent inset;
+      -webkit-text-fill-color: $color--font;
+      transition: background-color 5000s ease-in-out 0s;
+      &:hover,
+      &:focus,
+      &:active {
+        border: $border__input;
+        -webkit-box-shadow: -100px 0 0 100px transparent inset;
+        -webkit-text-fill-color: $color--font;
+        transition: background-color 5000s ease-in-out 0s;
       }
     }
   }
@@ -769,5 +788,33 @@ h6 {
     @media screen and (max-width: $md) {
       padding: 0;
     }
+  }
+}
+
+.c-loading {
+  width: 100vw;
+  height: 100vh;
+
+  background: $color--primary;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1200;
+
+  &__icon {
+    width: 40%;
+    height: 40%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.c-placeholder {
+  &__action {
+    animation: wobble 4s both infinite;
   }
 }

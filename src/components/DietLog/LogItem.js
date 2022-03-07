@@ -19,18 +19,16 @@ function LogItem(props) {
     getDietlogData,
     refresh,
     setRefresh,
-    foodFields,
-    setFoodFields,
-    editMode,
-    setEditMode,
     mealSummary,
     setMealSummary,
   } = props;
   const { id, title, description, datetime, edited_at, category_id } = dietlog;
   const { dietlogCategoryData } = useDietlog();
   const [category, setCategory] = useState({ id: '', name: '' });
+  const [editMode, setEditMode] = useState(false);
   const [dietlogImg, setDietlogImg] = useState([]);
   const [dietlogFood, setDietlogFood] = useState([]);
+  const [foodFields, setFoodFields] = useState([]);
   const [editFields, setEditFields] = useState({
     title: title,
     description: description,
@@ -39,13 +37,9 @@ function LogItem(props) {
   });
   const [foodSummary, setFoodSummary] = useState({
     calories: 0,
-    protien: 0,
+    protein: 0,
     fat: 0,
-    saturated_fat: 0,
-    trans_fat: 0,
     carb: 0,
-    sugar: 0,
-    sodium: 0,
   });
 
   const isFetchingCategory = dietlogCategoryData.length === 0;
@@ -151,6 +145,7 @@ function LogItem(props) {
       });
       const food = response.data;
       setDietlogFood([...food]);
+      setFoodFields([...food]);
     } catch (error) {
       console.log(error);
     }
@@ -271,13 +266,9 @@ function LogItem(props) {
     setFoodSummary({
       ...foodSummary,
       calories: sum('calories'),
-      protien: sum('protien'),
+      protein: sum('protein'),
       fat: sum('fat'),
-      saturated_fat: sum('saturated_fat'),
-      trans_fat: sum('trans_fat'),
       carb: sum('carb'),
-      sugar: sum('sugar'),
-      sodium: sum('sodium'),
     });
   };
 
@@ -288,7 +279,7 @@ function LogItem(props) {
       );
       setCategory({ ...matchedCategory });
     }
-  }, [dietlogCategoryData]);
+  }, [dietlogCategoryData, dietlogFood]);
 
   useEffect(() => {
     if (refresh) {
@@ -300,12 +291,17 @@ function LogItem(props) {
   useEffect(() => {
     if (!isEmptyFood) {
       handleSumFood();
-      const foodFieldsWithFlag = dietlogFood.map((food, i) => {
+    }
+  }, [dietlogFood]);
+
+  useEffect(() => {
+    if (!isEmptyFields) {
+      const foodFieldsWithFlag = foodFields.map((food, i) => {
         return { ...food, flag: i };
       });
       setFoodFields([...foodFieldsWithFlag]);
     }
-  }, [dietlogFood]);
+  }, [editMode]);
 
   useEffect(() => {
     getDietlogImg();

@@ -1,44 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Pagination, Autoplay, Navigation, Lazy } from 'swiper';
+import { Pagination, Navigation, Lazy } from 'swiper';
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
-import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/lazy';
 
-import { IMG_URL } from '../utils/config';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import { API_URL } from '../utils/config';
 
 import BlogPost from '../components/Home/BlogPost';
 import ScrollButton from '../components/ScrollButton';
+import Loading from '../components/Loading';
 
-import picSwiper1 from '../img/home/pic/swiper__1.jpg';
-import logoSlogan from '../img/common/illustration/logo--slogan.svg';
+import logo from '../img/common/logo--original.svg';
 import iconDeco from '../img/common/icon/deco.svg';
 import picProduct from '../img/home/pic/product.jpeg';
 import picDiet1 from '../img/home/pic/diet__1.jpg';
 import picDiet2 from '../img/home/pic/diet__2.jpg';
 import picOverviewProduct from '../img/home/pic/overview__product.webp';
 import picOverviewBlog from '../img/home/pic/overview__blog.jpg';
+import KeyVisual from '../components/Home/KeyVisual';
+import picCalculator from '../img/home/pic/calculator_home.jpg';
+import picCalculatorPh from '../img/home/pic/calculator-ph.png';
 
 function Home() {
   const [blogData, setBlogData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [offsetY, setOffsetY] = useState(0);
 
   const isFetchBlog = blogData.length === 0;
 
-  const swiperImgs = [
-    picSwiper1,
-    'https://ufoods.co.jp/asset/img/index/pic_index05-pc.png',
-    'https://ufoods.co.jp/asset/img/index/pic_index04-pc.png',
-    'https://ufoods.co.jp/asset/img/index/pic_index03-pc.png',
-  ];
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+  }, []);
 
   const overviewItems = [
     {
@@ -46,24 +49,28 @@ function Home() {
       heading: '健康餐盒',
       description: '兼顧健康、營養、食材與美味的首選。',
       img: picOverviewProduct,
+      delay: 0,
     },
     {
       id: 2,
       heading: 'TDEE計算機',
       description: '讓你擁有更健康的身體與體態，提升自我。',
-      img: 'https://picsum.photos/1920/1080/?random=2',
+      img: picCalculator,
+      delay: 300,
     },
     {
       id: 3,
       heading: '飲食日誌',
       description: '紀錄日常飲食，讓健康之路變得更容易！',
       img: picDiet2,
+      delay: 600,
     },
     {
       id: 4,
       heading: '健康新知',
       description: '定期為你帶來健康與健身的知識。',
       img: picOverviewBlog,
+      delay: 900,
     },
   ];
 
@@ -72,22 +79,26 @@ function Home() {
       id: 1,
       heading: '營養',
       description: '食譜是經由專業的營養師團隊以及飲食顧問精心規劃設計。',
+      delay: 150,
     },
     {
       id: 2,
       heading: '健康',
       description: '符合高纖、低脂、低GI、高蛋白的標準，皆附有成分與營養標示。',
+      delay: 300,
     },
     {
       id: 3,
       heading: '食材',
       description:
         '嚴選產地，在地當令採收不落地，選用新鮮、有機的食材烹調，讓你吃得健康又安心。',
+      delay: 450,
     },
     {
       id: 4,
       heading: '美味',
       description: '品項多樣，並且不斷在嘗試開發新口味，健康的料理也能很好吃。',
+      delay: 600,
     },
   ];
 
@@ -106,78 +117,43 @@ function Home() {
     const blogs = response.data.dataCount;
     setBlogData([...blogs]);
   };
+
   useEffect(() => {
     getBlog();
   }, []);
 
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3500);
+  }, []);
+
+  const handleScroll = () => setOffsetY(window.pageYOffset);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
+      {loading && <Loading />}
       <div className="l-home">
-        <div className="l-home__key-vision">
-          <div className="c-swiper c-swiper--kv">
-            <Swiper
-              direction={'vertical'}
-              speed={2000}
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-              }}
-              modules={[EffectFade, Pagination, Autoplay, Lazy]}
-              effect={'fade'}
-              fadeEffect={{
-                crossFade: false,
-              }}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              loop={true}
-              loopFillGroupWithBlank={true}
-              lazy={{
-                loadPrevNext: true,
-                loadPrevNextAmount: 1,
-                elementClass: 'swiper-lazy',
-                loadingClass: 'swiper-lazy-loading',
-                loadedClass: 'swiper-lazy-loaded',
-                preloaderClass: 'swiper-lazy-preloader',
-              }}
-              preloadImages={true}
-              slidesPerView={1}
-            >
-              {swiperImgs.map((img) => {
-                return (
-                  <SwiperSlide key={uuidv4()}>
-                    <img
-                      className="swiper-lazy animation animation__key-vision nimation__key-vision--in"
-                      src={img}
-                      alt="swiper-img"
-                    />
-                    <div className="swiper-lazy-preloader swiper-lazy-preloader-white swiper-lazy-loading"></div>
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-            <HashLink
-              smooth
-              to="#main"
-              role="button"
-              className="c-scroll-indicator"
-            >
-              SCROLL
-            </HashLink>
-            <div className="l-home__slogan">
-              <img
-                className="e-img e-img--contain"
-                src={logoSlogan}
-                alt="slogan"
-              />
-            </div>
-          </div>
-        </div>
-        <div className="l-home__main" id="main">
+        <KeyVisual loading={loading} />
+        <div className="l-home__main">
+          <div
+            className="l-home__bg"
+            style={{
+              transform: `translateY(${offsetY * 0.3}px)`,
+            }}
+          />
           <div className="l-home__overview c-overview">
             <div className="row justify-content-center">
-              <div className="col-10 col-md-8 col-lg-8 col-xl-6">
+              <div
+                className="col-10 col-md-8 col-lg-8 col-xl-6"
+                data-aos="fade-down"
+              >
                 <div className="c-title c-title--center">
                   <div className="c-title__icon">
                     <img
@@ -198,13 +174,18 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-10 col-md-8 col-lg-10">
+              <div className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8">
                 <div className="c-overview__list">
                   <div className="row gx-3 gx-md-5 gx-lg-3 gx-xl-5 gy-4 gy-lg-0">
                     {overviewItems.map((item) => {
-                      const { id, heading, description, img } = item;
+                      const { id, heading, description, img, delay } = item;
                       return (
-                        <div key={id} className="col-6 col-lg-3">
+                        <div
+                          key={id}
+                          className="col-6 col-lg-3"
+                          data-aos="fade-up"
+                          data-aos-delay={delay}
+                        >
                           <div className="c-overview__item">
                             <div className="c-overview__cover">
                               <img
@@ -228,12 +209,15 @@ function Home() {
           </div>
           <div className="l-home__product c-section">
             <div className="row justify-content-center g-0">
-              <div className="col-12 col-lg-10">
+              <div className="col-12 col-lg-10 col-xl-9 col-xxl-8">
                 <div
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
                 >
-                  <div className="col-12 col-md-8 col-lg-5 order-2 order-lg-1">
+                  <div
+                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
+                    data-aos="fade-up"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
                         <div className="c-title c-title--start">
@@ -261,12 +245,20 @@ function Home() {
                     </div>
                   </div>
                   <div className="d-none d-lg-flex col-1 order-lg-2"></div>
-                  <div className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container">
+                  <div
+                    className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container"
+                    data-aos="fade-left"
+                    data-aos-delay="500"
+                  >
                     <div className="c-section__block c-section__block--right">
                       <img
-                        className="e-img e-img--cover"
+                        className="e-img e-img--cover c-section__img"
                         src={picProduct}
                         alt="product"
+                        style={{
+                          transform: `translateY(-${offsetY * 0.1}px)`,
+                        }}
+                        section="product"
                       />
                     </div>
                   </div>
@@ -275,7 +267,10 @@ function Home() {
                   className="row gy-5 g-lg-0 c-section__row mb-5 mb-lg-0"
                   section="product-list"
                 >
-                  <div className="col-12 col-lg-6 position-relative c-section__container">
+                  <div
+                    className="col-12 col-lg-6 position-relative c-section__container"
+                    data-aos="fade-right"
+                  >
                     <div className="c-section__block c-section__block--left"></div>
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
@@ -307,9 +302,14 @@ function Home() {
                         <div className="c-section__wrapper" section="list">
                           <ul className="c-section__list">
                             {productItems.map((item) => {
-                              const { id, heading, description } = item;
+                              const { id, heading, description, delay } = item;
                               return (
-                                <li key={id} className="c-section__item">
+                                <li
+                                  key={id}
+                                  className="c-section__item"
+                                  data-aos="fade-left"
+                                  data-aos-delay={delay}
+                                >
                                   <div className="c-section__list-num">
                                     {id}
                                   </div>
@@ -333,6 +333,64 @@ function Home() {
               </div>
             </div>
           </div>
+          <div className="l-home__calculator">
+            <div className="row justify-content-center g-0">
+              <div className="col-12 col-lg-10">
+                <div className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0">
+                  <div
+                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
+                    data-aos="fade-up"
+                  >
+                    <div className="row justify-content-center">
+                      <div className="col-10 col-lg-12 c-textbox">
+                        <div className="c-title c-title--start">
+                          <div className="c-title__deco">GOALS CALCULATOR</div>
+                          <h3 className="c-title__title">TDEE/ BMR 計算機</h3>
+                          <h6 className="c-title__subtitle">
+                            果實帶您了解TDEE與BMR的不同
+                          </h6>
+                          <hr className="e-hr e-hr--primary c-title__hr" />
+                        </div>
+                        <p className="c-section__context">
+                          不管你是要增肌、減脂或是維持目前的體重，都可以透過BMR跟TDEE來了解你一天需要的熱量為多少！
+                        </p>
+                        <p className="c-section__context">
+                          我們提供了BMR/TDEE計算機，方便您了解每日該攝取約多少卡的熱量。
+                        </p>
+                        <p className="c-section__context">
+                          就讓果實一起來帶大家了解什麼是每日總熱量消耗(TDEE)、基礎代謝率(BMR)，以及如何提升代謝率。
+                        </p>
+                        <Link
+                          to="/calculator"
+                          role="button"
+                          className="e-btn e-btn--w100 e-btn--primary e-btn--large mt-5"
+                        >
+                          了解更多
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="d-none d-lg-flex col-1 order-lg-2"></div>
+                  <div
+                    className="col-10 col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8 position-relative order-1 order-lg-3"
+                    data-aos="fade-left"
+                    data-aos-offset="200"
+                  >
+                    <div className="cal-img">
+                      <div className="des-right__deco">
+                        <img className="img-responsive" src={logo} alt="" />
+                      </div>
+                      <img
+                        className="img-responsive"
+                        src={picCalculatorPh}
+                        alt="calculator"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="l-home__diet-intro c-section">
             <div className="row justify-content-center">
               <div className="col-12 d-flex d-lg-none position-relative c-section__container mb-5">
@@ -344,11 +402,12 @@ function Home() {
                     className="e-img e-img--cover"
                     src={picDiet2}
                     alt="diet"
+                    data-aos="fade-right"
                   />
                 </div>
               </div>
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--center">
+                <div className="c-title c-title--center" data-aos="fade-down">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"
@@ -383,18 +442,28 @@ function Home() {
               </div>
               <div className="l-home__diet-list c-section">
                 <div className="row justify-content-center">
-                  <div className="col-12 col-xl-10">
+                  <div className="col-12 col-xl-10 col-xl-9 col-xxl-8">
                     <div className="row justify-content-center gx-lg-5 gx-xl-0">
-                      <div className="col-3 position-relative d-none d-lg-flex">
+                      <div
+                        className="col-3 position-relative d-none d-lg-flex"
+                        data-aos="fade-right"
+                      >
                         <div className="c-section__block c-section__block--both-left">
                           <img
-                            className="e-img e-img--cover"
+                            className="e-img e-img--cover c-section__img"
                             src={picDiet1}
                             alt="diet"
+                            style={{
+                              transform: `translateY(-${offsetY * 0.1}px)`,
+                            }}
+                            section="diet"
                           />
                         </div>
                       </div>
-                      <div className="col-10 col-lg-5 col-xl-6">
+                      <div
+                        className="col-10 col-lg-5 col-xl-6"
+                        data-aos="fade-up"
+                      >
                         <div className="c-diet">
                           <h5 className="c-title__text c-diet__heading">
                             只需成為果實會員，即可...
@@ -418,12 +487,19 @@ function Home() {
                           </Link>
                         </div>
                       </div>
-                      <div className="col-3 position-relative d-none d-lg-flex">
+                      <div
+                        className="col-3 position-relative d-none d-lg-flex"
+                        data-aos="fade-left"
+                      >
                         <div className="c-section__block c-section__block--both-right">
                           <img
-                            className="e-img e-img--cover"
+                            className="e-img e-img--cover c-section__img"
                             src={picDiet2}
                             alt="diet"
+                            style={{
+                              transform: `translateY(-${offsetY * 0.1}px)`,
+                            }}
+                            section="diet"
                           />
                         </div>
                       </div>
@@ -448,7 +524,7 @@ function Home() {
           <div className="l-home__blog c-section">
             <div className="row justify-content-center">
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--start">
+                <div className="c-title c-title--start" data-aos="fade-down">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"
@@ -464,7 +540,7 @@ function Home() {
                   <hr className="e-hr e-hr--primary c-title__hr" />
                 </div>
               </div>
-              <div className="col-10">
+              <div className="col-10 col-xl-9 col-xxl-8" data-aos="fade-up">
                 <div className="c-swiper c-swiper--blog">
                   {!isFetchBlog && (
                     <Swiper

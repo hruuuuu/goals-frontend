@@ -28,7 +28,6 @@ const EditPassWord = () => {
 
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
-    console.log(data.password);
   }
 
   async function handleSubmit(e) {

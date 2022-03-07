@@ -1,18 +1,29 @@
 .l-home {
   height: max-content;
-  background-image: $img__home-bg;
-  background-attachment: fixed;
-
-  @media screen and (max-width: $md) {
-    background-image: none;
-  }
   &__main {
     padding: 3.75rem 0;
     overflow: hidden;
+
+    position: relative;
   }
-  &__key-vision {
+  &__bg {
+    width: 100%;
+    height: calc(100% + 100vh);
+    background-image: url("../img/home/pic/bg.png");
+    background-repeat: repeat-Y;
+    background-size: contain;
+    background-size: 130%;
+
+    position: absolute;
+    top: -100vh;
+    left: 0;
+    z-index: -1;
+  }
+  &__key-visual {
     width: 100vw;
     height: calc(100vh - $height__navbar);
+
+    overflow: hidden;
 
     position: relative;
 
@@ -27,6 +38,31 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  &__title {
+    @include h2;
+    color: $color--light;
+    margin-bottom: 0.5rem;
+
+    text-align: center;
+
+    transition: 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+    letter-spacing: -0.5rem;
+    opacity: 0;
+    &.active {
+      letter-spacing: 0.625rem;
+      opacity: 1;
+    }
+    &--cursive {
+      margin-bottom: 0;
+
+      font-family: "Style Script", cursive;
+      font-size: 7rem;
+      &.active {
+        letter-spacing: 0.0125rem;
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .c-scroll-indicator {
@@ -39,6 +75,7 @@
   position: absolute;
   right: -1.5rem;
   bottom: 15%;
+  z-index: 1000;
 
   transition: $transition;
   @include interaction__link;
@@ -305,6 +342,22 @@
       }
     }
   }
+  &__img {
+    position: absolute;
+    &[section="product"] {
+      width: 120%;
+      height: 120%;
+
+      top: 20%;
+    }
+    &[section="diet"] {
+      width: 130%;
+      height: 130%;
+
+      top: 60%;
+      left: -10%;
+    }
+  }
   &__row {
     &[section="product-intro"] {
       height: $height__product-intro;
@@ -403,5 +456,58 @@
     margin-bottom: 2.5rem !important;
     text-align: center;
     color: $color--primary;
+  }
+}
+
+/*l-home__calculator*/
+.l-home__calculator {
+  padding-bottom: 3rem;
+  .c-textbox {
+    padding-top: 5rem;
+    padding-left: 6.25rem;
+    @media screen and (max-width: $xxl) {
+      padding-left: 3rem;
+    }
+    @media screen and (max-width: $xl) {
+      padding-left: 0rem;
+    }
+    @media screen and (max-width: $lg) {
+      padding-top: 0;
+    }
+    @media screen and (max-width: $md) {
+      .c-title__deco {
+        display: none;
+      }
+    }
+  }
+  .des-right__deco {
+    width: 200px;
+    transform: translate(65%, -50%);
+    top: 50%;
+    right: 0;
+    z-index: -1;
+    @media screen and (max-width: $xl) {
+      width: 150px;
+    }
+    @media screen and (max-width: $lg) {
+      top: 18%;
+    }
+    @media screen and (max-width: $md) {
+      width: 100px;
+      top: 10%;
+      right: 10%;
+    }
+    &::before {
+      width: 400px;
+      height: 400px;
+      @media screen and (max-width: $xl) {
+        width: 300px;
+        height: 300px;
+      }
+      @media screen and (max-width: $md) {
+        width: 200px;
+        height: 200px;
+      }
+    }
   }
 }

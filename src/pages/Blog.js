@@ -6,7 +6,7 @@ import BlogPagination from '../components/Blog/BlogPagination';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/calculator.jpg';
 
 const Blog = () => {
   return (

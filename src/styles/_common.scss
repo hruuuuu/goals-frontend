@@ -12,7 +12,7 @@
 
   transition: $transition;
   &::after {
-    content: "";
+    content: '';
     width: 100%;
     height: 100%;
 
@@ -59,7 +59,7 @@
     #{$_}__link {
       position: relative;
       &::after {
-        content: "";
+        content: '';
         width: 0.5rem;
         height: 0.5rem;
 
@@ -82,7 +82,7 @@
       }
       &.active {
         &::after {
-          content: "";
+          content: '';
           width: 0.5rem;
           height: 0.5rem;
 
@@ -166,10 +166,10 @@
       left: 0;
 
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       &::after {
-        content: "";
+        content: '';
         width: 100%;
         height: 100%;
 
@@ -185,7 +185,7 @@
       #{$_}__link {
         position: relative;
         &::after {
-          content: "";
+          content: '';
           width: 0.5rem;
           height: 0.5rem;
 
@@ -202,7 +202,7 @@
         }
         &.active {
           &::after {
-            content: "";
+            content: '';
             width: 0.5rem;
             height: 0.5rem;
 
@@ -226,7 +226,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-end;
+      align-items: center;
 
       transition: $transition__navbar-menu;
       opacity: 0;
@@ -243,7 +243,7 @@
     }
     #{$_}__item {
       padding: 0.625rem;
-      margin: 0 2.5rem 1rem 0;
+      margin-bottom: 1rem;
       &:last-of-type {
         margin-bottom: 0;
       }
@@ -290,7 +290,7 @@
   &--scroll {
     transition: $transition;
     &::before {
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       background-image: none;
@@ -304,7 +304,7 @@
       transition: $transition__navbar-menu;
     }
     &::after {
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
 
@@ -420,7 +420,7 @@
 
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 25%;
       height: $height__line;
       background: $color--secondary;
@@ -461,7 +461,7 @@
 
     position: relative;
     &::before {
-      @include icon--absolute("\f0dc");
+      @include icon--absolute('\f0dc');
       color: $color--secondary;
       font-size: 1.2rem;
 
@@ -490,7 +490,7 @@
     &:first-of-type {
       margin-right: 0;
       #{$_}__link::before {
-        content: "";
+        content: '';
         display: none;
       }
     }
@@ -507,7 +507,7 @@
     display: inline-block;
 
     &::before {
-      @include icon--absolute("\f105");
+      @include icon--absolute('\f105');
       color: $color--gray4;
       font-size: 1rem;
 
@@ -614,7 +614,7 @@
       text-align: center;
       position: relative;
       &::before {
-        content: "";
+        content: '';
         width: 1px;
         height: 85px;
         background: rgba(107, 156, 102, 0.6);
@@ -623,7 +623,7 @@
         transform: translate(-1px, calc(-100% - 15px));
       }
       &::after {
-        content: "";
+        content: '';
         width: 5px;
         height: 30px;
         position: absolute;
@@ -1130,7 +1130,7 @@
       padding: $padding__chat;
     }
     #{$_}__msg {
-      &[from="client"] {
+      &[from='client'] {
         color: $color--light;
         background: $color--info;
 
@@ -1139,7 +1139,7 @@
           left: -3rem;
         }
       }
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1161,7 +1161,7 @@
       margin-bottom: $padding__chat;
     }
     #{$_}__msg {
-      &[from="admin"] {
+      &[from='admin'] {
         color: $color--light;
         background: $color--info;
 
@@ -1170,7 +1170,7 @@
           left: -3rem;
         }
       }
-      &[from="client"] {
+      &[from='client'] {
         color: $color--font;
         background: $color--gray6;
 
@@ -1228,4 +1228,19 @@
 
 .transition-btn {
   transition: 0.5s ease all;
+}
+
+/*sample img*/
+.empty_img {
+  margin: auto;
+  opacity: 0.2;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+  margin-top: 50px;
+  img {
+    width: 200px;
+    margin: auto;
+  }
 }

@@ -12,7 +12,8 @@ import FloatingMenu from '../components/FloatingMenu';
 import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
-import picBanner from '../img/home/pic/swiper__1.jpg';
+
+import picBanner from '../img/page_banner/product.jpg';
 
 function Products() {
   /* 控制floatingMenu */

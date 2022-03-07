@@ -20,7 +20,7 @@ const SignupModal = ({
           {!page ? '密碼重新設定' : '新的驗證'}信到您的e-mail信箱。
         </p>
         <div className="modal-form">
-          <label htmlFor="remail" className="modal_form-label">
+          <label htmlFor="remail" className="c-form__label">
             電子信箱
           </label>
           <input
@@ -28,12 +28,12 @@ const SignupModal = ({
             id="remail"
             name="remail"
             placeholder="請填入您的電子信箱"
-            className="modal_form-Input form-control"
+            className="form-control c-form__input"
             onChange={handleChange}
           />
           <button
             type="submit"
-            className="modal_submit-button"
+            className="e-btn e-btn--primary e-btn--w100 e-btn--medium mt-4"
             onClick={handleSubmit}
           >
             送出

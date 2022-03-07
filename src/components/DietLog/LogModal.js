@@ -21,8 +21,6 @@ function LogModal(props) {
     setRefresh,
     foodFields,
     setFoodFields,
-    editMode,
-    setEditMode,
   } = props;
   const { setDietlogData, dietlogCategoryData, canlendarDate } = useDietlog();
   const [addFields, setAddFields] = useState({
@@ -33,6 +31,7 @@ function LogModal(props) {
     datetime: '',
   });
   const [foods, setFoods] = useState([]);
+  const [editMode, setEditMode] = useState(true);
 
   const handleIn = showModal.in
     ? 'animation animation__modal animation__modal--in'
@@ -165,6 +164,7 @@ function LogModal(props) {
         centered
         animation={false}
         fullscreen="md-down"
+        backdrop="static"
       >
         <div className="c-dietlog-modal__form">
           <div className="row gx-5">
@@ -277,10 +277,11 @@ function LogModal(props) {
             </div>
             <div className="col-12 d-flex justify-content-center align-items-center mt-3">
               <button
-                type="reset"
+                type="button"
                 className="e-btn e-btn--plain e-btn--secondary e-btn--medium me-2"
+                onClick={handleClose}
               >
-                清空
+                返回
               </button>
               <button
                 type="button"

@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/home/pic/swiper__1.jpg';
+import picBanner from '../img/page_banner/calculator.jpg';
 
 function Coupon() {
   const [isDisplay, setIsDisplay] = useState(false);
