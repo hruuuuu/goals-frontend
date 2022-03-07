@@ -11,3 +11,7 @@
 .google-logout>span {
     padding: 0 !important;
 }
+
+.logout-icon {
+    @include cursor(pointer);
+}

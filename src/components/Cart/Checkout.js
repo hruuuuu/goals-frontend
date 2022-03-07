@@ -170,11 +170,11 @@ function Checkout(props) {
           id="submit"
         >
           <span id="button-text">
-            {/* {isLoading ? (
+            {isLoading ? (
               <div className="spinner" id="spinner"></div>
-            ) : ( */}
-            Pay now
-            {/* )} */}
+            ) : (
+              'Pay now'
+            )}
           </span>
         </button>
         {/* {message && <div id="payment-message">{message}</div>} */}

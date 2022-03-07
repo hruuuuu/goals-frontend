@@ -84,7 +84,10 @@ function NavbarMobile(props) {
             <hr className="e-hr e-hr--navbar" />
           </li>
           {!login ? null : (
-            <li className="l-navbar__item d-flex" onClick={handleLogout}>
+            <li
+              className="l-navbar__item d-flex logout-icon"
+              onClick={handleLogout}
+            >
               <h4 className="l-navbar__font">登出</h4>
               <i className="fas fa-sign-out-alt l-navbar__font l-navbar__icon l-navbar__icon--inline"></i>
             </li>
