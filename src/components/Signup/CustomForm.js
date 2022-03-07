@@ -25,6 +25,18 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
     setPasswordField(false);
   };
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
   // 提交表單
   const submitHandler = async (values) => {
     try {
@@ -37,14 +49,51 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
           Swal.fire({
             icon: 'success',
             html: userProfile.msg,
-            confirmButtonColor: '#3085d6',
+            showConfirmButton: true,
             confirmButtonText: 'OK',
+            focusConfirm: false,
+            buttonsStyling: false,
+            customClass: {
+              container: 'c-alert__overlay',
+              popup: 'c-alert__modal',
+              title: 'c-alert__title',
+              htmlContainer: 'c-alert__text',
+              confirmButton: 'e-btn e-btn--plain e-btn--medium',
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               setLogin(true);
               history('/');
             }
           });
+        } else {
+          Toast.fire({
+            icon: 'error',
+            html: userProfile.msg,
+            customClass: {
+              popup: 'c-alert__toast',
+              title: 'c-alert__subtitle',
+            },
+          });
+          // Swal.fire({
+          //   icon: 'error',
+          //   html: userProfile.msg,
+          //   showConfirmButton: true,
+          //   confirmButtonText: 'OK',
+          //   focusConfirm: false,
+          //   buttonsStyling: false,
+          //   customClass: {
+          //     container: 'c-alert__overlay',
+          //     popup: 'c-alert__modal',
+          //     title: 'c-alert__title',
+          //     htmlContainer: 'c-alert__text',
+          //     confirmButton: 'e-btn e-btn--plain e-btn--medium',
+          //   },
+          // }).then((result) => {
+          //   if (result.isConfirmed) {
+          //     history('/login');
+          //   }
+          // });
         }
       } else {
         const signupData = await axios.post(`${API_URL}/auth/signup`, values, {
@@ -55,13 +104,50 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
           Swal.fire({
             icon: 'success',
             html: userProfile.msg,
-            confirmButtonColor: '#3085d6',
+            showConfirmButton: true,
             confirmButtonText: 'OK',
+            focusConfirm: false,
+            buttonsStyling: false,
+            customClass: {
+              container: 'c-alert__overlay',
+              popup: 'c-alert__modal',
+              title: 'c-alert__title',
+              htmlContainer: 'c-alert__text',
+              confirmButton: 'e-btn e-btn--plain e-btn--medium',
+            },
           }).then((result) => {
             if (result.isConfirmed) {
               history('/');
             }
           });
+        } else {
+          Toast.fire({
+            icon: 'error',
+            html: userProfile.msg,
+            customClass: {
+              popup: 'c-alert__toast',
+              title: 'c-alert__subtitle',
+            },
+          });
+          // Swal.fire({
+          //   icon: 'error',
+          //   html: userProfile.msg,
+          //   showConfirmButton: true,
+          //   confirmButtonText: 'OK',
+          //   focusConfirm: false,
+          //   buttonsStyling: false,
+          //   customClass: {
+          //     container: 'c-alert__overlay',
+          //     popup: 'c-alert__modal',
+          //     title: 'c-alert__title',
+          //     htmlContainer: 'c-alert__text',
+          //     confirmButton: 'e-btn e-btn--plain e-btn--medium',
+          //   },
+          // }).then((result) => {
+          //   if (result.isConfirmed) {
+          //     history('/login');
+          //   }
+          // });
         }
       }
     } catch (err) {
