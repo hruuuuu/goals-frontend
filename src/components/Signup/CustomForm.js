@@ -174,7 +174,7 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
             id="email"
             name="email"
             placeholder="請輸入電子信箱"
-            className="form-control"
+            className="form-control c-form__input"
             label="電子信箱"
           />
           <CustomInput
@@ -182,7 +182,7 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
             id="password"
             name="password"
             placeholder="請輸入密碼"
-            className="form-control"
+            className="form-control c-form__input"
             label="密碼"
           />
           {!page ? null : (
@@ -191,7 +191,7 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
               id="confirmPassword"
               name="confirmPassword"
               placeholder="請再次輸入密碼"
-              className="form-control"
+              className="form-control c-form__input"
               label="再次輸入密碼"
             />
           )}
@@ -229,7 +229,7 @@ const CustomForm = ({ page, setPage, setLogin, handleShow }) => {
 
           <button
             type="submit"
-            className="signup-form_button"
+            className="e-btn e-btn--primary e-btn--w100 e-btn--medium mt-3"
             disabled={props.isSubmitting}
           >
             {!page ? '登入' : '註冊'}

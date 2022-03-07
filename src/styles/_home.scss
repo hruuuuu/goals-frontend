@@ -46,7 +46,6 @@
     text-align: center;
 
     transition: 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
-    transition-delay: 0.3s;
     letter-spacing: -0.5rem;
     opacity: 0;
     &.active {
@@ -344,8 +343,20 @@
     }
   }
   &__img {
-    width: 130%;
-    height: 130%;
+    position: absolute;
+    &[section="product"] {
+      width: 120%;
+      height: 120%;
+
+      top: 20%;
+    }
+    &[section="diet"] {
+      width: 130%;
+      height: 130%;
+
+      top: 60%;
+      left: -10%;
+    }
   }
   &__row {
     &[section="product-intro"] {

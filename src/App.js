@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRoutes, useLocation, useMatch } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { useBeforeunload } from 'react-beforeunload';
 
 import { API_URL } from './utils/config';
 import { ShowContext } from './context/showProductDetail';
@@ -53,6 +54,10 @@ function App() {
       window.scrollTo(0, 0);
     }
   }, [location]);
+
+  useBeforeunload(() => {
+    window.scrollTo(0, 0);
+  });
 
   useEffect(() => {
     (async () => {

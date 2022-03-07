@@ -1,5 +1,6 @@
 .error {
-    color: red;
+    @include text--small;
+    color: $color--error;
     margin-top: 0.5rem;
     text-align: center;
 }
@@ -89,7 +90,7 @@
 
                 .signup-form_label {
                     color: $color--gray4;
-                    padding: .5rem 0 0 4rem;
+                    padding: 0.5rem 0 0 4rem;
                     margin-bottom: 0.5rem;
                     color: $color__font;
                     width: 100%;
@@ -129,7 +130,7 @@
 }
 
 .signup-page::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, white, transparent);
@@ -140,7 +141,7 @@
 }
 
 .signup-page::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, transparent, white);
@@ -176,6 +177,30 @@
 
         .another-login_title {
             color: $color--gray3;
+
+            position: relative;
+            &::before {
+                content: "";
+                width: 2rem;
+                height: $height__line;
+                background: $color--gray4;
+
+                position: absolute;
+                top: 50%;
+                left: -3rem;
+                transform: translateY(-50%);
+            }
+            &::after {
+                content: "";
+                width: 2rem;
+                height: $height__line;
+                background: $color--gray4;
+
+                position: absolute;
+                top: 50%;
+                right: -3rem;
+                transform: translateY(-50%);
+            }
         }
     }
 
@@ -197,7 +222,6 @@
             box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px;
         }
     }
-
 }
 
 /** Modal **/
@@ -221,19 +245,18 @@
     }
 
     .modal-form {
-
         .modal_form-label {
-            font-size: .8rem;
-            margin: .5rem 0;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .modal_form-Input {
-            padding: .5rem;
+            padding: 0.5rem;
         }
     }
 
     .modal_submit-button {
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         margin-top: 1rem;
         background-color: $color--success;
         border-color: transparent;
@@ -268,7 +291,7 @@
         width: 80%;
 
         .another-login_title-wrapper {
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
     }
 }
@@ -293,16 +316,13 @@
             height: 100%;
 
             .signup-form {
-
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 5%;
                     }
                 }
             }
-
         }
     }
 
@@ -312,17 +332,14 @@
         .another-login_title-wrapper {
             font-size: 1rem;
         }
-
     }
 }
 
 @media screen and (max-width: 425px) {
     .signup-page {
         .signup-form-wrapper {
-
             .signup-form {
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 10%;
@@ -333,12 +350,9 @@
     }
 
     .another-login {
-
-
         .another-login_title-wrapper {
-            font-size: .8rem;
+            font-size: 0.8rem;
         }
-
     }
 
     .modal-wrapper {

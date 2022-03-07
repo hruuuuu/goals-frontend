@@ -403,6 +403,20 @@ h6 {
         transform: translateY(-50%);
       }
     }
+    &:-webkit-autofill {
+      border: $border__input;
+      -webkit-box-shadow: -100px 0 0 100px transparent inset;
+      -webkit-text-fill-color: $color--font;
+      transition: background-color 5000s ease-in-out 0s;
+      &:hover,
+      &:focus,
+      &:active {
+        border: $border__input;
+        -webkit-box-shadow: -100px 0 0 100px transparent inset;
+        -webkit-text-fill-color: $color--font;
+        transition: background-color 5000s ease-in-out 0s;
+      }
+    }
   }
   &__label {
     margin-bottom: 0.5rem;
@@ -796,5 +810,11 @@ h6 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+.c-placeholder {
+  &__action {
+    animation: wobble 4s both infinite;
   }
 }

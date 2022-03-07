@@ -75,17 +75,19 @@ function DietLog() {
           </div>
         </div>
       ) : (
-        <div className="u-height u-height--empty-page u-margin u-margin--page-bottom">
+        <div className="u-margin u-margin--page-bottom">
           <div className="container">
             <div className="row justify-content-center align-items-center">
-              <div className="col-7 d-flex flex-column justift-content-center align-items-center">
-                <h2 className="mb-5">請先登入以體驗完整功能</h2>
-                <Link
-                  to="/login"
-                  className="e-btn e-btn--primary e-btn--large e-btn--w100"
-                >
-                  前往登入
-                </Link>
+              <div className="col-5 d-flex flex-column justift-content-center align-items-center">
+                <div className="c-placeholder u-height u-height--empty-page d-flex flex-column align-items-center justify-content-center">
+                  <h2 className="mb-5">請先登入以體驗完整功能</h2>
+                  <Link
+                    to="/login"
+                    className="e-btn e-btn--primary e-btn--large e-btn--w100 c-placeholder__action"
+                  >
+                    前往登入
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

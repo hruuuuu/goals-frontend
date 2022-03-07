@@ -4,7 +4,6 @@
     position: relative;
     display: flex;
 
-
     .login-page_background {
         width: 100%;
         height: 100%;
@@ -100,7 +99,7 @@
 
                 .login-form_label {
                     color: $color--gray4;
-                    padding: .5rem 0 0 4rem;
+                    padding: 0.5rem 0 0 4rem;
                     margin-bottom: 0.5rem;
                     color: $color__font;
                     width: 100%;
@@ -136,8 +135,31 @@
                 font-size: 1.25rem;
 
                 .another-login_title {
-                    background-color: $color--light;
                     color: $color--gray3;
+
+                    position: relative;
+                    &::before {
+                        content: "";
+                        width: 2rem;
+                        height: $height__line;
+                        background: $color--gray4;
+
+                        position: absolute;
+                        top: 50%;
+                        left: -3rem;
+                        transform: translateY(-50%);
+                    }
+                    &::after {
+                        content: "";
+                        width: 2rem;
+                        height: $height__line;
+                        background: $color--gray4;
+
+                        position: absolute;
+                        top: 50%;
+                        right: -3rem;
+                        transform: translateY(-50%);
+                    }
                 }
             }
 
@@ -167,12 +189,11 @@
                     }
                 }
 
-
                 .line {
-                    color: #00B900;
+                    color: #00b900;
 
                     :hover {
-                        color: #00B900;
+                        color: #00b900;
                     }
                 }
 
@@ -182,16 +203,14 @@
                     :hover {
                         color: #3b5998;
                     }
-
                 }
             }
-
         }
     }
 }
 
 .login-page::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, white, transparent);
@@ -202,7 +221,7 @@
 }
 
 .login-page::after {
-    content: '';
+    content: "";
     width: 100%;
     height: 100px;
     background: linear-gradient(to bottom, transparent, white);
@@ -232,19 +251,18 @@
     }
 
     .modal-form {
-
         .modal_form-label {
-            font-size: .8rem;
-            margin: .5rem 0;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
         }
 
         .modal_form-Input {
-            padding: .5rem;
+            padding: 0.5rem;
         }
     }
 
     .modal_submit-button {
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         margin-top: 1rem;
         background-color: $color--success;
         border-color: transparent;
@@ -272,11 +290,10 @@
                 }
 
                 .another-login_buttons {
-
                     .google,
                     .facebook,
                     .line {
-                        padding: .3rem .8rem;
+                        padding: 0.3rem 0.8rem;
                         font-size: 1.5rem;
                     }
                 }
@@ -316,26 +333,22 @@
                 }
 
                 .another-login_buttons {
-
                     .google,
                     .facebook,
                     .line {
-                        padding: .2rem .5rem;
+                        padding: 0.2rem 0.5rem;
                     }
                 }
             }
 
             .login-form {
-
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 5%;
                     }
                 }
             }
-
         }
     }
 }
@@ -344,17 +357,13 @@
     .login-page {
         .login-form-wrapper {
             .another-login {
-
-
                 .another-login_title-wrapper {
-                    font-size: .8rem;
+                    font-size: 0.8rem;
                 }
-
             }
 
             .login-form {
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 10%;

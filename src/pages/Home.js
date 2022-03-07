@@ -49,24 +49,28 @@ function Home() {
       heading: '健康餐盒',
       description: '兼顧健康、營養、食材與美味的首選。',
       img: picOverviewProduct,
+      delay: 0,
     },
     {
       id: 2,
       heading: 'TDEE計算機',
       description: '讓你擁有更健康的身體與體態，提升自我。',
       img: picCalculator,
+      delay: 300,
     },
     {
       id: 3,
       heading: '飲食日誌',
       description: '紀錄日常飲食，讓健康之路變得更容易！',
       img: picDiet2,
+      delay: 600,
     },
     {
       id: 4,
       heading: '健康新知',
       description: '定期為你帶來健康與健身的知識。',
       img: picOverviewBlog,
+      delay: 900,
     },
   ];
 
@@ -75,22 +79,26 @@ function Home() {
       id: 1,
       heading: '營養',
       description: '食譜是經由專業的營養師團隊以及飲食顧問精心規劃設計。',
+      delay: 150,
     },
     {
       id: 2,
       heading: '健康',
       description: '符合高纖、低脂、低GI、高蛋白的標準，皆附有成分與營養標示。',
+      delay: 300,
     },
     {
       id: 3,
       heading: '食材',
       description:
         '嚴選產地，在地當令採收不落地，選用新鮮、有機的食材烹調，讓你吃得健康又安心。',
+      delay: 450,
     },
     {
       id: 4,
       heading: '美味',
       description: '品項多樣，並且不斷在嘗試開發新口味，健康的料理也能很好吃。',
+      delay: 600,
     },
   ];
 
@@ -166,16 +174,18 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div
-                className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8"
-                data-aos="fade-up"
-              >
+              <div className="col-10 col-md-8 col-lg-10 col-xl-9 col-xxl-8">
                 <div className="c-overview__list">
                   <div className="row gx-3 gx-md-5 gx-lg-3 gx-xl-5 gy-4 gy-lg-0">
                     {overviewItems.map((item) => {
-                      const { id, heading, description, img } = item;
+                      const { id, heading, description, img, delay } = item;
                       return (
-                        <div key={id} className="col-6 col-lg-3">
+                        <div
+                          key={id}
+                          className="col-6 col-lg-3"
+                          data-aos="fade-up"
+                          data-aos-delay={delay}
+                        >
                           <div className="c-overview__item">
                             <div className="c-overview__cover">
                               <img
@@ -203,9 +213,11 @@ function Home() {
                 <div
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
-                  data-aos="fade-up"
                 >
-                  <div className="col-12 col-md-8 col-lg-5 order-2 order-lg-1">
+                  <div
+                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
+                    data-aos="fade-up"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
                         <div className="c-title c-title--start">
@@ -233,15 +245,20 @@ function Home() {
                     </div>
                   </div>
                   <div className="d-none d-lg-flex col-1 order-lg-2"></div>
-                  <div className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container">
+                  <div
+                    className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container"
+                    data-aos="fade-left"
+                    data-aos-delay="500"
+                  >
                     <div className="c-section__block c-section__block--right">
                       <img
                         className="e-img e-img--cover c-section__img"
                         src={picProduct}
                         alt="product"
                         style={{
-                          transform: `translateY(-${offsetY * 0.05}px)`,
+                          transform: `translateY(-${offsetY * 0.1}px)`,
                         }}
+                        section="product"
                       />
                     </div>
                   </div>
@@ -249,9 +266,11 @@ function Home() {
                 <div
                   className="row gy-5 g-lg-0 c-section__row mb-5 mb-lg-0"
                   section="product-list"
-                  data-aos="fade-up"
                 >
-                  <div className="col-12 col-lg-6 position-relative c-section__container">
+                  <div
+                    className="col-12 col-lg-6 position-relative c-section__container"
+                    data-aos="fade-right"
+                  >
                     <div className="c-section__block c-section__block--left"></div>
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
@@ -283,9 +302,14 @@ function Home() {
                         <div className="c-section__wrapper" section="list">
                           <ul className="c-section__list">
                             {productItems.map((item) => {
-                              const { id, heading, description } = item;
+                              const { id, heading, description, delay } = item;
                               return (
-                                <li key={id} className="c-section__item">
+                                <li
+                                  key={id}
+                                  className="c-section__item"
+                                  data-aos="fade-left"
+                                  data-aos-delay={delay}
+                                >
                                   <div className="c-section__list-num">
                                     {id}
                                   </div>
@@ -350,6 +374,7 @@ function Home() {
                   <div
                     className="col-10 col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8 position-relative order-1 order-lg-3"
                     data-aos="fade-left"
+                    data-aos-offset="200"
                   >
                     <div className="cal-img">
                       <div className="des-right__deco">
@@ -377,27 +402,24 @@ function Home() {
                     className="e-img e-img--cover"
                     src={picDiet2}
                     alt="diet"
+                    data-aos="fade-right"
                   />
                 </div>
               </div>
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--center">
-                  <div className="c-title c-title--center" data-aos="fade-down">
-                    <div className="c-title__icon">
-                      <img
-                        className="e-img e-img--contain"
-                        src={iconDeco}
-                        alt="deco"
-                      />
-                    </div>
-                    <div className="c-title__deco">DIET LOG</div>
-                    <h3 className="c-title__title">果實飲食日誌</h3>
-                    <h6 className="c-title__subtitle">
-                      為你打造專屬的飲食秘書
-                    </h6>
-                    <hr className="e-hr e-hr--primary c-title__hr" />
+                <div className="c-title c-title--center" data-aos="fade-down">
+                  <div className="c-title__icon">
+                    <img
+                      className="e-img e-img--contain"
+                      src={iconDeco}
+                      alt="deco"
+                    />
                   </div>
-                  <div className="c-title__heading" data-aos="fade-up">
+                  <div className="c-title__deco">DIET LOG</div>
+                  <h3 className="c-title__title">果實飲食日誌</h3>
+                  <h6 className="c-title__subtitle">為你打造專屬的飲食秘書</h6>
+                  <hr className="e-hr e-hr--primary c-title__hr" />
+                  <div className="c-title__heading">
                     <p className="c-title__context c-title__context--center">
                       你是不是常常不記得每天吃了什麼，也不知道如何追蹤飲食呢？
                     </p>
@@ -418,23 +440,30 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="l-home__diet-list c-section" data-aos="fade-up">
+              <div className="l-home__diet-list c-section">
                 <div className="row justify-content-center">
                   <div className="col-12 col-xl-10 col-xl-9 col-xxl-8">
                     <div className="row justify-content-center gx-lg-5 gx-xl-0">
-                      <div className="col-3 position-relative d-none d-lg-flex">
+                      <div
+                        className="col-3 position-relative d-none d-lg-flex"
+                        data-aos="fade-right"
+                      >
                         <div className="c-section__block c-section__block--both-left">
                           <img
                             className="e-img e-img--cover c-section__img"
                             src={picDiet1}
                             alt="diet"
                             style={{
-                              transform: `translateY(-${offsetY * 0.03}px)`,
+                              transform: `translateY(-${offsetY * 0.1}px)`,
                             }}
+                            section="diet"
                           />
                         </div>
                       </div>
-                      <div className="col-10 col-lg-5 col-xl-6">
+                      <div
+                        className="col-10 col-lg-5 col-xl-6"
+                        data-aos="fade-up"
+                      >
                         <div className="c-diet">
                           <h5 className="c-title__text c-diet__heading">
                             只需成為果實會員，即可...
@@ -458,15 +487,19 @@ function Home() {
                           </Link>
                         </div>
                       </div>
-                      <div className="col-3 position-relative d-none d-lg-flex">
+                      <div
+                        className="col-3 position-relative d-none d-lg-flex"
+                        data-aos="fade-left"
+                      >
                         <div className="c-section__block c-section__block--both-right">
                           <img
                             className="e-img e-img--cover c-section__img"
                             src={picDiet2}
                             alt="diet"
                             style={{
-                              transform: `translateY(-${offsetY * 0.03}px)`,
+                              transform: `translateY(-${offsetY * 0.1}px)`,
                             }}
+                            section="diet"
                           />
                         </div>
                       </div>
@@ -491,7 +524,7 @@ function Home() {
           <div className="l-home__blog c-section">
             <div className="row justify-content-center">
               <div className="col-10 col-lg-8 col-xl-6">
-                <div className="c-title c-title--start" data-aos="fade-up">
+                <div className="c-title c-title--start" data-aos="fade-down">
                   <div className="c-title__icon">
                     <img
                       className="e-img e-img--contain"

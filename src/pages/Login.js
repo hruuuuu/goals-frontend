@@ -90,11 +90,9 @@ const Login = () => {
           </form>
           <div className="another-login">
             <p className="another-login_title-wrapper">
-              &mdash;
               <span className="another-login_title">
                 Or Continue With Social Media
               </span>
-              &mdash;
             </p>
             <div className="another-login_buttons">
               <button className="another-login_button google">
