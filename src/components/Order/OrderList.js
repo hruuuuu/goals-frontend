@@ -264,7 +264,6 @@ const OrderList = () => {
         backdropClassName={`c-modal__backdrop ${handleIn} ${handleOut}`}
         contentClassName="c-modal__wrapper c-modal__wrapper--full-page"
         fullscreen="md-down"
-        centered
       >
         <div className="c-order-detail">
           <div className="l-header__title mb-4">
@@ -282,7 +281,9 @@ const OrderList = () => {
           <div className="c-order-detail__content">
             <h6 className="c-order-detail__heading">
               訂購人:
-              <span className="c-order-detail__text">...</span>
+              <span className="c-order-detail__text">
+                {orderdata[0].purchaser}
+              </span>
             </h6>
             <h6 className="c-order-detail__heading">
               收件人:
@@ -314,13 +315,13 @@ const OrderList = () => {
                 {orderdata[0].address}
               </span>
             </h6>
-            <h6 className="c-order-detail__heading">
+            {/* <h6 className="c-order-detail__heading">
               使用折價券:
               <span className="c-order-detail__text">...</span>
-            </h6>
+            </h6> */}
             <h6 className="c-order-detail__heading">
-              訂單金額:
-              <span className="c-order-detail__text">...</span>
+              折扣後金額:
+              <span className="c-order-detail__text">{orderdata[0].total}</span>
             </h6>
             <h6 className="c-order-detail__heading">
               成立時間:
@@ -349,7 +350,9 @@ const OrderList = () => {
                       {orderdata.name}
                     </td>
                     <td className="detailContent">{orderdata.amount}</td>
-                    <th className="detailContent">...</th>
+                    <th className="detailContent">
+                      {orderdata.price * orderdata.amount}
+                    </th>
                   </tr>
                 </tbody>
               );
