@@ -6,7 +6,7 @@ import { API_URL } from '../../utils/config';
 import { useCartList } from '../../context/cart';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
-
+import { useNavigate } from 'react-router-dom';
 import {
   PaymentElement,
   useStripe,
@@ -14,6 +14,7 @@ import {
 } from '@stripe/react-stripe-js';
 
 function Checkout(props) {
+  const history = useNavigate();
   const { activeStep, setActiveStep } = props;
   const { creditcard, setCreditcard } = props;
   const { orderTotal, setOrderTotal } = props;
@@ -47,33 +48,7 @@ function Checkout(props) {
     if (!clientSecret) {
       return;
     }
-
-    // stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-    //   console.log(paymentIntent);
-    //   switch (paymentIntent.status) {
-    //     case 'succeeded':
-    //       setMessage('Payment succeeded!');
-    //       break;
-    //     case 'processing':
-    //       setMessage('Your payment is processing.');
-    //       break;
-    //     case 'requires_payment_method':
-    //       setMessage('Your payment was not successful, please try again.');
-    //       break;
-    //     default:
-    //       setMessage('Something went wrong.');
-    //       break;
-    //   }
-    // });
   }, [stripe]);
-
-  // const [creditcard, setCreditcard] = useState({
-  //   cvc: '',
-  //   expiry: '',
-  //   focus: '',
-  //   name: '',
-  //   number: '',
-  // });
 
   //coupon_receive
   const usedCouponData = {
@@ -165,8 +140,24 @@ function Checkout(props) {
 
     setIsLoading(false);
 
-    // orderDetails
+    // // orderDetails
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/orderDetails`,
+    //   cartDetails,
+    //   usedCouponData
+    // );
 
+    // // order_items
+    // let orderItemsResponse = await axios.post(
+    //   `${API_URL}/cart/orderItems`,
+    //   cartItems
+    // );
+
+    // //coupon_receive
+    // let couponReceiveResponse = await axios.post(
+    //   `${API_URL}/cart/orderItemsCoupon`,
+    //   usedCouponData
+    // );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }
 
@@ -178,6 +169,7 @@ function Checkout(props) {
           className="btn_outline btn_grn text-light mt-3 p-3 pay-btn"
           disabled={isLoading || !stripe || !elements}
           id="submit"
+          type="submit"
         >
           <span id="button-text">
             {/* {isLoading ? (

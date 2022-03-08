@@ -20,7 +20,6 @@ function Shipping(props) {
         }
       );
       setDelivery(response.data);
-      console.log(response.data);
     };
     getDelivery();
   }, []);

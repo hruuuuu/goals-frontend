@@ -4,6 +4,7 @@ import { Formik, Form, useField } from 'formik';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Image from '../img/sign/login.jpg';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 import { API_URL } from '../utils/config';
 
@@ -97,13 +98,41 @@ const ResetPassword = () => {
   };
 
   const submitHandler = async (values) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
     try {
       const resetData = await axios.post(`${API_URL}/verify/reset`, values, {
         withCredentials: true,
       });
       console.log(resetData);
-      if (resetData.status === 200) {
-        history('/');
+      if (resetData.status === 200 && resetData.data.code < 30000) {
+        Toast.fire({
+          icon: 'success',
+          html: resetData.data.msg,
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
+        });
+        history('/login');
+      } else {
+        Toast.fire({
+          icon: 'error',
+          html: resetData.data.msg,
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
+        });
       }
     } catch (err) {
       console.error(err);
