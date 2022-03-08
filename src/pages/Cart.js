@@ -27,8 +27,6 @@ function Cart() {
     );
 
     if (clientSecret && paymentStatus === 'succeeded') {
-      // console.log(localStorage.getItem('cartList'));
-      // const orderItems = localStorage.getItem('cartList');
       Swal.fire({
         icon: 'success',
         text: '付款成功',

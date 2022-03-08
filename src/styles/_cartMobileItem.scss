@@ -24,7 +24,7 @@
     object-fit: cover;
   }
   &__name {
-    @include text--medium-bold;
+    @include text--normal-bold;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 1;

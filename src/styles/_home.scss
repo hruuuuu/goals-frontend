@@ -11,13 +11,15 @@
     height: calc(100% + 100vh);
     background-image: url("../img/home/pic/bg.png");
     background-repeat: repeat-Y;
-    background-size: contain;
     background-size: 130%;
 
     position: absolute;
     top: -100vh;
     left: 0;
     z-index: -1;
+    @media screen and (max-width: $lg) {
+      background-size: 300%;
+    }
   }
   &__key-visual {
     width: 100%;

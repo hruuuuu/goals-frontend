@@ -7,7 +7,6 @@ import { useCartList } from '../../context/cart';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
 import { useNavigate } from 'react-router-dom';
-
 import {
   PaymentElement,
   useStripe,
@@ -48,51 +47,6 @@ function Checkout(props) {
 
     if (!clientSecret) {
       return;
-    }
-
-    const clientSecrets = new URLSearchParams(window.location.search).get(
-      'payment_intent_client_secret'
-    );
-
-    const paymentStatus = new URLSearchParams(window.location.search).get(
-      'redirect_status'
-    );
-
-    if (clientSecrets && paymentStatus === 'succeeded') {
-      async function pushData() {
-        await axios.post(
-          `${API_URL}/cart/orderDetails`,
-          cartDetails,
-          usedCouponData
-        );
-      }
-      pushData();
-      Swal.fire({
-        icon: 'success',
-        text: '付款成功',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history('/member/order');
-        }
-      });
-    } else if (clientSecrets && paymentStatus === 'processing') {
-      Swal.fire({
-        icon: 'info',
-        text: '您的付款正在處理中',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history('/');
-        }
-      });
-    } else if (clientSecrets && paymentStatus === 'requires_payment_method') {
-      Swal.fire({
-        icon: 'warning',
-        text: '您的付款不成功，請再試一次',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history('/');
-        }
-      });
     }
   }, [stripe]);
 
@@ -146,6 +100,24 @@ function Checkout(props) {
     }
 
     setIsLoading(true);
+
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails,
+      usedCouponData
+    );
+
+    // order_items
+    let orderItemsResponse = await axios.post(
+      `${API_URL}/cart/orderItems`,
+      cartItems
+    );
+
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
 
     const { error } = await stripe.confirmPayment({
       elements,

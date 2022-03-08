@@ -40,7 +40,6 @@ function Shipping(props) {
 
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
-    console.log(delivery);
   }
   // console.log(shippingData);
 
@@ -70,8 +69,8 @@ function Shipping(props) {
               className="form-control c-form__input"
               id="firstName"
               placeholder="預設會員姓名"
-              name="name"
-              value={shippingData.name}
+              name="purchaser"
+              value={shippingData.purchaser}
               onChange={handleChange}
               required
             />
@@ -166,7 +165,6 @@ function Shipping(props) {
                   <option
                     className="option_font"
                     key={i}
-                    method={method.method}
                     value={method.delivery_id}
                   >
                     {method.method}
