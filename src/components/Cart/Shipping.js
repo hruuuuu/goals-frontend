@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { API_URL } from '../../utils/config';
 
+
 function Shipping(props) {
   const [delivery, setDelivery] = useState([]);
   const { shippingData, setShippingData } = props;
@@ -41,7 +42,6 @@ function Shipping(props) {
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
   }
-  // console.log(shippingData);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -160,7 +160,7 @@ function Shipping(props) {
               <option className="option_font" value="">
                 請選擇
               </option>
-              {delivery.map((method, i) => {
+              {delivery.map((method, index) => {
                 return (
                   <option
                     className="option_font"

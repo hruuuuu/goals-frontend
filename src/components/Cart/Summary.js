@@ -54,7 +54,6 @@ function Summary(props) {
 
     //活動折扣
     let allDiscountTotal = 0;
-
     for (let i = 0; i < cartListData.length; i++) {
       allDiscountTotal +=
         cartListData[i].discountPrice * cartListData[i].amount;
@@ -63,23 +62,32 @@ function Summary(props) {
     setDiscountTotal(
       Math.round(allSubtotal - allDiscountTotal + couponDiscount)
     );
+
     //應付金額
     setOrderTotal(Math.round(allDiscountTotal - couponDiscount));
   }, [cartListData, couponDiscount]);
 
   //選定折價券後，回傳折扣內容，更新活動折扣跟應付金額
   const handleChange = (e) => {
-    setCouponId(Number(e.target.value));
-    const usedCoupon = data.find(
-      (coupon) => coupon.id === Number(e.target.value)
-    );
-    setCouponDiscount(
-      Math.round(
+    if (e.target.value === 0) {
+      let allDiscountTotal = 0;
+      for (let i = 0; i < cartListData.length; i++) {
+        allDiscountTotal +=
+          cartListData[i].discountPrice * cartListData[i].amount;
+      }
+      setOrderTotal(Math.round(allDiscountTotal));
+    } else {
+      setCouponId(Number(e.target.value));
+      const usedCoupon = data.find(
+        (coupon) => coupon.id === Number(e.target.value)
+      );
+
+      setCouponDiscount(
         total -
           (total * usedCoupon.discount_multiplication -
             usedCoupon.discount_minus)
-      )
-    );
+      );
+    }
   };
 
   return (
@@ -102,7 +110,7 @@ function Summary(props) {
                 name="coupon"
                 onChange={handleChange}
               >
-                <option className="option_font" value="0" disabled>
+                <option className="option_font" value="0">
                   請選擇優惠券
                 </option>
                 {data.map((coupon, i) => {
@@ -110,13 +118,8 @@ function Summary(props) {
                     <option
                       className="option_font"
                       key={coupon.id}
-                      coupon={coupon}
-                      value={
-                        coupon.id
-                        // total -
-                        // (total * coupon.discount_multiplication -
-                        //   coupon.discount_minus)
-                      }
+                      coupon={coupon.id}
+                      value={coupon.id}
                     >
                       {coupon.discription}
                     </option>
