@@ -20,6 +20,7 @@ function Shipping(props) {
         }
       );
       setDelivery(response.data);
+      console.log(response.data);
     };
     getDelivery();
   }, []);
@@ -69,8 +70,8 @@ function Shipping(props) {
               className="form-control c-form__input"
               id="firstName"
               placeholder="預設會員姓名"
-              name="name"
-              value={shippingData.name}
+              name="purchaser"
+              value={shippingData.purchaser}
               onChange={handleChange}
               required
             />
@@ -164,9 +165,8 @@ function Shipping(props) {
                 return (
                   <option
                     className="option_font"
-                    key={method.id}
-                    method={method}
-                    value={method.id}
+                    key={i}
+                    value={method.delivery_id}
                   >
                     {method.method}
                   </option>

@@ -26,7 +26,7 @@ function CartStepper(props) {
     delivery_status_id: '1',
     payment_status_id: '4',
     payment_id: '1',
-    name: '',
+    purchaser: '',
     county: '',
     district: '',
     address: '',
