@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import axios from 'axios';
 import { API_URL } from '../../utils/config.js';
 import img from '../../img/common/illustration/food.svg';
-import picBanner from '../../img/home/pic/swiper__1.jpg';
+import picBanner from '../../img/page_banner/calculator.webp';
 
 function BlogArticle() {
   const [error, setError] = useState(null);

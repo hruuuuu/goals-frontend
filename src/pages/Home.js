@@ -21,11 +21,11 @@ import Loading from '../components/Loading';
 
 import logo from '../img/common/logo--original.svg';
 import iconDeco from '../img/common/icon/deco.svg';
-import picProduct from '../img/home/pic/product.jpeg';
-import picDiet1 from '../img/home/pic/diet__1.jpg';
-import picDiet2 from '../img/home/pic/diet__2.jpg';
+import picProduct from '../img/home/pic/product.webp';
+import picDiet1 from '../img/home/pic/diet__1.webp';
+import picDiet2 from '../img/home/pic/diet__2.webp';
 import picOverviewProduct from '../img/home/pic/overview__product.webp';
-import picOverviewBlog from '../img/home/pic/overview__blog.jpg';
+import picOverviewBlog from '../img/home/pic/overview__blog.webp';
 import KeyVisual from '../components/Home/KeyVisual';
 import picCalculator from '../img/home/pic/calculator_home.jpg';
 import picCalculatorPh from '../img/home/pic/calculator-ph.png';

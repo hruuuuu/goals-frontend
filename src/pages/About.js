@@ -9,7 +9,7 @@ import 'aos/dist/aos.css';
 
 import FloatingChat from '../components/FloatingChat';
 
-import picBanner from '../img/page_banner/about.jpg';
+import picBanner from '../img/page_banner/about.webp';
 
 function About() {
   useEffect(() => {

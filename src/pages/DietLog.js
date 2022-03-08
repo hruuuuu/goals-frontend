@@ -14,7 +14,7 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/page_banner/dietlog.jpg';
+import picBanner from '../img/page_banner/dietlog.webp';
 import picLoginHint from '../img/dietlog/pic/login-hint.png';
 
 function DietLog() {
