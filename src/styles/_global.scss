@@ -935,10 +935,28 @@ h6 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    @media screen and (max-width: $md) {
+      width: 50%;
+      height: 50%;
+    }
+    @media screen and (max-width: $sm) {
+      width: 60%;
+      height: 60%;
+    }
   }
 }
 
 .c-placeholder {
+  &__img {
+    width: 25rem;
+    height: 20rem;
+    margin: 0 auto;
+    // &--not-found {
+    //   background: $color--primary;
+    //   -webkit-mask: $img__not-found no-repeat center;
+    //   mask: $img__not-found no-repeat center;
+    // }
+  }
   &__action {
     animation: wobble 4s both infinite;
   }

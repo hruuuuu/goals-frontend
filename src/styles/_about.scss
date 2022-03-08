@@ -23,6 +23,11 @@
     }
   }
 
+  .about-box__img {
+    border-radius: $border-radius__about-block--right;
+    overflow: hidden;
+  }
+
   @media screen and (max-width: $xxl) {
     .about-box__text {
       p {

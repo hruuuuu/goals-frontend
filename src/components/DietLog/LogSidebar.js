@@ -17,6 +17,7 @@ function LogSidebar(props) {
   });
   const { canlendarDate, setCalendarDate } = useDietlog();
   const [calendar, setCalendar] = useState(new Date());
+  const [editMode, setEditMode] = useState(false);
 
   const handleSelectToday = () => {
     setCalendar(new Date());
@@ -33,6 +34,7 @@ function LogSidebar(props) {
   /* 控制modal顯示 */
   const handleShow = () => {
     setShowModal({ ...setShowModal, in: true });
+    setEditMode(true);
   };
   return (
     <>
@@ -73,6 +75,8 @@ function LogSidebar(props) {
             setRefresh={setRefresh}
             foodFields={foodFields}
             setFoodFields={setFoodFields}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         )}
       </div>

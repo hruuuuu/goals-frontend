@@ -79,30 +79,30 @@ function Home() {
       id: 1,
       heading: '營養',
       description: '食譜是經由專業的營養師團隊以及飲食顧問精心規劃設計。',
-      delay: 150,
-      offset: 150,
+      delay: 0,
+      offset: 0,
     },
     {
       id: 2,
       heading: '健康',
       description: '符合高纖、低脂、低GI、高蛋白的標準，皆附有成分與營養標示。',
-      delay: 250,
-      offset: 150,
+      delay: 300,
+      offset: 0,
     },
     {
       id: 3,
       heading: '食材',
       description:
         '嚴選產地，在地當令採收不落地，選用新鮮、有機的食材烹調，讓你吃得健康又安心。',
-      delay: 350,
-      offset: 50,
+      delay: 600,
+      offset: -50,
     },
     {
       id: 4,
       heading: '美味',
       description: '品項多樣，並且不斷在嘗試開發新口味，健康的料理也能很好吃。',
-      delay: 450,
-      offset: 0,
+      delay: 900,
+      offset: -50,
     },
   ];
 
@@ -215,7 +215,10 @@ function Home() {
                   className="row gy-5 g-lg-0 c-section__row justify-content-center justify-content-lg-start mb-5 mb-lg-0"
                   section="product-intro"
                 >
-                  <div className="col-12 col-md-8 col-lg-5 order-2 order-lg-1">
+                  <div
+                    className="col-12 col-md-8 col-lg-5 order-2 order-lg-1"
+                    data-aos="fade-right"
+                  >
                     <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
                         <div className="c-title c-title--start">
@@ -243,12 +246,7 @@ function Home() {
                     </div>
                   </div>
                   <div className="d-none d-lg-flex col-1 order-lg-2"></div>
-                  <div
-                    className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container"
-                    data-aos="fade-left"
-                    data-aos-delay="500"
-                    data-aos-offset="100"
-                  >
+                  <div className="col-12 col-lg-6 position-relative order-1 order-lg-3 c-section__container">
                     <div className="c-section__block c-section__block--right">
                       <img
                         className="e-img e-img--cover c-section__img"
@@ -268,10 +266,7 @@ function Home() {
                 >
                   <div className="col-12 col-lg-6 position-relative c-section__container">
                     <div className="c-section__block c-section__block--left"></div>
-                    <div
-                      className="row justify-content-center"
-                      data-aos="fade-right"
-                    >
+                    <div className="row justify-content-center">
                       <div className="col-10 col-lg-12">
                         <div className="c-section__wrapper" section="title">
                           <h2 className="c-section__title">果實餐盒的</h2>
@@ -446,7 +441,7 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="l-home__diet-list c-section">
+              <div className="l-home__diet-list">
                 <div className="row justify-content-center">
                   <div className="col-12 col-xl-10 col-xl-9 col-xxl-8">
                     <div className="row justify-content-center gx-lg-5 gx-xl-0">

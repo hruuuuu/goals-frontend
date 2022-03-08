@@ -30,7 +30,7 @@ function About() {
                   <div className="model__head">
                     <div className="model__head--deco-text">ABOUT</div>
                     <div className="model__head--title">
-                      果實，一個健康Lifestyle品牌
+                      果實，一個健康飲食品牌
                     </div>
                   </div>
                   <div className="about-box__text" data-aos="fade-right">
