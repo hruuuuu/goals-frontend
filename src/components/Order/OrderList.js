@@ -315,10 +315,7 @@ const OrderList = () => {
                 {orderdata[0].address}
               </span>
             </h6>
-            {/* <h6 className="c-order-detail__heading">
-              使用折價券:
-              <span className="c-order-detail__text">...</span>
-            </h6> */}
+
             <h6 className="c-order-detail__heading">
               折扣後金額:
               <span className="c-order-detail__text">{orderdata[0].total}</span>
@@ -351,7 +348,7 @@ const OrderList = () => {
                     </td>
                     <td className="detailContent">{orderdata.amount}</td>
                     <th className="detailContent">
-                      {orderdata.price * orderdata.amount}
+                      {(orderdata.price * orderdata.amount).toString()}
                     </th>
                   </tr>
                 </tbody>
