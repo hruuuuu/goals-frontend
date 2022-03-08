@@ -10,7 +10,7 @@ import { useLogin } from '../../context/LoginStatus';
 import { API_URL } from '../../utils/config';
 
 function NavbarMobile(props) {
-  const { navLinks, navActions, isTop, isActive } = props;
+  const { navLinks, navActions, isTop, isActive, isFullScreen } = props;
   const { login, setLogin, isSocial, setIsSocial, setUser } = useLogin();
   const [check, setCheck] = useState(false);
   const location = useLocation().pathname;
@@ -71,10 +71,10 @@ function NavbarMobile(props) {
         <i className="fas fa-bars l-navbar__icon"></i>
       </label>
       <NavLink to="/" className="l-navbar__font l-navbar__logo">
-        {isTop ? (
-          <img src={logoPrimary} alt="logo" />
-        ) : (
+        {!isTop || isFullScreen ? (
           <img src={logoLight} alt="logo" />
+        ) : (
+          <img src={logoPrimary} alt="logo" />
         )}
       </NavLink>
       <div className={`l-navbar__menu ${!isTop ? 'l-navbar--scroll' : ''}`}>
@@ -82,9 +82,9 @@ function NavbarMobile(props) {
           {navLinks.map((link) => {
             const { id, name, route } = link;
             return (
-              <li className="l-navbar__item" key={link.id}>
-                <NavLink to={link.route}>
-                  <h4 className="l-navbar__font">{link.name}</h4>
+              <li className="l-navbar__item" key={id}>
+                <NavLink to={route}>
+                  <h4 className="l-navbar__font">{name}</h4>
                 </NavLink>
               </li>
             );

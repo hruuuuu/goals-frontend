@@ -10,7 +10,7 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/page_banner/calculator.jpg';
+import picBanner from '../img/page_banner/calculator.webp';
 
 function Fav() {
   const [isDisplay, setIsDisplay] = useState(false);

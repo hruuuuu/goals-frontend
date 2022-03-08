@@ -13,7 +13,7 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/page_banner/product.jpg';
+import picBanner from '../img/page_banner/product.webp';
 
 function Products() {
   /* 控制floatingMenu */

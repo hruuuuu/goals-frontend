@@ -13,6 +13,7 @@ function NavbarDesktop(props) {
     login,
     isActive,
     setIsActive,
+    isFullScreen,
   } = props;
 
   return (
@@ -26,10 +27,10 @@ function NavbarDesktop(props) {
               setIsActive(0);
             }}
           >
-            {isTop ? (
-              <img src={logoPrimary} alt="logo" />
-            ) : (
+            {!isTop || isFullScreen ? (
               <img src={logoLight} alt="logo" />
+            ) : (
+              <img src={logoPrimary} alt="logo" />
             )}
           </NavLink>
         </li>
