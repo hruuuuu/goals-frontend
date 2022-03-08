@@ -4,7 +4,6 @@ import axios from 'axios';
 
 import { API_URL } from '../../utils/config';
 
-
 function Shipping(props) {
   const [delivery, setDelivery] = useState([]);
   const { shippingData, setShippingData } = props;
@@ -165,7 +164,7 @@ function Shipping(props) {
                 return (
                   <option
                     className="option_font"
-                    key={i}
+                    key={index}
                     value={method.delivery_id}
                   >
                     {method.method}
