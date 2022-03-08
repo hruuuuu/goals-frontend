@@ -40,6 +40,7 @@ function Shipping(props) {
 
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
+    console.log(delivery);
   }
   // console.log(shippingData);
 
@@ -164,9 +165,9 @@ function Shipping(props) {
                 return (
                   <option
                     className="option_font"
-                    key={method.id}
-                    method={method}
-                    value={method.id}
+                    key={i}
+                    method={method.method}
+                    value={method.delivery_id}
                   >
                     {method.method}
                   </option>

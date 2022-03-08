@@ -9,11 +9,11 @@ import ScrollButton from '../components/ScrollButton';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
-
 import picBanner from '../img/page_banner/calculator.jpg';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);
+
   const history = useNavigate();
 
   // 顯示結帳成功訊息
@@ -28,7 +28,7 @@ function Cart() {
 
     if (clientSecret && paymentStatus === 'succeeded') {
       // console.log(localStorage.getItem('cartList'));
-      const orderItems = localStorage.getItem('cartList');
+      // const orderItems = localStorage.getItem('cartList');
       Swal.fire({
         icon: 'success',
         text: '付款成功',

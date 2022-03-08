@@ -36,7 +36,6 @@ function App() {
   const [productsData, setProductsData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [cartListData, setCartListData] = useState([]);
-
   const [activityData, setActivityData] = useState([]);
   const [favItemsArr, setFavItemsArr] = useState([]);
   const [favData, setFavData] = useState([]);

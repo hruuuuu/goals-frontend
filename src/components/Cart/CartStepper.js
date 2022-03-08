@@ -26,7 +26,7 @@ function CartStepper(props) {
     delivery_status_id: '1',
     payment_status_id: '4',
     payment_id: '1',
-    name: '',
+    purchaser: '',
     county: '',
     district: '',
     address: '',
@@ -54,6 +54,7 @@ function CartStepper(props) {
     member_id: member.id,
     coupon_id: couponId,
   };
+
   // console.log(usedCouponData);
 
   //order_items
@@ -68,7 +69,6 @@ function CartStepper(props) {
     total: Number(orderTotal),
     member_id: member.id,
   };
-  // console.log(cartDetails);
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -97,24 +97,24 @@ function CartStepper(props) {
     e.preventDefault();
 
     //orderDetails
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartListData,
-      usedCouponData,
-      { withCredentials: true }
-    );
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/orderDetails`,
+    //   cartListData,
+    //   usedCouponData,
+    //   { withCredentials: true }
+    // );
 
     //order_items
-    let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/orderItems`,
-      cartItems
-    );
+    // let orderItemsResponse = await axios.post(
+    //   `${API_URL}/cart/orderItems`,
+    //   cartItems
+    // );
 
     //coupon_receive
-    let couponReceiveResponse = await axios.post(
-      `${API_URL}/cart/orderItemsCoupon`,
-      usedCouponData
-    );
+    // let couponReceiveResponse = await axios.post(
+    //   `${API_URL}/cart/orderItemsCoupon`,
+    //   usedCouponData
+    // );
   }
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);

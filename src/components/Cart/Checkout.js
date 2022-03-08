@@ -6,6 +6,7 @@ import { API_URL } from '../../utils/config';
 import { useCartList } from '../../context/cart';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
+import { useNavigate } from 'react-router-dom';
 
 import {
   PaymentElement,
@@ -14,6 +15,7 @@ import {
 } from '@stripe/react-stripe-js';
 
 function Checkout(props) {
+  const history = useNavigate();
   const { activeStep, setActiveStep } = props;
   const { creditcard, setCreditcard } = props;
   const { orderTotal, setOrderTotal } = props;
@@ -48,32 +50,51 @@ function Checkout(props) {
       return;
     }
 
-    // stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-    //   console.log(paymentIntent);
-    //   switch (paymentIntent.status) {
-    //     case 'succeeded':
-    //       setMessage('Payment succeeded!');
-    //       break;
-    //     case 'processing':
-    //       setMessage('Your payment is processing.');
-    //       break;
-    //     case 'requires_payment_method':
-    //       setMessage('Your payment was not successful, please try again.');
-    //       break;
-    //     default:
-    //       setMessage('Something went wrong.');
-    //       break;
-    //   }
-    // });
-  }, [stripe]);
+    const clientSecrets = new URLSearchParams(window.location.search).get(
+      'payment_intent_client_secret'
+    );
 
-  // const [creditcard, setCreditcard] = useState({
-  //   cvc: '',
-  //   expiry: '',
-  //   focus: '',
-  //   name: '',
-  //   number: '',
-  // });
+    const paymentStatus = new URLSearchParams(window.location.search).get(
+      'redirect_status'
+    );
+
+    if (clientSecrets && paymentStatus === 'succeeded') {
+      async function pushData() {
+        await axios.post(
+          `${API_URL}/cart/orderDetails`,
+          cartDetails,
+          usedCouponData
+        );
+      }
+      pushData();
+      Swal.fire({
+        icon: 'success',
+        text: '付款成功',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history('/member/order');
+        }
+      });
+    } else if (clientSecrets && paymentStatus === 'processing') {
+      Swal.fire({
+        icon: 'info',
+        text: '您的付款正在處理中',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history('/');
+        }
+      });
+    } else if (clientSecrets && paymentStatus === 'requires_payment_method') {
+      Swal.fire({
+        icon: 'warning',
+        text: '您的付款不成功，請再試一次',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history('/');
+        }
+      });
+    }
+  }, [stripe]);
 
   //coupon_receive
   const usedCouponData = {
@@ -147,24 +168,24 @@ function Checkout(props) {
 
     setIsLoading(false);
 
-    // orderDetails
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartDetails,
-      usedCouponData
-    );
+    // // orderDetails
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/orderDetails`,
+    //   cartDetails,
+    //   usedCouponData
+    // );
 
-    // order_items
-    let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/orderItems`,
-      cartItems
-    );
+    // // order_items
+    // let orderItemsResponse = await axios.post(
+    //   `${API_URL}/cart/orderItems`,
+    //   cartItems
+    // );
 
-    //coupon_receive
-    let couponReceiveResponse = await axios.post(
-      `${API_URL}/cart/orderItemsCoupon`,
-      usedCouponData
-    );
+    // //coupon_receive
+    // let couponReceiveResponse = await axios.post(
+    //   `${API_URL}/cart/orderItemsCoupon`,
+    //   usedCouponData
+    // );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }
 
@@ -176,6 +197,7 @@ function Checkout(props) {
           className="btn_outline btn_grn text-light mt-3 p-3 pay-btn"
           disabled={isLoading || !stripe || !elements}
           id="submit"
+          type="submit"
         >
           <span id="button-text">
             {/* {isLoading ? (
