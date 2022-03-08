@@ -126,6 +126,24 @@ function Checkout(props) {
 
     setIsLoading(true);
 
+    let orderDetailsResponse = await axios.post(
+      `${API_URL}/cart/orderDetails`,
+      cartDetails,
+      usedCouponData
+    );
+
+    // order_items
+    let orderItemsResponse = await axios.post(
+      `${API_URL}/cart/orderItems`,
+      cartItems
+    );
+
+    //coupon_receive
+    let couponReceiveResponse = await axios.post(
+      `${API_URL}/cart/orderItemsCoupon`,
+      usedCouponData
+    );
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -148,23 +166,7 @@ function Checkout(props) {
     setIsLoading(false);
 
     // orderDetails
-    let orderDetailsResponse = await axios.post(
-      `${API_URL}/cart/orderDetails`,
-      cartDetails,
-      usedCouponData
-    );
 
-    // order_items
-    let orderItemsResponse = await axios.post(
-      `${API_URL}/cart/orderItems`,
-      cartItems
-    );
-
-    //coupon_receive
-    let couponReceiveResponse = await axios.post(
-      `${API_URL}/cart/orderItemsCoupon`,
-      usedCouponData
-    );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }
 
