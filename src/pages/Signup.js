@@ -17,9 +17,19 @@ const Signup = () => {
   const [page, setPage] = useState(false);
 
   // 設定modal畫面
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState({
+    in: false,
+    out: false,
+  });
+  const handleClose = () => {
+    setShow({ ...show, out: true });
+    setTimeout(() => {
+      setShow({ ...show, in: false, out: false });
+    }, 500);
+  };
+  const handleShow = () => {
+    setShow({ ...setShow, in: true });
+  };
 
   // 設定modal Email
   const [data, setData] = useState({
@@ -33,6 +43,18 @@ const Signup = () => {
     });
   };
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
   // 設定modal提交重發驗證信/忘記密碼
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,33 +64,28 @@ const Signup = () => {
       });
       setShow(false);
       if (forgetEmail.status === 200 && forgetEmail.data.code < 30000) {
-        Swal.fire({
+        Toast.fire({
           icon: 'success',
           html: forgetEmail.data.msg,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            history('/');
-          }
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
         });
       }
     } else {
-      console.log(data);
       const reVerifyEmail = await axios.post(`${API_URL}/verify/resend`, data, {
         withCredentials: true,
       });
       setShow(false);
       if (reVerifyEmail.status === 200 && reVerifyEmail.data.code < 30000) {
-        Swal.fire({
+        Toast.fire({
           icon: 'success',
           html: reVerifyEmail.data.msg,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            history('/');
-          }
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
         });
       }
     }
@@ -87,8 +104,17 @@ const Signup = () => {
       Swal.fire({
         icon: 'success',
         html: loginResult.data.msg,
-        confirmButtonColor: '#3085d6',
+        showConfirmButton: true,
+        focusConfirm: false,
+        buttonsStyling: false,
         confirmButtonText: 'OK',
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium',
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           setLogin(true);

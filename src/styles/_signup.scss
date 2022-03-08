@@ -229,10 +229,16 @@
 
 /** Modal **/
 .modal-wrapper {
-    padding: 2rem;
-
+    width: 80%;
+    margin: 0 auto;
+    @media screen and (max-width: $md) {
+        width: 100%;
+    }
     .modal_close-button {
         cursor: pointer;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
     }
 
     .modal-title {
@@ -241,7 +247,6 @@
     }
 
     .modal-statement {
-        padding: 1rem 6rem;
         margin: 0 auto;
         text-align: center;
         line-height: 1.5;
@@ -320,7 +325,6 @@
 
             .signup-form {
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 5%;
@@ -344,7 +348,6 @@
         .signup-form-wrapper {
             .signup-form {
                 .form-floating {
-
                     .fa-envelope,
                     .fa-lock {
                         left: 10%;
@@ -357,12 +360,6 @@
     .another-login {
         .another-login_title-wrapper {
             font-size: 0.8rem;
-        }
-    }
-
-    .modal-wrapper {
-        .modal-statement {
-            padding: 1rem 2rem;
         }
     }
 }

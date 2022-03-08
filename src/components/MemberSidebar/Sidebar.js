@@ -16,22 +16,31 @@ function Sidebar(props) {
     });
 
     if (logoutResult.status === 200 && logoutResult.data.code < 30000) {
-      setUser({
-        id: '',
-        email: '',
-      });
       if (isSocial) {
         setIsSocial(false);
       }
       Swal.fire({
         icon: 'success',
         html: '登出成功',
-        confirmButtonColor: '#3085d6',
+        showConfirmButton: true,
         confirmButtonText: 'OK',
+        focusConfirm: false,
+        buttonsStyling: false,
+        customClass: {
+          container: 'c-alert__overlay',
+          popup: 'c-alert__modal',
+          title: 'c-alert__title',
+          htmlContainer: 'c-alert__text',
+          confirmButton: 'e-btn e-btn--plain e-btn--medium',
+        },
       }).then((result) => {
         if (result.isConfirmed) {
           setLogin(false);
-          history('/');
+          history('/login');
+          setUser({
+            id: '',
+            email: '',
+          });
         }
       });
     }
@@ -43,13 +52,7 @@ function Sidebar(props) {
       <ul className="Sidebaritems">
         {SidebarLinks.map((link) => {
           return (
-            <li
-              className="Sidebaritem"
-              key={link.id}
-              onClick={
-                link.name === '登出' && login ? () => handleLogout() : null
-              }
-            >
+            <li className="Sidebaritem" key={link.id}>
               <NavLink to={link.router} className="Sidebarfont">
                 {link.icon}
                 <h5 className="Sidebarfont__text">{link.name}</h5>
@@ -58,6 +61,14 @@ function Sidebar(props) {
             </li>
           );
         })}
+        {!login ? null : (
+          <li className="Sidebaritem logout-icon" onClick={handleLogout}>
+            <div className="Sidebarfont d-flex">
+              <i className="fas fa-sign-out-alt Sidebarfont__icon"></i>
+              <h5 className="Sidebarfont__text">登出</h5>
+            </div>
+          </li>
+        )}
       </ul>
     </div>
   );
