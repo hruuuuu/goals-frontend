@@ -38,23 +38,29 @@ function CartStepper(props) {
   const { member, setMember } = props;
   const { couponId, setCouponId } = props;
 
-  // //coupon_receive
-  // const usedCouponData = {
-  //   member_id: member.id,
-  //   coupon_id: couponId,
-  // };
+  //取得已登入會員的ID
+  // const userID = JSON.parse(localStorage.getItem('user'));
+  // console.log(userID);
+
+  //coupon_receive
+  const usedCouponData = {
+    member_id: member.id,
+    coupon_id: couponId,
+  };
+
+  // console.log(usedCouponData);
 
   // //order_items
   // // ->準備好要傳回資料庫的product_id, amount
   // const cartItems = { ...cartListData };
 
-  // //order_details
-  // // ->準備好要傳回資料庫的應付金額
-  // const cartDetails = {
-  //   ...shippingData,
-  //   total: Number(orderTotal),
-  //   member_id: member.id,
-  // };
+  //order_details
+  // ->準備好要傳回資料庫的應付金額
+  const cartDetails = {
+    ...shippingData,
+    total: Number(orderTotal),
+    member_id: member.id,
+  };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);
@@ -78,30 +84,30 @@ function CartStepper(props) {
   //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
   // };
 
-  // //送出訂單 ->傳回資料庫
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
+  //送出訂單 ->傳回資料庫
+  async function handleSubmit(e) {
+    e.preventDefault();
 
-  //   //orderDetails
-  //   let orderDetailsResponse = await axios.post(
-  //     `${API_URL}/cart/orderDetails`,
-  //     cartListData,
-  //     usedCouponData,
-  //     { withCredentials: true }
-  //   );
+    //orderDetails
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/orderDetails`,
+    //   cartListData,
+    //   usedCouponData,
+    //   { withCredentials: true }
+    // );
 
-  //   //order_items
-  //   let orderItemsResponse = await axios.post(
-  //     `${API_URL}/cart/orderItems`,
-  //     cartItems
-  //   );
+    //order_items
+    // let orderItemsResponse = await axios.post(
+    //   `${API_URL}/cart/orderItems`,
+    //   cartItems
+    // );
 
-  //   //coupon_receive
-  //   let couponReceiveResponse = await axios.post(
-  //     `${API_URL}/cart/orderItemsCoupon`,
-  //     usedCouponData
-  //   );
-  // }
+    //coupon_receive
+    // let couponReceiveResponse = await axios.post(
+    //   `${API_URL}/cart/orderItemsCoupon`,
+    //   usedCouponData
+    // );
+  }
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   const [clientSecret, setClientSecret] = useState('');

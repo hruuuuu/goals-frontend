@@ -14,6 +14,7 @@ import picBanner from '../img/page_banner/calculator.webp';
 
 function Cart() {
   const [isDisplay, setIsDisplay] = useState(false);
+
   const history = useNavigate();
 
   // 顯示結帳成功訊息
@@ -27,9 +28,6 @@ function Cart() {
     );
 
     if (clientSecret && paymentStatus === 'succeeded') {
-      // console.log(localStorage.getItem('cartList'));
-      // const orderItems = localStorage.getItem('cartList');
-
       Swal.fire({
         icon: 'success',
         text: '付款成功',

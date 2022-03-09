@@ -280,70 +280,46 @@ function ProductDetail(props) {
         toast.addEventListener('mouseleave', Swal.resumeTimer);
       },
     });
-    const commentPost = await axios.post(`${API_URL}/comment/new`, newComment, {
-      withCredentials: true,
-    });
-    if (commentPost.data.code < 30020) {
-      Toast.fire({
-        icon: 'error',
-        html: commentPost.data.msg,
-        customClass: {
-          popup: 'c-alert__toast',
-          title: 'c-alert__subtitle',
-        },
-      });
-      // Swal.fire({
-      //   icon: 'error',
-      //   html: commentPost.data.msg,
-      //   showCancelButton: true,
-      //   focusCancel: false,
-      //   cancelButtonText: 'Ok',
-      //   customClass: {
-      //     container: 'c-alert__overlay',
-      //     popup: 'c-alert__modal',
-      //     title: 'c-alert__title',
-      //     htmlContainer: 'c-alert__text',
-      //     confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
-      //     cancelButton: 'e-btn e-btn--cancel e-btn--medium',
-      //   },
-      // }).then((result) => {
-      //   if (!result.isConfirmed) {
-      //     setShowComment(false);
-      //     history('/');
-      //   }
-      // });
+    if (document.querySelector('#comment-content').value !== '') {
+      const commentPost = await axios.post(
+        `${API_URL}/comment/new`,
+        newComment,
+        {
+          withCredentials: true,
+        }
+      );
+      if (commentPost.data.code < 30020) {
+        Toast.fire({
+          icon: 'error',
+          html: commentPost.data.msg,
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
+        });
+      } else {
+        Toast.fire({
+          icon: 'success',
+          html: commentPost.data.msg,
+          customClass: {
+            popup: 'c-alert__toast',
+            title: 'c-alert__subtitle',
+          },
+        });
+        // handleCommentClose();
+        // handleClose();
+        setShowComment(false);
+        history(`/product`);
+      }
     } else {
       Toast.fire({
-        icon: 'success',
-        html: commentPost.data.msg,
+        icon: 'error',
+        html: '請輸入評論',
         customClass: {
           popup: 'c-alert__toast',
           title: 'c-alert__subtitle',
         },
       });
-      setShowComment(false);
-      history(`/product/${productId}`);
-
-      // Swal.fire({
-      //   icon: 'success',
-      //   html: commentPost.data.msg,
-      //   showConfirmButton: true,
-      //   confirmButtonText: 'OK',
-      //   focusConfirm: false,
-      //   customClass: {
-      //     container: 'c-alert__overlay',
-      //     popup: 'c-alert__modal',
-      //     title: 'c-alert__title',
-      //     htmlContainer: 'c-alert__text',
-      //     confirmButton: 'e-btn e-btn--plain e-btn--medium ms-2',
-      //     cancelButton: 'e-btn e-btn--cancel e-btn--medium',
-      //   },
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     setShowComment(false);
-      //     history(`/product/${productId}`);
-      //   }
-      // });
     }
   };
 
@@ -520,8 +496,13 @@ function ProductDetail(props) {
                           contentClassName="c-modal__wrapper c-modal__wrapper--full-page"
                           animation={false}
                           centered
-                          fullscreen="md-down"
                         >
+                          {/* <button
+                            onClick={handleClose}
+                            className="c-modal__close e-btn e-btn--icon"
+                          >
+                            <i className="fas fa-times e-icon e-icon--btn e-icon--primary"></i>
+                          </button> */}
                           <div className="comment-form">
                             <div className="mb-3">
                               <label
