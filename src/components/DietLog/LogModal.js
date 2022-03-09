@@ -19,8 +19,8 @@ function LogModal(props) {
     setShowModal,
     getDietlogData,
     setRefresh,
-    foodFields,
-    setFoodFields,
+    editMode,
+    setEditMode,
   } = props;
   const { setDietlogData, dietlogCategoryData, canlendarDate } = useDietlog();
   const [addFields, setAddFields] = useState({
@@ -31,7 +31,6 @@ function LogModal(props) {
     datetime: '',
   });
   const [foods, setFoods] = useState([]);
-  const [editMode, setEditMode] = useState(true);
 
   const handleIn = showModal.in
     ? 'animation animation__modal animation__modal--in'

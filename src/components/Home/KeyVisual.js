@@ -9,9 +9,9 @@ import 'swiper/css/autoplay';
 import 'swiper/css/effect-fade';
 import 'swiper/css/lazy';
 
-import picSwiper1 from '../../img/home/pic/swiper__1.jpg';
-import picSwiper2 from '../../img/home/pic/swiper__2.jpg';
-import picSwiper3 from '../../img/home/pic/swiper__3.jpg';
+import picSwiper1 from '../../img/home/pic/swiper__1.webp';
+import picSwiper2 from '../../img/home/pic/swiper__2.webp';
+import picSwiper3 from '../../img/home/pic/swiper__3.webp';
 import logoSlogan from '../../img/common/illustration/logo--slogan.svg';
 
 function KeyVisual(props) {

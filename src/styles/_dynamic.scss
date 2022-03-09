@@ -13,6 +13,14 @@
       height: max-content;
       min-height: calc(100vh - $height__navbar - 15.375rem);
     }
+    &--full-page {
+      height: max-content;
+      min-height: calc(100vh - $height__navbar);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   &-padding {
     &--product-top {

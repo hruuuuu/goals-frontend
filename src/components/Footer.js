@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import logo from '../img/common/logo--light.svg';
+import { NavLink, Link, useMatch } from 'react-router-dom';
+import logoLight from '../img/common/logo--light.svg';
+import logoPrimary from '../img/common/logo--primary.svg';
 
 function Footer() {
   const footerLinks = [
@@ -96,7 +97,11 @@ function Footer() {
                     })}
                   </li>
                   <li className="l-footer__item ms-4 ms-lg-0">
-                    <img src={logo} alt="" className="l-footer__logo" />
+                    <img
+                      src={logoLight}
+                      alt="logo"
+                      className="l-footer__logo"
+                    />
                   </li>
                 </ul>
                 <ul className="l-footer__list mt-3 d-block d-lg-none">

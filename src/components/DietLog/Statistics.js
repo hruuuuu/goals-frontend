@@ -201,6 +201,7 @@ function Statistics(props) {
       },
       {
         text: '本日各餐攝取熱量比例',
+        subtext: `總熱量${calories}卡`,
         top: '10%',
         left: '74%',
         textAlign: 'center',

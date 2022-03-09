@@ -2,6 +2,8 @@ import React from 'react';
 
 import ReactECharts from 'echarts-for-react';
 
+import picAddHint from '../../img/dietlog/pic/add-hint.png';
+
 function MealGraph(props) {
   const { statics, graphRightSeries, mealData, title, setMainTab } = props;
   const { calories, protein, fat, carb } = statics;
@@ -118,16 +120,27 @@ function MealGraph(props) {
     <>
       <div className="position-relative">
         {isEmptyStatistics && (
-          <div className="c-cover">
-            <h3>添加日誌以獲得數據</h3>
-            <button
-              className="e-btn e-btn--primary e-btn--medium c-cover__action"
-              onClick={() => {
-                setMainTab(1);
-              }}
-            >
-              添加日誌
-            </button>
+          <div className="c-cover c-placeholder">
+            <div className="row justify-content-center align-items-center w-100">
+              <div className="col-10 col-lg-7 d-flex flex-column justift-content-center align-items-center">
+                <div className="c-placeholder__img c-placeholder__img--not-found">
+                  <img
+                    src={picAddHint}
+                    alt="not-found"
+                    class="e-img e-img--contain"
+                  />
+                </div>
+                <h3 className="my-4 text-center">添加日誌來獲得數據！</h3>
+                <button
+                  className="e-btn e-btn--primary e-btn--w100 e-btn--medium c-placeholder__action"
+                  onClick={() => {
+                    setMainTab(1);
+                  }}
+                >
+                  查看日誌
+                </button>
+              </div>
+            </div>
           </div>
         )}
         <ReactECharts

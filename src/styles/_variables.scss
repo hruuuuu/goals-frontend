@@ -71,6 +71,7 @@ $border-radius__home-small-block: 5rem 0 5rem 0;
 $border-radius__home-small-block--mobile: 3.125rem 0 3.125rem 0;
 $border-radius__home-block--right: 12.5rem 0 0 0;
 $border-radius__home-block--left: 0 0 12.5rem 0;
+$border-radius__about-block--right: 0 0 0 12.5rem;
 
 /* border */
 $border__input: 0.0625rem solid $color__input-border;
@@ -149,6 +150,7 @@ $xl: 1199px;
 $xxl: 1399px;
 
 $img__home-bg: url("../img/home/pic/bg.png");
+$img__not-found: url(../img/common/illustration/order-empty.svg);
 
 /* bootstrap */
 @import "~bootstrap/scss/bootstrap.scss";

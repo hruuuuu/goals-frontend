@@ -14,7 +14,8 @@ import FloatingChat from '../components/FloatingChat';
 import ScrollButton from '../components/ScrollButton';
 import PageBanner from '../components/PageBanner';
 
-import picBanner from '../img/page_banner/dietlog.jpg';
+import picBanner from '../img/page_banner/dietlog.webp';
+import picLoginHint from '../img/dietlog/pic/login-hint.png';
 
 function DietLog() {
   const { calendarDate, setCalendarDate, dietlogData, setDietlogData } =
@@ -75,15 +76,23 @@ function DietLog() {
           </div>
         </div>
       ) : (
-        <div className="u-margin u-margin--page-bottom">
+        <div className="u-margin u-margin--page-bottom u-height u-height--empty-page">
           <div className="container">
             <div className="row justify-content-center align-items-center">
-              <div className="col-5 d-flex flex-column justift-content-center align-items-center">
-                <div className="c-placeholder u-height u-height--empty-page d-flex flex-column align-items-center justify-content-center">
-                  <h2 className="mb-5">請先登入以體驗完整功能</h2>
+              <div className="col-10 col-lg-5 d-flex flex-column justift-content-center align-items-center">
+                <div className="c-placeholder">
+                  <div className="c-placeholder__img c-placeholder__img--not-found">
+                    <img
+                      src={picLoginHint}
+                      alt="login-hint"
+                      class="e-img e-img--contain"
+                    />
+                  </div>
+                  <h3 className="my-4 text-center">登入才能體驗這個功能唷！</h3>
                   <Link
                     to="/login"
-                    className="e-btn e-btn--primary e-btn--large e-btn--w100 c-placeholder__action"
+                    role="button"
+                    className="e-btn e-btn--primary e-btn--medium e-btn--w100 c-placeholder__action"
                   >
                     前往登入
                   </Link>

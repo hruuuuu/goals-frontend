@@ -11,21 +11,30 @@ import NavbarMobile from './Navbar/NavbarMobile';
 import { useLogin } from '../context/LoginStatus';
 import { useCartList } from '../context/cart';
 import Swal from 'sweetalert2';
+
 import { API_URL } from '../utils/config';
+import routerList from '../config/routerList';
 
 function Navbar() {
   const { login, setLogin, isSocial, setIsSocial, setUser } = useLogin();
   const history = useNavigate();
-  const { cartListData, setCartListData } = useCartList();
+  const { cartListData } = useCartList();
   const [cartIconLength, setCartIconLength] = useState();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isTop, setIsTop] = useState(false);
-  const [isHomeTop, setIsHomeTop] = useState(false);
   const [isActive, setIsActive] = useState(0);
+
   const matchHome = useMatch('/');
+  const matchLogin = useMatch('/login');
+  const matchAdmin = useMatch('/admin');
+  const locationPath = useLocation().pathname;
+  const matchedRoutes = matchRoutes(routerList, locationPath);
 
   const isHome = matchHome !== null;
-  const locationPath = useLocation().pathname;
+  const isFullScreen =
+    matchLogin !== null ||
+    matchAdmin !== null ||
+    matchedRoutes[0].route.path === '*';
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -221,7 +230,9 @@ function Navbar() {
   return (
     <>
       <header
-        className={`l-navbar sticky-top ${!isTop ? 'l-navbar--scroll' : ''}`}
+        className={`l-navbar sticky-top ${
+          !isTop || isFullScreen ? 'l-navbar--scroll' : ''
+        }`}
       >
         <div className="container h-100">
           <nav className="l-navbar__wrapper justify-content-center justify-content-lg-between">
@@ -233,6 +244,7 @@ function Navbar() {
               login={login}
               isActive={isActive}
               setIsActive={setIsActive}
+              isFullScreen={isFullScreen}
             />
             <NavbarMobile
               navLinks={navLinks}
@@ -240,6 +252,7 @@ function Navbar() {
               isTop={isTop}
               handleLogout={handleLogout}
               isActive={isActive}
+              isFullScreen={isFullScreen}
             />
           </nav>
         </div>
