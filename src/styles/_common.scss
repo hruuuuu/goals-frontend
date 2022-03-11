@@ -1214,7 +1214,7 @@
 }
 
 /*scrollTop Button*/
-.MuiButton-root {
+.MuiButton-root.MuiButtonBase-root {
   font-size: 30px;
   color: #f8bc5d;
   position: fixed;
@@ -1228,9 +1228,9 @@
     background-color: #fff;
     border-radius: 99rem;
   }
-}
-.MuiButton-root:hover {
-  background-color: transparent !important;
+  &:hover {
+    background-color: transparent !important;
+  }
 }
 
 .transition-btn {
