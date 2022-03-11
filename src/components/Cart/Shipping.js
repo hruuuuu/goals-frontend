@@ -20,7 +20,6 @@ function Shipping(props) {
         }
       );
       setDelivery(response.data);
-      console.log(response.data);
     };
     getDelivery();
   }, []);
@@ -42,7 +41,6 @@ function Shipping(props) {
   function handleChange(e) {
     setShippingData({ ...shippingData, [e.target.name]: e.target.value });
   }
-  // console.log(shippingData);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -161,11 +159,11 @@ function Shipping(props) {
               <option className="option_font" value="">
                 請選擇
               </option>
-              {delivery.map((method, i) => {
+              {delivery.map((method, index) => {
                 return (
                   <option
                     className="option_font"
-                    key={i}
+                    key={index}
                     value={method.delivery_id}
                   >
                     {method.method}

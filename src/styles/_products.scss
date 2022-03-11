@@ -111,7 +111,7 @@
     align-items: center;
 
     &::after {
-      content: "";
+      content: '';
       width: calc(100% + 2rem);
       height: $height__floating-menu;
       background: $color--light;
@@ -124,7 +124,7 @@
     }
 
     &::before {
-      @include icon--absolute("\f078");
+      @include icon--absolute('\f078');
       color: $color--primary;
       font-size: 1.25rem;
 
@@ -174,7 +174,7 @@
     position: relative;
 
     &::after {
-      @include icon--absolute("\f002");
+      @include icon--absolute('\f002');
       color: $color--primary;
       font-size: 1rem;
 
@@ -627,4 +627,8 @@
     height: 5rem;
     resize: none;
   }
+}
+
+.swal-container {
+  z-index: 10000000 !important;
 }

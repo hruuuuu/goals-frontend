@@ -6,20 +6,30 @@ import { API_URL } from '../../utils/config';
 import { useCartList } from '../../context/cart';
 import Swal from 'sweetalert2';
 import $ from 'jquery';
-
+import { useNavigate } from 'react-router-dom';
 import {
   PaymentElement,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
 
 function Checkout(props) {
+  const history = useNavigate();
   const { activeStep, setActiveStep } = props;
-  const { creditcard, setCreditcard } = props;
   const { orderTotal, setOrderTotal } = props;
   const { member, setMember } = props;
   const { couponId, setCouponId } = props;
   const { shippingData, setShippingData } = props;
+  // const [creditcard, setCreditcard] = useState({
+  //   cvc: '',
+  //   expiry: '',
+  //   focus: '',
+  //   name: '',
+  //   cardNumber: '',
+  // });
   const { cartListData, setCartListData } = useCartList();
 
   const stripe = useStripe();
@@ -47,45 +57,17 @@ function Checkout(props) {
     if (!clientSecret) {
       return;
     }
-
-    // stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-    //   console.log(paymentIntent);
-    //   switch (paymentIntent.status) {
-    //     case 'succeeded':
-    //       setMessage('Payment succeeded!');
-    //       break;
-    //     case 'processing':
-    //       setMessage('Your payment is processing.');
-    //       break;
-    //     case 'requires_payment_method':
-    //       setMessage('Your payment was not successful, please try again.');
-    //       break;
-    //     default:
-    //       setMessage('Something went wrong.');
-    //       break;
-    //   }
-    // });
   }, [stripe]);
-
-  // const [creditcard, setCreditcard] = useState({
-  //   cvc: '',
-  //   expiry: '',
-  //   focus: '',
-  //   name: '',
-  //   number: '',
-  // });
 
   //coupon_receive
   const usedCouponData = {
     member_id: member.id,
     coupon_id: couponId,
   };
-  // console.log(usedCouponData);
 
   //order_items
   // ->準備好要傳回資料庫的product_id, amount
   const cartItems = { ...cartListData };
-  // console.log(cartItems);
 
   //order_details
   // ->準備好要傳回資料庫的應付金額
@@ -94,25 +76,18 @@ function Checkout(props) {
     total: Number(orderTotal),
     member_id: member.id,
   };
-  // console.log(cartDetails);
 
-  const handleInputFocus = (e) => {
-    setCreditcard({ ...creditcard, focus: e.target.name });
-    // console.log(e.target.name);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setCreditcard({ ...creditcard, [name]: value });
-  };
-
-  // const handleNext = (e) => {
-  //   e.preventDefault();
-
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  // const handleInputFocus = (e) => {
+  //   setCreditcard({ ...creditcard, focus: e.target.name });
   // };
 
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+
+  //   setCreditcard({ ...creditcard, [name]: value });
+  // };
+
+  //返回運輸資訊modal
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -165,30 +140,132 @@ function Checkout(props) {
 
     setIsLoading(false);
 
-    // orderDetails
+    // // orderDetails
+    // let orderDetailsResponse = await axios.post(
+    //   `${API_URL}/cart/orderDetails`,
+    //   cartDetails,
+    //   usedCouponData
+    // );
 
+    // // order_items
+    // let orderItemsResponse = await axios.post(
+    //   `${API_URL}/cart/orderItems`,
+    //   cartItems
+    // );
+
+    // //coupon_receive
+    // let couponReceiveResponse = await axios.post(
+    //   `${API_URL}/cart/orderItemsCoupon`,
+    //   usedCouponData
+    // );
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }
 
   return (
     <>
-      <form id="payment-form" onSubmit={handleSubmit} className="mt-3">
-        <PaymentElement id="payment-element" onChange={handleChange} />
-        <button
-          className="btn_outline btn_grn text-light mt-3 p-3 pay-btn"
-          disabled={isLoading || !stripe || !elements}
-          id="submit"
-        >
-          <span id="button-text">
-            {/* {isLoading ? (
+      <div className="container checkoutBox">
+        <form id="payment-form" onSubmit={handleSubmit} className="row">
+          <div className="col-12 g-3">
+            <h5>付款資訊</h5>
+          </div>
+          {/* <div className="col-12 g-3">
+            <Cards
+              cvc={creditcard.cvc}
+              expiry={creditcard.expiry}
+              focused={creditcard.focus}
+              name={creditcard.name}
+              number={creditcard.cardNumber}
+            />
+          </div>
+          <div className="col-12 g-3">
+            <label htmlFor="firstName" className="form-label c-form__label">
+              持卡人
+            </label>
+            <input
+              type="text"
+              className="form-control c-form__input"
+              name="name"
+              placeholder="請輸入持卡人姓名"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+            />
+          </div>
+          <div className="form-group col-12 g-3">
+            <label
+              htmlFor="card_num_field"
+              className="form-label c-form__label"
+            >
+              卡號
+            </label>
+            <CardNumberElement
+              type="text"
+              id="card_num_field"
+              className="form-control c-form__input"
+              name="cardNumber"
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="card_exp_field">Card Expiry</label>
+            <CardExpiryElement
+              type="text"
+              id="card_exp_field"
+              className="form-control"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="card_cvc_field">Card CVC</label>
+            <CardCvcElement
+              type="text"
+              id="card_cvc_field"
+              className="form-control"
+            />
+          </div> */}
+          <PaymentElement
+            id="payment-element"
+            onChange={handleChange}
+            className="col-12 g-3"
+          />
+          <hr className="mt-4" />
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button
+                className="e-btn e-btn--plain e-btn--secondary e-btn--w100 e-btn--medium"
+                onClick={handleBack}
+              >
+                上一步
+              </button>
+            </div>
+          </div>
+          <div className="col-6 g-3">
+            <div className="d-grid">
+              <button
+                className="e-btn e-btn--primary e-btn--w100 e-btn--medium pay-btn"
+                disabled={isLoading || !stripe || !elements}
+                id="submit"
+                onClick={() => {
+                  handleSubmit();
+                }}
+                form="payment-form"
+              >
+                <span id="button-text">
+                  {/* {isLoading ? (
               <div className="spinner" id="spinner"></div>
             ) : ( */}
-            Pay now
-            {/* )} */}
-          </span>
-        </button>
-        {/* {message && <div id="payment-message">{message}</div>} */}
-      </form>
+                  確認付款
+                  {/* )} */}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* {message && <div id="payment-message">{message}</div>} */}
+        </form>
+      </div>
+
       {/* <div className="container checkoutBox">
         <form className="row" onSubmit={handleSubmit} id="checkoutForm">
           <div className="col-12 g-3">
