@@ -111,7 +111,7 @@
     align-items: center;
 
     &::after {
-      content: '';
+      content: "";
       width: calc(100% + 2rem);
       height: $height__floating-menu;
       background: $color--light;
@@ -124,7 +124,7 @@
     }
 
     &::before {
-      @include icon--absolute('\f078');
+      @include icon--absolute("\f078");
       color: $color--primary;
       font-size: 1.25rem;
 
@@ -174,7 +174,7 @@
     position: relative;
 
     &::after {
-      @include icon--absolute('\f002');
+      @include icon--absolute("\f002");
       color: $color--primary;
       font-size: 1rem;
 
@@ -194,15 +194,15 @@
     width: 100%;
   }
 
-  .css-187mznn-MuiSlider-root {
+  .MuiSlider-root {
     color: $color--primary;
   }
 
-  .css-14pt78w-MuiSlider-rail {
+  .MuiSlider-rail {
     color: $color--gray6;
   }
 
-  .css-eg0mwd-MuiSlider-thumb {
+  .MuiSlider-thumb {
     width: 1rem;
     height: 1rem;
     border: 0.0625rem solid $color--primary;
@@ -222,12 +222,12 @@
     }
   }
 
-  .css-1kz0hui-MuiSlider-valueLabel {
+  .MuiSlider-valueLabel {
     background: $color--primary;
     border-radius: $border-radius__input;
   }
 
-  .css-a88p61-MuiInputBase-root-MuiInput-root {
+  .MuiInput-root {
     height: $height__input;
 
     &:before {
@@ -590,34 +590,34 @@
     }
   }
 
-  .css-1slz293-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__rec(0 0 0.5rem 0);
     height: 32.5rem;
   }
 
-  .css-1dk1h2u-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__text;
   }
 }
 
 .l-product {
-  .css-1slz293-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__rec(0 0 0.5rem 0);
     height: 12.5rem;
   }
 
-  .css-1dk1h2u-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__text;
   }
 }
 
 .l-fav {
-  .css-1slz293-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__rec(0);
     height: 10rem;
   }
 
-  .css-1dk1h2u-MuiSkeleton-root {
+  .MuiSkeleton-root {
     @include placeholder__text;
   }
 }
