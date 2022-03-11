@@ -6,26 +6,5 @@
   overflow-y: auto;
   height: max-content;
   max-height: calc($height__floating-menu * 0.6);
-  //scrollbar
-  /* width */
-  &::-webkit-scrollbar {
-    width: 0.5vw;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background-color: $color--gray6;
-    border-radius: 0.3rem;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $color--primary;
-    border-radius: 0.3rem;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: $color--hover;
-  }
+  @include scrollbar;
 }

@@ -115,7 +115,7 @@ function Navbar() {
     },
     {
       id: 3,
-      name: '計算機',
+      name: 'TDEE計算機',
       route: `/calculator`,
     },
     {

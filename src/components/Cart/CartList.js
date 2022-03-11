@@ -18,7 +18,7 @@ function CartList(props) {
             <div className="cartItem__thead">
               <div>商品縮圖</div>
               <div>商品名稱</div>
-              <div>商品單價</div>
+              <div className="cartItem__price">商品單價</div>
               <div className="cartItem__qty_btn">數量</div>
               <div className="cartItem__total">小計</div>
               <div className="cartItem__del_btn">移除</div>

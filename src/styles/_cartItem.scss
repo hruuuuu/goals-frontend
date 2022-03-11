@@ -40,6 +40,10 @@
   &__price {
     grid-column-start: 3;
     grid-column-end: 4;
+    place-self: center;
+    @media screen and (max-width: $lg) {
+      place-self: start;
+    }
   }
   &__qty_btn {
     place-self: center;
@@ -57,28 +61,7 @@
     grid-column-end: 7;
   }
 
-  //scrollbar
-  /* width */
-  &::-webkit-scrollbar {
-    width: 0.5vw;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background-color: $color--gray6;
-    border-radius: 0.5rem;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $color--primary;
-    border-radius: 0.5rem;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: $color--hover;
-  }
+  @include scrollbar;
 }
 
 //rwd

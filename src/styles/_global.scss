@@ -310,6 +310,10 @@ h6 {
     background: $color--primary;
     border-radius: 10rem;
     background-clip: content-box;
+    transition: $transition;
+    &:hover {
+      background: $color--hover;
+    }
   }
 }
 
